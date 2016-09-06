@@ -10,8 +10,7 @@ public class ApplicationTest {
 
     @Test
     public void testStartup() throws Throwable {
-        Application app = new Application();
-        app.start();
+        Application.start();
     }
 
 }

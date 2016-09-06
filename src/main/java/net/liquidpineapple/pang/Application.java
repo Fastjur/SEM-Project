@@ -43,23 +43,27 @@ public class Application extends JFrame {
         String name = properties.getProperty("application-name");
 
         setSize(width, height);
+        log.info("Initialized with width: " + width + " and height: " + height);
 
         setTitle(name);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
-        log.info("Application started successfully with width: " + width + " and height: " + height);
     }
 
-    public void start() {
+    public static void start() {
         EventQueue.invokeLater(() -> {
             Application ex;
             try {
                 ex = new Application();
                 ex.setVisible(true);
+                log.info("Application started successfully");
             } catch (IOException e) {
                 log.error(e.getMessage(), e);
             }
         });
+    }
+
+    public static void main(String[] args) throws Throwable {
+        Application.start();
     }
 }
