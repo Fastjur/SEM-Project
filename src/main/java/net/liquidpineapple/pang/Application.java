@@ -22,20 +22,19 @@ public class Application extends JFrame {
 
     private Properties properties;
 
-    public Application() throws IOException {
+    public Application(String propertiesLocation) throws IOException {
         log.info("Starting application...");
-        InputStream stream = this.getClass().getResourceAsStream(PROPERTIES_LOCATION);
+        InputStream stream = this.getClass().getResourceAsStream(propertiesLocation);
         if (stream != null) {
             properties = new Properties();
             properties.load(stream);
         } else {
-            String err = "Could not find resource file: " + PROPERTIES_LOCATION;
+            String err = "Could not find resource file: " + propertiesLocation;
             throw new FileNotFoundException(err);
         }
-        initGUI();
     }
 
-    private void initGUI() {
+    public void start() {
         add(new Board());
 
         Integer width = Integer.valueOf(properties.getProperty("application-width"));
@@ -48,22 +47,21 @@ public class Application extends JFrame {
         setTitle(name);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        setVisible(true);
+
+        log.info("Application started successfully!");
     }
 
-    public static void start() {
+    public static void main(String[] args) throws Throwable {
         EventQueue.invokeLater(() -> {
-            Application ex;
+            Application app = null;
             try {
-                ex = new Application();
-                ex.setVisible(true);
-                log.info("Application started successfully");
+                app = new Application(PROPERTIES_LOCATION);
+                app.start();
             } catch (IOException e) {
                 log.error(e.getMessage(), e);
             }
         });
-    }
-
-    public static void main(String[] args) throws Throwable {
-        Application.start();
     }
 }
