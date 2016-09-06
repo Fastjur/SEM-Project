@@ -7,6 +7,18 @@
     <groupId>net.liquidpineapple.sem.project</groupId>
     <artifactId>sem-project</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <developers>
+        <developer>
+            <name>Jurriaan Den Toonder</name>
+            <organization>Liquidpineapple.net</organization>
+            <email>jurriaan.toonder@liquidpineapple.net</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <build>
         <plugins>
             <plugin>
