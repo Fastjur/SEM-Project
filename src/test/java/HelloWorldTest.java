@@ -3,8 +3,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * @author: Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
- * @date: 05 09 2016.
+ * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
+ * @date 05 09 2016.
  */
 public class HelloWorldTest {
 
