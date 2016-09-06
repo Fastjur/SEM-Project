@@ -1,5 +1,7 @@
-import gui.Board;
+package net.liquidpineapple.pang;
+
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.gui.Board;
 
 import javax.swing.*;
 import java.awt.*;
