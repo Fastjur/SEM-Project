@@ -47,6 +47,8 @@ public class Application extends JFrame {
         setTitle(name);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        log.info("Application started successfully with width: " + width + " and height: " + height);
     }
 
     public void start() {
