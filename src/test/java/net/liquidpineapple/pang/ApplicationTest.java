@@ -4,7 +4,7 @@ import org.junit.Test;
 
 /**
  * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
- * @date 06 09 2016.
+ * @date 2016/09/06.
  */
 public class ApplicationTest {
 

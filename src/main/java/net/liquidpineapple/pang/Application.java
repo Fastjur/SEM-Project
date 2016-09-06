@@ -13,7 +13,7 @@ import java.util.Properties;
 /**
  * The main application, extends {@link JFrame}
  * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
- * @date 06 09 2016.
+ * @date 2016/09/06.
  */
 @Slf4j
 public class Application extends JFrame {
