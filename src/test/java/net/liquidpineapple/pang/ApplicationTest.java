@@ -13,6 +13,8 @@ public class ApplicationTest {
     @Test
     public void testStartup() throws Throwable {
         Application app = new Application();
+        app.start();
+        Thread.sleep(5000);
     }
 
 }

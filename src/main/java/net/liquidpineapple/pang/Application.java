@@ -49,8 +49,7 @@ public class Application extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    public static void main(String[] args) {
-
+    public void start() {
         EventQueue.invokeLater(() -> {
             Application ex;
             try {
@@ -60,6 +59,5 @@ public class Application extends JFrame {
                 log.error(e.getMessage(), e);
             }
         });
-
     }
 }
