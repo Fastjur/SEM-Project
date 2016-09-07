@@ -1,8 +1,5 @@
 package net.liquidpineapple.pang.objects;
 
-import net.liquidpineapple.pang.gui.Board;
-
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 
 /**

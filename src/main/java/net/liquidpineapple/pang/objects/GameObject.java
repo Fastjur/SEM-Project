@@ -2,10 +2,10 @@ package net.liquidpineapple.pang.objects;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.ImageObserver;
 
 /**
  * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
@@ -32,5 +32,9 @@ public abstract class GameObject {
 
         xPos = startX;
         yPos = startY;
+    }
+
+    public void doDrawing(Graphics2D graphics2D, ImageObserver imageObserver) {
+        graphics2D.drawImage(this.getImage(), this.getXPos(), this.getYPos(), imageObserver);
     }
 }
