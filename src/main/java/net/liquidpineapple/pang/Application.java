@@ -2,6 +2,7 @@ package net.liquidpineapple.pang;
 
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
+import net.liquidpineapple.pang.gui.PlayerBoard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +36,7 @@ public class Application extends JFrame {
     }
 
     public void start() {
-        add(new Board());
+        add(new PlayerBoard());
 
         Integer width = Integer.valueOf(properties.getProperty("application-width"));
         Integer height = Integer.valueOf(properties.getProperty("application-height"));
