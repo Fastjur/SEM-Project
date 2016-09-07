@@ -8,5 +8,17 @@ import javax.swing.*;
  */
 public class Board extends JPanel {
 
-    public Board() {}
+    private JPanel panel = new JPanel();
+
+    public Board() {
+        initBoard();
+    }
+
+    public void initBoard(){
+        new StartMenu().addMenu(panel);
+    }
+
+    public JPanel getPanel(){
+        return panel;
+    }
 }

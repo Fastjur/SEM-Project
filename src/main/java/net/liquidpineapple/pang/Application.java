@@ -49,7 +49,7 @@ public class Application extends JFrame {
         setLocationRelativeTo(null);
 
         setVisible(true);
-        add(new Board());
+        add(new Board().getPanel());
 
         log.info("Application started successfully!");
     }
