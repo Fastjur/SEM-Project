@@ -9,8 +9,6 @@ import java.awt.*;
  */
 public class Board extends JPanel {
 
-    //private JPanel panel = new JPanel();
-
     public Board() {
         initBoard();
     }
@@ -23,10 +21,6 @@ public class Board extends JPanel {
         this.add(overlay);
 
     }
-
-    /*public JPanel getPanel(){
-        return panel;
-    }*/
 
     public void drawBackground(JPanel panel){
 
