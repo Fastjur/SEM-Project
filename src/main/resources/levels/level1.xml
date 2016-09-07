@@ -1,0 +1,27 @@
+<level>
+	<background>bg1.png</background>
+	<startpos>
+		<x>40</x>
+		<y>60</y>
+	</startpos>
+	<objects>
+		<ball>
+			<position>
+				<x>300</x>
+				<y>300</y>
+			</position>
+			<direction>left</direction>
+			<size>1</size>
+			<color>red</color>
+		</ball>
+		<ball>
+			<position>
+				<x>400</x>
+				<y>300</y>
+			</position>
+			<direction>left</direction>
+			<size>1</size>
+			<color>red</color>
+		</ball>
+	</objects>
+</level>
