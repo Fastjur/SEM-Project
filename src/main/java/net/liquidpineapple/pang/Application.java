@@ -35,7 +35,7 @@ public class Application extends JFrame {
     }
 
     public void start() {
-        add(new Board());
+
 
         Integer width = Integer.valueOf(properties.getProperty("application-width"));
         Integer height = Integer.valueOf(properties.getProperty("application-height"));
@@ -49,6 +49,7 @@ public class Application extends JFrame {
         setLocationRelativeTo(null);
 
         setVisible(true);
+        add(new Board());
 
         log.info("Application started successfully!");
     }
