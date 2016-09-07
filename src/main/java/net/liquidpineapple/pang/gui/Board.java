@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.gui;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
@@ -15,10 +16,23 @@ public class Board extends JPanel {
     }
 
     public void initBoard(){
-        new StartMenu().addMenu(panel);
+        JPanel overlay = new JPanel();
+        overlay.setLayout(new OverlayLayout(overlay));
+        //drawBackground(overlay);
+        new StartMenu().addMenu(overlay);
+        panel.add(overlay);
+
     }
 
     public JPanel getPanel(){
         return panel;
+    }
+
+    public void drawBackground(JPanel panel){
+
+        ImageIcon buttonimage = new ImageIcon(getClass().getResource("/images/background.png"));
+        JLabel button = new JLabel(buttonimage);
+        button.setPreferredSize( new Dimension(800, 600));
+        panel.add(button);
     }
 }

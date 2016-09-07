@@ -23,9 +23,24 @@ public  class StartMenu implements Menu{
     }
 
     public void addMenu(JPanel panel){
-        ImageIcon buttonimage = new ImageIcon(getClass().getResource("/images/background.png"));
-        JButton button = new JButton("", buttonimage);
-        panel.add(button);
+        JPanel menuLayout = new JPanel();
+        menuLayout.setLayout(new BoxLayout(menuLayout, BoxLayout.Y_AXIS));
 
+        ImageIcon pangImage = new ImageIcon(getClass().getResource("/images/PANG.png"));
+        ImageIcon singleplrImage = new ImageIcon(getClass().getResource("/images/singleplayer.png"));
+        ImageIcon quitImage = new ImageIcon(getClass().getResource("/images/quit.png"));
+
+        JLabel titlelabel = new JLabel(pangImage);
+        titlelabel.setPreferredSize(new Dimension(730, 225));
+        menuLayout.add(titlelabel);
+
+        JButton singleplrButton = new JButton("", singleplrImage);
+        singleplrButton.setPreferredSize(new Dimension(730, 150));
+        menuLayout.add(singleplrButton);
+
+        JButton quitButton = new JButton("", quitImage);
+        quitButton.setPreferredSize(new Dimension(730, 150));
+        menuLayout.add(quitButton);
+        panel.add(menuLayout);
     }
 }
