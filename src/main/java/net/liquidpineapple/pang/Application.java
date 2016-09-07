@@ -50,7 +50,7 @@ public class Application extends JFrame {
         setLocationRelativeTo(null);
 
         setVisible(true);
-        add(board.getPanel());
+        add(board);
 
         log.info("Application started successfully!");
     }

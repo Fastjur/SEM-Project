@@ -9,7 +9,7 @@ import java.awt.*;
  */
 public class Board extends JPanel {
 
-    private JPanel panel = new JPanel();
+    //private JPanel panel = new JPanel();
 
     public Board() {
         initBoard();
@@ -18,15 +18,15 @@ public class Board extends JPanel {
     public void initBoard(){
         JPanel overlay = new JPanel();
         overlay.setLayout(new OverlayLayout(overlay));
-        //drawBackground(overlay);
         new StartMenu().addMenu(overlay);
-        panel.add(overlay);
+      //  drawBackground(overlay);
+        this.add(overlay);
 
     }
 
-    public JPanel getPanel(){
+    /*public JPanel getPanel(){
         return panel;
-    }
+    }*/
 
     public void drawBackground(JPanel panel){
 

@@ -7,12 +7,28 @@ import java.awt.event.KeyListener;
 
 /**
  * Created by Tim on 7-9-2016.
+ * Implementation of the Menu interface,
+ * Makes sure that the ingame menu is loaded.
  */
 public class IngameMenu implements Menu {
 
+    /**
+     * method to draw the menu.
+     * @param panel - panel in which the menu should be loaded.
+     */
     @Override
     public void draw(JPanel panel){
         panel.removeAll();
+        createMenu(panel);
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    /**
+     * method to create the interface/buttons of the menu.
+     * @param panel - panel in which these buttons should be placed.
+     */
+    private void createMenu(JPanel panel){
         JPanel menuLayout = new JPanel();
         menuLayout.setLayout(new BorderLayout());
         addButton("/images/W.png", menuLayout, "PAGE_START");
@@ -33,7 +49,6 @@ public class IngameMenu implements Menu {
             @Override
             public void keyTyped(KeyEvent e) {
                 panel.removeAll();
-                panel.revalidate();
                 panel.repaint();
                 System.out.print("GAME STARTS NOW");
                 //GAME.START();
@@ -41,25 +56,19 @@ public class IngameMenu implements Menu {
             }
 
             @Override
-            public void keyPressed(KeyEvent e) {
-
-            }
+            public void keyPressed(KeyEvent e) {}
 
             @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            public void keyReleased(KeyEvent e) {}
         });
-
-        panel.revalidate();
-        panel.repaint();
     }
 
-    @Override
-    public Component getComponent() {
-        return null;
-    }
-
+    /**
+     * Method to add buttons to a panel.
+     * @param filename - location of background-image of the buttons.
+     * @param panel - panel in which these buttons should be displayed.
+     * @param option - option tag to indicate the purpose of the button.
+     */
     @Override
     public void addButton(String filename, JPanel panel, String option){
         ImageIcon buttonImage = new ImageIcon(getClass().getResource(filename));
@@ -76,11 +85,4 @@ public class IngameMenu implements Menu {
                 break;
         }
     }
-
-    @Override
-    public void clearMenu(JPanel panel){
-        panel.removeAll();
-    }
-
-
 }
