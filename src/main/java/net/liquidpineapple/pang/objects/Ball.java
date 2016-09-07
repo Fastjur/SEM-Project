@@ -12,10 +12,16 @@ import static javafx.scene.input.KeyCode.Y;
  */
 public class Ball {
 
+    public enum Directions{
+        LEFT, RIGHT, RANDOM
+    }
+
     //Size 1 is the smallest ball.
     int size;
     int movX;
     int movY;
+    int X;
+    int Y;
 
     /**
      * Creates a ball with a set horizontal speed and a variable vertical speed depending on size.
@@ -25,30 +31,41 @@ public class Ball {
      * @param direction Direction the ball should move, valid inputs are: "left" and "right", anything else randomizes the direction.
      * @param sizeIn    The desired size of the ball, Greater then 4 or smaller then 0 results in a size 4 ball.
      */
-    public Ball(int spawnX, int spawnY, String direction, int sizeIn){
+    public Ball(int spawnX, int spawnY, Directions direction, int sizeIn){
+        X = spawnX;
+        Y = spawnY;
         if(sizeIn>0 && sizeIn<5){
         size = sizeIn;}
-        else{size = 4;}
+        else {
+            size = 4;}
+
         //Makes the ball go either left or right depending on input, if the input is incorrect it randomly chooses a direction.
-        if(direction=="left"){movX=-15;}
-        else if(direction=="right"){movX=15;}
-        else {Random coinflip = new Random();
-            if(coinflip.nextInt(1)==1){movX=-15;}
-            else {movX=15;}}
+        if(direction.equals(Directions.LEFT)){
+            movX=-15;}
+        else if(direction.equals(Directions.RIGHT)){
+            movX=15;}
+        else {
+            //Should be moved to somewhere we are sure it's running and called from there, Not important because for now the ball can just move to the same side.
+            Random coinflip = new Random();
+            if(coinflip.nextInt(1)==1){
+                movX=-15;}
+            else {
+                movX=15;}
+        }
         movY = 3*size+5;
         //Create actual ball here.
     }
 
     /**
-     * Calculates and returns the next position the ball should be drawn in.
-     * !!currently not returing
+     * Calculates and sets the next position the ball should be drawn in.
      */
     public void nextMovement(){
-        //int new X = selfX + movX;
+        X = X + movX;
         movY += 2;
-        //int new Y = selfY + movY;
-        //return (0,0);
+        Y = Y + movY;
     }
+
+
 
     /**
      * Handles floor colission, speed is set such that it always goes to the same height from the floor bounced on. hitting a higher platform means ending up higher too.
@@ -72,8 +89,8 @@ public class Ball {
     void destroyball(){
         //setscore+100
         if(size!=1){
-            //ball(selfX, selfY, "left", size-1);
-            //ball(selfX, selfY, "right", size-1);
+            new Ball(X, Y, Directions.LEFT, size-1);
+            new Ball(X, Y, Directions.RIGHT, size-1);
         }
         //remove ball
     }
@@ -88,6 +105,14 @@ public class Ball {
 
     public int getMovY(){
         return movY;
+    }
+
+    public int getX(){
+        return X;
+    }
+
+    public int getY(){
+        return Y;
     }
 
 }

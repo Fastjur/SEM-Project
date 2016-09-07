@@ -8,11 +8,11 @@ import org.junit.Test;
 
 public class BallTest {
 
-    Ball TestBallLeft = new Ball(0, 0, "left", 4);
-    Ball TestBallRight = new Ball(0, 0, "right", 3);
-    Ball TestBallIncorrectSizeGreater = new Ball(0, 0, "left", 6);
-    Ball TestBallIncorrectSizeSmaller = new Ball(0, 0, "left", 0);
-    Ball TestBallIncorrectDirection = new Ball(0, 0, "Cheese", 3);
+    Ball TestBallLeft = new Ball(0, 0, Ball.Directions.LEFT, 4);
+    Ball TestBallRight = new Ball(0, 0, Ball.Directions.RIGHT, 3);
+    Ball TestBallIncorrectSizeGreater = new Ball(0, 0, Ball.Directions.LEFT, 6);
+    Ball TestBallIncorrectSizeSmaller = new Ball(0, 0, Ball.Directions.RIGHT, 0);
+    Ball TestBallIncorrectDirection = new Ball(0, 0, Ball.Directions.RANDOM, 3);
 
     //Tests if the constructor handles left and right correctly.
     @Test
