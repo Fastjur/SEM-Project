@@ -24,6 +24,7 @@ public class Application extends JFrame {
     private Properties properties;
 
     public Application(String propertiesLocation) throws IOException {
+        super();
         log.info("Starting application...");
         InputStream stream = this.getClass().getResourceAsStream(propertiesLocation);
         if (stream != null) {
@@ -36,13 +37,14 @@ public class Application extends JFrame {
     }
 
     public void start() {
-        add(new PlayerBoard());
 
         Integer width = Integer.valueOf(properties.getProperty("application-width"));
         Integer height = Integer.valueOf(properties.getProperty("application-height"));
         String name = properties.getProperty("application-name");
 
+        setResizable(false);
         setSize(width, height);
+        add(new PlayerBoard(width, height));
         log.info("Initialized with width: " + width + " and height: " + height);
 
         setTitle(name);

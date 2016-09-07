@@ -1,25 +1,33 @@
 package net.liquidpineapple.pang.objects;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.awt.event.KeyEvent;
 
 /**
  * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
  * @date 2016/09/06.
  */
+@Slf4j
 public class Player extends GameObject {
 
     private static final String textureLocation = "/sprites/player/p1_front.png";
+    private final int maxX;
+    private int dx;
 
-    protected int dx;
-    protected int dy;
-
-    public Player(int startX, int startY) {
+    public Player(int startX, int startY, int maxX) {
         super(textureLocation, startX, startY);
+        this.maxX = maxX;
     }
 
     public void move() {
         xPos += dx;
-        yPos += dy;
+        if (xPos < 1) {
+            xPos = 1;
+        }
+        if (xPos > maxX) {
+            xPos = maxX;
+        }
     }
 
     public void keyPressed(KeyEvent e) {
@@ -30,10 +38,6 @@ public class Player extends GameObject {
                 dx = -1; break;
             case KeyEvent.VK_RIGHT:
                 dx = 1; break;
-            case KeyEvent.VK_DOWN:
-                dy = -1; break;
-            case KeyEvent.VK_UP:
-                dy = 1; break;
         }
     }
 
@@ -45,10 +49,6 @@ public class Player extends GameObject {
                 dx = 0; break;
             case KeyEvent.VK_RIGHT:
                 dx = 0; break;
-            case KeyEvent.VK_DOWN:
-                dy = 0; break;
-            case KeyEvent.VK_UP:
-                dy = 0; break;
         }
     }
 }
