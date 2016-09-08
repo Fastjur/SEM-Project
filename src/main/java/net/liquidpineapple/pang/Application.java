@@ -2,7 +2,6 @@ package net.liquidpineapple.pang;
 
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
-import net.liquidpineapple.pang.gui.PlayerBoard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,7 +43,7 @@ public class Application extends JFrame {
 
         setResizable(false);
         setSize(width, height);
-        add(new PlayerBoard(width, height));
+        add(new Board(width, height));
         log.info("Initialized with width: " + width + " and height: " + height);
 
         setTitle(name);

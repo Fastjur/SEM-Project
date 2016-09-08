@@ -63,4 +63,8 @@ public abstract class GameObject {
     public void doDrawing(Graphics2D graphics2D, ImageObserver imageObserver) {
         graphics2D.drawImage(this.getImage(), this.getXPos(), this.getYPos(), imageObserver);
     }
+
+    public void doUpdate() {
+
+    }
 }
