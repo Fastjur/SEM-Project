@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.ImageObserver;
 import java.net.URL;
 
@@ -27,12 +28,15 @@ public abstract class GameObject {
     private Image image;
 
     public GameObject(String textureLocation, int startX, int startY) {
+        this.xPos = startX;
+        this.yPos = startY;
+        ChangeImage(textureLocation);
+    }
+
+    public void ChangeImage(String textureLocation){
         ImageIcon imageIcon;
         log.info("Registering object with texture " + textureLocation);
         URL url = this.getClass().getResource(textureLocation);
-
-        this.xPos = startX;
-        this.yPos = startY;
 
         if (url != null) {
             imageIcon = new ImageIcon(url);
@@ -42,7 +46,6 @@ public abstract class GameObject {
                 "texture");
         }
         image = imageIcon.getImage();
-
         getWidthAndHeight();
     }
 
@@ -54,6 +57,8 @@ public abstract class GameObject {
     protected Rectangle getBounds() {
         return new Rectangle(xPos, yPos, width, height);
     }
+    //A Ellipse2D.float does also exists in case we need to be more accurate.
+    protected Ellipse2D.Double getEllipseBounds() {return new Ellipse2D.Double(xPos, yPos, width, height); }
 
     public void setPos(int xPos, int yPos) {
         this.xPos = xPos;
