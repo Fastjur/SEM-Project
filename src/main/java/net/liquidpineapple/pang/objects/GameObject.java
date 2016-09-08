@@ -28,12 +28,15 @@ public abstract class GameObject {
     private Image image;
 
     public GameObject(String textureLocation, int startX, int startY) {
+        this.xPos = startX;
+        this.yPos = startY;
+        ChangeImage(textureLocation);
+    }
+
+    public void ChangeImage(String textureLocation){
         ImageIcon imageIcon;
         log.info("Registering object with texture " + textureLocation);
         URL url = this.getClass().getResource(textureLocation);
-
-        this.xPos = startX;
-        this.yPos = startY;
 
         if (url != null) {
             imageIcon = new ImageIcon(url);
@@ -43,7 +46,6 @@ public abstract class GameObject {
                 "texture");
         }
         image = imageIcon.getImage();
-
         getWidthAndHeight();
     }
 

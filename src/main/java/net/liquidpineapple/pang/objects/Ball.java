@@ -32,8 +32,17 @@ public class Ball extends GameObject {
      * @param sizeIn    The desired size of the ball, Greater then 4 or smaller then 0 results in a size 4 ball.
      */
     public Ball(int startX, int startY, Directions direction, int sizeIn){
-
         super(textureLocationBlue, startX, startY);
+        if(size == 1){
+            ChangeImage(textureLocationGreen);
+        }
+        else if(size == 2){
+            ChangeImage(textureLocationRed);
+        }
+        else if (size == 3){
+            ChangeImage(textureLocationYellow);
+        }
+
         if(sizeIn>0 && sizeIn<5){
         size = sizeIn;}
         else {
