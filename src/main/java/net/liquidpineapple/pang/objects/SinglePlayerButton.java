@@ -7,6 +7,6 @@ package net.liquidpineapple.pang.objects;
 public class SinglePlayerButton extends Button {
 
     public SinglePlayerButton(int startX, int startY) {
-        super("",startX, startY);
+        super("/images/singleplayer.png",startX, startY);
     }
 }

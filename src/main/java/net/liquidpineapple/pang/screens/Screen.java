@@ -15,7 +15,9 @@ public abstract class Screen {
     protected LinkedList<GameObject> objectList;
     protected Image backgroundImage;
 
-    public Screen(int width, int height) {}
+    public Screen(int width, int height) {
+        this.objectList = new LinkedList<GameObject>();
+    }
 
     public void doDrawing(Graphics2D graphics2D, ImageObserver imageObserver) {
         graphics2D.drawImage(backgroundImage, 0, 0, null);

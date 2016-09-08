@@ -31,7 +31,7 @@ public class Board extends JPanel {
         setFocusable(true);
         setBackground(Color.BLACK);
 
-        currentScreen = new MainMenu();
+        currentScreen = new MainMenu(boardWidth, boardHeight);
     }
 
 

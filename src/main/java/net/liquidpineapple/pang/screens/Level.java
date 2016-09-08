@@ -1,12 +1,10 @@
 package net.liquidpineapple.pang.screens;
 
 import lombok.extern.slf4j.Slf4j;
-import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.objects.Player;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
-import java.util.LinkedList;
 
 /**
  * @author Govert de Gans
@@ -19,8 +17,6 @@ public class Level extends Screen {
 
     public Level(int boardWidth, int boardHeight) {
         super(boardWidth, boardHeight);
-
-        this.objectList = new LinkedList<GameObject>();
 
         //currentLevel = Level.createFromXML("level1.xml");
 
