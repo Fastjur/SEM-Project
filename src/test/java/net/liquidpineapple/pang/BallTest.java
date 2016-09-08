@@ -41,4 +41,5 @@ public class BallTest {
         assertTrue(TestBallIncorrectDirection.getMovX() == 15 || TestBallIncorrectDirection.getMovX() == -15);
     }
 
+
 }

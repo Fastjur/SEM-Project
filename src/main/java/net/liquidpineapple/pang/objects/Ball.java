@@ -1,6 +1,5 @@
 package net.liquidpineapple.pang.objects;
 
-import java.lang.reflect.Array;
 import java.util.Random;
 
 import static java.lang.Math.random;
@@ -10,7 +9,7 @@ import static javafx.scene.input.KeyCode.Y;
 /**
  * Created by Erik on 7-9-2016.
  */
-public class Ball {
+public class Ball extends GameObject {
 
     public enum Directions{
         LEFT, RIGHT, RANDOM
@@ -20,20 +19,21 @@ public class Ball {
     int size;
     int movX;
     int movY;
-    int X;
-    int Y;
-
+    private static final String textureLocationBlue = "/sprites/Balls/Blue/frame 1.png";
+    private static final String textureLocationGreen = "/sprites/Balls/Green/frame 1.png";
+    private static final String textureLocationRed = "/sprites/Balls/Red/frame 1.png";
+    private static final String textureLocationYellow = "/sprites/Balls/Yellow/frame 1.png";
     /**
      * Creates a ball with a set horizontal speed and a variable vertical speed depending on size.
      *
-     * @param spawnX    X-coordinate to make the ball
-     * @param spawnY    Y-coordinate to make the ball
+     * @param startX    X-coordinate to make the ball
+     * @param startY   Y-coordinate to make the ball
      * @param direction Direction the ball should move, valid inputs are: "left" and "right", anything else randomizes the direction.
      * @param sizeIn    The desired size of the ball, Greater then 4 or smaller then 0 results in a size 4 ball.
      */
-    public Ball(int spawnX, int spawnY, Directions direction, int sizeIn){
-        X = spawnX;
-        Y = spawnY;
+    public Ball(int startX, int startY, Directions direction, int sizeIn){
+
+        super(textureLocationBlue, startX, startY);
         if(sizeIn>0 && sizeIn<5){
         size = sizeIn;}
         else {
@@ -59,10 +59,10 @@ public class Ball {
     /**
      * Calculates and sets the next position the ball should be drawn in.
      */
-    public void nextMovement(){
-        X = X + movX;
+    public void move(){
+        xPos = xPos + movX;
         movY += 2;
-        Y = Y + movY;
+        yPos = yPos + movY;
     }
 
 
@@ -89,8 +89,8 @@ public class Ball {
     void destroyball(){
         //setscore+100
         if(size!=1){
-            new Ball(X, Y, Directions.LEFT, size-1);
-            new Ball(X, Y, Directions.RIGHT, size-1);
+            new Ball(xPos, yPos, Directions.LEFT, size-1);
+            new Ball(xPos, yPos, Directions.RIGHT, size-1);
         }
         //remove ball
     }
@@ -108,11 +108,11 @@ public class Ball {
     }
 
     public int getX(){
-        return X;
+        return xPos;
     }
 
     public int getY(){
-        return Y;
+        return yPos;
     }
 
 }
