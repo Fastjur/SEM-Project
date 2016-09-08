@@ -17,6 +17,7 @@ import java.util.Properties;
  */
 @Slf4j
 public class Application extends JFrame {
+    public static Board board = new Board();
 
     private static String PROPERTIES_LOCATION = "/config.properties";
 
@@ -35,7 +36,7 @@ public class Application extends JFrame {
     }
 
     public void start() {
-        add(new Board());
+
 
         Integer width = Integer.valueOf(properties.getProperty("application-width"));
         Integer height = Integer.valueOf(properties.getProperty("application-height"));
@@ -49,6 +50,7 @@ public class Application extends JFrame {
         setLocationRelativeTo(null);
 
         setVisible(true);
+        add(board);
 
         log.info("Application started successfully!");
     }
