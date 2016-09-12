@@ -15,7 +15,7 @@ public abstract class Screen {
     protected LinkedList<GameObject> objectList;
     protected Image backgroundImage;
 
-    public Screen(int width, int height) {
+    public Screen() {
         this.objectList = new LinkedList<GameObject>();
     }
 

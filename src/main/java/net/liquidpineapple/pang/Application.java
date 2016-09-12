@@ -19,7 +19,9 @@ import java.util.Properties;
 public class Application extends JFrame {
 
     private static String PROPERTIES_LOCATION = "/config.properties";
+    private static final int DELAY = 10;
 
+    private Board board;
     private Properties properties;
 
     public Application(String propertiesLocation) throws IOException {
@@ -43,7 +45,9 @@ public class Application extends JFrame {
 
         setResizable(false);
         setSize(width, height);
-        add(new Board(width, height));
+        board = new Board(width, height);
+        new InputHandler(board);
+        add(board);
         log.info("Initialized with width: " + width + " and height: " + height);
 
         setTitle(name);
@@ -53,6 +57,36 @@ public class Application extends JFrame {
         setVisible(true);
 
         log.info("Application started successfully!");
+
+
+
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run(){
+                long beforeTime, timeDiff, sleep;
+                beforeTime = System.currentTimeMillis();
+                log.info("Update loop is running");
+
+                while(true) {
+                    timeDiff = System.currentTimeMillis() - beforeTime;
+                    sleep = DELAY - timeDiff;
+
+                    if (sleep < 0) {
+                        sleep = 2;
+                    }
+
+                    try {
+                        board.doUpdate();
+
+                        Thread.sleep(sleep);
+                    } catch (InterruptedException e) {
+                        log.info("Interrupted: " + e.getMessage());
+                    }
+                }
+            }
+        });
+
+        thread1.start();
     }
 
     public static void main(String[] args) throws Throwable {

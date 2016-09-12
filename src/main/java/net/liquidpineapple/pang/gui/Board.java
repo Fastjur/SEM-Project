@@ -14,11 +14,10 @@ import java.awt.*;
 @Slf4j
 public class Board extends JPanel {
 
-    private static final int DELAY = 10;
     private final int boardWidth;
     private final int boardHeight;
     private Timer timer;
-    private Screen currentScreen;
+    public static Screen currentScreen;
 
     public Board(int boardWidth, int boardHeight) {
         super();
@@ -31,7 +30,7 @@ public class Board extends JPanel {
         setFocusable(true);
         setBackground(Color.BLACK);
 
-        currentScreen = new MainMenu(boardWidth, boardHeight);
+        currentScreen = new MainMenu();
     }
 
 
@@ -45,5 +44,9 @@ public class Board extends JPanel {
     private void doDrawing(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         currentScreen.doDrawing(g2d, this);
+    }
+
+    public void doUpdate() {
+        this.currentScreen.doUpdate();
     }
 }
