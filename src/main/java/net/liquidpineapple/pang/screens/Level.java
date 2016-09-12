@@ -1,10 +1,20 @@
 package net.liquidpineapple.pang.screens;
 
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.objects.Ball;
+import net.liquidpineapple.pang.objects.BallMovement;
+import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.objects.Player;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.imageio.ImageIO;
-import java.io.IOException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.*;
+import java.util.ArrayList;
 
 /**
  * @author Govert de Gans
@@ -16,24 +26,113 @@ public class Level extends Screen {
     private static final int BOTTOM_OFFSET = 10;
 
     public Level() {
-
-        //currentLevel = Level.createFromXML("level1.xml");
-
-        Player player = new Player(1, 1, 600);
-        objectList.add(player);
-        player.setPos(
-            51, 20
-        );
     }
 
-    public static Level createFromXML(String xmlFile, int width, int height) {
+    /**
+     * Method that parses a XML-file into a level.
+     * @param xmlFile - path/filename of the XML-file that should be parsed.
+     * @return - returns a new level.
+     */
+    public static Level createFromXML(String xmlFile) throws IOException {
+
         Level output = new Level();
-        try {
-            output.backgroundImage = ImageIO.read(Level.class.getResource("/sprites/bg.png"));
-        } catch (IOException e) {
-            log.error(e.getMessage(), e);
+        if (createFileReader(xmlFile) != null) {
+            Document doc = createFileReader(xmlFile);
+            String background_path = "/sprites/" + doc.getElementsByTagName("background").item(0).getTextContent();
+            output.backgroundImage = ImageIO.read(Level.class.getResource(background_path));
+
+            for (Ball ball : loadBalls(doc.getElementsByTagName("ball"))) {
+                output.objectList.add(ball);
+            }
+
+            for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
+                output.objectList.add(player);
+            }
         }
-        // todo: actually parse an xml file, output.objectList.add() & stuff
         return output;
+    }
+
+    /**
+     * Method that reads the balls from the XML-file and parses them into Ball objects.
+     * @param ballList - NodeList of the different balls to be parsed.
+     * @return - Arraylist with Ball objects.
+     */
+    public static ArrayList<Ball> loadBalls(NodeList ballList){
+        ArrayList<Ball> ballArray = new ArrayList<>();
+
+        for (int i = 0; i < ballList.getLength(); i++) {
+            Node ballNode = ballList.item(i);
+            Element ballElement = (Element) ballNode;
+
+            int int_Xpos = Integer.parseInt(ballElement.getElementsByTagName("x").item(0).getTextContent());
+            int int_Ypos = Integer.parseInt(ballElement.getElementsByTagName("y").item(0).getTextContent());
+
+            int size = Integer.parseInt(ballElement.getElementsByTagName("size").item(0)
+                .getTextContent());
+            String color = ballElement.getElementsByTagName("color").item(0).getTextContent();
+
+            String direction = ballElement.getElementsByTagName("direction").item(0).getTextContent();
+            BallMovement ballMovement = BallMovement.valueOf(direction);
+            Ball ball = new Ball(int_Xpos, int_Ypos, ballMovement, size);
+            ballArray.add(ball);
+        }
+        return ballArray;
+    }
+
+    /**
+     * Method that reads the players from the XML-file and parses them into Player objects.
+     * Simular to the loadBalls method
+     * @param playerlist - NodeList of the players that should be parsed.
+     * @return - ArrayList of Player objects.
+     */
+    public static ArrayList<Player> loadPlayer(NodeList playerlist){
+        ArrayList<Player> playerArray = new ArrayList<>();
+        for (int i = 0; i < playerlist.getLength(); i++){
+            Node playernode = playerlist.item(i);
+            Element playerElement = (Element) playernode;
+
+            int int_Xpos = Integer.parseInt(playerElement.getElementsByTagName("x").item(0).getTextContent());
+            int int_Ypos = Integer.parseInt(playerElement.getElementsByTagName("y").item(0).getTextContent());
+            int int_MaxX = Integer.parseInt(playerElement.getElementsByTagName("maxX").item(0).getTextContent());
+
+            Player player = new Player(int_Xpos, int_Ypos, int_MaxX);
+            playerArray.add(player);
+        }
+        return playerArray;
+    }
+
+    /**
+     * Method to create a FileReader to read the XML-file.
+     * @param xmlFile - Path/name of the XML-file to be parsed.
+     * @return - returns a new FileReader if no exception is thrown,
+     * else it will return null.
+     */
+    public static Document createFileReader(String xmlFile) {
+        try {
+            File inputFile = new File(xmlFile);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(inputFile);
+            doc.getDocumentElement().normalize();
+            return doc;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Method to update the level.
+     * This is were all the doUpdate() methods from the objectList are called.
+     */
+    public void doUpdate(){
+        int x = 0;
+        while(x<100) { //TODO, change this
+            for (GameObject object : objectList) {
+                object.doUpdate();
+            }
+            x++;
+        }
     }
 }
