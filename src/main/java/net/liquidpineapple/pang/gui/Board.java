@@ -32,7 +32,7 @@ public class Board extends JPanel {
         setBackground(Color.BLACK);
 
 
-        currentScreen = Level.createFromXML("src/main/resources/levels/level1.xml", boardWidth, boardHeight);//new Level(boardWidth, boardHeight);//new MainMenu(boardWidth, boardHeight);
+        currentScreen = Level.createFromXML("src/main/resources/levels/level1.xml");//new Level(boardWidth, boardHeight);//new MainMenu(boardWidth, boardHeight);
     }
 
 

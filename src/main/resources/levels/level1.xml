@@ -23,5 +23,12 @@
 			<size>1</size>
 			<color>red</color>
 		</ball>
+        <player>
+            <position>
+                <x>300</x>
+                <y>300</y>
+            </position>
+            <maxX>600</maxX>
+        </player>
 	</objects>
 </level>

@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.screens;
 
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.objects.Player;
 import org.w3c.dom.Document;
@@ -14,6 +15,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.beans.XMLDecoder;
 import java.io.*;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * @author Govert de Gans
@@ -28,11 +30,11 @@ public class Level extends Screen {
 
         //currentLevel = Level.createFromXML("level1.xml");
 
-        Player player = new Player(1, 1, 600);
+      /*  Player player = new Player(1, 1, 600);
         objectList.add(player);
         player.setPos(
             51, 20
-        );
+        );*/
     }
 
     public static Level createFromXML(String xmlFile) {
@@ -43,17 +45,12 @@ public class Level extends Screen {
             try {
                 NodeList balllist = doc.getElementsByTagName("ball");
                 NodeList playerlist = doc.getElementsByTagName("player");
+                for(Ball ball : loadBalls(balllist)) {
+                    output.objectList.add(ball);
+                }
 
-                for(int i =0; i<balllist.getLength(); i++){
-                    Node ball = balllist.item(i);
-                    Element ballElement = (Element) ball;
-                    NodeList position = ballElement.getElementsByTagName("position");
-                    int x_pos = Integer.getInteger(position.item(0).getTextContent());
-                    int y_pos = Integer.getInteger(position.item(1).getTextContent());
-                    String direction = ballElement.getElementsByTagName("direction").item(0).getTextContent();
-                    int size = Integer.getInteger(ballElement.getElementsByTagName("size").item(0).getTextContent());
-                    String color = ballElement.getElementsByTagName("color").item(0).getTextContent();
-
+                for(Player player: loadPlayer(playerlist)){
+                    output.objectList.add(player);
                 }
             }
 
@@ -62,6 +59,37 @@ public class Level extends Screen {
             }
         }
         return output;
+    }
+
+    public static ArrayList<Ball> loadBalls(NodeList balllist){
+        ArrayList<Ball> ballArray = new ArrayList<Ball>();
+        for(int i =0; i<balllist.getLength(); i++){
+            Node ballNode = balllist.item(i);
+            Element ballElement = (Element) ballNode;
+            int int_Xpos = Integer.parseInt(ballElement.getElementsByTagName("x").item(0).getTextContent());
+            int int_Ypos = Integer.parseInt(ballElement.getElementsByTagName("y").item(0).getTextContent());
+            String direction = ballElement.getElementsByTagName("direction").item(0).getTextContent();
+            int size = Integer.parseInt(ballElement.getElementsByTagName("size").item(0).getTextContent());
+            String color = ballElement.getElementsByTagName("color").item(0).getTextContent();
+            Ball.Directions directions = Ball.Directions.LEFT;
+            Ball ball = new Ball(int_Xpos, int_Ypos, directions, size);
+            ballArray.add(ball);
+        }
+        return ballArray;
+    }
+
+    public static ArrayList<Player> loadPlayer(NodeList playerlist){
+        ArrayList<Player> playerArray = new ArrayList<Player>();
+        for(int i =0; i<playerlist.getLength(); i++){
+            Node playernode = playerlist.item(i);
+            Element playerElement = (Element) playernode;
+            int int_Xpos = Integer.parseInt(playerElement.getElementsByTagName("x").item(0).getTextContent());
+            int int_Ypos = Integer.parseInt(playerElement.getElementsByTagName("y").item(0).getTextContent());
+            int int_MaxX = Integer.parseInt(playerElement.getElementsByTagName("maxX").item(0).getTextContent());
+            Player player = new Player(int_Xpos, int_Ypos, int_MaxX);
+            playerArray.add(player);
+        }
+        return playerArray;
     }
 
     public static Document createFileReader(String xmlFile) {

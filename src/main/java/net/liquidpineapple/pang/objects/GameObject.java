@@ -48,6 +48,22 @@ public abstract class GameObject extends JComponent {
         getWidthAndHeight();
     }
 
+    public void ChangeImage(String textureLocation){
+        ImageIcon imageIcon;
+        log.info("Registering object with texture " + textureLocation);
+        URL url = this.getClass().getResource(textureLocation);
+
+        if (url != null) {
+            imageIcon = new ImageIcon(url);
+        } else {
+            imageIcon = new ImageIcon(this.getClass().getResource(defaultTexture));
+            log.error("Could not find texture " + textureLocation + " resolving to default " +
+                "texture");
+        }
+        image = imageIcon.getImage();
+        getWidthAndHeight();
+    }
+
     private void getWidthAndHeight() {
         this.width = image.getWidth(null);
         this.height = image.getHeight(null);
