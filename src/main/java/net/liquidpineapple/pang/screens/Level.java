@@ -2,6 +2,7 @@ package net.liquidpineapple.pang.screens;
 
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.objects.Ball;
+import net.liquidpineapple.pang.objects.BallMovement;
 import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.objects.Player;
 import org.w3c.dom.Document;
@@ -58,21 +59,25 @@ public class Level extends Screen {
 
     /**
      * Method that reads the balls from the XML-file and parses them into Ball objects.
-     * @param balllist - NodeList of the different balls to be parsed.
+     * @param ballList - NodeList of the different balls to be parsed.
      * @return - Arraylist with Ball objects.
      */
-    public static ArrayList<Ball> loadBalls(NodeList balllist){
-        ArrayList<Ball> ballArray = new ArrayList<Ball>();
-        for(int i =0; i<balllist.getLength(); i++){
-            Node ballNode = balllist.item(i);
+    public static ArrayList<Ball> loadBalls(NodeList ballList){
+        ArrayList<Ball> ballArray = new ArrayList<>();
+
+        for (int i = 0; i < ballList.getLength(); i++) {
+            Node ballNode = ballList.item(i);
             Element ballElement = (Element) ballNode;
+
             int int_Xpos = Integer.parseInt(ballElement.getElementsByTagName("x").item(0).getTextContent());
             int int_Ypos = Integer.parseInt(ballElement.getElementsByTagName("y").item(0).getTextContent());
-            String direction = ballElement.getElementsByTagName("direction").item(0).getTextContent();
-            int size = Integer.parseInt(ballElement.getElementsByTagName("size").item(0).getTextContent());
+
+            int size = Integer.parseInt(ballElement.getElementsByTagName("ballSize").item(0).getTextContent());
             String color = ballElement.getElementsByTagName("color").item(0).getTextContent();
-            Ball.Directions directions = Ball.Directions.LEFT;
-            Ball ball = new Ball(int_Xpos, int_Ypos, directions, size);
+
+            String direction = ballElement.getElementsByTagName("direction").item(0).getTextContent();
+            BallMovement ballMovement = BallMovement.valueOf(direction);
+            Ball ball = new Ball(int_Xpos, int_Ypos, ballMovement, size);
             ballArray.add(ball);
         }
         return ballArray;
@@ -85,13 +90,15 @@ public class Level extends Screen {
      * @return - ArrayList of Player objects.
      */
     public static ArrayList<Player> loadPlayer(NodeList playerlist){
-        ArrayList<Player> playerArray = new ArrayList<Player>();
-        for(int i =0; i<playerlist.getLength(); i++){
+        ArrayList<Player> playerArray = new ArrayList<>();
+        for (int i = 0; i < playerlist.getLength(); i++){
             Node playernode = playerlist.item(i);
             Element playerElement = (Element) playernode;
+
             int int_Xpos = Integer.parseInt(playerElement.getElementsByTagName("x").item(0).getTextContent());
             int int_Ypos = Integer.parseInt(playerElement.getElementsByTagName("y").item(0).getTextContent());
             int int_MaxX = Integer.parseInt(playerElement.getElementsByTagName("maxX").item(0).getTextContent());
+
             Player player = new Player(int_Xpos, int_Ypos, int_MaxX);
             playerArray.add(player);
         }
@@ -125,7 +132,7 @@ public class Level extends Screen {
      */
     public void doUpdate(){
         int x = 0;
-        while(x<100) {
+        while(x<100) { //TODO, change this
             for (GameObject object : objectList) {
                 object.doUpdate();
             }

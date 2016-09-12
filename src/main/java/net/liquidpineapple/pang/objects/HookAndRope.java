@@ -1,5 +1,7 @@
 package net.liquidpineapple.pang.objects;
 
+import lombok.Getter;
+
 /**
  * Created by Tim on 9-9-2016.
  * Class that represents the hook system in the game.
@@ -10,6 +12,8 @@ public class HookAndRope extends GameObject{
     private static final String textureLocation = "/sprites/hookandrope/combined.png";
     private final int maxY;
     private double dy = 1; //specify upspeed rope here.
+
+    @Getter
     private boolean inUse = true;
 
     /**
@@ -45,14 +49,5 @@ public class HookAndRope extends GameObject{
             move();
         }
     }
-
-    /**
-     * Get method to get the boolean inUse, indicating if the hook is in use.
-     * @return boolean inUse;
-     */
-    public boolean isInUse() {
-        return inUse;
-    }
-
 
 }

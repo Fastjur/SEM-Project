@@ -14,7 +14,7 @@ import java.net.URL;
  * @date 2016/09/07.
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Slf4j
 public abstract class GameObject extends JComponent {
 
@@ -29,10 +29,10 @@ public abstract class GameObject extends JComponent {
     public GameObject(String textureLocation, int startX, int startY) {
         this.xPos = startX;
         this.yPos = startY;
-        ChangeImage(textureLocation);
+        changeImage(textureLocation);
     }
 
-    public void ChangeImage(String textureLocation){
+    public void changeImage(String textureLocation){
         ImageIcon imageIcon;
         log.info("Registering object with texture " + textureLocation);
         URL url = this.getClass().getResource(textureLocation);
@@ -55,10 +55,12 @@ public abstract class GameObject extends JComponent {
 
     public Rectangle getBounds() {
         return new Rectangle(xPos, yPos, objectWidth, objectHeight);
-
     }
+
     //A Ellipse2D.float does also exists in case we need to be more accurate.
-    protected Ellipse2D.Double getEllipseBounds() {return new Ellipse2D.Double(xPos, yPos, objectWidth, objectHeight); }
+    protected Ellipse2D.Double getEllipseBounds() {
+        return new Ellipse2D.Double(xPos, yPos, objectWidth, objectHeight);
+    }
 
     public void setPos(int xPos, int yPos) {
         this.xPos = xPos;

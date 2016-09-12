@@ -16,6 +16,17 @@ import java.awt.event.KeyEvent;
 public class Player extends GameObject {
 
     private static final String textureLocation = "/sprites/player/p1_front.png";
+
+    private enum PlayerMovement {
+        LEFT_DIRECTION(-1),
+        RIGHT_DIRECTION(1),
+        NO_MOVEMENT(0);
+
+        private final int dx;
+        PlayerMovement(int dx) {
+            this.dx = dx;
+        }
+    }
     private final int maxX;
     private int dx;
 
@@ -26,8 +37,8 @@ public class Player extends GameObject {
 
     public void move() {
         xPos += dx;
-        if (xPos < 1) {
-            xPos = 1;
+        if (xPos < PlayerMovement.LEFT_DIRECTION.dx) {
+            xPos = PlayerMovement.LEFT_DIRECTION.dx;
         }
         if (xPos > maxX) {
             xPos = maxX;
@@ -39,9 +50,9 @@ public class Player extends GameObject {
 
         switch(key) {
             case KeyEvent.VK_LEFT:
-                dx = -1; break;
+                dx = PlayerMovement.LEFT_DIRECTION.dx; break;
             case KeyEvent.VK_RIGHT:
-                dx = 1; break;
+                dx = PlayerMovement.RIGHT_DIRECTION.dx; break;
         }
     }
 
@@ -50,9 +61,9 @@ public class Player extends GameObject {
 
         switch(key) {
             case KeyEvent.VK_LEFT:
-                dx = 0; break;
+                dx = PlayerMovement.NO_MOVEMENT.dx; break;
             case KeyEvent.VK_RIGHT:
-                dx = 0; break;
+                dx = PlayerMovement.NO_MOVEMENT.dx; break;
         }
     }
 }
