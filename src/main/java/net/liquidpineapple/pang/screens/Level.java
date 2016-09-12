@@ -53,6 +53,7 @@ public class Level extends Screen {
                     String direction = ballElement.getElementsByTagName("direction").item(0).getTextContent();
                     int size = Integer.getInteger(ballElement.getElementsByTagName("size").item(0).getTextContent());
                     String color = ballElement.getElementsByTagName("color").item(0).getTextContent();
+
                 }
             }
 
