@@ -35,6 +35,9 @@ public class Level extends Screen {
         if (createFileReader(xmlFile) != null) {
             Document doc = createFileReader(xmlFile);
             try {
+                String background_path = "/sprites/"+ doc.getElementsByTagName("background").item(0).getTextContent();
+                System.out.println(background_path);
+                output.backgroundImage = ImageIO.read(Level.class.getResource(background_path));
                 NodeList balllist = doc.getElementsByTagName("ball");
                 NodeList playerlist = doc.getElementsByTagName("player");
                 for (Ball ball : loadBalls(balllist)) {
