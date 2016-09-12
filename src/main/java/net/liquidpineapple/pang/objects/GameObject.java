@@ -16,7 +16,7 @@ import java.net.URL;
 @Data
 @EqualsAndHashCode
 @Slf4j
-public abstract class GameObject {
+public abstract class GameObject extends JComponent {
 
     private static final String defaultTexture = "/sprites/no-texture.png";
 
@@ -51,7 +51,7 @@ public abstract class GameObject {
         this.height = image.getHeight(null);
     }
 
-    protected Rectangle getBounds() {
+    public Rectangle getBounds() {
         return new Rectangle(xPos, yPos, width, height);
     }
 

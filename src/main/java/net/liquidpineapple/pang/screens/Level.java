@@ -15,21 +15,19 @@ public class Level extends Screen {
 
     private static final int BOTTOM_OFFSET = 10;
 
-    public Level(int boardWidth, int boardHeight) {
-        super(boardWidth, boardHeight);
+    public Level() {
 
         //currentLevel = Level.createFromXML("level1.xml");
 
-        Player player = new Player(1, 1, boardWidth);
+        Player player = new Player(1, 1, 600);
         objectList.add(player);
         player.setPos(
-            boardWidth / 2 - player.getWidth() / 2,
-            boardHeight - player.getHeight() - BOTTOM_OFFSET
+            51, 20
         );
     }
 
     public static Level createFromXML(String xmlFile, int width, int height) {
-        Level output = new Level(width,  height);
+        Level output = new Level();
         try {
             output.backgroundImage = ImageIO.read(Level.class.getResource("/sprites/bg.png"));
         } catch (IOException e) {
