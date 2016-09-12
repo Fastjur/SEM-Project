@@ -1,5 +1,7 @@
 package net.liquidpineapple.pang.objects;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.awt.event.KeyEvent;
@@ -8,6 +10,8 @@ import java.awt.event.KeyEvent;
  * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
  * @date 2016/09/06.
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Slf4j
 public class Player extends GameObject {
 
