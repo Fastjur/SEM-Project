@@ -1,40 +1,20 @@
 package net.liquidpineapple.pang.objects;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Govert de Gans
  * @date 2016-09-08
  */
-public class SinglePlayerButton extends Button implements MouseListener {
+@Slf4j
+public class SinglePlayerButton extends Button {
 
     public SinglePlayerButton(int startX, int startY) {
         super("/images/singleplayer.png", startX, startY);
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println("ok");
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
+    public void onClick() {
+        log.info("I change the screen now");
     }
 }
