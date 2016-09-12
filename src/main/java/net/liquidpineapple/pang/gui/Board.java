@@ -6,6 +6,7 @@ import net.liquidpineapple.pang.screens.Screen;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 /**
  * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
@@ -20,14 +21,14 @@ public class Board extends JPanel {
     private Screen currentScreen;
 
 
-    public Board(int boardWidth, int boardHeight) {
+    public Board(int boardWidth, int boardHeight) throws IOException {
         super();
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
         init();
     }
 
-    private void init() {
+    private void init() throws IOException {
         setFocusable(true);
         setBackground(Color.BLACK);
 

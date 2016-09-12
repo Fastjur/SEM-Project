@@ -22,8 +22,6 @@ public class Ball extends GameObject {
     private static final String textureLocationRed = "/sprites/Balls/Red/frame 1.png";
     private static final String textureLocationYellow = "/sprites/Balls/Yellow/frame 1.png";
 
-    private Random randomDirection = new Random();
-
     /**
      * Creates a ball with a set horizontal speed and a variable vertical speed depending on size.
      *

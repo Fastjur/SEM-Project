@@ -37,7 +37,7 @@ public class Application extends JFrame {
         }
     }
 
-    public void start() {
+    public void start() throws IOException {
 
         Integer width = Integer.valueOf(properties.getProperty("application-width"));
         Integer height = Integer.valueOf(properties.getProperty("application-height"));

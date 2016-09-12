@@ -33,25 +33,20 @@ public class Level extends Screen {
      * @param xmlFile - path/filename of the XML-file that should be parsed.
      * @return - returns a new level.
      */
-    public static Level createFromXML(String xmlFile) {
+    public static Level createFromXML(String xmlFile) throws IOException {
 
         Level output = new Level();
         if (createFileReader(xmlFile) != null) {
             Document doc = createFileReader(xmlFile);
-            try {
-                String background_path = "/sprites/" + doc.getElementsByTagName("background").item(0).getTextContent();
-                output.backgroundImage = ImageIO.read(Level.class.getResource(background_path));
+            String background_path = "/sprites/" + doc.getElementsByTagName("background").item(0).getTextContent();
+            output.backgroundImage = ImageIO.read(Level.class.getResource(background_path));
 
-                for (Ball ball : loadBalls(doc.getElementsByTagName("ball"))) {
-                    output.objectList.add(ball);
-                }
-
-                for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
-                    output.objectList.add(player);
-                }
+            for (Ball ball : loadBalls(doc.getElementsByTagName("ball"))) {
+                output.objectList.add(ball);
             }
-            catch (Exception e) {
-                e.printStackTrace();
+
+            for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
+                output.objectList.add(player);
             }
         }
         return output;
@@ -72,7 +67,8 @@ public class Level extends Screen {
             int int_Xpos = Integer.parseInt(ballElement.getElementsByTagName("x").item(0).getTextContent());
             int int_Ypos = Integer.parseInt(ballElement.getElementsByTagName("y").item(0).getTextContent());
 
-            int size = Integer.parseInt(ballElement.getElementsByTagName("ballSize").item(0).getTextContent());
+            int size = Integer.parseInt(ballElement.getElementsByTagName("size").item(0)
+                .getTextContent());
             String color = ballElement.getElementsByTagName("color").item(0).getTextContent();
 
             String direction = ballElement.getElementsByTagName("direction").item(0).getTextContent();
