@@ -27,14 +27,6 @@ public class Level extends Screen {
     private static final int BOTTOM_OFFSET = 10;
 
     public Level() {
-
-        //currentLevel = Level.createFromXML("level1.xml");
-
-      /*  Player player = new Player(1, 1, 600);
-        objectList.add(player);
-        player.setPos(
-            51, 20
-        );*/
     }
 
     public static Level createFromXML(String xmlFile) {
@@ -45,16 +37,14 @@ public class Level extends Screen {
             try {
                 NodeList balllist = doc.getElementsByTagName("ball");
                 NodeList playerlist = doc.getElementsByTagName("player");
-                for(Ball ball : loadBalls(balllist)) {
+                for (Ball ball : loadBalls(balllist)) {
                     output.objectList.add(ball);
                 }
 
-                for(Player player: loadPlayer(playerlist)){
+                for (Player player : loadPlayer(playerlist)) {
                     output.objectList.add(player);
                 }
-            }
-
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

@@ -21,6 +21,14 @@ public class BallTest {
         assertEquals(15, TestBallRight.getMovX());
     }
 
+   //Tests if the constructor handles sets movY correctly.
+    @Test
+    public void testConstructorYSpeed() throws Throwable {
+        assertEquals(17, TestBallLeft.getMovY());
+        assertEquals(14, TestBallRight.getMovY());
+    }
+
+
     //Tests if the constructor handles size correctly
     @Test
     public void testConstructorSize() throws Throwable {

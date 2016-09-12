@@ -55,6 +55,7 @@ public abstract class GameObject extends JComponent {
 
     public Rectangle getBounds() {
         return new Rectangle(xPos, yPos, objectWidth, objectHeight);
+
     }
     //A Ellipse2D.float does also exists in case we need to be more accurate.
     protected Ellipse2D.Double getEllipseBounds() {return new Ellipse2D.Double(xPos, yPos, objectWidth, objectHeight); }
