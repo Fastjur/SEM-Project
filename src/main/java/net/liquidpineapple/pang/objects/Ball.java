@@ -104,6 +104,10 @@ public class Ball extends GameObject {
         //remove ball
     }
 
+    public int getBallSize(){
+        return size;
+    }
+
     public int getMovX(){
         return movX;
     }
