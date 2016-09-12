@@ -14,7 +14,7 @@ import java.net.URL;
  * @date 2016/09/07.
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Slf4j
 public abstract class GameObject extends JComponent {
 
