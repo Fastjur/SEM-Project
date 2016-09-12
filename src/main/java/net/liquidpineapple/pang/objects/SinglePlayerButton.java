@@ -1,12 +1,12 @@
 package net.liquidpineapple.pang.objects;
 
-import net.liquidpineapple.pang.gui.Board;
-import net.liquidpineapple.pang.screens.Level;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Govert de Gans
  * @date 2016-09-08
  */
+@Slf4j
 public class SinglePlayerButton extends Button {
 
     public SinglePlayerButton(int startX, int startY) {
@@ -15,6 +15,6 @@ public class SinglePlayerButton extends Button {
 
     @Override
     public void onClick() {
-        Board.currentScreen = new Level();
+        log.info("I change the screen now");
     }
 }

@@ -17,7 +17,7 @@ public class Board extends JPanel {
     private final int boardWidth;
     private final int boardHeight;
     private Timer timer;
-    public static Screen currentScreen;
+    private Screen currentScreen;
 
     public Board(int boardWidth, int boardHeight) {
         super();
