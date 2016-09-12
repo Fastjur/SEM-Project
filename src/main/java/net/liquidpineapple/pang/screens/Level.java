@@ -12,9 +12,7 @@ import org.w3c.dom.NodeList;
 import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.beans.XMLDecoder;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -29,31 +27,40 @@ public class Level extends Screen {
     public Level() {
     }
 
+    /**
+     * Method that parses a XML-file into a level.
+     * @param xmlFile - path/filename of the XML-file that should be parsed.
+     * @return - returns a new level.
+     */
     public static Level createFromXML(String xmlFile) {
 
         Level output = new Level();
         if (createFileReader(xmlFile) != null) {
             Document doc = createFileReader(xmlFile);
             try {
-                String background_path = "/sprites/"+ doc.getElementsByTagName("background").item(0).getTextContent();
-                System.out.println(background_path);
+                String background_path = "/sprites/" + doc.getElementsByTagName("background").item(0).getTextContent();
                 output.backgroundImage = ImageIO.read(Level.class.getResource(background_path));
-                NodeList balllist = doc.getElementsByTagName("ball");
-                NodeList playerlist = doc.getElementsByTagName("player");
-                for (Ball ball : loadBalls(balllist)) {
+
+                for (Ball ball : loadBalls(doc.getElementsByTagName("ball"))) {
                     output.objectList.add(ball);
                 }
 
-                for (Player player : loadPlayer(playerlist)) {
+                for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
                     output.objectList.add(player);
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return output;
     }
 
+    /**
+     * Method that reads the balls from the XML-file and parses them into Ball objects.
+     * @param balllist - NodeList of the different balls to be parsed.
+     * @return - Arraylist with Ball objects.
+     */
     public static ArrayList<Ball> loadBalls(NodeList balllist){
         ArrayList<Ball> ballArray = new ArrayList<Ball>();
         for(int i =0; i<balllist.getLength(); i++){
@@ -71,6 +78,12 @@ public class Level extends Screen {
         return ballArray;
     }
 
+    /**
+     * Method that reads the players from the XML-file and parses them into Player objects.
+     * Simular to the loadBalls method
+     * @param playerlist - NodeList of the players that should be parsed.
+     * @return - ArrayList of Player objects.
+     */
     public static ArrayList<Player> loadPlayer(NodeList playerlist){
         ArrayList<Player> playerArray = new ArrayList<Player>();
         for(int i =0; i<playerlist.getLength(); i++){
@@ -85,6 +98,12 @@ public class Level extends Screen {
         return playerArray;
     }
 
+    /**
+     * Method to create a FileReader to read the XML-file.
+     * @param xmlFile - Path/name of the XML-file to be parsed.
+     * @return - returns a new FileReader if no exception is thrown,
+     * else it will return null.
+     */
     public static Document createFileReader(String xmlFile) {
         try {
             File inputFile = new File(xmlFile);
@@ -100,6 +119,10 @@ public class Level extends Screen {
         }
     }
 
+    /**
+     * Method to update the level.
+     * This is were all the doUpdate() methods from the objectList are called.
+     */
     public void doUpdate(){
         int x = 0;
         while(x<100) {

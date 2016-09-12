@@ -2,10 +2,6 @@ package net.liquidpineapple.pang.objects;
 
 import java.util.Random;
 
-import static java.lang.Math.random;
-import static javafx.scene.input.KeyCode.X;
-import static javafx.scene.input.KeyCode.Y;
-
 /**
  * Created by Erik on 7-9-2016.
  */
