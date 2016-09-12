@@ -21,6 +21,8 @@
 
     <properties>
         <maven.compiler.version>3.5.1</maven.compiler.version>
+        <maven.jar.version>3.0.2</maven.jar.version>
+        <maven.assembly.version>2.6</maven.assembly.version>
         <coveralls.version>4.2.0</coveralls.version>
         <jdk.version>1.8</jdk.version>
         <jacoco.version>0.7.6.201602180812</jacoco.version>
@@ -46,14 +48,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <!-- Jar file entry point -->
-                            <mainClass>net.liquidpineapple.pang.Application</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
+                <version>${maven.jar.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
@@ -74,7 +69,9 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven.assembly.version}</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -87,8 +84,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
