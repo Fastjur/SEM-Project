@@ -52,7 +52,15 @@ public class PlayerTest {
 
     @Test
     public void testMove() throws Exception {
-
+        player.setPos(10, 20);
+        player.setDx(1);
+        player.move();
+        assertEquals(11, player.getXPos());
+        player.move();
+        assertEquals(12, player.getXPos());
+        player.setDx(-1);
+        player.move();
+        assertEquals(11, player.getXPos());
     }
 
     @Test
