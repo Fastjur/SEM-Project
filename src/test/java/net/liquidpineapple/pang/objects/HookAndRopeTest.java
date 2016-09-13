@@ -41,7 +41,6 @@ public class HookAndRopeTest {
     public void moveTest() throws Exception {
         assertEquals(600, hookAndRope.getYPos());
         hookAndRope.move();
-        assertTrue(hookAndRope.isInUse());
         assertEquals(599, hookAndRope.getYPos());
     }
 
@@ -53,10 +52,8 @@ public class HookAndRopeTest {
         HookAndRope rope = new HookAndRope(500, 598);
         assertEquals(rope.getYPos(), 600);
         rope.move();
-        assertTrue(rope.isInUse());
         assertEquals(rope.getYPos(), 599);
         rope.move();
-        assertFalse(rope.isInUse());
         assertEquals(rope.getYPos(), 600);
 
     }
@@ -67,7 +64,6 @@ public class HookAndRopeTest {
      */
     @Test
     public void doUpdateWhileNotInUseTest() throws Exception {
-        hookAndRope.setInUse(false);
         assertEquals(hookAndRope.getYPos(), 600);
         hookAndRope.doUpdate();
         assertEquals(hookAndRope.getYPos(), 600);
@@ -75,7 +71,6 @@ public class HookAndRopeTest {
 
     @Test
     public void doUpdateWhileInUseTest() throws Exception {
-        hookAndRope.setInUse(true);
         assertEquals(hookAndRope.getYPos(), 600);
         hookAndRope.doUpdate();
         assertEquals(hookAndRope.getYPos(), 599);

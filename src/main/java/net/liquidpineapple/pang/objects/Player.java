@@ -3,7 +3,9 @@ package net.liquidpineapple.pang.objects;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
+import net.liquidpineapple.pang.screens.Screen;
 
 import java.awt.event.KeyEvent;
 
@@ -56,6 +58,17 @@ public class Player extends GameObject {
         } else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {
             dx = PlayerMovement.RIGHT_DIRECTION.dx;
             move();
+        } else if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
+            boolean hookInUse = false;
+            for(GameObject o : Application.getBoard().getCurrentScreen().objectList){
+                if(o instanceof HookAndRope){
+                    hookInUse = true;
+                }
+            }
+            if(!hookInUse){
+                HookAndRope newRope = new HookAndRope(getXPos(), 0);
+                Application.getBoard().addObject(newRope);
+            }
         } else {
             dx = PlayerMovement.NO_MOVEMENT.dx;
         }
