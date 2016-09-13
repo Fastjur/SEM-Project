@@ -10,7 +10,7 @@ import lombok.Setter;
 public class HookAndRope extends GameObject{
 
     //TODO: remove white background for sprite
-    private static final String textureLocation = "/sprites/hookandrope/combined.png";
+    private static final String textureLocation = "/sprites/beam.png";
     private final int maxY;
     private double dy = 1; //specify upspeed rope here.
 
