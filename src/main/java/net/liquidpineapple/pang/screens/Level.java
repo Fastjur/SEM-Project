@@ -45,6 +45,7 @@ public class Level extends Screen {
             for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
                 output.objectList.add(player);
             }
+
         }
         for (ScoreToken token : ScoreSystem.getPlaces()) {
             output.objectList.add(token);
