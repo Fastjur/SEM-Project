@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
 
@@ -21,7 +22,8 @@ public class Application extends JFrame {
     private static String PROPERTIES_LOCATION = "/config.properties";
     private static final int DELAY = 10;
 
-    private Board board;
+    @Getter
+    private static Board board;
     private Properties properties;
 
     public Application(String propertiesLocation) throws IOException {

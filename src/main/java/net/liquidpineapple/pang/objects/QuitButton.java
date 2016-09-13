@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.objects;
 
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.Application;
 
 /**
  * Created by Jaap-Jan on 9-9-2016.
@@ -14,5 +15,6 @@ public class QuitButton extends Button{
     @Override
     public void onClick() {
         log.info("Close");
+        System.exit(0);
     }
 }

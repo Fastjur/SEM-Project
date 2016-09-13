@@ -35,7 +35,12 @@ public class Board extends JPanel {
         setBackground(Color.BLACK);
 
         //currentScreen = Level.createFromXML("src/main/resources/levels/level1.xml");
-        currentScreen = new ControlsScreen();
+        currentScreen = new MainMenu();
+    }
+
+    public void changeScreen(Screen screen){
+        currentScreen = screen;
+        this.repaint();
     }
 
 
