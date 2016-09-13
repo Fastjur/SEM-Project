@@ -22,7 +22,7 @@
         <player>
             <position>
                 <x>300</x>
-                <y>300</y>
+                <y>500</y>
             </position>
             <maxX>800</maxX>
         </player>
