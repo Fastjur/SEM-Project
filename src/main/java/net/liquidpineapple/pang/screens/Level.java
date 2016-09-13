@@ -126,13 +126,9 @@ public class Level extends Screen {
      * Method to update the level.
      * This is were all the doUpdate() methods from the objectList are called.
      */
-    public void doUpdate(){
-        int x = 0;
-        while(x<100) { //TODO, change this
-            for (GameObject object : objectList) {
-                object.doUpdate();
-            }
-            x++;
+    public void doUpdate() {
+        for (GameObject object : objectList) {
+            object.doUpdate();
         }
     }
 }
