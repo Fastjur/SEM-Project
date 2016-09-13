@@ -16,7 +16,7 @@ public class HookAndRope extends GameObject{
     //TODO: remove white background for sprite
     private static final String textureLocation = "/sprites/beam.png";
     private final int maxY;
-    private double dy = 3; //specify upspeed rope here.
+    private double dy = 15; //specify upspeed rope here.
 
     /**
      * Constructor for the HookAndRope class

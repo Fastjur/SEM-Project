@@ -21,8 +21,8 @@ public class Player extends GameObject {
     private static final String textureLocation = "/sprites/player/p1_front.png";
 
     private enum PlayerMovement {
-        LEFT_DIRECTION(-1),
-        RIGHT_DIRECTION(1),
+        LEFT_DIRECTION(-4),
+        RIGHT_DIRECTION(4),
         NO_MOVEMENT(0);
 
         private final int dx;
