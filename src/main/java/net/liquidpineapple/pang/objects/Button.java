@@ -15,16 +15,24 @@ public abstract class Button extends GameObject {
         super(textureLocation, startX, startY);
     }
 
+    private boolean clicked = false;
     @Override
     public void doUpdate() {
 
         if (InputHandler.isLeftMouseButtonDown()) {
-
-            Point mousePos = InputHandler.getMousePos();
-            if (this.getBounds().contains(mousePos)) {
-                log.info("contains");
-                this.onClick();
-            }
+                Point mousePos = InputHandler.getMousePos();
+                if (this.getBounds().contains(mousePos)) {
+                    if (!clicked) {
+                        clicked = true;
+                        log.info("contains");
+                        this.onClick();
+                    }
+                } else {
+                    clicked = false;
+                }
+        }
+        else{
+            clicked = false;
         }
     }
 

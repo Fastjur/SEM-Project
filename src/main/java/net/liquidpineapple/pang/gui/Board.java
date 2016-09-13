@@ -2,6 +2,7 @@ package net.liquidpineapple.pang.gui;
 
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.screens.Level;
+import net.liquidpineapple.pang.screens.MainMenu;
 import net.liquidpineapple.pang.screens.Screen;
 
 import javax.swing.*;
@@ -32,8 +33,8 @@ public class Board extends JPanel {
         setFocusable(true);
         setBackground(Color.BLACK);
 
-        currentScreen = Level.createFromXML("src/main/resources/levels/level1.xml");
-
+        //currentScreen = Level.createFromXML("src/main/resources/levels/level1.xml");
+        currentScreen = new MainMenu();
     }
 
 
