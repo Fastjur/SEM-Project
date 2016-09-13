@@ -1,4 +1,4 @@
-package net.liquidpineapple.pang;
+package net.liquidpineapple.pang.objects;
 
 import net.liquidpineapple.pang.objects.Ball;
 import static org.junit.Assert.assertEquals;
