@@ -2,6 +2,7 @@ package net.liquidpineapple.pang;
 
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
+import net.liquidpineapple.pang.objects.ScoreSystem;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +22,8 @@ public class Application extends JFrame {
     private static String PROPERTIES_LOCATION = "/config.properties";
     private static final int DELAY = 10;
 
+    private ScoreSystem scoreKeeper;
+
     private Board board;
     private Properties properties;
 
@@ -39,12 +42,15 @@ public class Application extends JFrame {
 
     public void start() throws IOException {
 
+
         Integer width = Integer.valueOf(properties.getProperty("application-width"));
         Integer height = Integer.valueOf(properties.getProperty("application-height"));
         String name = properties.getProperty("application-name");
 
         setResizable(false);
         setSize(width, height);
+
+        scoreKeeper = new ScoreSystem();
         board = new Board(width, height);
         new InputHandler(board);
         add(board);
@@ -57,7 +63,6 @@ public class Application extends JFrame {
         setVisible(true);
 
         log.info("Application started successfully!");
-
 
 
         Thread thread1 = new Thread(new Runnable() {
@@ -77,7 +82,6 @@ public class Application extends JFrame {
 
                     try {
                         board.doUpdate();
-
                         Thread.sleep(sleep);
                     } catch (InterruptedException e) {
                         log.info("Interrupted: " + e.getMessage());
