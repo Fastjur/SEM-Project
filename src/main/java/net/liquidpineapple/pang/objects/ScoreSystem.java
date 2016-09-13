@@ -1,5 +1,8 @@
 package net.liquidpineapple.pang.objects;
 
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -8,8 +11,11 @@ import java.util.ArrayList;
  */
 public class ScoreSystem {
 
-    static int score;
-    static ArrayList<ScoreToken> Places;
+    private static int score;
+
+
+    @Getter
+    private static ArrayList<ScoreToken> Places;
 
 
     public ScoreSystem() {
@@ -25,13 +31,15 @@ public class ScoreSystem {
         Places.add(new ScoreToken(69,5));
         Places.add(new ScoreToken(37,5));
         Places.add(new ScoreToken(5,5));
+        displayscore();
     }
 
 
-    public static void AddScore(int scoreIn) {
+    public void AddScore(int scoreIn) {
         if(score != 999999999){
             score += scoreIn;
         }
+        displayscore();
     }
 
     public void displayscore() {

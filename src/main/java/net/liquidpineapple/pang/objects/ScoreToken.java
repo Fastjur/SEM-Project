@@ -5,6 +5,7 @@ package net.liquidpineapple.pang.objects;
  */
 public class ScoreToken extends GameObject {
 
+    private int currentnumber;
     private static final String textureLocation0 = "/sprites/Numbers/Hud_0.png";
     private static final String textureLocation1 = "/sprites/Numbers/Hud_1.png";
     private static final String textureLocation2 = "/sprites/Numbers/Hud_2.png";
@@ -22,18 +23,41 @@ public class ScoreToken extends GameObject {
     }
 
     public void SetScoreToken(int Number){
-        switch(Number) {
-            case 0: changeImage(textureLocation0); break;
-            case 1: changeImage(textureLocation1); break;
-            case 2: changeImage(textureLocation2); break;
-            case 3: changeImage(textureLocation3); break;
-            case 4: changeImage(textureLocation4); break;
-            case 5: changeImage(textureLocation5); break;
-            case 6: changeImage(textureLocation6); break;
-            case 7: changeImage(textureLocation7); break;
-            case 8: changeImage(textureLocation8); break;
-            case 9: changeImage(textureLocation9); break;
+        if(Number != currentnumber) {
+            switch (Number) {
+                case 0:
+                    changeImage(textureLocation0);
+                    break;
+                case 1:
+                    changeImage(textureLocation1);
+                    break;
+                case 2:
+                    changeImage(textureLocation2);
+                    break;
+                case 3:
+                    changeImage(textureLocation3);
+                    break;
+                case 4:
+                    changeImage(textureLocation4);
+                    break;
+                case 5:
+                    changeImage(textureLocation5);
+                    break;
+                case 6:
+                    changeImage(textureLocation6);
+                    break;
+                case 7:
+                    changeImage(textureLocation7);
+                    break;
+                case 8:
+                    changeImage(textureLocation8);
+                    break;
+                case 9:
+                    changeImage(textureLocation9);
+                    break;
+            }
         }
+        currentnumber = Number;
     }
 
 }
