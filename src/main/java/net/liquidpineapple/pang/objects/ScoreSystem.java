@@ -51,4 +51,8 @@ public class ScoreSystem {
             i++;
         }
     }
+
+    public int getScore(){
+        return score;
+    }
 }

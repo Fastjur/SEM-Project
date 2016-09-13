@@ -60,4 +60,8 @@ public class ScoreToken extends GameObject {
         currentnumber = Number;
     }
 
+    public int getcurrentnumber(){
+        return currentnumber;
+    }
+
 }
