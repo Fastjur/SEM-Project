@@ -1,10 +1,7 @@
 package net.liquidpineapple.pang.screens;
 
 import lombok.extern.slf4j.Slf4j;
-import net.liquidpineapple.pang.objects.Ball;
-import net.liquidpineapple.pang.objects.BallMovement;
-import net.liquidpineapple.pang.objects.GameObject;
-import net.liquidpineapple.pang.objects.Player;
+import net.liquidpineapple.pang.objects.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -48,6 +45,9 @@ public class Level extends Screen {
             for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
                 output.objectList.add(player);
             }
+        }
+        for (ScoreToken token : ScoreSystem.getPlaces()) {
+            output.objectList.add(token);
         }
         return output;
     }

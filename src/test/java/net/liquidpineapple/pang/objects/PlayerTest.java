@@ -61,6 +61,20 @@ public class PlayerTest {
         player.setDx(-1);
         player.move();
         assertEquals(11, player.getXPos());
+
+        player.setPos(1, 1);
+        player.setDx(-1);
+        for (int i = 0; i < 10; i++) {
+            player.move();
+        }
+        assertEquals(1, player.getXPos());
+
+        player.setPos(max, 1);
+        player.setDx(1);
+        for (int i = 0; i < 10; i++) {
+            player.move();
+        }
+        assertEquals(max, player.getXPos());
     }
 
 }
