@@ -1,15 +1,13 @@
 package net.liquidpineapple.pang;
 
-import javafx.scene.input.KeyCode;
 import lombok.extern.slf4j.Slf4j;
-import net.liquidpineapple.pang.gui.Board;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.HashSet;
-import java.util.Iterator;
 
 /**
  * @author Govert de Gans
