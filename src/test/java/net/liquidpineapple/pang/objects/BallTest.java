@@ -1,4 +1,4 @@
-package net.liquidpineapple.pang;
+package net.liquidpineapple.pang.objects;
 
 import net.liquidpineapple.pang.objects.Ball;
 import static org.junit.Assert.assertEquals;
@@ -41,6 +41,28 @@ public class BallTest {
     public void testIncorrectSize() throws Throwable {
         assertEquals(4, TestBallIncorrectSizeGreater.getBallSize());
         assertEquals(4, TestBallIncorrectSizeSmaller.getBallSize());
+    }
+
+    @Test
+    public void testMove() throws Exception {
+        TestBallLeft.setPos(5, 5);
+        TestBallLeft.setMovX(1);
+
+        TestBallLeft.move();
+        assertEquals(6, TestBallLeft.getXPos());
+
+        TestBallLeft.setMovX(-1);
+        TestBallLeft.move();
+        assertEquals(5, TestBallLeft.getXPos());
+
+        TestBallLeft.setMovY(1);
+        TestBallLeft.move();
+        assertEquals(48, TestBallLeft.getYPos());
+
+        TestBallLeft.setMovY(-1);
+        TestBallLeft.move();
+        assertEquals(49, TestBallLeft.getYPos());
+
     }
 
 }

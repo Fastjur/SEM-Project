@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.objects;
 
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by Tim on 9-9-2016.
@@ -9,10 +10,11 @@ import lombok.Getter;
 public class HookAndRope extends GameObject{
 
     //TODO: remove white background for sprite
-    private static final String textureLocation = "/sprites/hookandrope/combined.png";
+    private static final String textureLocation = "/sprites/beam.png";
     private final int maxY;
     private double dy = 1; //specify upspeed rope here.
 
+    @Setter
     @Getter
     private boolean inUse = true;
 
@@ -34,7 +36,7 @@ public class HookAndRope extends GameObject{
 
         //if yPos reaches 0, the top of the frame has been reached,
         // and yPos should go to boardHeight again
-        if(yPos<=0){
+        if(yPos<=maxY){
             yPos = 600;
             inUse = false;
         }
