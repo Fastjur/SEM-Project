@@ -33,6 +33,10 @@ public class InputHandler implements MouseListener, KeyListener{
         return keysPressed.contains(keyCode);
     }
 
+    public static boolean isAnyKeyPressed() {
+        return !keysPressed.isEmpty();
+    }
+
     public static boolean isLeftMouseButtonDown() {
         return mouseButtonPressed == MouseEvent.BUTTON1;
     }

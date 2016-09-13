@@ -1,6 +1,8 @@
 package net.liquidpineapple.pang.objects;
 
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.screens.ControlsScreen;
 
 /**
  * @author Govert de Gans
@@ -16,5 +18,6 @@ public class SinglePlayerButton extends Button {
     @Override
     public void onClick() {
         log.info("I change the screen now");
+        Application.getBoard().changeScreen(new ControlsScreen());
     }
 }
