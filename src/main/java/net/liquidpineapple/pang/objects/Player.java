@@ -3,6 +3,7 @@ package net.liquidpineapple.pang.objects;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
 
 import java.awt.event.KeyEvent;
@@ -41,8 +42,10 @@ public class Player extends GameObject {
         if (xPos < 1) {
             xPos = 1;
         }
-        if (xPos > maxX) {
-            xPos = maxX;
+        int boardWidth = Application.getBoard().getWidth();
+        int playerMaxPosX = boardWidth - this.getWidth();
+        if (xPos > playerMaxPosX) {
+            xPos = playerMaxPosX;
         }
     }
 
