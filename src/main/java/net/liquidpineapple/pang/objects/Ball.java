@@ -2,8 +2,7 @@ package net.liquidpineapple.pang.objects;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.Random;
+import net.liquidpineapple.pang.Application;
 
 /**
  * Created by Erik on 7-9-2016.
@@ -17,10 +16,10 @@ public class Ball extends GameObject {
     private int movX;
     private int movY;
 
-    private static final String textureLocationBlue = "/sprites/Balls/Blue/frame 1.png";
-    private static final String textureLocationGreen = "/sprites/Balls/Green/frame 1.png";
-    private static final String textureLocationRed = "/sprites/Balls/Red/frame 1.png";
-    private static final String textureLocationYellow = "/sprites/Balls/Yellow/frame 1.png";
+    private static final String textureLocationBlue = "/sprites/Balls/blue.png";
+    private static final String textureLocationGreen = "/sprites/Balls/green.png";
+    private static final String textureLocationRed = "/sprites/Balls/red.png";
+    private static final String textureLocationYellow = "/sprites/Balls/yellow.png";
 
     /**
      * Creates a ball with a set horizontal speed and a variable vertical speed depending on size.
@@ -55,33 +54,37 @@ public class Ball extends GameObject {
         } else if (direction.equals(BallMovement.RIGHT_MOVEMENT)) {
             movX = BallMovement.RIGHT_MOVEMENT.getDx();
         }
-        movY = 3* ballSize +5;
-        //Create actual ball here.
+        movY = 0;
+    }
+
+    @Override
+    public void doUpdate() {
+        super.doUpdate();
+
+        move();
+        if (yPos + this.getHeight() > Application.getBoard().getHeight())
+            yPos = Application.getBoard().getHeight() - this.getHeight();
+        if (xPos + this.getWidth() > Application.getBoard().getWidth())
+            xPos = Application.getBoard().getWidth() - this.getWidth();
+        if (xPos < 0)
+            xPos = 0;
+
+        if (xPos == 0 || xPos + this.getWidth() == Application.getBoard().getWidth()) {
+            movX = -movX;
+        }
+
+        if (yPos + this.getHeight() == Application.getBoard().getHeight()) {
+            movY = -30;
+        }
     }
 
     /**
      * Calculates and sets the next position the ball should be drawn in.
      */
     public void move(){
-        xPos = xPos + movX;
-        movY += 2;
-        yPos = yPos + movY;
-    }
-
-    /**
-     * Handles floor colission, speed is set such that it always goes to the same height from the floor bounced on. hitting a higher platform means ending up higher too.
-     */
-    void collidefloor(){
-        //This way it always goes to the same height after hitting a surface.
-        movY = -(3* ballSize +5);
-    }
-
-    /**
-     * Handles wall colission by negating the horizontal direction.
-     */
-    void collidewall(){
-        //We always move the same speed so we can just change direction.
-        movX = -movX;
+        xPos += movX;
+        movY += 1;
+        yPos += movY;
     }
 
     /**
