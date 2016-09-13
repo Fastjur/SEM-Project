@@ -3,8 +3,6 @@ package net.liquidpineapple.pang.objects;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.Random;
-
 /**
  * Created by Erik on 7-9-2016.
  */
@@ -17,10 +15,10 @@ public class Ball extends GameObject {
     private int movX;
     private int movY;
 
-    private static final String textureLocationBlue = "/sprites/Balls/Blue/frame 1.png";
-    private static final String textureLocationGreen = "/sprites/Balls/Green/frame 1.png";
-    private static final String textureLocationRed = "/sprites/Balls/Red/frame 1.png";
-    private static final String textureLocationYellow = "/sprites/Balls/Yellow/frame 1.png";
+    private static final String textureLocationBlue = "/sprites/balls/blue/frame 1.png";
+    private static final String textureLocationGreen = "/sprites/balls/green/frame 1.png";
+    private static final String textureLocationRed = "/sprites/balls/red/frame 1.png";
+    private static final String textureLocationYellow = "/sprites/balls/yellow/frame 1.png";
 
     /**
      * Creates a ball with a set horizontal speed and a variable vertical speed depending on size.

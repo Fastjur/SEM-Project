@@ -6,17 +6,16 @@ package net.liquidpineapple.pang.objects;
 public class ScoreToken extends GameObject {
 
     private int currentnumber;
-    private static final String textureLocation0 = "/sprites/Numbers/Hud_0.png";
-    private static final String textureLocation1 = "/sprites/Numbers/Hud_1.png";
-    private static final String textureLocation2 = "/sprites/Numbers/Hud_2.png";
-    private static final String textureLocation3 = "/sprites/Numbers/Hud_3.png";
-    private static final String textureLocation4 = "/sprites/Numbers/Hud_4.png";
-    private static final String textureLocation5 = "/sprites/Numbers/Hud_5.png";
-    private static final String textureLocation6 = "/sprites/Numbers/Hud_6.png";
-    private static final String textureLocation7 = "/sprites/Numbers/Hud_7.png";
-    private static final String textureLocation8 = "/sprites/Numbers/Hud_8.png";
-    private static final String textureLocation9 = "/sprites/Numbers/Hud_9.png";
-
+    private static final String textureLocation0 = "/sprites/numbers/hud_0.png";
+    private static final String textureLocation1 = "/sprites/numbers/hud_1.png";
+    private static final String textureLocation2 = "/sprites/numbers/hud_2.png";
+    private static final String textureLocation3 = "/sprites/numbers/hud_3.png";
+    private static final String textureLocation4 = "/sprites/numbers/hud_4.png";
+    private static final String textureLocation5 = "/sprites/numbers/hud_5.png";
+    private static final String textureLocation6 = "/sprites/numbers/hud_6.png";
+    private static final String textureLocation7 = "/sprites/numbers/hud_7.png";
+    private static final String textureLocation8 = "/sprites/numbers/hud_8.png";
+    private static final String textureLocation9 = "/sprites/numbers/hud_9.png";
 
     ScoreToken(int X, int Y){
         super(textureLocation0, X, Y);
