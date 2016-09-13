@@ -1,11 +1,8 @@
 package net.liquidpineapple.pang.objects;
 
-import net.liquidpineapple.pang.objects.Ball;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import net.liquidpineapple.pang.objects.BallMovement;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class BallTest {
 
@@ -17,15 +14,15 @@ public class BallTest {
     //Tests if the constructor handles left and right correctly.
     @Test
     public void testConstructorDirection() throws Throwable {
-        assertEquals(-15, TestBallLeft.getMovX());
-        assertEquals(15, TestBallRight.getMovX());
+        assertEquals(-2, TestBallLeft.getMovX());
+        assertEquals(2, TestBallRight.getMovX());
     }
 
    //Tests if the constructor handles sets movY correctly.
     @Test
     public void testConstructorYSpeed() throws Throwable {
-        assertEquals(17, TestBallLeft.getMovY());
-        assertEquals(14, TestBallRight.getMovY());
+        assertEquals(0, TestBallLeft.getMovY());
+        assertEquals(0, TestBallRight.getMovY());
     }
 
 
@@ -57,11 +54,11 @@ public class BallTest {
 
         TestBallLeft.setMovY(1);
         TestBallLeft.move();
-        assertEquals(48, TestBallLeft.getYPos());
+        assertEquals(10, TestBallLeft.getYPos());
 
         TestBallLeft.setMovY(-1);
         TestBallLeft.move();
-        assertEquals(49, TestBallLeft.getYPos());
+        assertEquals(10, TestBallLeft.getYPos());
 
     }
 
