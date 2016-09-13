@@ -63,23 +63,4 @@ public class PlayerTest {
         assertEquals(11, player.getXPos());
     }
 
-    @Test
-    public void testKeyPressed() throws Exception {
-        KeyEvent event = new KeyEvent(player, 1, System.currentTimeMillis(), 0, KeyEvent.VK_RIGHT, 'a');
-        player.keyPressed(event);
-        assertEquals(1, player.getDx());
-
-        event.setKeyCode(KeyEvent.VK_LEFT);
-        player.keyPressed(event);
-        assertEquals(-1, player.getDx());
-    }
-
-    @Test
-    public void testKeyReleased() throws Exception {
-        KeyEvent event = new KeyEvent(player, 1, System.currentTimeMillis(), 0, KeyEvent.VK_RIGHT, 'a');
-        player.keyPressed(event);
-        assertEquals(1, player.getDx()); // Check if value actually changed from default zero
-        player.keyReleased(event);
-        assertEquals(0, player.getDx()); // Check if value went back to default
-    }
 }
