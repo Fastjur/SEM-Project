@@ -46,7 +46,6 @@ public class Application extends JFrame {
         setResizable(false);
         setSize(width, height);
         board = new Board(width, height);
-        new InputHandler(board);
         add(board);
         log.info("Initialized with width: " + width + " and height: " + height);
 

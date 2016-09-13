@@ -3,6 +3,7 @@ package net.liquidpineapple.pang.objects;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.InputHandler;
 
 import java.awt.event.KeyEvent;
 
@@ -37,33 +38,26 @@ public class Player extends GameObject {
 
     public void move() {
         xPos += dx;
-        if (xPos < PlayerMovement.LEFT_DIRECTION.dx) {
-            xPos = PlayerMovement.LEFT_DIRECTION.dx;
+        if (xPos < 1) {
+            xPos = 1;
         }
         if (xPos > maxX) {
             xPos = maxX;
         }
     }
 
-    public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
+    @Override
+    public void doUpdate() {
+        super.doUpdate();
 
-        switch(key) {
-            case KeyEvent.VK_LEFT:
-                dx = PlayerMovement.LEFT_DIRECTION.dx; break;
-            case KeyEvent.VK_RIGHT:
-                dx = PlayerMovement.RIGHT_DIRECTION.dx; break;
-        }
-    }
-
-    public void keyReleased(KeyEvent e) {
-        int key = e.getKeyCode();
-
-        switch(key) {
-            case KeyEvent.VK_LEFT:
-                dx = PlayerMovement.NO_MOVEMENT.dx; break;
-            case KeyEvent.VK_RIGHT:
-                dx = PlayerMovement.NO_MOVEMENT.dx; break;
+        if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {
+            dx = PlayerMovement.LEFT_DIRECTION.dx;
+            move();
+        } else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {
+            dx = PlayerMovement.RIGHT_DIRECTION.dx;
+            move();
+        } else {
+            dx = PlayerMovement.NO_MOVEMENT.dx;
         }
     }
 }
