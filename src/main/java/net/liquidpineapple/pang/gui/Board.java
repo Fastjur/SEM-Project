@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.gui;
 
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.screens.ControlsScreen;
 import net.liquidpineapple.pang.screens.Level;
 import net.liquidpineapple.pang.screens.MainMenu;
 import net.liquidpineapple.pang.screens.Screen;
@@ -34,7 +35,7 @@ public class Board extends JPanel {
         setBackground(Color.BLACK);
 
         //currentScreen = Level.createFromXML("src/main/resources/levels/level1.xml");
-        currentScreen = new MainMenu();
+        currentScreen = new ControlsScreen();
     }
 
 
