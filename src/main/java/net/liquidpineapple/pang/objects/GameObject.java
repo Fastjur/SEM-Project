@@ -14,16 +14,16 @@ import java.net.URL;
  * @date 2016/09/07.
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @Slf4j
-public abstract class GameObject extends JComponent {
+public abstract class GameObject {
 
     private static final String defaultTexture = "/sprites/no-texture.png";
 
     protected int xPos;
     protected int yPos;
-    private int objectWidth;
-    private int objectHeight;
+    private int width;
+    private int height;
     private Image image;
 
     public GameObject(String textureLocation, int startX, int startY) {
@@ -49,17 +49,17 @@ public abstract class GameObject extends JComponent {
     }
 
     private void getWidthAndHeight() {
-        this.objectWidth = image.getWidth(null);
-        this.objectHeight = image.getHeight(null);
+        this.width = image.getWidth(null);
+        this.height = image.getHeight(null);
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(xPos, yPos, objectWidth, objectHeight);
+        return new Rectangle(xPos, yPos, width, height);
     }
 
     //A Ellipse2D.float does also exists in case we need to be more accurate.
     protected Ellipse2D.Double getEllipseBounds() {
-        return new Ellipse2D.Double(xPos, yPos, objectWidth, objectHeight);
+        return new Ellipse2D.Double(xPos, yPos, width, height);
     }
 
     public void setPos(int xPos, int yPos) {
