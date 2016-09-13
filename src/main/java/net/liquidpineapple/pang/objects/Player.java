@@ -53,12 +53,19 @@ public class Player extends GameObject {
         super.doUpdate();
 
         if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {
-            dx = PlayerMovement.LEFT_DIRECTION.dx;
-            move();
+            if(!InputHandler.isKeyPressed(KeyEvent.VK_D)) {
+                dx = PlayerMovement.LEFT_DIRECTION.dx;
+                move();
+            }
+
         } else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {
             dx = PlayerMovement.RIGHT_DIRECTION.dx;
             move();
-        } else if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
+        } else {
+            dx = PlayerMovement.NO_MOVEMENT.dx;
+        }
+
+        if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
             boolean hookInUse = false;
             for(GameObject o : Application.getBoard().getCurrentScreen().objectList){
                 if(o instanceof HookAndRope){
@@ -69,8 +76,6 @@ public class Player extends GameObject {
                 HookAndRope newRope = new HookAndRope(getXPos(), 0);
                 Application.getBoard().addObject(newRope);
             }
-        } else {
-            dx = PlayerMovement.NO_MOVEMENT.dx;
         }
     }
 }
