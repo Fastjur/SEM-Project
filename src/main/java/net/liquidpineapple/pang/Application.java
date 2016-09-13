@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.objects.ScoreSystem;
@@ -20,11 +21,13 @@ import java.util.Properties;
 public class Application extends JFrame {
 
     private static String PROPERTIES_LOCATION = "/config.properties";
-    private static final int DELAY = 10;
+    private static final int UPDATE_DELAY = 10;
+    private static final int DRAW_DELAY = 5;
 
     private ScoreSystem scoreKeeper;
 
-    private Board board;
+    @Getter
+    private static Board board;
     private Properties properties;
 
     public Application(String propertiesLocation) throws IOException {
@@ -64,33 +67,57 @@ public class Application extends JFrame {
 
         log.info("Application started successfully!");
 
+        Runnable doUpdateRunnable = () -> {
+            long beforeTime, timeDiff, sleep;
+            beforeTime = System.currentTimeMillis();
+            log.info("Update loop is running");
 
-        Thread thread1 = new Thread(new Runnable() {
-            @Override
-            public void run(){
-                long beforeTime, timeDiff, sleep;
-                beforeTime = System.currentTimeMillis();
-                log.info("Update loop is running");
+            while(true) {
+                timeDiff = System.currentTimeMillis() - beforeTime;
+                sleep = UPDATE_DELAY - timeDiff;
 
-                while(true) {
-                    timeDiff = System.currentTimeMillis() - beforeTime;
-                    sleep = DELAY - timeDiff;
+                if (sleep < 0) {
+                    sleep = 2;
+                }
 
-                    if (sleep < 0) {
-                        sleep = 2;
-                    }
+                try {
+                    board.doUpdate();
 
-                    try {
-                        board.doUpdate();
-                        Thread.sleep(sleep);
-                    } catch (InterruptedException e) {
-                        log.info("Interrupted: " + e.getMessage());
-                    }
+                    beforeTime = System.currentTimeMillis();
+                    Thread.sleep(sleep);
+                } catch (InterruptedException e) {
+                    log.info("Interrupted: " + e.getMessage());
                 }
             }
-        });
+        };
 
-        thread1.start();
+        Runnable doDrawRunnable = () -> {
+            long beforeTime, timeDiff, sleep;
+            beforeTime = System.currentTimeMillis();
+            log.info("Draw loop is running");
+
+            while(true) {
+                timeDiff = System.currentTimeMillis() - beforeTime;
+                sleep = DRAW_DELAY - timeDiff;
+
+                if (sleep < 0) {
+                    sleep = 2;
+                }
+
+                try {
+                    board.revalidate();
+                    board.repaint();
+                    beforeTime = System.currentTimeMillis();
+                    Thread.sleep(sleep);
+                } catch (InterruptedException e) {
+                    log.info("Interrupted: " + e.getMessage());
+
+                }
+            }
+        };
+
+        new Thread(doUpdateRunnable).start();
+        new Thread(doDrawRunnable).start();
     }
 
     public static void main(String[] args) throws Throwable {
