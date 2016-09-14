@@ -68,4 +68,8 @@ public class Board extends JPanel {
     public synchronized void addObject(GameObject o){
         currentScreen.objectList.add(o);
     }
+
+    public synchronized boolean containsObject(GameObject o){
+        return currentScreen.objectList.contains(o);
+    }
 }
