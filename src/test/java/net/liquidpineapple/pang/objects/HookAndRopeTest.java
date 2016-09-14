@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.objects;
 
+import net.liquidpineapple.pang.Application;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,8 +42,7 @@ public class HookAndRopeTest {
     public void moveTest() throws Exception {
         assertEquals(600, hookAndRope.getYPos());
         hookAndRope.move();
-        assertTrue(hookAndRope.isInUse());
-        assertEquals(599, hookAndRope.getYPos());
+        assertEquals(585, hookAndRope.getYPos());
     }
 
     /**
@@ -50,14 +50,12 @@ public class HookAndRopeTest {
      */
     @Test
     public void hitTopMoveTest() throws Exception {
-        HookAndRope rope = new HookAndRope(500, 598);
+        HookAndRope rope = new HookAndRope(500, 584);
         assertEquals(rope.getYPos(), 600);
         rope.move();
-        assertTrue(rope.isInUse());
-        assertEquals(rope.getYPos(), 599);
+        assertEquals(rope.getYPos(), 585);
         rope.move();
-        assertFalse(rope.isInUse());
-        assertEquals(rope.getYPos(), 600);
+        assertFalse(Application.getBoard().containsObject(rope));
 
     }
 
@@ -65,20 +63,12 @@ public class HookAndRopeTest {
      * Tests the doUpdate method of the HookAndRope class.
      * @throws Exception
      */
-    @Test
-    public void doUpdateWhileNotInUseTest() throws Exception {
-        hookAndRope.setInUse(false);
-        assertEquals(hookAndRope.getYPos(), 600);
-        hookAndRope.doUpdate();
-        assertEquals(hookAndRope.getYPos(), 600);
-    }
 
     @Test
     public void doUpdateWhileInUseTest() throws Exception {
-        hookAndRope.setInUse(true);
         assertEquals(hookAndRope.getYPos(), 600);
         hookAndRope.doUpdate();
-        assertEquals(hookAndRope.getYPos(), 599);
+        assertEquals(hookAndRope.getYPos(), 585);
     }
 
     @After
