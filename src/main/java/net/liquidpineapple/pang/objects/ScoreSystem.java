@@ -33,11 +33,9 @@ public class ScoreSystem {
     }
 
 
-    public static void AddScore(int scoreIn) {
-        if(score != 999999999){
-            score += scoreIn;
-            if(score > 999999999){score = 999999999;}
-        }
+    public static void addScore(int scoreIn) {
+        score += scoreIn;
+        if(score > 999999999){score = 999999999;}
     }
 
     public void displayscore() {
