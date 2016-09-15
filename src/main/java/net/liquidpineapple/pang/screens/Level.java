@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.screens;
 
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.objects.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -50,6 +51,7 @@ public class Level extends Screen {
         for (ScoreToken token : ScoreSystem.getPlaces()) {
             output.objectList.add(token);
         }
+        output.objectList.add(Application.lifeKeeper);
         return output;
     }
 
