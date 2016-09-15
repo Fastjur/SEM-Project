@@ -11,10 +11,15 @@ import java.awt.image.ImageObserver;
 import java.io.IOException;
 
 /**
- * Created by Jaap-Jan on 13-9-2016.
+ * Class that represents the Controls screen.
+ * @author Jaap-Jan
+ * @date 13-9-2016.
  */
 @Slf4j
 public class ControlsScreen extends Screen{
+    /**
+     * Constructor for the ControlsScreen.
+     */
     public ControlsScreen() {
         try {
             backgroundImage = ImageIO.read(Level.class.getResource("/sprites/bg.png"));
@@ -25,6 +30,9 @@ public class ControlsScreen extends Screen{
         objectList.add(new ControlsObj(0, 10));
     }
 
+    /**
+     * Method that updates the controlsScreen.
+     */
     @Override
     public void doUpdate() {
         super.doUpdate();

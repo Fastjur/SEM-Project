@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import net.liquidpineapple.pang.Application;
 
 /**
+ * Class that represents the ball.
  * Created by Erik on 7-9-2016.
  */
 @Data
@@ -25,10 +26,10 @@ public class Ball extends GameObject {
     /**
      * Creates a ball with a set horizontal speed and a variable vertical speed depending on size.
      *
-     * @param startX    X-coordinate to make the ball
-     * @param startY   Y-coordinate to make the ball
-     * @param direction Direction the ball should move, valid inputs are: "left" and "right", anything else randomizes the direction.
-     * @param sizeIn    The desired size of the ball, Greater then 4 or smaller then 0 results in a size 4 ball.
+     * @param startX - X-coordinate to make the ball
+     * @param startY - Y-coordinate to make the ball
+     * @param direction - Direction the ball should move, valid inputs are: "left" and "right", anything else randomizes the direction.
+     * @param sizeIn - The desired size of the ball, Greater then 4 or smaller then 0 results in a size 4 ball.
      */
     public Ball(int startX, int startY, BallMovement direction, int sizeIn){
         super(textureLocationBlue, startX, startY);
@@ -58,6 +59,9 @@ public class Ball extends GameObject {
         movY = 0;
     }
 
+    /**
+     * Method that updates the ball.
+     */
     @Override
     public void doUpdate() {
         super.doUpdate();
@@ -99,6 +103,10 @@ public class Ball extends GameObject {
         yPos += movY;
     }
 
+    /**
+     * Method that checks whether the ball collides with the Hook.
+     * @return returns true if the hook is hit, returns false otherwise.
+     */
     public boolean collisionHook(){
         boolean hookInUse = false;
         HookAndRope activeRope = null;
@@ -125,6 +133,10 @@ public class Ball extends GameObject {
         return false;
     }
 
+    /**
+     * Method that checks whether the ball collides with the Player.
+     * @return returns true if the player is hit, returns false otherwise.
+     */
     public boolean collisionPlayer(){
         Player player = null;
         for(GameObject o : Application.getBoard().getCurrentScreen().objectList){

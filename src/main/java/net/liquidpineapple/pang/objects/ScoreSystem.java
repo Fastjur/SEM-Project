@@ -8,17 +8,18 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
+ * Class that represents the ScoreSystem.
  * Created by Erik on 12-9-2016.
  */
 public class ScoreSystem {
 
     private static int score;
-
-
     @Getter
     private static ArrayList<ScoreToken> Places;
 
-
+    /**
+     * The constructor for the scoresystem.
+     */
     public ScoreSystem() {
         score = 0;
         //These are from right to left.
@@ -35,7 +36,10 @@ public class ScoreSystem {
         displayscore();
     }
 
-
+    /**
+     * Method that adds points to the total score.
+     * @param scoreIn - The score that should be added.
+     */
     public static void AddScore(int scoreIn) {
         if(score != 999999999){
             score += scoreIn;
@@ -43,6 +47,9 @@ public class ScoreSystem {
         }
     }
 
+    /**
+     * Method that makes the current score displayed on the screen correctly.
+     */
     public void displayscore() {
         int calcscore = score;
         int i = 0;
@@ -53,10 +60,17 @@ public class ScoreSystem {
         }
     }
 
+    /**
+     * Getter for the current score.
+     * @return the current score.
+     */
     public int getScore(){
         return score;
     }
 
+    /**
+     * Resets the score when the player died.
+     */
     public void resetScore(){
         Application.setScoreKeeper(new ScoreSystem());
     }
