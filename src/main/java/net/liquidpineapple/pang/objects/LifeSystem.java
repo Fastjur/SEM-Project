@@ -47,8 +47,12 @@ public class LifeSystem extends GameObject{
 
 
     public static void gainLife() {
-        if (lives < 4) {
+        if (lives < 3) {
             lives += 1;
         }
+    }
+
+    public int getLives(){
+        return lives;
     }
 }
