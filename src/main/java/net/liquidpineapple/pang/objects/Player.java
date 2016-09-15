@@ -3,7 +3,9 @@ package net.liquidpineapple.pang.objects;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
+import net.liquidpineapple.pang.screens.Screen;
 
 import java.awt.event.KeyEvent;
 
@@ -19,8 +21,8 @@ public class Player extends GameObject {
     private static final String textureLocation = "/sprites/player/p1_front.png";
 
     private enum PlayerMovement {
-        LEFT_DIRECTION(-1),
-        RIGHT_DIRECTION(1),
+        LEFT_DIRECTION(-4),
+        RIGHT_DIRECTION(4),
         NO_MOVEMENT(0);
 
         private final int dx;
@@ -51,13 +53,29 @@ public class Player extends GameObject {
         super.doUpdate();
 
         if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {
-            dx = PlayerMovement.LEFT_DIRECTION.dx;
-            move();
+            if(!InputHandler.isKeyPressed(KeyEvent.VK_D)) {
+                dx = PlayerMovement.LEFT_DIRECTION.dx;
+                move();
+            }
+
         } else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {
             dx = PlayerMovement.RIGHT_DIRECTION.dx;
             move();
         } else {
             dx = PlayerMovement.NO_MOVEMENT.dx;
+        }
+
+        if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
+            boolean hookInUse = false;
+            for(GameObject o : Application.getBoard().getCurrentScreen().objectList){
+                if(o instanceof HookAndRope){
+                    hookInUse = true;
+                }
+            }
+            if(!hookInUse){
+                HookAndRope newRope = new HookAndRope(getXPos(), 0);
+                Application.getBoard().addObject(newRope);
+            }
         }
     }
 }
