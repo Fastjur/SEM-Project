@@ -1,6 +1,8 @@
 package net.liquidpineapple.pang.screens;
 
+import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.objects.GameObject;
+import net.liquidpineapple.pang.objects.Player;
 
 import java.awt.*;
 import java.awt.image.ImageObserver;
