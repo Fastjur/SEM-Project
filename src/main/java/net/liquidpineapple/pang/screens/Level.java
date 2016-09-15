@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
+import java.sql.Time;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class Level extends Screen {
 
     private static final int BOTTOM_OFFSET = 10;
+    private TimeSystem timeKeeper;
 
     public Level() {
     }
@@ -46,9 +48,13 @@ public class Level extends Screen {
             for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
                 output.objectList.add(player);
             }
+            TimeSystem timeKeeper = new TimeSystem(Integer.parseInt(doc.getElementsByTagName("time").item(0).getTextContent()));
+            for (NumberToken token: timeKeeper.getTimePlaces()){
+                output.objectList.add(token);
+            }
 
         }
-        for (ScoreToken token : ScoreSystem.getPlaces()) {
+        for (NumberToken token : ScoreSystem.getPlaces()) {
             output.objectList.add(token);
         }
         output.objectList.add(Application.lifeKeeper);
