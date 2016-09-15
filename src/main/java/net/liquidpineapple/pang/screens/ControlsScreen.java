@@ -17,7 +17,7 @@ import java.io.IOException;
 public class ControlsScreen extends Screen{
     public ControlsScreen() {
         try {
-            backgroundImage = ImageIO.read(Level.class.getResource("/images/background.png"));
+            backgroundImage = ImageIO.read(Level.class.getResource("/sprites/bg.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
