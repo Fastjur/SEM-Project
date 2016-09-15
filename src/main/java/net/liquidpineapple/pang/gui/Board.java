@@ -1,7 +1,9 @@
 package net.liquidpineapple.pang.gui;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.InputHandler;
+import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.screens.Level;
 import net.liquidpineapple.pang.screens.MainMenu;
 import net.liquidpineapple.pang.screens.Screen;
@@ -20,6 +22,7 @@ public class Board extends JPanel {
     private final int boardWidth;
     private final int boardHeight;
     private Timer timer;
+    @Getter
     private Screen currentScreen;
 
 
@@ -62,5 +65,13 @@ public class Board extends JPanel {
 
     public void doUpdate() {
         this.currentScreen.doUpdate();
+    }
+
+    public synchronized void addObject(GameObject o){
+        currentScreen.objectList.add(o);
+    }
+
+    public synchronized boolean containsObject(GameObject o){
+        return currentScreen.objectList.contains(o);
     }
 }
