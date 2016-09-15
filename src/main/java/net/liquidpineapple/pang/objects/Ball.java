@@ -76,6 +76,10 @@ public class Ball extends GameObject {
         if (yPos + this.getHeight() == Application.getBoard().getHeight()) {
             movY = -30;
         }
+
+        if(collisionHook()){
+            destroyball();
+        }
     }
 
     /**
@@ -87,16 +91,45 @@ public class Ball extends GameObject {
         yPos += movY;
     }
 
+    public boolean collisionHook(){
+        boolean hookInUse = false;
+        HookAndRope activeRope = null;
+        for(GameObject o : Application.getBoard().getCurrentScreen().objectList){
+            if(o instanceof HookAndRope){
+                hookInUse = true;
+                activeRope = (HookAndRope) o;
+            }
+        }
+
+        if(!hookInUse){
+            return false;
+        }
+
+        int ropePos = activeRope.getXPos() + (activeRope.getImage().getWidth(null))/2;
+
+        if(ropePos - this.getXPos() >= 0 && ropePos - this.getXPos() <= this.getWidth()) {
+            if(this.getYPos()+ this.getHeight() >= activeRope.getYPos()){
+                Application.getBoard().getCurrentScreen().objectList.remove(activeRope);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Adds score (WIP), spawns two balls going left and right respectively on itself, and removes this ball.
      */
-    void destroyball(){
-        //setscore+100
+    public void destroyball(){
+        Application.getScoreKeeper().AddScore(100);
         if (ballSize != 1){
-            new Ball(xPos, yPos, BallMovement.LEFT_MOVEMENT, ballSize -1);
-            new Ball(xPos, yPos, BallMovement.RIGHT_MOVEMENT, ballSize -1);
+            Ball smallerBall = new Ball(xPos, yPos, BallMovement.LEFT_MOVEMENT, ballSize -1);
+            Ball smallerBall2 = new Ball(xPos+1, yPos, BallMovement.RIGHT_MOVEMENT, ballSize -1);
+            Application.getBoard().addObject(smallerBall);
+            Application.getBoard().addObject(smallerBall2);
         }
         //remove ball
+        Application.getBoard().getCurrentScreen().objectList.remove(this);
     }
 
 }

@@ -24,10 +24,13 @@ public class Application extends JFrame {
     private static final int UPDATE_DELAY = 50;
     private static final int DRAW_DELAY = 5;
 
-    private ScoreSystem scoreKeeper;
+
 
     @Getter
     private static Board board;
+    @Getter
+    private static ScoreSystem scoreKeeper;
+
     private Properties properties;
 
     public Application(String propertiesLocation) throws IOException {
