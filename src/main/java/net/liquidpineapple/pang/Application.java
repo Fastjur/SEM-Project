@@ -3,6 +3,7 @@ package net.liquidpineapple.pang;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
+import net.liquidpineapple.pang.objects.LifeSystem;
 import net.liquidpineapple.pang.objects.ScoreSystem;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class Application extends JFrame {
     private static final int DRAW_DELAY = 5;
 
 
+    public static LifeSystem lifeKeeper;
 
     @Getter
     private static Board board;
@@ -57,6 +59,7 @@ public class Application extends JFrame {
         setSize(width, height);
 
         scoreKeeper = new ScoreSystem();
+        lifeKeeper = new LifeSystem();
         board = new Board(width, height);
         add(board);
         log.info("Initialized with width: " + width + " and height: " + height);
@@ -84,6 +87,8 @@ public class Application extends JFrame {
 
                 try {
                     board.doUpdate();
+                    scoreKeeper.displayscore();
+                    lifeKeeper.updateLifes();
 
                     beforeTime = System.currentTimeMillis();
                     Thread.sleep(sleep);

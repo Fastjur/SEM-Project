@@ -22,10 +22,11 @@ public class ScoreSystemTest {
 
     @Test
     public void addTest(){
-        ScoreSysTester.AddScore(500);
+        ScoreSystem.AddScore(500);
         assertEquals(ScoreSysTester.getScore(),500);
         ScoreSysTester.AddScore(356);
         assertEquals(ScoreSysTester.getScore(),856);
+        ScoreSysTester.displayscore();
         assertEquals(ScoreSystem.getPlaces().get(0).getcurrentnumber(), 6);
 
         assertEquals(ScoreSystem.getPlaces().get(1).getcurrentnumber(), 5);
