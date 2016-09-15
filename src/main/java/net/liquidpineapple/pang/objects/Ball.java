@@ -16,7 +16,7 @@ public class Ball extends GameObject {
     private int ballSize;
     private int movX;
     private int movY;
-    private boolean isHit = false;
+
 
     private static final String textureLocationBlue = "/sprites/Balls/blue.png";
     private static final String textureLocationGreen = "/sprites/Balls/green.png";
@@ -85,13 +85,6 @@ public class Ball extends GameObject {
         if(collisionHook()){
             destroyball();
         }
-
-        if(collisionPlayer()){
-            if(!isHit) {
-                Application.lifeKeeper.loseLife();
-                isHit = true;
-            }
-        }
     }
 
     /**
@@ -133,29 +126,6 @@ public class Ball extends GameObject {
         return false;
     }
 
-    /**
-     * Method that checks whether the ball collides with the Player.
-     * @return returns true if the player is hit, returns false otherwise.
-     */
-    public boolean collisionPlayer(){
-        Player player = null;
-        for(GameObject o : Application.getBoard().getCurrentScreen().objectList){
-            if(o instanceof Player){
-                player = (Player) o;
-            }
-        }
-
-        int playerPos = player.getXPos() + (player.getImage().getWidth(null))/2;
-
-        if(playerPos - this.getXPos() >= 0 && playerPos - this.getXPos() <= this.getWidth()) {
-            if(this.getYPos()+ this.getHeight() >= player.getYPos()){
-                return true;
-            }
-        }
-
-        isHit = false;
-        return false;
-    }
 
     /**
      * Adds score (WIP), spawns two balls going left and right respectively on itself, and removes this ball.
