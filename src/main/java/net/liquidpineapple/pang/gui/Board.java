@@ -38,8 +38,8 @@ public class Board extends JPanel {
         setFocusable(true);
         setBackground(Color.BLACK);
 
-       // currentScreen = Level.createFromXML("src/main/resources/levels/level1.xml");
-        currentScreen = new MainMenu();
+        currentScreen = Level.createFromXML("src/main/resources/levels/level1.xml");
+      //  currentScreen = new MainMenu();
     }
 
     public void changeScreen(Screen screen){
