@@ -80,6 +80,10 @@ public class Ball extends GameObject {
         if(collisionHook()){
             destroyball();
         }
+
+        if(collisionPlayer()){
+
+        }
     }
 
     /**
@@ -110,6 +114,26 @@ public class Ball extends GameObject {
         if(ropePos - this.getXPos() >= 0 && ropePos - this.getXPos() <= this.getWidth()) {
             if(this.getYPos()+ this.getHeight() >= activeRope.getYPos()){
                 Application.getBoard().getCurrentScreen().objectList.remove(activeRope);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean collisionPlayer(){
+        Player player = null;
+        for(GameObject o : Application.getBoard().getCurrentScreen().objectList){
+            if(o instanceof Player){
+                player = (Player) o;
+            }
+        }
+
+        int playerPos = player.getXPos() + (player.getImage().getWidth(null))/2;
+
+        if(playerPos - this.getXPos() >= 0 && playerPos - this.getXPos() <= this.getWidth()) {
+            if(this.getYPos()+ this.getHeight() >= player.getYPos()){
+                Application.getBoard().getCurrentScreen().objectList.remove(playerPos);
                 return true;
             }
         }
