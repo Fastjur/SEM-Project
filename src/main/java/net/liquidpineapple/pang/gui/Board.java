@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.screens.Level;
+import net.liquidpineapple.pang.screens.MainMenu;
 import net.liquidpineapple.pang.screens.Screen;
 
 import javax.swing.*;
@@ -32,6 +33,7 @@ public class Board extends JPanel {
         setFocusable(true);
         requestFocus();
         addKeyListener(new InputHandler());
+        addMouseListener(new InputHandler());
         init();
     }
 
@@ -40,7 +42,7 @@ public class Board extends JPanel {
         setBackground(Color.BLACK);
 
         currentScreen = Level.createFromXML("src/main/resources/levels/level1.xml");
-//        currentScreen = new MainMenu();
+      //  currentScreen = new MainMenu();
     }
 
     public void changeScreen(Screen screen){
