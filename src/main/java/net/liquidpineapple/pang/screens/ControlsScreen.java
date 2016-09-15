@@ -30,6 +30,8 @@ public class ControlsScreen extends Screen{
         super.doUpdate();
         if(InputHandler.isAnyKeyPressed()){
             try {
+                Application.lifeKeeper.resetLives();
+                Application.getScoreKeeper().resetScore();
                 Application.getBoard().changeScreen(Level.createFromXML("src/main/resources/levels/level1.xml"));
             } catch (IOException e) {
                 log.error("Could not load level", e);

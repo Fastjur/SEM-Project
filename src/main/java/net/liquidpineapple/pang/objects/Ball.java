@@ -15,6 +15,7 @@ public class Ball extends GameObject {
     private int ballSize;
     private int movX;
     private int movY;
+    private boolean isHit = false;
 
     private static final String textureLocationBlue = "/sprites/Balls/blue.png";
     private static final String textureLocationGreen = "/sprites/Balls/green.png";
@@ -82,7 +83,10 @@ public class Ball extends GameObject {
         }
 
         if(collisionPlayer()){
-
+            if(!isHit) {
+                Application.lifeKeeper.loseLife();
+                isHit = true;
+            }
         }
     }
 
@@ -133,11 +137,11 @@ public class Ball extends GameObject {
 
         if(playerPos - this.getXPos() >= 0 && playerPos - this.getXPos() <= this.getWidth()) {
             if(this.getYPos()+ this.getHeight() >= player.getYPos()){
-                Application.getBoard().getCurrentScreen().objectList.remove(playerPos);
                 return true;
             }
         }
 
+        isHit = false;
         return false;
     }
 

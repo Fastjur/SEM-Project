@@ -2,6 +2,7 @@ package net.liquidpineapple.pang.objects;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.Application;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -54,5 +55,9 @@ public class ScoreSystem {
 
     public int getScore(){
         return score;
+    }
+
+    public void resetScore(){
+        Application.setScoreKeeper(new ScoreSystem());
     }
 }

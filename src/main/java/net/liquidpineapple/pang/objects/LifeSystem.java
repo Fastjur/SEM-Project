@@ -1,5 +1,8 @@
 package net.liquidpineapple.pang.objects;
 
+import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.screens.MainMenu;
+
 /**
  * Created by Erik on 13-9-2016.
  */
@@ -38,7 +41,7 @@ public class LifeSystem extends GameObject{
                     break;
                 case 0:
                     changeImage(textureH0);
-                    System.exit(0);
+                    Application.getBoard().changeScreen(new MainMenu());
                     break;
             }
             lastLives = lives;
@@ -55,4 +58,5 @@ public class LifeSystem extends GameObject{
     public int getLives(){
         return lives;
     }
+    public void resetLives() { lives = 3; }
 }

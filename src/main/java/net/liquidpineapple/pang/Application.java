@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.objects.LifeSystem;
@@ -31,6 +32,7 @@ public class Application extends JFrame {
     @Getter
     private static Board board;
     @Getter
+    @Setter
     private static ScoreSystem scoreKeeper;
 
     private Properties properties;
