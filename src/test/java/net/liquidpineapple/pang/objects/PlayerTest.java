@@ -5,9 +5,8 @@ import org.junit.Test;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
@@ -21,6 +20,7 @@ public class PlayerTest {
 
     private static final String playerTexture = "/sprites/player/p1_front.png";
     private static final String defaultTexture = "/sprites/no-texture.png";
+    private final double DELTA = 0.01;
 
     private Player player;
 
@@ -38,8 +38,8 @@ public class PlayerTest {
     @Test
     public void testSetPos() throws Exception {
         player.setPos(5, 6);
-        assertEquals(5, player.getXPos());
-        assertEquals(6, player.getYPos());
+        assertEquals(5, player.getXPos(), DELTA);
+        assertEquals(6, player.getYPos(), DELTA);
     }
 
     @Test
@@ -55,26 +55,26 @@ public class PlayerTest {
         player.setPos(10, 20);
         player.setDx(1);
         player.move();
-        assertEquals(11, player.getXPos());
+        assertEquals(11, player.getXPos(), DELTA);
         player.move();
-        assertEquals(12, player.getXPos());
+        assertEquals(12, player.getXPos(), DELTA);
         player.setDx(-1);
         player.move();
-        assertEquals(11, player.getXPos());
+        assertEquals(11, player.getXPos(), DELTA);
 
         player.setPos(1, 1);
         player.setDx(-1);
         for (int i = 0; i < 10; i++) {
             player.move();
         }
-        assertEquals(1, player.getXPos());
+        assertEquals(1, player.getXPos(), DELTA);
 
         player.setPos(max, 1);
         player.setDx(1);
         for (int i = 0; i < 10; i++) {
             player.move();
         }
-        assertEquals(max, player.getXPos());
+        assertEquals(max, player.getXPos(), DELTA);
     }
 
 }

@@ -1,11 +1,10 @@
 package net.liquidpineapple.pang.objects;
 
-import net.liquidpineapple.pang.Application;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Tim on 13-9-2016.
@@ -16,6 +15,7 @@ public class HookAndRopeTest {
     HookAndRope hookAndRope;
     private static final int XCOORD = 400;
     private static final int MAXY = 300;
+    private final double DELTA = 0.01;
 
     /**
      * Setup new HookAndRope.
@@ -31,8 +31,8 @@ public class HookAndRopeTest {
      */
     @Test
     public void constructorTest() throws Exception{
-        assertEquals(hookAndRope.getXPos(), XCOORD);
-        assertEquals(hookAndRope.getYPos(), 600);
+        assertEquals(hookAndRope.getXPos(), XCOORD, DELTA);
+        assertEquals(hookAndRope.getYPos(), 600, DELTA);
     }
 
     /**
@@ -40,9 +40,9 @@ public class HookAndRopeTest {
      */
     @Test
     public void moveTest() throws Exception {
-        assertEquals(600, hookAndRope.getYPos());
+        assertEquals(600, hookAndRope.getYPos(), DELTA);
         hookAndRope.move();
-        assertEquals(585, hookAndRope.getYPos());
+        assertEquals(597, hookAndRope.getYPos(), DELTA);
     }
 
     /**
