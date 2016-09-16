@@ -62,11 +62,4 @@ public class TimeSystem {
         }
     }
 
-    public ArrayList<NumberToken> getTimePlaces(){
-        return timePlaces;
-    }
-
-    public int getTime(){
-        return time;
-    }
 }
