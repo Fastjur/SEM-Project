@@ -14,8 +14,8 @@ public class Ball extends GameObject {
 
     //Size 1 is the smallest ball.
     private int ballSize;
-    private int movX;
-    private int movY;
+    private double movX;
+    private double movY;
 
 
     private static final String textureLocationBlue = "/sprites/Balls/blue.png";
@@ -31,7 +31,7 @@ public class Ball extends GameObject {
      * @param direction - Direction the ball should move, valid inputs are: "left" and "right", anything else randomizes the direction.
      * @param sizeIn - The desired size of the ball, Greater then 4 or smaller then 0 results in a size 4 ball.
      */
-    public Ball(int startX, int startY, BallMovement direction, int sizeIn){
+    public Ball(double startX, double startY, BallMovement direction, int sizeIn){
         super(textureLocationBlue, startX, startY);
 
         if (sizeIn > 0 && sizeIn < 5) {
@@ -79,20 +79,20 @@ public class Ball extends GameObject {
         }
 
         if (yPos + this.getHeight() == Application.getBoard().getHeight()) {
-            movY = -30;
-        }
-
-        if(collisionHook()){
-            destroyball();
-        }
+            movY = -6;
     }
+
+    if(collisionHook()){
+        destroyball();
+    }
+}
 
     /**
      * Calculates and sets the next position the ball should be drawn in.
      */
     public void move(){
         xPos += movX;
-        movY += 1;
+        movY += 1/25.0;
         yPos += movY;
     }
 
@@ -114,7 +114,7 @@ public class Ball extends GameObject {
             return false;
         }
 
-        int ropePos = activeRope.getXPos() + (activeRope.getWidth())/2;
+        double ropePos = activeRope.getXPos() + (activeRope.getWidth())/2;
 
         if(ropePos - this.getXPos() >= 0 && ropePos - this.getXPos() <= this.getWidth()) {
             if(this.getYPos()+ this.getHeight() >= activeRope.getYPos()){

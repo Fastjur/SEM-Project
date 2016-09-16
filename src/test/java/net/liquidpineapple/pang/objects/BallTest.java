@@ -10,19 +10,20 @@ public class BallTest {
     private Ball TestBallRight = new Ball(0, 0, BallMovement.RIGHT_MOVEMENT, 3);
     private Ball TestBallIncorrectSizeGreater = new Ball(0, 0, BallMovement.LEFT_MOVEMENT, 6);
     private Ball TestBallIncorrectSizeSmaller = new Ball(0, 0, BallMovement.RIGHT_MOVEMENT, 0);
+    private final double DELTA = 0.01;
 
     //Tests if the constructor handles left and right correctly.
     @Test
     public void testConstructorDirection() throws Throwable {
-        assertEquals(-2, TestBallLeft.getMovX());
-        assertEquals(2, TestBallRight.getMovX());
+        assertEquals(-2/5.0, TestBallLeft.getMovX(), DELTA);
+        assertEquals(2/5.0, TestBallRight.getMovX(), DELTA);
     }
 
    //Tests if the constructor handles sets movY correctly.
     @Test
     public void testConstructorYSpeed() throws Throwable {
-        assertEquals(0, TestBallLeft.getMovY());
-        assertEquals(0, TestBallRight.getMovY());
+        assertEquals(0, TestBallLeft.getMovY(), DELTA);
+        assertEquals(0, TestBallRight.getMovY(), DELTA);
     }
 
 
@@ -46,19 +47,19 @@ public class BallTest {
         TestBallLeft.setMovX(1);
 
         TestBallLeft.move();
-        assertEquals(6, TestBallLeft.getXPos());
+        assertEquals(6, TestBallLeft.getXPos(), DELTA);
 
         TestBallLeft.setMovX(-1);
         TestBallLeft.move();
-        assertEquals(5, TestBallLeft.getXPos());
+        assertEquals(5, TestBallLeft.getXPos(), DELTA);
 
         TestBallLeft.setMovY(1);
         TestBallLeft.move();
-        assertEquals(10, TestBallLeft.getYPos());
+        assertEquals(6.16, TestBallLeft.getYPos(), DELTA);
 
         TestBallLeft.setMovY(-1);
         TestBallLeft.move();
-        assertEquals(10, TestBallLeft.getYPos());
+        assertEquals(5.2, TestBallLeft.getYPos(), DELTA);
 
     }
 

@@ -11,7 +11,7 @@ public class TitlePang extends GameObject {
      * @param startX - The X location where the object should be on the screen.
      * @param startY - The Y location where the object should be on the screen.
      */
-    public TitlePang(int startX, int startY) {
+    public TitlePang(double startX, double startY) {
         super("/images/PANG.png", startX, startY);
     }
 }

@@ -1,11 +1,7 @@
 package net.liquidpineapple.pang.objects;
 
 import lombok.Getter;
-import lombok.Setter;
 import net.liquidpineapple.pang.Application;
-import net.liquidpineapple.pang.InputHandler;
-
-import java.awt.event.KeyEvent;
 
 /**
  * Created by Tim on 9-9-2016.
@@ -15,16 +11,16 @@ public class HookAndRope extends GameObject{
 
     //TODO: remove white background for sprite
     private static final String textureLocation = "/sprites/beam.png";
-    private final int maxY;
+    private final double maxY;
     @Getter
-    private double dy = 15; //specify upspeed rope here.
+    private double dy = 3; //specify upspeed rope here.
 
     /**
      * Constructor for the HookAndRope class
      * @param startX - Xlocation where the hook should go up.
      * @param maxY - Maximum height the rope should go up to.
      */
-    public HookAndRope(int startX, int maxY) {
+    public HookAndRope(double startX, double maxY) {
         super(textureLocation, startX, 600);
         this.maxY = maxY;
     }
