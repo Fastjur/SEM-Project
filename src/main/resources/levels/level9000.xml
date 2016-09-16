@@ -35,5 +35,6 @@
             </position>
             <maxX>800</maxX>
         </player>
+        <time>120</time>
 	</objects>
 </level>
