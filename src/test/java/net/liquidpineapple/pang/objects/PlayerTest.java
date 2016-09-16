@@ -48,31 +48,4 @@ public class PlayerTest {
         player.setImage(newImg);
         assertEquals(newImg, player.getImage());
     }
-
-    @Test
-    public void testMove() throws Exception {
-        player.setPos(10, 20);
-        player.setDx(1);
-        player.move();
-        assertEquals(11, player.getXPos(), DELTA);
-        player.move();
-        assertEquals(12, player.getXPos(), DELTA);
-        player.setDx(-1);
-        player.move();
-        assertEquals(11, player.getXPos(), DELTA);
-
-        player.setPos(1, 1);
-        player.setDx(-1);
-        for (int i = 0; i < 10; i++) {
-            player.move();
-        }
-        assertEquals(1, player.getXPos(), DELTA);
-
-        player.setPos(max, 1);
-        player.setDx(1);
-        for (int i = 0; i < 10; i++) {
-            player.move();
-        }
-        assertEquals(max, player.getXPos(), DELTA);
-    }
 }
