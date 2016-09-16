@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.ImageObserver;
 import java.net.URL;
 
@@ -18,13 +19,13 @@ import java.net.URL;
 @Slf4j
 public abstract class GameObject {
 
-    protected int xPos;
-    protected int yPos;
-    private int width;
-    private int height;
+    protected double xPos;
+    protected double yPos;
+    private double width;
+    private double height;
     private Image image;
 
-    public GameObject(String textureLocation, int startX, int startY) {
+    public GameObject(String textureLocation, double startX, double startY) {
         this.xPos = startX;
         this.yPos = startY;
         changeImage(textureLocation);
@@ -49,8 +50,8 @@ public abstract class GameObject {
         this.height = image.getHeight(null);
     }
 
-    public Rectangle getBounds() {
-        return new Rectangle(xPos, yPos, width, height);
+    public Rectangle2D.Double getBounds() {
+        return new Rectangle2D.Double(xPos, yPos, width, height);
     }
 
     //A Ellipse2D.float does also exists in case we need to be more accurate.
@@ -64,7 +65,7 @@ public abstract class GameObject {
     }
 
     public void doDrawing(Graphics2D graphics2D, ImageObserver imageObserver) {
-        graphics2D.drawImage(this.getImage(), this.getXPos(), this.getYPos(), imageObserver);
+        graphics2D.drawImage(this.getImage(), (int)Math.round(this.getXPos()), (int)Math.round(this.getYPos()), imageObserver);
     }
 
     public void doUpdate() {

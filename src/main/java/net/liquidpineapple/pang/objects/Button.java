@@ -6,16 +6,28 @@ import net.liquidpineapple.pang.InputHandler;
 import java.awt.*;
 
 /**
+ * Super class for every button in the game.
  * @author Govert de Gans
  * @date 2016-09-08
  */
 @Slf4j
 public abstract class Button extends GameObject {
-    public Button(String textureLocation, int startX, int startY) {
+
+    private boolean clicked = false;
+
+    /**
+     * Constructor of a button.
+     * @param textureLocation - The storage location of the texture.
+     * @param startX - The X position where the image should be on the screen.
+     * @param startY - The Y position where the image should be on the screen.
+     */
+    public Button(String textureLocation, double startX, double startY) {
         super(textureLocation, startX, startY);
     }
 
-    private boolean clicked = false;
+    /**
+     * Method that updates the buttons.
+     */
     @Override
     public void doUpdate() {
 
@@ -36,6 +48,9 @@ public abstract class Button extends GameObject {
         }
     }
 
+    /**
+     * Super method that checks for clicks.
+     */
     public void onClick() {
 
     }

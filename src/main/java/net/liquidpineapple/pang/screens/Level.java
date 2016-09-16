@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.screens;
 
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.objects.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -11,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
+import java.sql.Time;
 import java.util.ArrayList;
 
 /**
@@ -45,10 +47,17 @@ public class Level extends Screen {
             for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
                 output.objectList.add(player);
             }
+            TimeSystem timeSystem = new TimeSystem(loadTime(doc));
+
+            for (NumberToken token: timeSystem.getTimePlaces()){
+                output.objectList.add(token);
+            }
+
         }
-        for (ScoreToken token : ScoreSystem.getPlaces()) {
+        for (NumberToken token : ScoreSystem.getPlaces()) {
             output.objectList.add(token);
         }
+        output.objectList.add(Application.lifeKeeper);
         return output;
     }
 
@@ -101,6 +110,15 @@ public class Level extends Screen {
     }
 
     /**
+     * method to read time form an XML-file
+     * @doc document to be read from
+     * @return - returns an int containted in the <time></time>
+     */
+    public static int loadTime(Document doc){
+        return Integer.parseInt(doc.getElementsByTagName("time").item(0).getTextContent());
+    }
+
+    /**
      * Method to create a FileReader to read the XML-file.
      * @param xmlFile - Path/name of the XML-file to be parsed.
      * @return - returns a new FileReader if no exception is thrown,
@@ -125,8 +143,8 @@ public class Level extends Screen {
      * Method to update the level.
      * This is were all the doUpdate() methods from the objectList are called.
      */
-    public void doUpdate(){
-        for (GameObject object : objectList) {
+    public void doUpdate() {
+        for (GameObject object : new ArrayList<GameObject>(objectList)) {
             object.doUpdate();
         }
     }

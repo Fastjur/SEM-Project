@@ -1,8 +1,10 @@
 package net.liquidpineapple.pang;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
+import net.liquidpineapple.pang.objects.LifeSystem;
 import net.liquidpineapple.pang.objects.ScoreSystem;
 
 import javax.swing.*;
@@ -24,10 +26,15 @@ public class Application extends JFrame {
     private static final int UPDATE_DELAY = 10;
     private static final int DRAW_DELAY = 5;
 
-    private ScoreSystem scoreKeeper;
+
+    public static LifeSystem lifeKeeper;
 
     @Getter
     private static Board board;
+    @Getter
+    @Setter
+    private static ScoreSystem scoreKeeper;
+
     private Properties properties;
 
     public Application(String propertiesLocation) throws IOException {
@@ -54,6 +61,7 @@ public class Application extends JFrame {
         setSize(width, height);
 
         scoreKeeper = new ScoreSystem();
+        lifeKeeper = new LifeSystem();
         board = new Board(width, height);
         add(board);
         log.info("Initialized with width: " + width + " and height: " + height);
@@ -81,6 +89,8 @@ public class Application extends JFrame {
 
                 try {
                     board.doUpdate();
+                    scoreKeeper.displayscore();
+                    lifeKeeper.updateLifes();
 
                     beforeTime = System.currentTimeMillis();
                     Thread.sleep(sleep);

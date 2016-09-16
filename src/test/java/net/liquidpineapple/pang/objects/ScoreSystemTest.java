@@ -14,7 +14,7 @@ public class ScoreSystemTest {
     @Test
     public void constructorTest(){
         assertEquals(ScoreSysTester.getScore(),0);
-        for (ScoreToken token : ScoreSystem.getPlaces()) {
+        for (NumberToken token : ScoreSystem.getPlaces()) {
             assertEquals(token.getcurrentnumber(), 0);
         }
     }
@@ -22,10 +22,11 @@ public class ScoreSystemTest {
 
     @Test
     public void addTest(){
-        ScoreSysTester.AddScore(500);
+        ScoreSystem.addScore(500);
         assertEquals(ScoreSysTester.getScore(),500);
-        ScoreSysTester.AddScore(356);
+        ScoreSysTester.addScore(356);
         assertEquals(ScoreSysTester.getScore(),856);
+        ScoreSysTester.displayscore();
         assertEquals(ScoreSystem.getPlaces().get(0).getcurrentnumber(), 6);
 
         assertEquals(ScoreSystem.getPlaces().get(1).getcurrentnumber(), 5);

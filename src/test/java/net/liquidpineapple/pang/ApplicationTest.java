@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang;
 
+import net.liquidpineapple.pang.screens.Level;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -24,4 +25,10 @@ public class ApplicationTest {
         app.start();
     }
 
+    @Test
+    public void testScreenChangeToLevel() throws Throwable {
+        Application app = new Application(PROPERTIES_LOCATION);
+        app.start();
+        Application.getBoard().changeScreen(Level.createFromXML("src/main/resources/levels/level9000.xml"));
+    }
 }
