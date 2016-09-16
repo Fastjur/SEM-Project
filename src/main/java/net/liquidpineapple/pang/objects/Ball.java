@@ -114,7 +114,7 @@ public class Ball extends GameObject {
             return false;
         }
 
-        int ropePos = activeRope.getXPos() + (activeRope.getImage().getWidth(null))/2;
+        int ropePos = activeRope.getXPos() + (activeRope.getWidth())/2;
 
         if(ropePos - this.getXPos() >= 0 && ropePos - this.getXPos() <= this.getWidth()) {
             if(this.getYPos()+ this.getHeight() >= activeRope.getYPos()){
@@ -131,7 +131,7 @@ public class Ball extends GameObject {
      * Adds score (WIP), spawns two balls going left and right respectively on itself, and removes this ball.
      */
     public void destroyball(){
-        Application.getScoreKeeper().AddScore(100);
+        ScoreSystem.AddScore(100);
         if (ballSize != 1){
             Ball smallerBall = new Ball(xPos, yPos, BallMovement.LEFT_MOVEMENT, ballSize -1);
             Ball smallerBall2 = new Ball(xPos+1, yPos, BallMovement.RIGHT_MOVEMENT, ballSize -1);

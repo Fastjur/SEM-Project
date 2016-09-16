@@ -2,6 +2,7 @@ package net.liquidpineapple.pang.objects;
 
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.screens.MainMenu;
+import lombok.Getter;
 
 /**
  * Class that represents the lifeSystem.
@@ -13,6 +14,7 @@ public class LifeSystem extends GameObject{
     private static final String textureH1 = "/sprites/hearts1.png";
     private static final String textureH2 = "/sprites/hearts2.png";
     private static final String textureH3 = "/sprites/hearts3.png";
+    @Getter
     private static int lives;
     private int lastLives;
 
@@ -65,14 +67,6 @@ public class LifeSystem extends GameObject{
         if (lives < 3) {
             lives += 1;
         }
-    }
-
-    /**
-     * Method that returns the current ammount of lives.
-     * @return - the remaining ammount of lives.
-     */
-    public int getLives(){
-        return lives;
     }
 
     /**

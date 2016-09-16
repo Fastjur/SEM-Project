@@ -82,9 +82,9 @@ public class Player extends GameObject {
         }
 
         if(collisionPlayer()){
-            if(!this.isHit) {
+            if(!isHit) {
                 Application.lifeKeeper.loseLife();
-                this.isHit = true;
+                isHit = true;
             }
         }
     }
@@ -104,7 +104,7 @@ public class Player extends GameObject {
                 }
             }
         }
-        this.isHit = false;
+        isHit = false;
         return false;
     }
 }
