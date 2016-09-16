@@ -29,12 +29,10 @@ public class Player extends GameObject {
             this.dx = dx;
         }
     }
-    private final int maxX;
     private int dx;
 
-    public Player(int startX, int startY, int maxX) {
+    public Player(int startX, int startY) {
         super(textureLocation, startX, startY);
-        this.maxX = maxX;
     }
 
     public void move() {

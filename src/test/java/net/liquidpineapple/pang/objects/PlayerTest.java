@@ -5,9 +5,8 @@ import org.junit.Test;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
@@ -19,14 +18,13 @@ public class PlayerTest {
     private static final int startY = 20;
     private static final int max = 50;
 
-    private static final String playerTexture = "/sprites/player/p1_front.png";
     private static final String defaultTexture = "/sprites/no-texture.png";
 
     private Player player;
 
     @Before
-    public void setUp() {
-        player = new Player(startX, startY, max);
+    public void setUp() throws Exception {
+        player = new Player(startX, startY);
     }
 
     @Test
@@ -52,6 +50,7 @@ public class PlayerTest {
 
     @Test
     public void testMove() throws Exception {
+
         player.setPos(10, 20);
         player.setDx(1);
         player.move();
@@ -62,6 +61,7 @@ public class PlayerTest {
         player.move();
         assertEquals(11, player.getXPos());
 
+        // Test clamping left
         player.setPos(1, 1);
         player.setDx(-1);
         for (int i = 0; i < 10; i++) {
@@ -69,12 +69,6 @@ public class PlayerTest {
         }
         assertEquals(1, player.getXPos());
 
-        player.setPos(max, 1);
-        player.setDx(1);
-        for (int i = 0; i < 10; i++) {
-            player.move();
-        }
-        assertEquals(max, player.getXPos());
     }
 
 }
