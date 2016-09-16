@@ -16,7 +16,7 @@ public class SinglePlayerButton extends Button {
      * @param startX - The X location where the button should be on the screen.
      * @param startY - The Y location where the button should be on the screen.
      */
-    public SinglePlayerButton(int startX, int startY) {
+    public SinglePlayerButton(double startX, double startY) {
         super("/images/singleplayer.png", startX, startY);
     }
 

@@ -21,7 +21,7 @@ public abstract class Button extends GameObject {
      * @param startX - The X position where the image should be on the screen.
      * @param startY - The Y position where the image should be on the screen.
      */
-    public Button(String textureLocation, int startX, int startY) {
+    public Button(String textureLocation, double startX, double startY) {
         super(textureLocation, startX, startY);
     }
 

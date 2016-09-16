@@ -11,9 +11,9 @@ public enum BallMovement {
     RIGHT_MOVEMENT(2);
 
     @Getter
-    private final int dx;
+    private final double dx;
 
-    BallMovement(int dx) {
+    BallMovement(double dx) {
         this.dx = dx;
     }
 }

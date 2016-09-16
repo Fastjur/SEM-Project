@@ -1,7 +1,6 @@
 package net.liquidpineapple.pang.objects;
 
 import lombok.extern.slf4j.Slf4j;
-import net.liquidpineapple.pang.Application;
 
 /**
  * Class that represents the object for the Quitbutton.
@@ -15,7 +14,7 @@ public class QuitButton extends Button{
      * @param startX - The X location where the button should be on the screen.
      * @param startY - The Y location where the button should be on the screen.
      */
-    public QuitButton(int startX, int startY) {
+    public QuitButton(double startX, double startY) {
         super("/images/quit.png", startX, startY);
     }
 

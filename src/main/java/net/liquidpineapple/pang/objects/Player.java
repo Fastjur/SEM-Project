@@ -2,12 +2,9 @@ package net.liquidpineapple.pang.objects;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
-import net.liquidpineapple.pang.screens.Screen;
 
 import java.awt.event.KeyEvent;
 
@@ -28,15 +25,15 @@ public class Player extends GameObject {
         RIGHT_DIRECTION(4),
         NO_MOVEMENT(0);
 
-        private final int dx;
-        PlayerMovement(int dx) {
+        private final double dx;
+        PlayerMovement(double dx) {
             this.dx = dx;
         }
     }
-    private final int maxX;
-    private int dx;
+    private final double maxX;
+    private double dx;
 
-    public Player(int startX, int startY, int maxX) {
+    public Player(double startX, double startY, double maxX) {
         super(textureLocation, startX, startY);
         this.maxX = maxX;
     }
@@ -95,7 +92,7 @@ public class Player extends GameObject {
             if(object instanceof Ball){
                 Ball ball = (Ball) object;
 
-                int playerPos = this.getXPos() + (this.getImage().getWidth(null))/2;
+                double playerPos = this.getXPos() + (this.getImage().getWidth(null))/2;
 
                 if(playerPos - ball.getXPos() >= 0 && playerPos - ball.getXPos() <= ball.getWidth()) {
                     if(ball.getYPos()+ ball.getHeight() >= this.getYPos()){
