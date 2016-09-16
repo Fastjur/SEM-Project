@@ -3,7 +3,7 @@ package net.liquidpineapple.pang.objects;
 /**
  * Created by Erik on 12-9-2016.
  */
-public class ScoreToken extends GameObject {
+public class NumberToken extends GameObject {
 
     private int currentnumber;
     private static final String textureLocation0 = "/sprites/Numbers/Hud_0.png";
@@ -18,7 +18,7 @@ public class ScoreToken extends GameObject {
     private static final String textureLocation9 = "/sprites/Numbers/Hud_9.png";
 
 
-    ScoreToken(int X, int Y){
+    NumberToken(int X, int Y){
         super(textureLocation0, X, Y);
     }
 

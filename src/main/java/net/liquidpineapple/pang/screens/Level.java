@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
+import java.sql.Time;
 import java.util.ArrayList;
 
 /**
@@ -46,9 +47,14 @@ public class Level extends Screen {
             for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
                 output.objectList.add(player);
             }
+            TimeSystem timeSystem = new TimeSystem(loadTime(doc));
+
+            for (NumberToken token: timeSystem.getTimePlaces()){
+                output.objectList.add(token);
+            }
 
         }
-        for (ScoreToken token : ScoreSystem.getPlaces()) {
+        for (NumberToken token : ScoreSystem.getPlaces()) {
             output.objectList.add(token);
         }
         output.objectList.add(Application.lifeKeeper);
@@ -102,6 +108,15 @@ public class Level extends Screen {
             playerArray.add(player);
         }
         return playerArray;
+    }
+
+    /**
+     * method to read time form an XML-file
+     * @doc document to be read from
+     * @return - returns an int containted in the <time></time>
+     */
+    public static int loadTime(Document doc){
+        return Integer.parseInt(doc.getElementsByTagName("time").item(0).getTextContent());
     }
 
     /**

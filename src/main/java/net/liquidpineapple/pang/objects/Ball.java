@@ -131,7 +131,7 @@ public class Ball extends GameObject {
      * Adds score (WIP), spawns two balls going left and right respectively on itself, and removes this ball.
      */
     public void destroyball(){
-        ScoreSystem.AddScore(100);
+        ScoreSystem.addScore(100);
         if (ballSize != 1){
             Ball smallerBall = new Ball(xPos, yPos, BallMovement.LEFT_MOVEMENT, ballSize -1);
             Ball smallerBall2 = new Ball(xPos+1, yPos, BallMovement.RIGHT_MOVEMENT, ballSize -1);
