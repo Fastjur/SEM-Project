@@ -18,15 +18,14 @@ public class PlayerTest {
     private static final int startY = 20;
     private static final int max = 50;
 
-    private static final String playerTexture = "/sprites/player/p1_front.png";
     private static final String defaultTexture = "/sprites/no-texture.png";
     private final double DELTA = 0.01;
 
     private Player player;
 
     @Before
-    public void setUp() {
-        player = new Player(startX, startY, max);
+    public void setUp() throws Exception {
+        player = new Player(startX, startY);
     }
 
     @Test
@@ -49,32 +48,4 @@ public class PlayerTest {
         player.setImage(newImg);
         assertEquals(newImg, player.getImage());
     }
-
-    @Test
-    public void testMove() throws Exception {
-        player.setPos(10, 20);
-        player.setDx(1);
-        player.move();
-        assertEquals(11, player.getXPos(), DELTA);
-        player.move();
-        assertEquals(12, player.getXPos(), DELTA);
-        player.setDx(-1);
-        player.move();
-        assertEquals(11, player.getXPos(), DELTA);
-
-        player.setPos(1, 1);
-        player.setDx(-1);
-        for (int i = 0; i < 10; i++) {
-            player.move();
-        }
-        assertEquals(1, player.getXPos(), DELTA);
-
-        player.setPos(max, 1);
-        player.setDx(1);
-        for (int i = 0; i < 10; i++) {
-            player.move();
-        }
-        assertEquals(max, player.getXPos(), DELTA);
-    }
-
 }

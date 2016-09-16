@@ -102,9 +102,8 @@ public class Level extends Screen {
 
             int int_Xpos = Integer.parseInt(playerElement.getElementsByTagName("x").item(0).getTextContent());
             int int_Ypos = Integer.parseInt(playerElement.getElementsByTagName("y").item(0).getTextContent());
-            int int_MaxX = Integer.parseInt(playerElement.getElementsByTagName("maxX").item(0).getTextContent());
 
-            Player player = new Player(int_Xpos, int_Ypos, int_MaxX);
+            Player player = new Player(int_Xpos, int_Ypos);
             playerArray.add(player);
         }
         return playerArray;

@@ -30,12 +30,10 @@ public class Player extends GameObject {
             this.dx = dx;
         }
     }
-    private final double maxX;
     private double dx;
 
-    public Player(double startX, double startY, double maxX) {
+    public Player(double startX, double startY) {
         super(textureLocation, startX, startY);
-        this.maxX = maxX;
     }
 
     public void move() {
@@ -43,8 +41,10 @@ public class Player extends GameObject {
         if (xPos < 1) {
             xPos = 1;
         }
-        if (xPos > maxX) {
-            xPos = maxX;
+        int boardWidth = Application.getBoard().getWidth();
+        double playerMaxPosX = boardWidth - this.getWidth();
+        if (xPos > playerMaxPosX) {
+            xPos = playerMaxPosX;
         }
     }
 

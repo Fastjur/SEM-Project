@@ -19,8 +19,6 @@ import java.net.URL;
 @Slf4j
 public abstract class GameObject {
 
-    private static final String defaultTexture = "/sprites/no-texture.png";
-
     protected double xPos;
     protected double yPos;
     private double width;
@@ -38,13 +36,11 @@ public abstract class GameObject {
         log.info("Registering object with texture " + textureLocation);
         URL url = this.getClass().getResource(textureLocation);
 
-        if (url != null) {
-            imageIcon = new ImageIcon(url);
-        } else {
-            imageIcon = new ImageIcon(this.getClass().getResource(defaultTexture));
-            log.error("Could not find texture " + textureLocation + " resolving to default " +
-                "texture");
+        if (url == null) {
+            throw new IllegalArgumentException("Could not find texture " + textureLocation);
         }
+
+        imageIcon = new ImageIcon(url);
         image = imageIcon.getImage();
         getWidthAndHeight();
     }
