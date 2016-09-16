@@ -1,21 +1,22 @@
 package net.liquidpineapple.pang.objects;
 
 import lombok.Getter;
-
+import net.liquidpineapple.pang.Application;
 import java.util.ArrayList;
 
 /**
+ * Class that represents the ScoreSystem.
  * Created by Erik on 12-9-2016.
  */
 public class ScoreSystem {
 
     private static int score;
-
-
     @Getter
     private static ArrayList<NumberToken> Places;
 
-
+    /**
+     * The constructor for the scoresystem.
+     */
     public ScoreSystem() {
         score = 0;
         //These are from right to left.
@@ -32,12 +33,16 @@ public class ScoreSystem {
         displayscore();
     }
 
-
     public static void addScore(int scoreIn) {
         score += scoreIn;
-        if(score > 999999999){score = 999999999;}
+        if (score > 999999999) {
+            score = 999999999;
+        }
     }
 
+    /**
+     * Method that makes the current score displayed on the screen correctly.
+     */
     public void displayscore() {
         int calcscore = score;
         int i = 0;
@@ -48,7 +53,18 @@ public class ScoreSystem {
         }
     }
 
+    /**
+     * Getter for the current score.
+     * @return the current score.
+     */
     public int getScore(){
         return score;
+    }
+
+    /**
+     * Resets the score when the player died.
+     */
+    public void resetScore(){
+        Application.setScoreKeeper(new ScoreSystem());
     }
 }

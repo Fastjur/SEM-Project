@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.objects.LifeSystem;
@@ -25,11 +26,15 @@ public class Application extends JFrame {
     private static final int UPDATE_DELAY = 50;
     private static final int DRAW_DELAY = 5;
 
-    private ScoreSystem scoreKeeper;
+
     public static LifeSystem lifeKeeper;
 
     @Getter
     private static Board board;
+    @Getter
+    @Setter
+    private static ScoreSystem scoreKeeper;
+
     private Properties properties;
 
     public Application(String propertiesLocation) throws IOException {

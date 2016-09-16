@@ -11,13 +11,18 @@ import java.awt.image.ImageObserver;
 import java.io.IOException;
 
 /**
- * Created by Jaap-Jan on 13-9-2016.
+ * Class that represents the Controls screen.
+ * @author Jaap-Jan
+ * @date 13-9-2016.
  */
 @Slf4j
 public class ControlsScreen extends Screen{
+    /**
+     * Constructor for the ControlsScreen.
+     */
     public ControlsScreen() {
         try {
-            backgroundImage = ImageIO.read(Level.class.getResource("/images/background.png"));
+            backgroundImage = ImageIO.read(Level.class.getResource("/sprites/bg.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -25,12 +30,17 @@ public class ControlsScreen extends Screen{
         objectList.add(new ControlsObj(0, 10));
     }
 
+    /**
+     * Method that updates the controlsScreen.
+     */
     @Override
     public void doUpdate() {
         super.doUpdate();
         if(InputHandler.isAnyKeyPressed()){
             try {
-                Application.getBoard().changeScreen(Level.createFromXML("src/main/resources/levels/level1.xml"));
+                Application.lifeKeeper.resetLives();
+                Application.getScoreKeeper().resetScore();
+                Application.getBoard().changeScreen(Level.createFromXML("src/main/resources/levels/level9000.xml"));
             } catch (IOException e) {
                 log.error("Could not load level", e);
             }

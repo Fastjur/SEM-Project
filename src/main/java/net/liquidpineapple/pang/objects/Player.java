@@ -2,6 +2,8 @@ package net.liquidpineapple.pang.objects;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
@@ -19,6 +21,7 @@ import java.awt.event.KeyEvent;
 public class Player extends GameObject {
 
     private static final String textureLocation = "/sprites/player/p1_front.png";
+    public static boolean isHit = false;
 
     private enum PlayerMovement {
         LEFT_DIRECTION(-4),
@@ -77,5 +80,31 @@ public class Player extends GameObject {
                 Application.getBoard().addObject(newRope);
             }
         }
+
+        if(collisionPlayer()){
+            if(!isHit) {
+                Application.lifeKeeper.loseLife();
+                isHit = true;
+            }
+        }
+    }
+
+    public boolean collisionPlayer(){
+        boolean returnBool = false;
+        for(GameObject object : Application.getBoard().getCurrentScreen().objectList){
+            if(object instanceof Ball){
+                Ball ball = (Ball) object;
+
+                int playerPos = this.getXPos() + (this.getImage().getWidth(null))/2;
+
+                if(playerPos - ball.getXPos() >= 0 && playerPos - ball.getXPos() <= ball.getWidth()) {
+                    if(ball.getYPos()+ ball.getHeight() >= this.getYPos()){
+                       return true;
+                    }
+                }
+            }
+        }
+        isHit = false;
+        return false;
     }
 }
