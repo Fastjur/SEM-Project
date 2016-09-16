@@ -13,7 +13,7 @@ public class HookAndRope extends GameObject{
     private static final String textureLocation = "/sprites/beam.png";
     private final double maxY;
     @Getter
-    private double dy = 15; //specify upspeed rope here.
+    private double dy = 3; //specify upspeed rope here.
 
     /**
      * Constructor for the HookAndRope class

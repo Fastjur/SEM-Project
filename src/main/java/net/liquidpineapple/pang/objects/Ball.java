@@ -79,20 +79,20 @@ public class Ball extends GameObject {
         }
 
         if (yPos + this.getHeight() == Application.getBoard().getHeight()) {
-            movY = -30;
-        }
-
-        if(collisionHook()){
-            destroyball();
-        }
+            movY = -6;
     }
+
+    if(collisionHook()){
+        destroyball();
+    }
+}
 
     /**
      * Calculates and sets the next position the ball should be drawn in.
      */
     public void move(){
         xPos += movX;
-        movY += 1;
+        movY += 1/25.0;
         yPos += movY;
     }
 

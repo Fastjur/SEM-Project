@@ -7,8 +7,8 @@ import lombok.Getter;
  *         Created on 12-9-16
  */
 public enum BallMovement {
-    LEFT_MOVEMENT(-2),
-    RIGHT_MOVEMENT(2);
+    LEFT_MOVEMENT(-2/5.0),
+    RIGHT_MOVEMENT(2/5.0);
 
     @Getter
     private final double dx;

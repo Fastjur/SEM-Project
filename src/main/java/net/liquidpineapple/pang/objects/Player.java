@@ -21,8 +21,8 @@ public class Player extends GameObject {
     public static boolean isHit = false;
 
     private enum PlayerMovement {
-        LEFT_DIRECTION(-4),
-        RIGHT_DIRECTION(4),
+        LEFT_DIRECTION(-4/5.0),
+        RIGHT_DIRECTION(4/5.0),
         NO_MOVEMENT(0);
 
         private final double dx;

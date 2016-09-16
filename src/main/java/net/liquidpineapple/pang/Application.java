@@ -23,7 +23,7 @@ import java.util.Properties;
 public class Application extends JFrame {
 
     private static String PROPERTIES_LOCATION = "/config.properties";
-    private static final int UPDATE_DELAY = 50;
+    private static final int UPDATE_DELAY = 10;
     private static final int DRAW_DELAY = 5;
 
 
