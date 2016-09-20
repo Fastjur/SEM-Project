@@ -26,7 +26,6 @@ public class TimeSystem {
         @Override
         public void actionPerformed(ActionEvent ae)
         {
-            log.info("lbh");
             if(time > 0){
                 time -= 1;}
             //Here the proper behaviour when time is run out should be replaced, for now it will add 60 seconds and lose a life.
