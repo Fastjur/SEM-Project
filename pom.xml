@@ -16,7 +16,12 @@
             <roles>
                 <role>Developer</role>
             </roles>
+            <timezone>Europe/Amsterdam</timezone>
+            <properties>
+                <picUrl>https://lh3.googleusercontent.com/-UwKyJR2q-lY/AAAAAAAAAAI/AAAAAAAAKsM/3icQQYIgnCg/s0/photo.jpg</picUrl>
+            </properties>
         </developer>
+
     </developers>
 
     <properties>
@@ -34,7 +39,7 @@
     </properties>
 
     <build>
-        <finalName>SEM-Group(-1)-Pang-${version}</finalName>
+        <finalName>SEM-Group(-1)-Pang-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -91,9 +96,37 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.6</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.6</version>
+            </plugin>
+        </plugins>
+    </reporting>
     <dependencies>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-pmd-plugin</artifactId>
+            <version>3.6</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
