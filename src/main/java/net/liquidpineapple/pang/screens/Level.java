@@ -47,9 +47,9 @@ public class Level extends Screen {
             for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
                 output.objectList.add(player);
             }
-            TimeSystem timeSystem = new TimeSystem(loadTime(doc));
+            TimeSystem.resetTime(loadTime(doc));
 
-            for (NumberToken token: timeSystem.getTimePlaces()){
+            for (NumberToken token: TimeSystem.getTimePlaces()){
                 output.objectList.add(token);
             }
 

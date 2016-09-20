@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.objects;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,19 +12,21 @@ import java.util.ArrayList;
 /**
  * Created by Erik on 12-9-2016.
  */
+@Slf4j
 public class TimeSystem {
 
     private static int time;
-    private Timer interval;
+    private static Timer interval;
 
     @Getter
-    private ArrayList<NumberToken> timePlaces;
+    private static ArrayList<NumberToken> timePlaces;
 
     private ActionListener timerAction = new ActionListener()
     {
         @Override
         public void actionPerformed(ActionEvent ae)
         {
+            log.info("lbh");
             if(time > 0){
                 time -= 1;}
             //Here the proper behaviour when time is run out should be replaced, for now it will add 60 seconds and lose a life.
@@ -35,7 +38,12 @@ public class TimeSystem {
         }
     };
 
-    public TimeSystem(int inTime) {
+    public TimeSystem() {
+        interval = new Timer(1000, timerAction);
+        interval.setRepeats(true);
+    }
+
+    public static void resetTime(int inTime) {
         time = inTime;
         if(time > 999){time = 999;}
 
@@ -45,14 +53,10 @@ public class TimeSystem {
         timePlaces.add(new NumberToken(723,52));
         timePlaces.add(new NumberToken(691,52));
         updatetime();
-        interval = new Timer(1000, timerAction);
-        interval.setRepeats(true);
         interval.start();
-
     }
 
-
-    public void updatetime() {
+    private static void updatetime() {
         int calctime = time;
         int i = 0;
         while(i<3){
