@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class ScoreSystem {
 
+    @Getter
     private static int score;
     @Getter
     private static ArrayList<NumberToken> Places;

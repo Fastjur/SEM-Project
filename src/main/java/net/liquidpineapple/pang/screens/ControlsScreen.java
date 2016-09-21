@@ -6,8 +6,6 @@ import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.objects.ControlsObj;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.ImageObserver;
 import java.io.IOException;
 
 /**

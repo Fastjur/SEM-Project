@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.objects;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.screens.GameOverScreen;
 import net.liquidpineapple.pang.screens.MainMenu;
 import lombok.Getter;
 
@@ -53,7 +54,7 @@ public class LifeSystem extends GameObject{
                     break;
                 case 0:
                     changeImage(textureH0);
-                    Application.getBoard().changeScreen(new MainMenu());
+                    Application.getBoard().changeScreen(new GameOverScreen());
                     break;
             }
             lastLives = lives;
