@@ -54,6 +54,7 @@ public class LifeSystem extends GameObject{
                 case 0:
                     changeImage(textureH0);
                     Application.getBoard().changeScreen(new MainMenu());
+                    Application.getBoard().setLevelCount(1);
                     break;
             }
             lastLives = lives;
