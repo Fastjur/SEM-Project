@@ -32,6 +32,7 @@ public class Level extends Screen {
      * Method that parses a XML-file into a level.
      * @param xmlFile - path/filename of the XML-file that should be parsed.
      * @return - returns a new level.
+     * @throws IOException
      */
     public static Level createFromXML(String xmlFile) throws IOException {
 
@@ -112,8 +113,8 @@ public class Level extends Screen {
 
     /**
      * method to read time form an XML-file
-     * @doc document to be read from
-     * @return - returns an int containted in the <time></time>
+     * @param doc {@link Document} to be read from
+     * @return - returns an int contained in the {@code <time></time>}
      */
     public static int loadTime(Document doc){
         return Integer.parseInt(doc.getElementsByTagName("time").item(0).getTextContent());

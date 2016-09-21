@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 
 /**
- * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
+ * @author Jurriaan Den Toonder
  * @date 2016/09/06.
  */
 public class ApplicationTest {

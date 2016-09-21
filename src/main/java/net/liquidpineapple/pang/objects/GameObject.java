@@ -3,6 +3,8 @@ package net.liquidpineapple.pang.objects;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.logger.Logger;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -11,7 +13,7 @@ import java.awt.image.ImageObserver;
 import java.net.URL;
 
 /**
- * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
+ * @author Jurriaan Den Toonder
  * @date 2016/09/07.
  */
 @Data
@@ -32,7 +34,7 @@ public abstract class GameObject {
 
     public void changeImage(String textureLocation){
         ImageIcon imageIcon;
-        log.info("Registering object with texture " + textureLocation);
+        Logger.info("Registering object with texture " + textureLocation);
         URL url = this.getClass().getResource(textureLocation);
 
         if (url == null) {

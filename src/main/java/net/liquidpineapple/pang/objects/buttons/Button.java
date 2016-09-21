@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.objects.buttons;
 
 import net.liquidpineapple.pang.InputHandler;
+import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.GameObject;
 
 import java.awt.*;
@@ -35,7 +36,7 @@ public abstract class Button extends GameObject {
                 if (this.getBounds().contains(mousePos)) {
                     if (!clicked) {
                         clicked = true;
-                        log.info("contains");
+                        Logger.info("contains");
                         this.onClick();
                     }
                 } else {

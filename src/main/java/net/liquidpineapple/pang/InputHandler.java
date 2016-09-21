@@ -1,5 +1,7 @@
 package net.liquidpineapple.pang;
 
+import net.liquidpineapple.pang.logger.Logger;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -42,7 +44,7 @@ public class InputHandler implements MouseListener, KeyListener{
     public void mousePressed(MouseEvent e) {
         mousePos = new Point(e.getX(), e.getY());
         mouseButtonPressed = e.getButton();
-        log.info("pang-1");
+        Logger.info("pang-1");
     }
 
     @Override

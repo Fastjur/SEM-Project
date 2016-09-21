@@ -12,7 +12,7 @@ import java.io.IOException;
 
 /**
  * Class that represents the board.
- * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
+ * @author Jurriaan Den Toonder
  * @date 2016/09/06.
  */
 public class Board extends JPanel {

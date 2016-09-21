@@ -2,6 +2,7 @@ package net.liquidpineapple.pang.screens;
 
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
+import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.ControlsObj;
 
 import javax.imageio.ImageIO;
@@ -38,7 +39,7 @@ public class ControlsScreen extends Screen{
                 Application.getScoreKeeper().resetScore();
                 Application.getBoard().changeScreen(Level.createFromXML("src/main/resources/levels/level9000.xml"));
             } catch (IOException e) {
-                log.error("Could not load level", e);
+                Logger.error("Could not load level", e);
             }
         }
     }

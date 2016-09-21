@@ -37,6 +37,7 @@ public class HookAndRopeTest {
 
     /**
      * Tests the normal behaviour of move method in the HookAndRope class.
+     * @throws Exception
      */
     @Test
     public void moveTest() throws Exception {
@@ -45,7 +46,7 @@ public class HookAndRopeTest {
         assertEquals(597, hookAndRope.getYPos(), DELTA);
     }
 
-    /**
+    /*
      *Tests the behaviour of the move method when the rope collides with the maximum height.
      * TODO: MOCK THIS TEST TO PREVENT FAILURE.
 

@@ -9,7 +9,7 @@ import net.liquidpineapple.pang.InputHandler;
 import java.awt.event.KeyEvent;
 
 /**
- * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
+ * @author Jurriaan Den Toonder
  * @date 2016/09/06.
  */
 @Data

@@ -1,5 +1,7 @@
 package net.liquidpineapple.pang.objects.buttons;
 
+import net.liquidpineapple.pang.logger.Logger;
+
 /**
  * Class that represents the object for the Quitbutton.
  * @author Jaap-Jan
@@ -20,7 +22,7 @@ public class QuitButton extends Button{
      */
     @Override
     public void onClick() {
-        log.info("Close");
+        Logger.info("Close");
         System.exit(0);
     }
 }
