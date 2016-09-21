@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.objects.GameObject;
@@ -25,6 +26,9 @@ public class Board extends JPanel {
     private Timer timer;
     @Getter
     private Screen currentScreen;
+    @Getter
+    @Setter
+    private int levelCount = 1;
 
     /**
      * Constructor of the board.
