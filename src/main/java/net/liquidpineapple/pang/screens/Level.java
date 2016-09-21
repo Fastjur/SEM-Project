@@ -1,7 +1,9 @@
 package net.liquidpineapple.pang.screens;
 
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.gui.NumberToken;
+import net.liquidpineapple.pang.gui.ScoreSystem;
+import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.objects.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -11,15 +13,14 @@ import org.w3c.dom.NodeList;
 import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.*;
-import java.sql.Time;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * @author Govert de Gans
  * @date 2016-09-07
  */
-@Slf4j
 public class Level extends Screen {
 
     private static final int BOTTOM_OFFSET = 10;

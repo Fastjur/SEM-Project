@@ -1,4 +1,6 @@
-package net.liquidpineapple.pang.objects;
+package net.liquidpineapple.pang.gui;
+
+import net.liquidpineapple.pang.objects.GameObject;
 
 /**
  * Created by Erik on 12-9-2016.

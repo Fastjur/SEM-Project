@@ -3,6 +3,7 @@ package net.liquidpineapple.pang.objects;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.gui.ScoreSystem;
 
 /**
  * Class that represents the ball.

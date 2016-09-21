@@ -2,11 +2,10 @@ package net.liquidpineapple.pang;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
-import net.liquidpineapple.pang.objects.LifeSystem;
-import net.liquidpineapple.pang.objects.ScoreSystem;
-import net.liquidpineapple.pang.objects.TimeSystem;
+import net.liquidpineapple.pang.gui.LifeSystem;
+import net.liquidpineapple.pang.gui.ScoreSystem;
+import net.liquidpineapple.pang.gui.TimeSystem;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +19,6 @@ import java.util.Properties;
  * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
  * @date 2016/09/06.
  */
-@Slf4j
 public class Application extends JFrame {
 
     private static String PROPERTIES_LOCATION = "/config.properties";

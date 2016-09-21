@@ -1,4 +1,4 @@
-package net.liquidpineapple.pang.objects;
+package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
 import net.liquidpineapple.pang.Application;

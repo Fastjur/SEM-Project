@@ -1,7 +1,5 @@
 package net.liquidpineapple.pang;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -13,7 +11,6 @@ import java.util.HashSet;
  * @author Govert de Gans
  * @date 2016-09-12
  */
-@Slf4j
 public class InputHandler implements MouseListener, KeyListener{
 
     private static HashSet<Integer> keysPressed = new HashSet<>();

@@ -1,13 +1,10 @@
 package net.liquidpineapple.pang.screens;
 
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.objects.ControlsObj;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.ImageObserver;
 import java.io.IOException;
 
 /**
@@ -15,7 +12,6 @@ import java.io.IOException;
  * @author Jaap-Jan
  * @date 13-9-2016.
  */
-@Slf4j
 public class ControlsScreen extends Screen{
     /**
      * Constructor for the ControlsScreen.

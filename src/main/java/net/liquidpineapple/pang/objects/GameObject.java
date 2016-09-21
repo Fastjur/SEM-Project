@@ -16,7 +16,6 @@ import java.net.URL;
  */
 @Data
 @EqualsAndHashCode
-@Slf4j
 public abstract class GameObject {
 
     protected double xPos;

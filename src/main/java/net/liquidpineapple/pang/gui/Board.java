@@ -1,10 +1,8 @@
 package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.objects.GameObject;
-import net.liquidpineapple.pang.screens.Level;
 import net.liquidpineapple.pang.screens.MainMenu;
 import net.liquidpineapple.pang.screens.Screen;
 
@@ -17,7 +15,6 @@ import java.io.IOException;
  * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
  * @date 2016/09/06.
  */
-@Slf4j
 public class Board extends JPanel {
 
     private final int boardWidth;

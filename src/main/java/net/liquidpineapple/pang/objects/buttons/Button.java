@@ -1,7 +1,7 @@
-package net.liquidpineapple.pang.objects;
+package net.liquidpineapple.pang.objects.buttons;
 
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.InputHandler;
+import net.liquidpineapple.pang.objects.GameObject;
 
 import java.awt.*;
 
@@ -10,7 +10,6 @@ import java.awt.*;
  * @author Govert de Gans
  * @date 2016-09-08
  */
-@Slf4j
 public abstract class Button extends GameObject {
 
     private boolean clicked = false;

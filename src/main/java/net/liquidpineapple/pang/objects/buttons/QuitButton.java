@@ -1,13 +1,10 @@
-package net.liquidpineapple.pang.objects;
-
-import lombok.extern.slf4j.Slf4j;
+package net.liquidpineapple.pang.objects.buttons;
 
 /**
  * Class that represents the object for the Quitbutton.
  * @author Jaap-Jan
  * @date 9-9-2016.
  */
-@Slf4j
 public class QuitButton extends Button{
     /**
      * Constructor of the Quitbutton.

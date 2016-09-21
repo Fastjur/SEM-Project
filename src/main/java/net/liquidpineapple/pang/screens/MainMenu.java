@@ -1,7 +1,7 @@
 package net.liquidpineapple.pang.screens;
 
-import net.liquidpineapple.pang.objects.QuitButton;
-import net.liquidpineapple.pang.objects.SinglePlayerButton;
+import net.liquidpineapple.pang.objects.buttons.QuitButton;
+import net.liquidpineapple.pang.objects.buttons.SinglePlayerButton;
 import net.liquidpineapple.pang.objects.TitlePang;
 
 import javax.imageio.ImageIO;

@@ -14,7 +14,6 @@ import java.awt.event.KeyEvent;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Slf4j
 public class Player extends GameObject {
 
     private static final String textureLocation = "/sprites/player/p1_front.png";
