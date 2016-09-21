@@ -5,9 +5,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by Jaap-Jan on 13-9-2016.
- */
 public class ControlsScreenTest {
     private static String PROPERTIES_LOCATION = "/config.properties";
 

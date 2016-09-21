@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.objects.LifeSystem;
 import net.liquidpineapple.pang.objects.ScoreSystem;
+import net.liquidpineapple.pang.objects.TimeSystem;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,9 +32,13 @@ public class Application extends JFrame {
 
     @Getter
     private static Board board;
+
     @Getter
     @Setter
     private static ScoreSystem scoreKeeper;
+
+    @Getter
+    private static TimeSystem timeSystem;
 
     private Properties properties;
 
@@ -73,6 +78,8 @@ public class Application extends JFrame {
         setVisible(true);
 
         log.info("Application started successfully!");
+
+        timeSystem = new TimeSystem();
 
         Runnable doUpdateRunnable = () -> {
             long beforeTime, timeDiff, sleep;
