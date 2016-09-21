@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Class that represents the Controls screen.
+ * Class that represents the game over screen.
  * @author Jaap-Jan
  * @date 21-9-2016.
  */
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class GameOverScreen extends Screen {
     private static ArrayList<NumberToken> Places;
     /**
-     * Constructor for the ControlsScreen.
+     * Constructor for the game over screen.
      */
     public GameOverScreen() {
         try {
@@ -61,7 +61,7 @@ public class GameOverScreen extends Screen {
     }
 
     /**
-     * Method that updates the controlsScreen.
+     * Method that updates the game over screen.
      */
     @Override
     public void doUpdate() {
@@ -73,6 +73,9 @@ public class GameOverScreen extends Screen {
         }
     }
 
+    /**
+     * Method that makes the score display on the screen.
+     */
     public void displayscore() {
         int calcscore = Application.getScoreKeeper().getScore();
         int i = 0;
