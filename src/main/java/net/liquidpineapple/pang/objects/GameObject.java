@@ -3,6 +3,8 @@ package net.liquidpineapple.pang.objects;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.logger.Logger;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -11,12 +13,11 @@ import java.awt.image.ImageObserver;
 import java.net.URL;
 
 /**
- * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
+ * @author Jurriaan Den Toonder
  * @date 2016/09/07.
  */
 @Data
 @EqualsAndHashCode
-@Slf4j
 public abstract class GameObject {
 
     protected double xPos;
@@ -29,11 +30,13 @@ public abstract class GameObject {
         this.xPos = startX;
         this.yPos = startY;
         changeImage(textureLocation);
+        Logger.info("GameObject registered at (" + xPos + ", " + yPos + ") with width " + width +
+            " and height " + height);
     }
 
     public void changeImage(String textureLocation){
         ImageIcon imageIcon;
-        log.info("Registering object with texture " + textureLocation);
+        Logger.info("Registering object with texture " + textureLocation);
         URL url = this.getClass().getResource(textureLocation);
 
         if (url == null) {
@@ -62,6 +65,7 @@ public abstract class GameObject {
     public void setPos(int xPos, int yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
+        Logger.info("Set position for " + this.toString() + "to (" + xPos + "," + yPos + ")");
     }
 
     public void doDrawing(Graphics2D graphics2D, ImageObserver imageObserver) {

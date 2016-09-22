@@ -1,7 +1,6 @@
-package net.liquidpineapple.pang.objects;
+package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 /**
  * Created by Erik on 12-9-2016.
  */
-@Slf4j
 public class TimeSystem {
 
     private static int time;

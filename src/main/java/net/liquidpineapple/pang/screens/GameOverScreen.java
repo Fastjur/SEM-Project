@@ -3,8 +3,8 @@ package net.liquidpineapple.pang.screens;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
-import net.liquidpineapple.pang.objects.NumberToken;
-
+import net.liquidpineapple.pang.gui.NumberToken;
+import net.liquidpineapple.pang.gui.ScoreSystem;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
@@ -15,7 +15,6 @@ import java.util.ArrayList;
  * @author Jaap-Jan
  * @date 21-9-2016.
  */
-@Slf4j
 public class GameOverScreen extends Screen {
     private static ArrayList<NumberToken> places;
     /**
@@ -59,7 +58,7 @@ public class GameOverScreen extends Screen {
      * Method that makes the score display on the screen.
      */
     public void displayscore() {
-        int calcscore = Application.getScoreKeeper().getScore();
+        int calcscore = ScoreSystem.getScore();
         int i = 0;
 
         while(calcscore>0){

@@ -22,8 +22,8 @@ public class BallTest {
    //Tests if the constructor handles sets movY correctly.
     @Test
     public void testConstructorYSpeed() throws Throwable {
-        assertEquals(0, TestBallLeft.getMovY(), DELTA);
-        assertEquals(0, TestBallRight.getMovY(), DELTA);
+        assertEquals(-2.0, TestBallLeft.getMovY(), DELTA);
+        assertEquals(-2.0, TestBallRight.getMovY(), DELTA);
     }
 
 
@@ -55,11 +55,11 @@ public class BallTest {
 
         TestBallLeft.setMovY(1);
         TestBallLeft.move();
-        assertEquals(6.16, TestBallLeft.getYPos(), DELTA);
+        assertEquals(2.16, TestBallLeft.getYPos(), DELTA);
 
         TestBallLeft.setMovY(-1);
         TestBallLeft.move();
-        assertEquals(5.2, TestBallLeft.getYPos(), DELTA);
+        assertEquals(1.2000000000000002, TestBallLeft.getYPos(), DELTA);
 
     }
 

@@ -1,4 +1,4 @@
-package net.liquidpineapple.pang.objects;
+package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
 import net.liquidpineapple.pang.Application;
@@ -52,14 +52,6 @@ public class ScoreSystem {
             calcscore /= 10;
             i++;
         }
-    }
-
-    /**
-     * Getter for the current score.
-     * @return the current score.
-     */
-    public int getScore(){
-        return score;
     }
 
     /**

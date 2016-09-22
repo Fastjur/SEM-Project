@@ -1,15 +1,15 @@
-package net.liquidpineapple.pang.objects;
+package net.liquidpineapple.pang.gui;
 
-import net.liquidpineapple.pang.Application;
-import net.liquidpineapple.pang.screens.GameOverScreen;
-import net.liquidpineapple.pang.screens.MainMenu;
 import lombok.Getter;
+import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.objects.GameObject;
+import net.liquidpineapple.pang.screens.GameOverScreen;
 
 /**
  * Class that represents the lifeSystem.
  * Created by Erik on 13-9-2016.
  */
-public class LifeSystem extends GameObject{
+public class LifeSystem extends GameObject {
 
     private static final String textureH0 = "/sprites/hearts0.png";
     private static final String textureH1 = "/sprites/hearts1.png";
