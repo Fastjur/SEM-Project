@@ -7,7 +7,7 @@ import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.logger.Logger;
-import net.liquidpineapple.pang.logger.LoggerTypes;
+import net.liquidpineapple.pang.objects.DropRandomizer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,6 +34,9 @@ public class Application extends JFrame {
 
     @Getter
     private static Board board;
+
+    @Getter
+    private static DropRandomizer dropRandomizer;
 
     @Getter
     @Setter
@@ -69,6 +72,7 @@ public class Application extends JFrame {
 
         scoreKeeper = new ScoreSystem();
         lifeKeeper = new LifeSystem();
+        dropRandomizer = new DropRandomizer();
         board = new Board(width, height);
         add(board);
         Logger.info("Initialized with width: " + width + " and height: " + height);

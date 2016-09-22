@@ -2,7 +2,6 @@ package net.liquidpineapple.pang.screens;
 
 import net.liquidpineapple.pang.objects.buttons.QuitButton;
 import net.liquidpineapple.pang.objects.buttons.SinglePlayerButton;
-import net.liquidpineapple.pang.objects.TitlePang;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
@@ -18,12 +17,11 @@ public class MainMenu extends Screen {
      */
     public MainMenu() {
         try {
-            backgroundImage = ImageIO.read(Level.class.getResource("/sprites/bg.png"));
+            backgroundImage = ImageIO.read(Level.class.getResource("/sprites/titlebg.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        objectList.add(new TitlePang(50, 30));
         objectList.add(new SinglePlayerButton(200, 250)); 
         objectList.add(new QuitButton(200, 370));
     }

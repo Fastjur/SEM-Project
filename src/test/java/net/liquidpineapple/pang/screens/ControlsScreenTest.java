@@ -14,7 +14,7 @@ public class ControlsScreenTest {
         app.start();
         ControlsScreen cs = new ControlsScreen();
         app.getBoard().changeScreen(cs);
-        assertFalse(cs.objectList.isEmpty());
+        assertTrue(cs.objectList.isEmpty());
     }
 
 }
