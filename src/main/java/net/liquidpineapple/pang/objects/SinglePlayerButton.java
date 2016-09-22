@@ -9,6 +9,7 @@ import net.liquidpineapple.pang.screens.ControlsScreen;
  * @author Govert de Gans
  * @date 2016-09-08
  */
+
 @Slf4j
 public class SinglePlayerButton extends Button {
     /**
