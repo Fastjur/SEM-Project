@@ -5,8 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Date;
 
@@ -20,6 +18,8 @@ public class LoggerTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private final PrintStream oldStdOut = System.out;
+    private final PrintStream oldStdErr = System.err;
 
     @Before
     public void setUpStreams() {
@@ -30,16 +30,15 @@ public class LoggerTest {
 
     @After
     public void cleanUpStreams() {
-        System.setOut(null);
-        System.setErr(null);
+        System.setOut(oldStdOut);
+        System.setErr(oldStdErr);
     }
 
     @Test
     public void testSetLevel() throws Exception {
         String time = String.valueOf(new Date().getTime());
-        final String EXPECTED_INFO = "[ERROR] " + time + "\n" +
-                                     "[WARNING] " + time + "\n" +
-                                     "[INFO] " + time + "\n";
+        final String EXPECTED_WARN_AND_INFO = "[WARNING] " + time + "\n" +
+                                              "[INFO] " + time + "\n";
         final String EXPECTED_WARNING = "[WARNING] " + time + "\n";
         final String EXPECTED_ERROR = "[ERROR] " + time + "\n";
 
@@ -57,16 +56,18 @@ public class LoggerTest {
         Logger.error(time);
         Logger.warning(time);
         Logger.info(time);
-        assertEquals(EXPECTED_ERROR, outContent.toString());
+        assertEquals(EXPECTED_ERROR, errContent.toString());
 
         outContent.reset();
+        errContent.reset();
 
         // Check that all is logged on info
         Logger.setLevel(LoggerTypes.INFO);
         Logger.error(time);
         Logger.warning(time);
         Logger.info(time);
-        assertEquals(EXPECTED_INFO, outContent.toString());
+        assertEquals(EXPECTED_ERROR, errContent.toString());
+        assertEquals(EXPECTED_WARN_AND_INFO, outContent.toString());
     }
 
     @Test
@@ -90,15 +91,16 @@ public class LoggerTest {
         String log = "We are logging this yay!";
         String expected = "[ERROR] We are logging this yay!\n";
         Logger.error(log);
-        assertEquals(expected, outContent.toString());
+        assertEquals(expected, errContent.toString());
     }
 
     @Test
     public void testError1() throws Exception {
         String log = "We are logging this yay!";
-        String expected = "[ERROR] We are logging this yay!\n";
+        String expected = "[ERROR] We are logging this yay!\n" +
+            "java.lang.IllegalArgumentException: Some exception";
         Exception exception = new IllegalArgumentException("Some exception");
         Logger.error(log, exception);
-        assertEquals(expected, outContent.toString());
+        assertTrue(errContent.toString().startsWith(expected));
     }
 }

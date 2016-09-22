@@ -38,7 +38,11 @@ public class Logger {
      */
     private static void print(LoggerTypes type, String message) {
         if (type.getPriority() >= level) {
-            System.out.println(type.getPrefix() + " " + message);
+            if (type.equals(LoggerTypes.ERROR)) {
+                System.err.println(type.getPrefix() + " " + message);
+            } else {
+                System.out.println(type.getPrefix() + " " + message);
+            }
         }
     }
 

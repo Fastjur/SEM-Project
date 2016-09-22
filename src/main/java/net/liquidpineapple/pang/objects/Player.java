@@ -2,9 +2,9 @@ package net.liquidpineapple.pang.objects;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
+import net.liquidpineapple.pang.gui.LifeSystem;
 
 import java.awt.event.KeyEvent;
 
@@ -79,14 +79,13 @@ public class Player extends GameObject {
 
         if(collisionPlayer()){
             if(!isHit) {
-                Application.lifeKeeper.loseLife();
+                LifeSystem.loseLife();
                 isHit = true;
             }
         }
     }
 
     public boolean collisionPlayer(){
-        boolean returnBool = false;
         for(GameObject object : Application.getBoard().getCurrentScreen().objectList){
             if(object instanceof Ball){
                 Ball ball = (Ball) object;
@@ -94,7 +93,7 @@ public class Player extends GameObject {
                 double playerPos = this.getXPos() + (this.getImage().getWidth(null))/2;
 
                 if(playerPos - ball.getXPos() >= 0 && playerPos - ball.getXPos() <= ball.getWidth()) {
-                    if(ball.getYPos()+ ball.getHeight() >= this.getYPos()){
+                    if(ball.getYPos() + ball.getHeight() >= this.getYPos()) {
                        return true;
                     }
                 }
