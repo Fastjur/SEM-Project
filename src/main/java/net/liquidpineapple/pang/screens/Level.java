@@ -1,8 +1,13 @@
 package net.liquidpineapple.pang.screens;
 
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
+
 import net.liquidpineapple.pang.gui.Board;
+
+import net.liquidpineapple.pang.gui.NumberToken;
+import net.liquidpineapple.pang.gui.ScoreSystem;
+import net.liquidpineapple.pang.gui.TimeSystem;
+
 import net.liquidpineapple.pang.objects.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -12,15 +17,14 @@ import org.w3c.dom.NodeList;
 import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.*;
-import java.sql.Time;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * @author Govert de Gans
  * @date 2016-09-07
  */
-@Slf4j
 public class Level extends Screen {
 
     private static final int BOTTOM_OFFSET = 10;
@@ -32,6 +36,7 @@ public class Level extends Screen {
      * Method that parses a XML-file into a level.
      * @param xmlFile - path/filename of the XML-file that should be parsed.
      * @return - returns a new level.
+     * @throws IOException
      */
     public static Level createFromXML(String xmlFile) throws IOException {
 
@@ -112,8 +117,8 @@ public class Level extends Screen {
 
     /**
      * method to read time form an XML-file
-     * @doc document to be read from
-     * @return - returns an int containted in the <time></time>
+     * @param doc {@link Document} to be read from
+     * @return - returns an int contained in the {@code <time></time>}
      */
     public static int loadTime(Document doc){
         return Integer.parseInt(doc.getElementsByTagName("time").item(0).getTextContent());

@@ -11,7 +11,7 @@ install:
   - mvn test-compile -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 script:
-  - mvn test jacoco:report
+  - mvn jacoco:prepare-agent test jacoco:report
 
 after_success:
   - mvn coveralls:report

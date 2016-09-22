@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
+ * @author Jurriaan Den Toonder
  * @date 2016/09/12.
  */
 public class PlayerTest {

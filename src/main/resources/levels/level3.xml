@@ -10,7 +10,7 @@
 			<size>4</size>
 			<color>red</color>
 		</ball>
-		<ball>
+		<!--<ball>
 			<position>
 				<x>400</x>
 				<y>200</y>
@@ -27,7 +27,7 @@
 			<direction>LEFT_MOVEMENT</direction>
 			<size>4</size>
 			<color>red</color>
-		</ball>
+		</ball>-->
         <player>
             <position>
                 <x>300</x>
