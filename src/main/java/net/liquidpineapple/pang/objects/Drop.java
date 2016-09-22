@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.objects;
 
+import lombok.Getter;
 import net.liquidpineapple.pang.Application;
 
 /**
