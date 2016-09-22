@@ -13,7 +13,7 @@ import java.io.*;
 public class AudioSystem {
 
     private static Player player;
-    private static String loopingSound;
+    private static String loopingSound = "";
 
     public static void start() {
         new Thread(() -> {
@@ -34,8 +34,11 @@ public class AudioSystem {
                     resourceStream.read(buffer);
                     currentLoop = loopingSound;
                 }
-                player = new Player(new ByteArrayInputStream(buffer));
-                player.play();
+
+                if (buffer != null) {
+                    player = new Player(new ByteArrayInputStream(buffer));
+                    player.play();
+                }
             }
         } catch(JavaLayerException e) {
             Logger.error("The AudioSystem has crashed.", e);
@@ -45,8 +48,9 @@ public class AudioSystem {
     }
 
     public static void changeLoopingSound(String newLoopingSound) {
-        if (loopingSound != null)
+        if (!loopingSound.equals("")) {
             player.close();
+        }
         loopingSound = newLoopingSound;
     }
 }
