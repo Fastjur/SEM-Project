@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.gui.LifeSystem;
+import net.liquidpineapple.pang.logger.Logger;
 
 import java.awt.event.KeyEvent;
 
@@ -36,6 +37,7 @@ public class Player extends GameObject {
     }
 
     public void move() {
+        double oldX = xPos;
         xPos += dx;
         if (xPos < 1) {
             xPos = 1;
@@ -45,6 +47,7 @@ public class Player extends GameObject {
         if (xPos > playerMaxPosX) {
             xPos = playerMaxPosX;
         }
+        Logger.info("Moved " + this + " from x: " + oldX + " to x: " + xPos);
     }
 
     @Override
@@ -78,7 +81,7 @@ public class Player extends GameObject {
         }
 
         if(collisionPlayer()){
-            if(!isHit) {
+            if(!isHit && !Application.cheatMode) {
                 LifeSystem.loseLife();
                 isHit = true;
             }

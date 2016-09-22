@@ -30,6 +30,8 @@ public abstract class GameObject {
         this.xPos = startX;
         this.yPos = startY;
         changeImage(textureLocation);
+        Logger.info("GameObject registered at (" + xPos + ", " + yPos + ") with width " + width +
+            " and height " + height);
     }
 
     public void changeImage(String textureLocation){
@@ -63,6 +65,7 @@ public abstract class GameObject {
     public void setPos(int xPos, int yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
+        Logger.info("Set position for " + this.toString() + "to (" + xPos + "," + yPos + ")");
     }
 
     public void doDrawing(Graphics2D graphics2D, ImageObserver imageObserver) {

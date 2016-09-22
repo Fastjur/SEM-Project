@@ -1,5 +1,7 @@
 package net.liquidpineapple.pang.logger;
 
+import lombok.Getter;
+
 /**
  * The logger class containing static methods to log out to the console.
  * @author Jurriaan Den Toonder
@@ -7,7 +9,15 @@ package net.liquidpineapple.pang.logger;
  */
 public class Logger {
 
+    @Getter
+    private static Logger instance = new Logger();
+
     private static int level;
+
+    /**
+     * Singleton constructor
+     */
+    private Logger(){}
 
     /**
      * Set the level at which the logger should print to the console.

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.ScoreSystem;
+import net.liquidpineapple.pang.logger.Logger;
 
 /**
  * Class that represents the ball.
@@ -57,7 +58,7 @@ public class Ball extends GameObject {
         } else if (direction.equals(BallMovement.RIGHT_MOVEMENT)) {
             movX = BallMovement.RIGHT_MOVEMENT.getDx();
         }
-        movY = 0;
+        movY = -2;
     }
 
     /**
@@ -92,9 +93,13 @@ public class Ball extends GameObject {
      * Calculates and sets the next position the ball should be drawn in.
      */
     public void move(){
+        double oldX = xPos,
+               oldY = yPos;
         xPos += movX;
         movY += 1/25.0;
         yPos += movY;
+        Logger.info("Moved " + this.toString() + " from (" + oldX + ", " + oldY + ") to (" + xPos
+            + ", " + yPos + ")");
     }
 
     /**
@@ -120,6 +125,7 @@ public class Ball extends GameObject {
         if(ropePos - this.getXPos() >= 0 && ropePos - this.getXPos() <= this.getWidth()) {
             if(this.getYPos()+ this.getHeight() >= activeRope.getYPos()){
                 Application.getBoard().getCurrentScreen().objectList.remove(activeRope);
+                Logger.info("Collision between " + this + " and " + activeRope);
                 return true;
             }
         }
@@ -140,6 +146,7 @@ public class Ball extends GameObject {
             Application.getBoard().addObject(smallerBall2);
         }
         //remove ball
+        Logger.info("Removing " + this);
         Application.getBoard().getCurrentScreen().objectList.remove(this);
     }
 

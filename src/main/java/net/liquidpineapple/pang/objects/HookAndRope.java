@@ -1,18 +1,22 @@
 package net.liquidpineapple.pang.objects;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.logger.Logger;
 
 /**
  * Created by Tim on 9-9-2016.
  * Class that represents the hook system in the game.
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class HookAndRope extends GameObject{
 
     //TODO: remove white background for sprite
     private static final String textureLocation = "/sprites/beam.png";
     private final double maxY;
-    @Getter
     private double dy = 3; //specify upspeed rope here.
 
     /**
@@ -29,6 +33,7 @@ public class HookAndRope extends GameObject{
      * Method to move the hook upwards.
      */
     public void move(){
+        double oldY = yPos;
         yPos -= dy;
 
         //if yPos reaches 0, the top of the frame has been reached,
@@ -36,6 +41,8 @@ public class HookAndRope extends GameObject{
         if(yPos<=maxY){
             Application.getBoard().getCurrentScreen().objectList.remove(this);
         }
+
+        Logger.info("Moved " + this + " from y: " + oldY + " to y: " + yPos);
     }
 
     /**
