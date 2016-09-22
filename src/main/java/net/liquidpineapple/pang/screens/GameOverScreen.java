@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 @Slf4j
 public class GameOverScreen extends Screen {
-    private static ArrayList<NumberToken> Places;
+    private static ArrayList<NumberToken> places;
     /**
      * Constructor for the game over screen.
      */
@@ -29,34 +29,16 @@ public class GameOverScreen extends Screen {
         }
 
         //These are from right to left.
-        Places = new ArrayList<>(9);
-        NumberToken nine = new NumberToken(524,300);
-        NumberToken eight = new NumberToken(492,300);
-        NumberToken seven = new NumberToken(460,300);
-        NumberToken six = new NumberToken(428,300);
-        NumberToken five = new NumberToken(396,300);
-        NumberToken four = new NumberToken(364,300);
-        NumberToken three = new NumberToken(332,300);
-        NumberToken two = new NumberToken(300,300);
-        NumberToken one = new NumberToken(268,300);
-        Places.add(nine);
-        Places.add(eight);
-        Places.add(seven);
-        Places.add(six);
-        Places.add(five);
-        Places.add(four);
-        Places.add(three);
-        Places.add(two);
-        Places.add(one);
-        objectList.add(nine);
-        objectList.add(eight);
-        objectList.add(seven);
-        objectList.add(six);
-        objectList.add(five);
-        objectList.add(four);
-        objectList.add(three);
-        objectList.add(two);
-        objectList.add(one);
+        places = new ArrayList<>(9);
+        int numberPosX = 524;
+        int numberPosY = 300;
+        int numberOfTokens = 9;
+        for(int i = 0; i<numberOfTokens; i++) {
+            NumberToken token = new NumberToken(numberPosX, numberPosY);
+            places.add(token);
+            objectList.add(token);
+            numberPosX -= 32;
+        }
         displayscore();
     }
 
@@ -81,7 +63,7 @@ public class GameOverScreen extends Screen {
         int i = 0;
 
         while(calcscore>0){
-            Places.get(i).SetScoreToken(calcscore % 10);
+            places.get(i).SetScoreToken(calcscore % 10);
             calcscore /= 10;
             i++;
         }
