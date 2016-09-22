@@ -27,6 +27,9 @@ public class Application extends JFrame {
     private static final int UPDATE_DELAY = 10;
     private static final int DRAW_DELAY = 5;
 
+    // Set to true to prevent loosing lives
+    public static final boolean cheatMode = false;
+
     public static LifeSystem lifeKeeper;
 
     @Getter
