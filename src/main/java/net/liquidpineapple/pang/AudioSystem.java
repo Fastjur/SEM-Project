@@ -14,6 +14,7 @@ public class AudioSystem {
 
     private static Player player;
     private static String loopingSound = "";
+    private static boolean isRunning;
 
     public static void start() {
         new Thread(() -> {
@@ -23,6 +24,7 @@ public class AudioSystem {
 
     private static void playLoop() {
         Logger.info("Music loop is running");
+        isRunning = true;
         byte[] buffer = null;
         try {
             String currentLoop = "";
@@ -45,10 +47,11 @@ public class AudioSystem {
         } catch(IOException e) {
             Logger.error("The AudioSystem has crashed.", e);
         }
+        isRunning = false;
     }
 
     public static void changeLoopingSound(String newLoopingSound) {
-        if (!loopingSound.equals("")) {
+        if (!loopingSound.equals("") && isRunning) {
             player.close();
         }
         loopingSound = newLoopingSound;
