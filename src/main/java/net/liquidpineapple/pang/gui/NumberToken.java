@@ -19,7 +19,7 @@ public class NumberToken extends GameObject {
     private static final String textureLocation8 = "/sprites/numbers/hud_8.png";
     private static final String textureLocation9 = "/sprites/numbers/hud_9.png";
 
-    NumberToken(int X, int Y){
+    public NumberToken(int X, int Y){
         super(textureLocation0, X, Y);
     }
 
