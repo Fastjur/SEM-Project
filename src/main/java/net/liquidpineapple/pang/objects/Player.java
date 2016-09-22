@@ -87,16 +87,19 @@ public class Player extends GameObject {
     }
 
     public boolean collisionPlayer(){
-        boolean returnBool = false;
         for(GameObject object : Application.getBoard().getCurrentScreen().objectList){
-            if(object instanceof Ball){
-                Ball ball = (Ball) object;
-
+            if(object instanceof Ball || object instanceof Drop){
                 double playerPos = this.getXPos() + (this.getImage().getWidth(null))/2;
 
-                if(playerPos - ball.getXPos() >= 0 && playerPos - ball.getXPos() <= ball.getWidth()) {
-                    if(ball.getYPos()+ ball.getHeight() >= this.getYPos()){
-                       return true;
+                if(playerPos - object.getXPos() >= 0 && playerPos - object.getXPos() <= object.getWidth()) {
+                    if(object.getYPos()+ object.getHeight() >= this.getYPos()){
+                        if(object instanceof Drop){
+                            Drop drop = (Drop) object;
+                            drop.playerCollision();
+                            return false;
+                        }
+                        else{return true;}
+
                     }
                 }
             }

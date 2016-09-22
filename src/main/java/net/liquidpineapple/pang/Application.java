@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
+import net.liquidpineapple.pang.objects.DropRandomizer;
 import net.liquidpineapple.pang.objects.LifeSystem;
 import net.liquidpineapple.pang.objects.ScoreSystem;
 import net.liquidpineapple.pang.objects.TimeSystem;
@@ -32,6 +33,9 @@ public class Application extends JFrame {
 
     @Getter
     private static Board board;
+
+    @Getter
+    private static DropRandomizer dropRandomizer;
 
     @Getter
     @Setter
@@ -67,6 +71,7 @@ public class Application extends JFrame {
 
         scoreKeeper = new ScoreSystem();
         lifeKeeper = new LifeSystem();
+        dropRandomizer = new DropRandomizer();
         board = new Board(width, height);
         add(board);
         log.info("Initialized with width: " + width + " and height: " + height);
