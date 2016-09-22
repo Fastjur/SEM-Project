@@ -3,11 +3,8 @@ package net.liquidpineapple.pang.screens;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
-import net.liquidpineapple.pang.objects.ControlsObj;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.ImageObserver;
 import java.io.IOException;
 
 /**
@@ -22,12 +19,10 @@ public class ControlsScreen extends Screen{
      */
     public ControlsScreen() {
         try {
-            backgroundImage = ImageIO.read(Level.class.getResource("/sprites/bg.png"));
+            backgroundImage = ImageIO.read(Level.class.getResource("/sprites/controlsbg.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        objectList.add(new ControlsObj(0, 10));
     }
 
     /**
