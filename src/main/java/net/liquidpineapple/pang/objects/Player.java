@@ -92,7 +92,7 @@ public class Player extends GameObject {
                 double playerPos = this.getXPos() + (this.getImage().getWidth(null))/2;
 
                 if(playerPos - object.getXPos() >= 0 && playerPos - object.getXPos() <= object.getWidth()) {
-                    if(object.getYPos()+ object.getHeight() >= object.getYPos()){
+                    if(object.getYPos()+ object.getHeight() >= this.getYPos()){
                         if(object instanceof Drop){
                             Drop drop = (Drop) object;
                             drop.playerCollision();

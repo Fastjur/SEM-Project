@@ -138,6 +138,7 @@ public class Ball extends GameObject {
             Application.getBoard().addObject(smallerBall);
             Application.getBoard().addObject(smallerBall2);
         }
+        Application.getDropRandomizer().rollRandomdrop(xPos+(this.getWidth()/2), yPos+(this.getHeight()/2));
         //remove ball
         Application.getBoard().getCurrentScreen().objectList.remove(this);
     }

@@ -51,7 +51,7 @@ public class Drop extends GameObject {
         if (xPos < 0)
             xPos = 0;
 
-        if (yPos == 0){
+        if (yPos + this.getHeight() == Application.getBoard().getHeight()){
             movX = 0;
         }
         else  if (xPos == 0 || xPos + this.getWidth() == Application.getBoard().getWidth()) {
@@ -61,5 +61,6 @@ public class Drop extends GameObject {
 
     public void playerCollision() {
         ScoreSystem.addScore(score);
+        Application.getBoard().getCurrentScreen().objectList.remove(this);
     }
 }
