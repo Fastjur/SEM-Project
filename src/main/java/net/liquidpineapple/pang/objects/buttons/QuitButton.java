@@ -1,13 +1,12 @@
-package net.liquidpineapple.pang.objects;
+package net.liquidpineapple.pang.objects.buttons;
 
-import lombok.extern.slf4j.Slf4j;
+import net.liquidpineapple.pang.logger.Logger;
 
 /**
  * Class that represents the object for the Quitbutton.
  * @author Jaap-Jan
  * @date 9-9-2016.
  */
-@Slf4j
 public class QuitButton extends Button{
     /**
      * Constructor of the Quitbutton.
@@ -23,7 +22,7 @@ public class QuitButton extends Button{
      */
     @Override
     public void onClick() {
-        log.info("Close");
+        Logger.info("Close");
         System.exit(0);
     }
 }

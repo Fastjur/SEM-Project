@@ -2,19 +2,19 @@ package net.liquidpineapple.pang.objects;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
+import net.liquidpineapple.pang.gui.LifeSystem;
+import net.liquidpineapple.pang.logger.Logger;
 
 import java.awt.event.KeyEvent;
 
 /**
- * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
+ * @author Jurriaan Den Toonder
  * @date 2016/09/06.
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Slf4j
 public class Player extends GameObject {
 
     private static final String textureLocation = "/sprites/player/p1_front.png";
@@ -37,6 +37,7 @@ public class Player extends GameObject {
     }
 
     public void move() {
+        double oldX = xPos;
         xPos += dx;
         if (xPos < 1) {
             xPos = 1;
@@ -46,6 +47,7 @@ public class Player extends GameObject {
         if (xPos > playerMaxPosX) {
             xPos = playerMaxPosX;
         }
+        Logger.info("Moved " + this + " from x: " + oldX + " to x: " + xPos);
     }
 
     @Override
@@ -79,24 +81,27 @@ public class Player extends GameObject {
         }
 
         if(collisionPlayer()){
-            if(!isHit) {
-                Application.lifeKeeper.loseLife();
+            if(!isHit && !Application.cheatMode) {
+                LifeSystem.loseLife();
                 isHit = true;
             }
         }
     }
 
     public boolean collisionPlayer(){
-        boolean returnBool = false;
-        for(GameObject object : Application.getBoard().getCurrentScreen().objectList){
-            if(object instanceof Ball){
-                Ball ball = (Ball) object;
-
+        for(GameObject object : Application.getBoard().getCurrentScreen().objectList) {
+            if(object instanceof Ball || object instanceof Drop) {
                 double playerPos = this.getXPos() + (this.getImage().getWidth(null))/2;
 
-                if(playerPos - ball.getXPos() >= 0 && playerPos - ball.getXPos() <= ball.getWidth()) {
-                    if(ball.getYPos()+ ball.getHeight() >= this.getYPos()){
-                       return true;
+                if(playerPos - object.getXPos() >= 0 && playerPos - object.getXPos() <= object.getWidth()) {
+                    if(object.getYPos() + object.getHeight() >= this.getYPos()) {
+                        if(object instanceof Drop) {
+                            Drop drop = (Drop) object;
+                            drop.playerCollision();
+                            return false;
+                        } else {
+                            return true;
+                        }
                     }
                 }
             }

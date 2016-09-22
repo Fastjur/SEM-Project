@@ -29,7 +29,7 @@ public abstract class Screen {
     /**
      * Method that draws object on the screen.
      * @param graphics2D - Object that needs to be drawn.
-     * @param imageObserver
+     * @param imageObserver {@link ImageObserver} the image observer.
      */
     public void doDrawing(Graphics2D graphics2D, ImageObserver imageObserver) {
         graphics2D.drawImage(backgroundImage, 0, 0, null);

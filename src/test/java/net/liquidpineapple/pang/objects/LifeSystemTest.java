@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.objects;
 
+import net.liquidpineapple.pang.gui.LifeSystem;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
