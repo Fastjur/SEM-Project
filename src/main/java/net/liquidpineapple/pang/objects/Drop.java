@@ -53,14 +53,14 @@ public class Drop extends GameObject {
         super.doUpdate();
 
         move();
-        if (yPos + this.getHeight() - 1 > Application.getBoard().getHeight())
+        if (yPos + this.getHeight() > Application.getBoard().getHeight())
             yPos = Application.getBoard().getHeight() - this.getHeight();
         if (xPos + this.getWidth() > Application.getBoard().getWidth())
             xPos = Application.getBoard().getWidth() - this.getWidth();
         if (xPos < 0)
             xPos = 0;
 
-        if (yPos + this.getHeight() - 1 == Application.getBoard().getHeight()){
+        if (yPos + this.getHeight() == Application.getBoard().getHeight()){
             movX = 0;
         }
         else  if (xPos == 0 || xPos + this.getWidth() == Application.getBoard().getWidth()) {

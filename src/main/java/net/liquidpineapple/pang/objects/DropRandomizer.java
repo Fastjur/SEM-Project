@@ -29,30 +29,30 @@ public class DropRandomizer {
      * @param startY
      */
     public void rollRandomdrop(double startX, double startY) {
-        int roll = randomizer.nextInt(500);
+        int roll = randomizer.nextInt(100);
         Drop testdrop = null;
-        if(0 <= roll && roll < 150){
+        if(0 <= roll && roll < 30){
             testdrop = new Drop("/sprites/drops/coinBronze.png", startX, startY, 0, 1, 10);
         }
-        else if(150 <= roll && roll <250 ){
+        else if(30 <= roll && roll <50 ){
             testdrop = new Drop("/sprites/drops/coinSilver.png", startX, startY, 0, 1, 100);
         }
-        else if(250 <= roll && roll <300 ){
+        else if(50 <= roll && roll <60 ){
             testdrop = new Drop("/sprites/drops/coinGold.png", startX, startY, 0, 1, 1000);
         }
-        else if(300 <= roll && roll <310 ){
+        else if(60 <= roll && roll <62 ){
             testdrop = new Drop("/sprites/drops/gemBlue.png", startX, startY, 0, 1, 1500);
         }
-        else if(310 <= roll && roll <320 ){
+        else if(62 <= roll && roll <64 ){
             testdrop = new Drop("/sprites/drops/gemRed.png", startX, startY, 0, 1, 1500);
         }
-        else if(320 <= roll && roll <330 ){
+        else if(64 <= roll && roll <66 ){
             testdrop = new Drop("/sprites/drops/gemYellow.png", startX, startY, 0, 1, 1500);
         }
-        else if(330 <= roll && roll <340 ) {
+        else if(66 <= roll && roll <68 ) {
             testdrop = new Drop("/sprites/drops/gemGreen.png", startX, startY, 0, 1, 1500);
         }
-        else if(340 <= roll && roll <350 ) {
+        else if(68 <= roll && roll <70 ) {
             testdrop = new Drop("/sprites/drops/heart.png", startX, startY, 0, 1, 1, 1);
         }
         if(testdrop != null){
