@@ -25,18 +25,21 @@
     </developers>
 
     <properties>
-        <maven.compiler.version>3.5.1</maven.compiler.version>
-        <maven.jar.version>3.0.2</maven.jar.version>
-        <maven.assembly.version>2.6</maven.assembly.version>
+        <argLine>-Xmx2048m -Xms1024m</argLine>
         <coveralls.version>4.2.0</coveralls.version>
-        <jdk.version>1.8</jdk.version>
         <jacoco.version>0.7.6.201602180812</jacoco.version>
+        <jdk.version>1.8</jdk.version>
         <junit.version>4.12</junit.version>
         <lombok.version>1.16.8</lombok.version>
+        <maven.assembly.version>2.6</maven.assembly.version>
+        <maven.checkstyle.version>2.9</maven.checkstyle.version>
+        <maven.compiler.version>3.5.1</maven.compiler.version>
+        <maven.jar.version>3.0.2</maven.jar.version>
+        <maven.surefire.version>2.19.1</maven.surefire.version>
+        <pmd.version>3.6</pmd.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <pmd.version>3.6</pmd.version>
-        <maven.checkstyle.version>2.9</maven.checkstyle.version>
+        <slf4j.logger.version>1.6.2</slf4j.logger.version>
     </properties>
 
     <build>
@@ -68,10 +71,15 @@
                     <version>${jacoco.version}</version>
                     <executions>
                         <execution>
-                            <id>prepare-agent</id>
+                            <id>default-prepare-agent</id>
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
+                            <configuration>
+                                <includes>
+                                    <include>net/liquidpineapple/**</include>
+                                </includes>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
@@ -183,6 +191,11 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${maven.surefire.version}</version>
         </dependency>
     </dependencies>
 
