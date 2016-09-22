@@ -18,7 +18,7 @@ public class DropRandomizer {
     public void rollRandomdrop(double startX, double startY) {
         int roll = randomizer.nextInt(2);
         if(roll == 1){
-            Drop testdrop = new Drop("/sprites/numbers/hud_0.png", startX, startY, 100, 2, 1);
+            Drop testdrop = new Drop("/sprites/drops/coinBronze.png", startX, startY, 100, 0, 1);
             Application.getBoard().addObject(testdrop);
         }
     }
