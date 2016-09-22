@@ -167,7 +167,6 @@ public class Level extends Screen {
                 }
             } else{
                 //set behaviour when all levels have been completed here.
-                //TODO: create endgame screen.
                 newScreen = new WinScreen();
             }
             currentBoard.changeScreen(newScreen);
