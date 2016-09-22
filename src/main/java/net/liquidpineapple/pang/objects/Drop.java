@@ -10,6 +10,7 @@ public class Drop extends GameObject {
     private int score;
     private double movY;
     private double movX;
+    private int livesChange;
 
     /**
      * Creates a new drop.
@@ -21,7 +22,15 @@ public class Drop extends GameObject {
      * @param movX            as vertical movement every update
      * @param movY            as horizontal movement every update
      */
-    public Drop(String textureLocation, double startX, double startY, int score, double movX, double movY){
+    public Drop(String textureLocation, double startX, double startY, double movX, double movY, int score, int livesChange){
+        super(textureLocation, startX, startY);
+        this.score = score;
+        this.movY = movY;
+        this.movX = movX;
+        this.livesChange = livesChange;
+    }
+
+    public Drop(String textureLocation, double startX, double startY, double movX, double movY, int score){
         super(textureLocation, startX, startY);
         this.score = score;
         this.movY = movY;
@@ -61,6 +70,12 @@ public class Drop extends GameObject {
 
     public void playerCollision() {
         ScoreSystem.addScore(score);
+        while(livesChange>0){
+            LifeSystem.gainLife();
+            livesChange-=1;}
+        while(livesChange<0){
+            LifeSystem.loseLife();
+            livesChange+=1;}
         Application.getBoard().getCurrentScreen().objectList.remove(this);
     }
 }

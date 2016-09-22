@@ -23,7 +23,8 @@ public class DropRandomizer {
      * 20% Silver coin 100p
      * 10% Gold coin 1000p
      * 8% 1 of 4 colored Gems 1500p
-     * 
+     * 2% A heart that gives a life and 1p
+     *
      * @param startX
      * @param startY
      */
@@ -31,27 +32,30 @@ public class DropRandomizer {
         int roll = randomizer.nextInt(500);
         Drop testdrop = null;
         if(0 <= roll && roll < 150){
-            testdrop = new Drop("/sprites/drops/coinBronze.png", startX, startY, 10, 0, 1);
+            testdrop = new Drop("/sprites/drops/coinBronze.png", startX, startY, 0, 1, 10);
         }
         else if(150 <= roll && roll <250 ){
-            testdrop = new Drop("/sprites/drops/coinSilver.png", startX, startY, 100, 0, 1);
+            testdrop = new Drop("/sprites/drops/coinSilver.png", startX, startY, 0, 1, 100);
         }
         else if(250 <= roll && roll <300 ){
-            testdrop = new Drop("/sprites/drops/coinGold.png", startX, startY, 1000, 0, 1);
+            testdrop = new Drop("/sprites/drops/coinGold.png", startX, startY, 0, 1, 1000);
         }
         else if(300 <= roll && roll <310 ){
-            testdrop = new Drop("/sprites/drops/gemBlue.png", startX, startY, 1500, 0, 1);
+            testdrop = new Drop("/sprites/drops/gemBlue.png", startX, startY, 0, 1, 1500);
         }
         else if(310 <= roll && roll <320 ){
-            testdrop = new Drop("/sprites/drops/gemRed.png", startX, startY, 1500, 0, 1);
+            testdrop = new Drop("/sprites/drops/gemRed.png", startX, startY, 0, 1, 1500);
         }
         else if(320 <= roll && roll <330 ){
-            testdrop = new Drop("/sprites/drops/gemYellow.png", startX, startY, 1500, 0, 1);
+            testdrop = new Drop("/sprites/drops/gemYellow.png", startX, startY, 0, 1, 1500);
         }
-        else if(330 <= roll && roll <340 ){
-            testdrop = new Drop("/sprites/drops/gemGreen.png", startX, startY, 1500, 0, 1);
+        else if(330 <= roll && roll <340 ) {
+            testdrop = new Drop("/sprites/drops/gemGreen.png", startX, startY, 0, 1, 1500);
         }
-        if(roll<340){
+        else if(340 <= roll && roll <350 ) {
+            testdrop = new Drop("/sprites/drops/heart.png", startX, startY, 0, 1, 1, 1);
+        }
+        if(testdrop != null){
             Application.getBoard().addObject(testdrop);
         }
 
