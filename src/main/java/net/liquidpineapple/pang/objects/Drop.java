@@ -2,6 +2,8 @@ package net.liquidpineapple.pang.objects;
 
 import lombok.Getter;
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.gui.LifeSystem;
+import net.liquidpineapple.pang.gui.ScoreSystem;
 
 /**
  * Created by Erik on 22-9-2016.

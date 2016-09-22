@@ -2,12 +2,12 @@ package net.liquidpineapple.pang;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.gui.Board;
+import net.liquidpineapple.pang.gui.LifeSystem;
+import net.liquidpineapple.pang.gui.ScoreSystem;
+import net.liquidpineapple.pang.gui.TimeSystem;
+import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.DropRandomizer;
-import net.liquidpineapple.pang.objects.LifeSystem;
-import net.liquidpineapple.pang.objects.ScoreSystem;
-import net.liquidpineapple.pang.objects.TimeSystem;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,16 +18,17 @@ import java.util.Properties;
 
 /**
  * The main application, extends {@link JFrame}
- * @author Jurriaan Den Toonder<jurriaan.toonder@liquidpineapple.net>
+ * @author Jurriaan Den Toonder
  * @date 2016/09/06.
  */
-@Slf4j
 public class Application extends JFrame {
 
     private static String PROPERTIES_LOCATION = "/config.properties";
     private static final int UPDATE_DELAY = 10;
     private static final int DRAW_DELAY = 5;
 
+    // Set to true to prevent loosing lives
+    public static final boolean cheatMode = false;
 
     public static LifeSystem lifeKeeper;
 
@@ -48,7 +49,7 @@ public class Application extends JFrame {
 
     public Application(String propertiesLocation) throws IOException {
         super();
-        log.info("Starting application...");
+        Logger.info("Starting application...");
         InputStream stream = this.getClass().getResourceAsStream(propertiesLocation);
         if (stream != null) {
             properties = new Properties();
@@ -74,7 +75,7 @@ public class Application extends JFrame {
         dropRandomizer = new DropRandomizer();
         board = new Board(width, height);
         add(board);
-        log.info("Initialized with width: " + width + " and height: " + height);
+        Logger.info("Initialized with width: " + width + " and height: " + height);
 
         setTitle(name);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -82,14 +83,14 @@ public class Application extends JFrame {
 
         setVisible(true);
 
-        log.info("Application started successfully!");
+        Logger.info("Application started successfully!");
 
         timeSystem = new TimeSystem();
 
         Runnable doUpdateRunnable = () -> {
             long beforeTime, timeDiff, sleep;
             beforeTime = System.currentTimeMillis();
-            log.info("Update loop is running");
+            Logger.info("Update loop is running");
 
             while(true) {
                 timeDiff = System.currentTimeMillis() - beforeTime;
@@ -107,7 +108,7 @@ public class Application extends JFrame {
                     beforeTime = System.currentTimeMillis();
                     Thread.sleep(sleep);
                 } catch (InterruptedException e) {
-                    log.info("Interrupted: " + e.getMessage());
+                    Logger.info("Interrupted: " + e.getMessage());
                 }
             }
         };
@@ -115,7 +116,7 @@ public class Application extends JFrame {
         Runnable doDrawRunnable = () -> {
             long beforeTime, timeDiff, sleep;
             beforeTime = System.currentTimeMillis();
-            log.info("Draw loop is running");
+            Logger.info("Draw loop is running");
 
             while(true) {
                 timeDiff = System.currentTimeMillis() - beforeTime;
@@ -131,7 +132,7 @@ public class Application extends JFrame {
                     beforeTime = System.currentTimeMillis();
                     Thread.sleep(sleep);
                 } catch (InterruptedException e) {
-                    log.info("Interrupted: " + e.getMessage());
+                    Logger.info("Interrupted: " + e.getMessage());
 
                 }
             }
@@ -148,7 +149,7 @@ public class Application extends JFrame {
                 app = new Application(PROPERTIES_LOCATION);
                 app.start();
             } catch (IOException e) {
-                log.error(e.getMessage(), e);
+                Logger.error(e.getMessage(), e);
             }
         });
     }

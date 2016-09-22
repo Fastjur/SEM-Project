@@ -1,8 +1,8 @@
 package net.liquidpineapple.pang.screens;
 
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
+import net.liquidpineapple.pang.logger.Logger;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
@@ -12,7 +12,6 @@ import java.io.IOException;
  * @author Jaap-Jan
  * @date 13-9-2016.
  */
-@Slf4j
 public class ControlsScreen extends Screen{
     /**
      * Constructor for the ControlsScreen.
@@ -37,7 +36,7 @@ public class ControlsScreen extends Screen{
                 Application.getScoreKeeper().resetScore();
                 Application.getBoard().changeScreen(Level.createFromXML("src/main/resources/levels/level9000.xml"));
             } catch (IOException e) {
-                log.error("Could not load level", e);
+                Logger.error("Could not load level", e);
             }
         }
     }

@@ -1,6 +1,8 @@
 package net.liquidpineapple.pang.objects;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.gui.LifeSystem;
+import net.liquidpineapple.pang.gui.ScoreSystem;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -10,16 +12,15 @@ import static org.junit.Assert.assertEquals;
  */
 public class DropTest {
 
-    private static String PROPERTIES_LOCATION = "/config.properties";
-    LifeSystem lifeSystem = new LifeSystem();
-    Drop Drop1live  = new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 0, 1);
-    Drop Droplose2live  = new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 0, -2);
+    private static final String PROPERTIES_LOCATION = "/config.properties";
+    private Drop Drop1live  = new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 0, 1);
+    private Drop Droplose2live  = new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 0, -2);
 
-    private final double DELTA = 0.01;
+    private static final double DELTA = 0.01;
 
-    float movement = 1;
-    Drop Drop100p  = new Drop("/sprites/drops/heart.png", 0, 0, 2*movement, movement, 100);
-    Drop Drop1000p  = new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 1000);
+    private float movement = 1;
+    private Drop Drop100p  = new Drop("/sprites/drops/heart.png", 0, 0, 2*movement, movement, 100);
+    private Drop Drop1000p  = new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 1000);
 
     @Before
     public void testinit() throws Throwable{
@@ -29,7 +30,7 @@ public class DropTest {
 
     @Test
     public void testlifegain(){
-        int oldlives = lifeSystem.getLives();
+        int oldlives = LifeSystem.getLives();
         Droplose2live.playerCollision();
         assertEquals(oldlives-2, LifeSystem.getLives());
         Drop1live.playerCollision();
