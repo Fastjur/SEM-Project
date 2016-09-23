@@ -1,9 +1,13 @@
 package net.liquidpineapple.pang.screens;
 
 import net.liquidpineapple.pang.Application;
+
+import net.liquidpineapple.pang.gui.Board;
+
 import net.liquidpineapple.pang.gui.NumberToken;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.gui.TimeSystem;
+
 import net.liquidpineapple.pang.objects.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -136,18 +140,45 @@ public class Level extends Screen {
             return doc;
 
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
 
+    @Override
     /**
-     * Method to update the level.
-     * This is were all the doUpdate() methods from the objectList are called.
+     * Update method for the level class.
+     * Checks if the level is completed and if so, it loads a new level.
+     * Updates all components in level when the level is not ended.
      */
     public void doUpdate() {
-        for (GameObject object : new ArrayList<GameObject>(objectList)) {
-            object.doUpdate();
+        boolean levelEnded = true;
+        for(GameObject object: objectList) {
+            if (object instanceof Ball) {
+                levelEnded = false;
+            }
+        }
+
+        if(levelEnded){
+            Board currentBoard = Application.getBoard();
+            currentBoard.setLevelCount(currentBoard.getLevelCount()+1);
+            Screen newScreen = null;
+            String levelLocation= "src/main/resources/levels/level" + currentBoard.getLevelCount() + ".xml";
+            if(createFileReader(levelLocation) != null){
+                try {
+                    newScreen = Level.createFromXML("src/main/resources/levels/level" + currentBoard.getLevelCount() + ".xml");
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else{
+                //set behaviour when all levels have been completed here.
+                newScreen = new WinScreen();
+            }
+            currentBoard.changeScreen(newScreen);
+        } else {
+            for(GameObject object : new ArrayList<GameObject>(objectList)) {
+                object.doUpdate();
+            }
         }
     }
 }
