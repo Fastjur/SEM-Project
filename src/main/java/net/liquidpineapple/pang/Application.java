@@ -140,6 +140,9 @@ public class Application extends JFrame {
 
         new Thread(doUpdateRunnable).start();
         new Thread(doDrawRunnable).start();
+
+        AudioSystem.start();
+        AudioSystem.changeLoopingSound("/sounds/bg.mp3");
     }
 
     public static void main(String[] args) throws Throwable {
