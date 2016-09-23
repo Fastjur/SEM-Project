@@ -3,8 +3,10 @@ package net.liquidpineapple.pang.screens;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.logger.Logger;
+import org.xml.sax.SAXException;
 
 import javax.imageio.ImageIO;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 /**
@@ -34,8 +36,8 @@ public class ControlsScreen extends Screen{
             try {
                 Application.lifeKeeper.resetLives();
                 Application.getScoreKeeper().resetScore();
-                Application.getBoard().changeScreen(Level.createFromXML("src/main/resources/levels/level1.xml"));
-            } catch (IOException e) {
+                Application.getBoard().changeScreen(Level.createFromXML("/levels/level1.xml"));
+            } catch (IOException | ParserConfigurationException | SAXException e) {
                 Logger.error("Could not load level", e);
             }
         }

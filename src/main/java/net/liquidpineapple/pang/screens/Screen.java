@@ -5,8 +5,6 @@ import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import static net.liquidpineapple.pang.screens.Level.createFileReader;
-
 /**
  * Super class for all of the screens.
  * @author Govert de Gans

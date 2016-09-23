@@ -1,24 +1,26 @@
 package net.liquidpineapple.pang.screens;
 
 import net.liquidpineapple.pang.Application;
-
 import net.liquidpineapple.pang.gui.Board;
-
 import net.liquidpineapple.pang.gui.NumberToken;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.gui.TimeSystem;
-
-import net.liquidpineapple.pang.objects.*;
+import net.liquidpineapple.pang.objects.Ball;
+import net.liquidpineapple.pang.objects.BallMovement;
+import net.liquidpineapple.pang.objects.GameObject;
+import net.liquidpineapple.pang.objects.Player;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -38,7 +40,7 @@ public class Level extends Screen {
      * @return - returns a new level.
      * @throws IOException
      */
-    public static Level createFromXML(String xmlFile) throws IOException {
+    public static Level createFromXML(String xmlFile) throws IOException, ParserConfigurationException, SAXException {
 
         Level output = new Level();
         if (createFileReader(xmlFile) != null) {
@@ -130,16 +132,15 @@ public class Level extends Screen {
      * @return - returns a new FileReader if no exception is thrown,
      * else it will return null.
      */
-    public static Document createFileReader(String xmlFile) {
-        try {
-            File inputFile = new File(xmlFile);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
-            doc.getDocumentElement().normalize();
-            return doc;
+    public static Document createFileReader(String xmlFile) throws ParserConfigurationException, SAXException {
+        InputStream in = Level.class.getResourceAsStream(xmlFile);
+        DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
-        } catch (Exception e) {
+        try {
+            return documentBuilder.parse(in);
+        } catch (IOException | IllegalArgumentException e) {
+            //TODO Fix this shit
+            e.printStackTrace();
             return null;
         }
     }
@@ -159,26 +160,37 @@ public class Level extends Screen {
         }
 
         if(levelEnded){
-            Board currentBoard = Application.getBoard();
-            currentBoard.setLevelCount(currentBoard.getLevelCount()+1);
-            Screen newScreen = null;
-            String levelLocation= "src/main/resources/levels/level" + currentBoard.getLevelCount() + ".xml";
-            if(createFileReader(levelLocation) != null){
-                try {
-                    newScreen = Level.createFromXML("src/main/resources/levels/level" + currentBoard.getLevelCount() + ".xml");
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else{
-                //set behaviour when all levels have been completed here.
-                newScreen = new WinScreen();
+            try {
+                nextLevel();
+            } catch (ParserConfigurationException | SAXException e) {
+                e.printStackTrace();
             }
-            currentBoard.changeScreen(newScreen);
         } else {
-            for(GameObject object : new ArrayList<GameObject>(objectList)) {
-                object.doUpdate();
-            }
+            new ArrayList<>(objectList).forEach(GameObject::doUpdate);
         }
+    }
+
+    /**
+     * Attempst to load the new level (WIP)
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     */
+    private void nextLevel() throws ParserConfigurationException, SAXException {
+        Board currentBoard = Application.getBoard();
+        currentBoard.setLevelCount(currentBoard.getLevelCount()+1);
+        Screen newScreen = null;
+        String levelLocation = "/levels/level" + currentBoard.getLevelCount() + ".xml";
+        if(createFileReader(levelLocation) != null){
+            try {
+                newScreen = Level.createFromXML("/levels/level" + currentBoard.getLevelCount() + ".xml");
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else{
+            //set behaviour when all levels have been completed here.
+            newScreen = new WinScreen();
+        }
+        currentBoard.changeScreen(newScreen);
     }
 }
