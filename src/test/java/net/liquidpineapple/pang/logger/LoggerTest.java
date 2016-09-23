@@ -37,10 +37,10 @@ public class LoggerTest {
     @Test
     public void testSetLevel() throws Exception {
         String time = String.valueOf(new Date().getTime());
-        final String EXPECTED_WARN_AND_INFO = "[WARNING] " + time + "\n" +
-                                              "[INFO] " + time + "\n";
-        final String EXPECTED_WARNING = "[WARNING] " + time + "\n";
-        final String EXPECTED_ERROR = "[ERROR] " + time + "\n";
+        final String EXPECTED_WARN_AND_INFO = "[WARNING] " + time + System.lineSeparator() +
+                                              "[INFO] " + time + System.lineSeparator();
+        final String EXPECTED_WARNING = "[WARNING] " + time + System.lineSeparator();
+        final String EXPECTED_ERROR = "[ERROR] " + time + System.lineSeparator();
 
         Logger.setLevel(LoggerTypes.WARNING);
 
@@ -73,7 +73,7 @@ public class LoggerTest {
     @Test
     public void testInfo() throws Exception {
         String log = "We are logging this yay!";
-        String expected = "[INFO] We are logging this yay!\n";
+        String expected = "[INFO] We are logging this yay!" + System.lineSeparator();
         Logger.info(log);
         assertEquals(expected, outContent.toString());
     }
@@ -81,7 +81,7 @@ public class LoggerTest {
     @Test
     public void testWarning() throws Exception {
         String log = "We are logging this yay!";
-        String expected = "[WARNING] We are logging this yay!\n";
+        String expected = "[WARNING] We are logging this yay!" + System.lineSeparator();
         Logger.warning(log);
         assertEquals(expected, outContent.toString());
     }
@@ -89,7 +89,7 @@ public class LoggerTest {
     @Test
     public void testError() throws Exception {
         String log = "We are logging this yay!";
-        String expected = "[ERROR] We are logging this yay!\n";
+        String expected = "[ERROR] We are logging this yay!" + System.lineSeparator();
         Logger.error(log);
         assertEquals(expected, errContent.toString());
     }
@@ -97,7 +97,7 @@ public class LoggerTest {
     @Test
     public void testError1() throws Exception {
         String log = "We are logging this yay!";
-        String expected = "[ERROR] We are logging this yay!\n" +
+        String expected = "[ERROR] We are logging this yay!" + System.lineSeparator() +
             "java.lang.IllegalArgumentException: Some exception";
         Exception exception = new IllegalArgumentException("Some exception");
         Logger.error(log, exception);
