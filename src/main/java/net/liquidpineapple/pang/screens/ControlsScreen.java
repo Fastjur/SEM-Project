@@ -34,7 +34,7 @@ public class ControlsScreen extends Screen{
             try {
                 Application.lifeKeeper.resetLives();
                 Application.getScoreKeeper().resetScore();
-                Application.getBoard().changeScreen(Level.createFromXML("src/main/resources/levels/level9000.xml"));
+                Application.getBoard().changeScreen(Level.createFromXML("src/main/resources/levels/level1.xml"));
             } catch (IOException e) {
                 Logger.error("Could not load level", e);
             }

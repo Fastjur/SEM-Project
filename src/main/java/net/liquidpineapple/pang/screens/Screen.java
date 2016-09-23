@@ -1,13 +1,11 @@
 package net.liquidpineapple.pang.screens;
-
-import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.objects.GameObject;
-import net.liquidpineapple.pang.objects.Player;
-
 import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import static net.liquidpineapple.pang.screens.Level.createFileReader;
 
 /**
  * Super class for all of the screens.
@@ -18,6 +16,7 @@ public abstract class Screen {
 
     public LinkedList<GameObject> objectList;
     protected Image backgroundImage;
+
 
     /**
      * Constructor of the screen.
@@ -39,7 +38,8 @@ public abstract class Screen {
     }
 
     /**
-     * Method that updates all of the object on the screen.
+     * Method to update the level.
+     * This is were all the doUpdate() methods from the objectList are called.
      */
     public void doUpdate() {
         for(GameObject object : new ArrayList<GameObject>(objectList)) {

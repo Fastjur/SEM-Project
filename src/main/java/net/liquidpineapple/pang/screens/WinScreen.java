@@ -5,26 +5,27 @@ import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.gui.NumberToken;
-import net.liquidpineapple.pang.gui.ScoreSystem;
+
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Class that represents the game over screen.
+ * Class that represents the winscreen.
  * @author Jaap-Jan
  * @date 21-9-2016.
  */
-public class GameOverScreen extends Screen {
+
+public class WinScreen extends Screen {
     @Getter
     private static ArrayList<NumberToken> places;
     /**
-     * Constructor for the game over screen.
+     * Constructor for the winscreen.
      */
-    public GameOverScreen() {
+    public WinScreen() {
         try {
-            backgroundImage = ImageIO.read(Level.class.getResource("/sprites/gameover.png"));
+            backgroundImage = ImageIO.read(Level.class.getResource("/sprites/winscreen.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,15 +45,16 @@ public class GameOverScreen extends Screen {
     }
 
     /**
-     * Method that updates the game over screen.
+     * Method that updates the winscreen.
      */
     @Override
     public void doUpdate() {
         super.doUpdate();
         if(InputHandler.isAnyKeyPressed()){
-                Application.lifeKeeper.resetLives();
-                Application.getScoreKeeper().resetScore();
-                Application.getBoard().changeScreen(new MainMenu());
+            Application.getBoard().setLevelCount(1);
+            Application.lifeKeeper.resetLives();
+            Application.getScoreKeeper().resetScore();
+            Application.getBoard().changeScreen(new MainMenu());
         }
     }
 
@@ -60,7 +62,7 @@ public class GameOverScreen extends Screen {
      * Method that makes the score display on the screen.
      */
     public void displayscore() {
-        int calcscore = ScoreSystem.getScore();
+        int calcscore = Application.getScoreKeeper().getScore();
         int i = 0;
 
         while(calcscore>0){
