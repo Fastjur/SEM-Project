@@ -21,6 +21,16 @@
                 <picUrl>https://lh3.googleusercontent.com/-UwKyJR2q-lY/AAAAAAAAAAI/AAAAAAAAKsM/3icQQYIgnCg/s0/photo.jpg</picUrl>
             </properties>
         </developer>
+        <developer>
+            <name>Tim Rietveld</name>
+            <organization>Liquidpineapple.net</organization>
+            <email>tim.rietveld@box.nl</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>Europe/Amsterdam</timezone>
+        </developer>
+
 
     </developers>
 
