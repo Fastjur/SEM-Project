@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.objects;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.logger.Logger;
 
 import java.util.Random;
 
@@ -12,6 +13,7 @@ public class DropRandomizer {
     private Random randomizer;
 
     public DropRandomizer(){
+        Logger.info("Randomizer starting.");
         randomizer = new Random();
     }
 

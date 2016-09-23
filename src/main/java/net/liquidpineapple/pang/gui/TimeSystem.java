@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
+import net.liquidpineapple.pang.logger.Logger;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -36,6 +37,8 @@ public class TimeSystem {
     };
 
     public TimeSystem() {
+
+        Logger.info("TimeSystem Starting.");
         interval = new Timer(1000, timerAction);
         interval.setRepeats(true);
     }

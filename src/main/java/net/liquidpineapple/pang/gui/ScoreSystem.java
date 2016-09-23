@@ -2,6 +2,8 @@ package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.logger.Logger;
+
 import java.util.ArrayList;
 
 /**
@@ -20,6 +22,7 @@ public class ScoreSystem {
      */
     public ScoreSystem() {
         score = 0;
+        Logger.info("ScoreSystem starting.");
         //These are from right to left.
         Places = new ArrayList<>(9);
         Places.add(new NumberToken(261,5));
