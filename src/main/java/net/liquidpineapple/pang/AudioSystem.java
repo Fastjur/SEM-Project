@@ -51,7 +51,7 @@ public class AudioSystem {
     }
 
     public static void changeLoopingSound(String newLoopingSound) {
-        if (!loopingSound.equals("") && isRunning) {
+        if (!loopingSound.equals("") && isRunning && player != null) {
             player.close();
         }
         loopingSound = newLoopingSound;
