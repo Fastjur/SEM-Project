@@ -1,19 +1,7 @@
 package net.liquidpineapple.pang.screens;
-
-import net.liquidpineapple.pang.Application;
-import net.liquidpineapple.pang.gui.Board;
-import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.GameObject;
-import net.liquidpineapple.pang.objects.Player;
-import org.w3c.dom.Document;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
 import java.awt.image.ImageObserver;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 

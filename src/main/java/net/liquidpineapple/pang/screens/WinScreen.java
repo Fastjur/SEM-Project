@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.screens;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
  */
 
 public class WinScreen extends Screen {
+    @Getter
     private static ArrayList<NumberToken> places;
     /**
      * Constructor for the winscreen.

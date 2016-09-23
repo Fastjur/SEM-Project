@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.liquidpineapple.pang.Application;
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 public class ScoreSystem {
 
     @Getter
+    @Setter
     private static int score;
     @Getter
     private static ArrayList<NumberToken> Places;

@@ -99,4 +99,13 @@ public class PlayerTest {
         Application.getBoard().addObject(ball);
         assertTrue(player.collisionPlayer());
     }
+
+    @Test
+    public void testDoUpdate() throws Exception {
+        Application app = new Application(PROPERTIES_LOCATION);
+        app.start();
+        player.setXPos(100);
+        player.setYPos(100);
+
+    }
 }

@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.gui;
 
+import lombok.Getter;
 import net.liquidpineapple.pang.objects.GameObject;
 
 /**
@@ -7,6 +8,7 @@ import net.liquidpineapple.pang.objects.GameObject;
  */
 public class NumberToken extends GameObject {
 
+    @Getter
     private int currentnumber;
     private static final String textureLocation0 = "/sprites/numbers/hud_0.png";
     private static final String textureLocation1 = "/sprites/numbers/hud_1.png";
