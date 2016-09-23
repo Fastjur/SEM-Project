@@ -95,6 +95,7 @@ public class Player extends GameObject {
 
                 if(playerPos - object.getXPos() >= 0 && playerPos - object.getXPos() <= object.getWidth()) {
                     if(object.getYPos() + object.getHeight() >= this.getYPos()) {
+                        Logger.info("Player Collided with object:" + object);
                         if(object instanceof Drop) {
                             Drop drop = (Drop) object;
                             drop.playerCollision();

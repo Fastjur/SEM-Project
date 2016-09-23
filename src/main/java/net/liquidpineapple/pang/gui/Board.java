@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import net.liquidpineapple.pang.InputHandler;
+import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.screens.MainMenu;
 import net.liquidpineapple.pang.screens.Screen;
@@ -55,6 +56,7 @@ public class Board extends JPanel {
 
       //  currentScreen = Level.createFromXML("src/main/resources/levels/level1.xml");
         currentScreen = new MainMenu();
+        Logger.info("MainMenu Created.");
     }
 
     /**
@@ -63,6 +65,7 @@ public class Board extends JPanel {
      */
     public void changeScreen(Screen screen){
         currentScreen = screen;
+        Logger.info("Screen changed to:" + screen);
         this.repaint();
     }
 

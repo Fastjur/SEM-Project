@@ -2,6 +2,7 @@ package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.screens.GameOverScreen;
 
@@ -24,6 +25,7 @@ public class LifeSystem extends GameObject {
      */
     public LifeSystem(){
         super(textureH3,636,5);
+        Logger.info("LifeSystem starting.");
         lives = 3;
     }
 
