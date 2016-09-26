@@ -30,8 +30,7 @@ public abstract class GameObject {
         this.xPos = startX;
         this.yPos = startY;
         changeImage(textureLocation);
-        Logger.info("GameObject registered at (" + xPos + ", " + yPos + ") with width " + width +
-            " and height " + height);
+        Logger.info("GameObject registered at (" + xPos + ", " + yPos + ") with width " + width + " and height " + height);
     }
 
     public void changeImage(String textureLocation){
@@ -62,7 +61,7 @@ public abstract class GameObject {
         return new Ellipse2D.Double(xPos, yPos, width, height);
     }
 
-    public void setPos(int xPos, int yPos) {
+    public void setPos(double xPos, double yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
         Logger.info("Set position for " + this.toString() + "to (" + xPos + "," + yPos + ")");

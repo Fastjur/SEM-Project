@@ -3,6 +3,9 @@ package net.liquidpineapple.pang.objects;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -11,14 +14,46 @@ import java.util.Random;
 public class DropRandomizer {
 
     private Random randomizer;
+    private final int bronzeNum = 30;
+    private final int silverNum = 20;
+    private final int goldNum = 10;
+    private final int gemNum = 8;
+    private final int heartNum = 2;
+    private final int nullNum = 100-heartNum-gemNum-goldNum-silverNum-bronzeNum;
+
+    private ArrayList<Drop> randomList;
+
 
     public DropRandomizer(){
         Logger.info("Randomizer starting.");
+        randomList = new ArrayList<>();
         randomizer = new Random();
+
+        for(int i=0 ;i<bronzeNum; i++){
+            randomList.add(new Drop("/sprites/drops/coinBronze.png", 0, 0, 0, 1, 10));
+        }
+        for(int i=0 ;i<silverNum; i++){
+            randomList.add(new Drop("/sprites/drops/coinSilver.png", 0, 0, 0, 1, 100));
+        }
+        for(int i=0 ;i<goldNum; i++){
+            randomList.add(new Drop("/sprites/drops/coinGold.png", 0, 0, 0, 1, 1000));
+        }
+        for(int i=0 ;i<(gemNum/4); i++) {
+            randomList.add(new Drop("/sprites/drops/gemBlue.png", 0, 0, 0, 1, 1500));
+            randomList.add(new Drop("/sprites/drops/gemRed.png", 0, 0, 0, 1, 1500));
+            randomList.add(new Drop("/sprites/drops/gemYellow.png", 0, 0, 0, 1, 1500));
+            randomList.add(new Drop("/sprites/drops/gemGreen.png", 0, 0, 0, 1, 1500));
+        }
+        for (int i = 0; i < heartNum; i++) {
+            randomList.add(new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 1, 1));
+        }
+        for (int i = 0; i < nullNum; i++) {
+            randomList.add(null);
+        }
     }
 
     /**
-     * Rolls for an drop and if it does roll postive creates that drop at startX startY.
+     * Rolls for a drop and if it does roll positive creates that drop at startX startY.
      *
      * Currently set up to:
      * 30% Bronze coin 10p
@@ -27,37 +62,17 @@ public class DropRandomizer {
      * 8% 1 of 4 colored Gems 1500p
      * 2% A heart that gives a life and 1p
      *
-     * @param startX
-     * @param startY
+     * @param startX Start position X
+     * @param startY Start position Y
      */
     public void rollRandomdrop(double startX, double startY) {
-        int roll = randomizer.nextInt(100);
-        Drop randomDrop  = null;
-        if(0 <= roll && roll < 30){
-             randomDrop  = new Drop("/sprites/drops/coinBronze.png", startX, startY, 0, 1, 10);
-        }
-        else if(30 <= roll && roll <50 ){
-             randomDrop  = new Drop("/sprites/drops/coinSilver.png", startX, startY, 0, 1, 100);
-        }
-        else if(50 <= roll && roll <60 ){
-             randomDrop  = new Drop("/sprites/drops/coinGold.png", startX, startY, 0, 1, 1000);
-        }
-        else if(60 <= roll && roll <62 ){
-             randomDrop  = new Drop("/sprites/drops/gemBlue.png", startX, startY, 0, 1, 1500);
-        }
-        else if(62 <= roll && roll <64 ){
-             randomDrop  = new Drop("/sprites/drops/gemRed.png", startX, startY, 0, 1, 1500);
-        }
-        else if(64 <= roll && roll <66 ){
-             randomDrop  = new Drop("/sprites/drops/gemYellow.png", startX, startY, 0, 1, 1500);
-        }
-        else if(66 <= roll && roll <68 ) {
-             randomDrop  = new Drop("/sprites/drops/gemGreen.png", startX, startY, 0, 1, 1500);
-        }
-        else if(68 <= roll && roll <70 ) {
-             randomDrop  = new Drop("/sprites/drops/heart.png", startX, startY, 0, 1, 1, 1);
-        }
+
+        int length = randomList.size();
+        int roll = randomizer.nextInt(length);
+        Drop randomDrop = randomList.get(roll);
+
         if( randomDrop  != null){
+            randomDrop.setPos(startX, startY);
             Application.getBoard().addObject( randomDrop );
         }
     }
