@@ -18,6 +18,9 @@ public class TimeSystem {
     private static Timer interval;
 
     @Getter
+    private static TimeSystem instance = new TimeSystem();
+
+    @Getter
     private static ArrayList<NumberToken> timePlaces;
 
     private ActionListener timerAction = new ActionListener()
@@ -36,8 +39,10 @@ public class TimeSystem {
         }
     };
 
-    public TimeSystem() {
-
+    /**
+     * Singleton constructor
+     */
+    private TimeSystem() {
         Logger.info("TimeSystem Starting.");
         interval = new Timer(1000, timerAction);
         interval.setRepeats(true);

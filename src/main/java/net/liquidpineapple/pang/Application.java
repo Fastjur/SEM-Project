@@ -42,9 +42,6 @@ public class Application extends JFrame {
     @Setter
     private static ScoreSystem scoreKeeper;
 
-    @Getter
-    private static TimeSystem timeSystem;
-
     private Properties properties;
 
     public Application(String propertiesLocation) throws IOException {
@@ -85,7 +82,7 @@ public class Application extends JFrame {
 
         Logger.info("Application started successfully!");
 
-        timeSystem = new TimeSystem();
+        TimeSystem.getInstance();
 
         Runnable doUpdateRunnable = () -> {
             long beforeTime, timeDiff, sleep;
