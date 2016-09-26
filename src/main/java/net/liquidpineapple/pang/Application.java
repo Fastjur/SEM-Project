@@ -36,9 +36,6 @@ public class Application extends JFrame {
     private static Board board;
 
     @Getter
-    private static DropRandomizer dropRandomizer;
-
-    @Getter
     @Setter
     private static ScoreSystem scoreKeeper;
 
@@ -69,7 +66,7 @@ public class Application extends JFrame {
 
         scoreKeeper = new ScoreSystem();
         lifeSystem = LifeSystem.getInstance();
-        dropRandomizer = new DropRandomizer();
+        DropRandomizer.getInstance();
         board = new Board(width, height);
         add(board);
         Logger.info("Initialized with width: " + width + " and height: " + height);
