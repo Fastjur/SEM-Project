@@ -64,7 +64,7 @@ public class Application extends JFrame {
         setResizable(false);
         setSize(width, height);
 
-        scoreKeeper = new ScoreSystem();
+        scoreKeeper = ScoreSystem.getInstance();
         lifeSystem = LifeSystem.getInstance();
         DropRandomizer.getInstance();
         board = new Board();
@@ -149,5 +149,14 @@ public class Application extends JFrame {
                 Logger.error(e.getMessage(), e);
             }
         });
+    }
+
+    /**
+     * Close the application
+     */
+    public void close() {
+        Logger.info("Shutting down. Goodbye!");
+        AudioSystem.stop();
+        dispose();
     }
 }

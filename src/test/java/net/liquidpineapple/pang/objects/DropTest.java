@@ -3,6 +3,7 @@ package net.liquidpineapple.pang.objects;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -22,9 +23,11 @@ public class DropTest {
     private Drop Drop100p  = new Drop("/sprites/drops/heart.png", 0, 0, 2*movement, movement, 100);
     private Drop Drop1000p  = new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 1000);
 
+    private Application app;
+
     @Before
-    public void testinit() throws Throwable{
-        Application app = new Application(PROPERTIES_LOCATION);
+    public void setUp() throws Exception {
+        app = new Application(PROPERTIES_LOCATION);
         app.start();
     }
 
@@ -51,6 +54,11 @@ public class DropTest {
         Drop100p.doUpdate();
         assertEquals(2*movement,Drop100p.getXPos(), DELTA);
         assertEquals(movement,Drop100p.getYPos(), DELTA);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        app.close();
     }
 
 }

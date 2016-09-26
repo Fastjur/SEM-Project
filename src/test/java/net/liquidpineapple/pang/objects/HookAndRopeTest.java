@@ -1,9 +1,11 @@
 package net.liquidpineapple.pang.objects;
 
+import net.liquidpineapple.pang.Application;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -12,16 +14,22 @@ import static org.junit.Assert.assertEquals;
  */
 public class HookAndRopeTest {
 
-    HookAndRope hookAndRope;
+    private static final String PROPERTIES_LOCATION = "/config.properties";
+
+    private HookAndRope hookAndRope;
     private static final int XCOORD = 400;
     private static final int MAXY = 300;
-    private final double DELTA = 0.01;
+    private final double DELTA = 0.0;
+
+    private Application app;
 
     /**
      * Setup new HookAndRope.
      */
     @Before
-    public void setUp(){
+    public void setUp() throws Exception {
+        app = new Application(PROPERTIES_LOCATION);
+        app.start();
         hookAndRope = new HookAndRope(XCOORD, MAXY);
     }
 
@@ -46,23 +54,22 @@ public class HookAndRopeTest {
         assertEquals(597, hookAndRope.getYPos(), DELTA);
     }
 
-    /*
+    /**
      *Tests the behaviour of the move method when the rope collides with the maximum height.
-     * TODO: MOCK THIS TEST TO PREVENT FAILURE.
-
+     */
     @Test
     public void hitTopMoveTest() throws Exception {
         HookAndRope rope = new HookAndRope(500, 584);
-        assertEquals(rope.getYPos(), 600);
+        assertEquals(600, rope.getYPos(), DELTA);
         rope.move();
-        assertEquals(rope.getYPos(), 585);
+        assertEquals(597, rope.getYPos(), DELTA);
         rope.move();
         assertFalse(Application.getBoard().containsObject(rope));
-
     }
-     */
+
     @After
     public void tearDown(){
         hookAndRope = null;
+        app.close();
     }
 }

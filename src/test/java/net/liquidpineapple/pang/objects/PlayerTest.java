@@ -2,6 +2,7 @@ package net.liquidpineapple.pang.objects;
 
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.screens.Screen;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,20 +18,27 @@ import static org.junit.Assert.assertTrue;
  */
 public class PlayerTest {
 
+    private Application app;
+
     private static final int startX = 15;
     private static final int startY = 20;
-    private static final int max = 50;
 
     private static final String defaultTexture = "/sprites/no-texture.png";
     private final double DELTA = 0.01;
     private static String PROPERTIES_LOCATION = "/config.properties";
 
-
     private Player player;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Throwable {
+        app = new Application(PROPERTIES_LOCATION);
+        app.start();
         player = new Player(startX, startY);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        app.close();
     }
 
     @Test
@@ -63,8 +71,6 @@ public class PlayerTest {
 
     @Test
     public void testMoveLEFT() throws Exception {
-        Application app = new Application(PROPERTIES_LOCATION);
-        app.start();
         player.setDx(-DELTA);
         player.move();
         System.out.println(startX-DELTA);
@@ -73,8 +79,6 @@ public class PlayerTest {
 
     @Test
     public void testMoveRIGHT() throws Exception {
-        Application app = new Application(PROPERTIES_LOCATION);
-        app.start();
         player.setDx(DELTA);
         player.move();
         assertEquals(player.getXPos(), startX+DELTA, 0.001);
@@ -82,8 +86,6 @@ public class PlayerTest {
 
     @Test
     public void testMoveNODIRECTION() throws Exception {
-        Application app = new Application(PROPERTIES_LOCATION);
-        app.start();
         player.setDx(0);
         player.move();
         assertEquals(player.getXPos(), startX, 0.0000001);
@@ -91,8 +93,6 @@ public class PlayerTest {
 
     @Test
     public void testCollision() throws Exception {
-        Application app = new Application(PROPERTIES_LOCATION);
-        app.start();
         player.setXPos(100);
         player.setYPos(100);
         Ball ball = new Ball(100, 100, BallMovement.LEFT_MOVEMENT, 1);
@@ -102,8 +102,6 @@ public class PlayerTest {
 
     @Test
     public void testDoUpdate() throws Exception {
-        Application app = new Application(PROPERTIES_LOCATION);
-        app.start();
         player.setXPos(100);
         player.setYPos(100);
 

@@ -1,6 +1,9 @@
 package net.liquidpineapple.pang.screens;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.gui.ScoreSystem;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,27 +12,37 @@ import static org.junit.Assert.*;
  * Created by Tim on 23-9-2016.
  */
 public class GameOverScreenTest {
-    private static String PROPERTIES_LOCATION = "/config.properties";
+
+    private Application app;
+    private static final String PROPERTIES_LOCATION = "/config.properties";
+
+    @Before
+    public void setUp() throws Exception {
+        app = new Application(PROPERTIES_LOCATION);
+        app.start();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        app.close();
+    }
 
     @Test
     public void GameOverScreen() throws Exception {
-        Application app = new Application(PROPERTIES_LOCATION);
-        app.start();
         GameOverScreen gameOverScreen = new GameOverScreen();
-        app.getBoard().changeScreen(gameOverScreen);
+        Application.getBoard().changeScreen(gameOverScreen);
         assertFalse(gameOverScreen.objectList.isEmpty());
     }
 
     @Test
     public void testDisplayScore() throws Exception {
-        Application app = new Application(PROPERTIES_LOCATION);
-        app.start();
         GameOverScreen gameOverScreen = new GameOverScreen();
-        app.getBoard().changeScreen(gameOverScreen);
-        Application.getScoreKeeper().setScore(10);
+        Application.getBoard().changeScreen(gameOverScreen);
+        ScoreSystem.setScore(10);
         gameOverScreen.displayscore();
-        assertEquals(gameOverScreen.getPlaces().get(0).getcurrentnumber(), 0);
-        assertEquals(gameOverScreen.getPlaces().get(1).getcurrentnumber(), 1);
+
+        assertEquals(0, GameOverScreen.getPlaces().get(0).getcurrentnumber());
+        assertEquals(1, GameOverScreen.getPlaces().get(1).getcurrentnumber());
     }
 
 
