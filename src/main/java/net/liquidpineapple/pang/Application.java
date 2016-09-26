@@ -30,7 +30,7 @@ public class Application extends JFrame {
     // Set to true to prevent loosing lives
     public static final boolean cheatMode = false;
 
-    public static LifeSystem lifeKeeper;
+    public static LifeSystem lifeSystem;
 
     @Getter
     private static Board board;
@@ -68,7 +68,7 @@ public class Application extends JFrame {
         setSize(width, height);
 
         scoreKeeper = new ScoreSystem();
-        lifeKeeper = new LifeSystem();
+        lifeSystem = LifeSystem.getInstance();
         dropRandomizer = new DropRandomizer();
         board = new Board(width, height);
         add(board);
@@ -100,7 +100,7 @@ public class Application extends JFrame {
                 try {
                     board.doUpdate();
                     scoreKeeper.displayscore();
-                    lifeKeeper.updateLifes();
+                    lifeSystem.updateLifes();
 
                     beforeTime = System.currentTimeMillis();
                     Thread.sleep(sleep);

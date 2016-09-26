@@ -65,7 +65,8 @@ public class Level extends Screen {
         for (NumberToken token : ScoreSystem.getPlaces()) {
             output.objectList.add(token);
         }
-        output.objectList.add(Application.lifeKeeper);
+        Application.lifeSystem.updateLifes();
+        output.objectList.add(Application.lifeSystem);
         return output;
     }
 
