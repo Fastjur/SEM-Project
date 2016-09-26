@@ -22,6 +22,7 @@ public class LifeSystem extends GameObject {
     private int lastLives;
 
     @Getter
+    @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
     private static LifeSystem instance = new LifeSystem();
 
     /**

@@ -80,11 +80,9 @@ public class Player extends GameObject {
             }
         }
 
-        if(collisionPlayer()){
-            if(!isHit && !Application.cheatMode) {
-                LifeSystem.loseLife();
-                isHit = true;
-            }
+        if (collisionPlayer() && !isHit && !Application.cheatMode) {
+            LifeSystem.loseLife();
+            isHit = true;
         }
     }
 
@@ -93,17 +91,18 @@ public class Player extends GameObject {
             if(object instanceof Ball || object instanceof Drop) {
                 double playerPos = this.getXPos() + (this.getImage().getWidth(null))/2;
 
-                if(playerPos - object.getXPos() >= 0 && playerPos - object.getXPos() <= object.getWidth()) {
-                    if(object.getYPos() + object.getHeight() >= this.getYPos()) {
-                        Logger.info("Player Collided with object:" + object);
-                        if(object instanceof Drop) {
-                            Drop drop = (Drop) object;
-                            drop.playerCollision();
-                            return false;
-                        } else {
-                            return true;
-                        }
+                if (playerPos - object.getXPos() >= 0 && playerPos - object.getXPos() <= object.getWidth() &&
+                    object.getYPos() + object.getHeight() >= this.getYPos()) {
+
+                    Logger.info("Player Collided with object:" + object);
+                    if (object instanceof Drop) {
+                        Drop drop = (Drop) object;
+                        drop.playerCollision();
+                        return false;
+                    } else {
+                        return true;
                     }
+
                 }
             }
         }

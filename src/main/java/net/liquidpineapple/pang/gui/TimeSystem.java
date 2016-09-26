@@ -18,6 +18,7 @@ public class TimeSystem {
     private static Timer interval;
 
     @Getter
+    @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
     private static TimeSystem instance = new TimeSystem();
 
     @Getter

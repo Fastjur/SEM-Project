@@ -12,6 +12,7 @@ import java.util.Random;
 public class DropRandomizer {
 
     @Getter
+    @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
     private static DropRandomizer instance = new DropRandomizer();
 
     private static Random randomizer;
