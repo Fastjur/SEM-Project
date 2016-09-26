@@ -59,6 +59,7 @@ public class LifeSystem extends GameObject {
 
                     Application.getBoard().setLevelCount(1);
                     Application.getBoard().changeScreen(new GameOverScreen());
+                    TimeSystem.stop();
 
                     break;
             }

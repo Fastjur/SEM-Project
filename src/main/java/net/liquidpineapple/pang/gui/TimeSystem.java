@@ -71,4 +71,11 @@ public class TimeSystem {
         }
     }
 
+    /**
+     * Stops the timer from ticking. The time will stay at the same value
+     */
+    public static void stop() {
+        interval.stop();
+    }
+
 }
