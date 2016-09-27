@@ -27,7 +27,7 @@ public class Drop extends GameObject {
      * @param movY            as horizontal movement every update
      */
     public Drop(String textureLocation, double startX, double startY, double movX, double movY, int score, int livesChange){
-        super(textureLocation, startX, startY);g
+        super(textureLocation, startX, startY);
         this.score = score;
         this.movY = movY;
         this.movX = movX;
