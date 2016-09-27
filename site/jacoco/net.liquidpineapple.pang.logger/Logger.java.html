@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Logger.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sem-project</a> &gt; <a href="index.source.html" class="el_package">net.liquidpineapple.pang.logger</a> &gt; <span class="el_source">Logger.java</span></div><h1>Logger.java</h1><pre class="source lang-java linenums">package net.liquidpineapple.pang.logger;
+
+import lombok.Getter;
+
+/**
+ * The logger class containing static methods to log out to the console.
+ * @author Jurriaan Den Toonder
+ * @date 2016/09/21.
+ */
+public class Logger {
+
+<span class="nc" id="L12">    @Getter</span>
+    @SuppressWarnings(&quot;PMD.UnusedPrivateField&quot;) // It is used in the generated getter method
+<span class="fc" id="L14">    private static Logger instance = new Logger();</span>
+
+    private static int level;
+
+    /**
+     * Singleton constructor
+     */
+<span class="fc" id="L21">    private Logger(){}</span>
+
+    /**
+     * Set the level at which the logger should print to the console.
+     * @param type {@link LoggerTypes} level of logger.
+     */
+    public static void setLevel(LoggerTypes type) {
+<span class="fc" id="L28">        level = type.getPriority();</span>
+<span class="fc" id="L29">    }</span>
+
+    /**
+     * Prints to the console using the correct prefix, message and the stack trace.
+     * Synchronized to prevent stack traces from getting messed up.
+     * @param type {@link LoggerTypes} type of the message to log.
+     * @param message {@link String}, readable message to print to the log
+     * @param e {@link Exception} the exception that occurred to print the stack trace from.
+     */
+    private synchronized static void print(LoggerTypes type, String message, Exception e) {
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">        if (type.getPriority() &gt;= level) {</span>
+<span class="fc" id="L40">            print(type, message);</span>
+<span class="fc" id="L41">            e.printStackTrace();</span>
+        }
+<span class="fc" id="L43">    }</span>
+
+    /**
+     * Prints to the console using the correct prefix and message.
+     * @param type {@link LoggerTypes} type of the message to log.
+     * @param message {@link String}, readable message to print to the log
+     */
+    private static void print(LoggerTypes type, String message) {
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (type.getPriority() &gt;= level) {</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">            if (type.equals(LoggerTypes.ERROR)) {</span>
+<span class="fc" id="L53">                System.err.println(type.getPrefix() + &quot; &quot; + message);</span>
+            } else {
+<span class="fc" id="L55">                System.out.println(type.getPrefix() + &quot; &quot; + message);</span>
+            }
+        }
+<span class="fc" id="L58">    }</span>
+
+    /**
+     * Logs to the console using level info.
+     * @param message {@link String}, readable message to print to the log
+     */
+    public static void info(String message) {
+<span class="fc" id="L65">        print(LoggerTypes.INFO, message);</span>
+<span class="fc" id="L66">    }</span>
+
+    /**
+     * Logs to the console using level warning.
+     * @param message {@link String}, readable message to print to the log
+     */
+    public static void warning(String message) {
+<span class="fc" id="L73">        print(LoggerTypes.WARNING, message);</span>
+<span class="fc" id="L74">    }</span>
+
+    /**
+     * Logs to the console using level error and prints out the stack trace of the exception
+     * @param message {@link String}, readable message to print to the log
+     * @param e {@link Exception} the exception that occurred to print the stack trace from.
+     */
+    public static void error(String message, Exception e) {
+<span class="fc" id="L82">        print(LoggerTypes.ERROR, message, e);</span>
+<span class="fc" id="L83">    }</span>
+
+    /**
+     * Logs to the console using level error.
+     * @param message {@link String}, readable message to print to the log
+     */
+    public static void error(String message) {
+<span class="fc" id="L90">        print(LoggerTypes.ERROR, message);</span>
+<span class="fc" id="L91">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

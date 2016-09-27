@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Level.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sem-project</a> &gt; <a href="index.source.html" class="el_package">net.liquidpineapple.pang.screens</a> &gt; <span class="el_source">Level.java</span></div><h1>Level.java</h1><pre class="source lang-java linenums">package net.liquidpineapple.pang.screens;
+
+import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.gui.Board;
+import net.liquidpineapple.pang.gui.NumberToken;
+import net.liquidpineapple.pang.gui.ScoreSystem;
+import net.liquidpineapple.pang.gui.TimeSystem;
+import net.liquidpineapple.pang.objects.Ball;
+import net.liquidpineapple.pang.objects.BallMovement;
+import net.liquidpineapple.pang.objects.GameObject;
+import net.liquidpineapple.pang.objects.Player;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.imageio.ImageIO;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+/**
+ * @author Govert de Gans
+ * @date 2016-09-07
+ */
+public class Level extends Screen {
+
+<span class="fc" id="L32">    public Level() {</span>
+<span class="fc" id="L33">    }</span>
+
+    /**
+     * Method that parses a XML-file into a level.
+     * @param xmlFile - path/filename of the XML-file that should be parsed.
+     * @return - returns a new level.
+     * @throws IOException
+     */
+    public static Level createFromXML(String xmlFile) throws IOException, ParserConfigurationException, SAXException {
+
+<span class="fc" id="L43">        Level output = new Level();</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if (createFileReader(xmlFile) != null) {</span>
+<span class="nc" id="L45">            Document doc = createFileReader(xmlFile);</span>
+<span class="nc" id="L46">            String background_path = &quot;/sprites/&quot; + doc.getElementsByTagName(&quot;background&quot;).item(0).getTextContent();</span>
+<span class="nc" id="L47">            output.backgroundImage = ImageIO.read(Level.class.getResource(background_path));</span>
+
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            for (Ball ball : loadBalls(doc.getElementsByTagName(&quot;ball&quot;))) {</span>
+<span class="nc" id="L50">                output.objectList.add(ball);</span>
+<span class="nc" id="L51">            }</span>
+
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            for (Player player : loadPlayer(doc.getElementsByTagName(&quot;player&quot;))) {</span>
+<span class="nc" id="L54">                output.objectList.add(player);</span>
+<span class="nc" id="L55">            }</span>
+<span class="nc" id="L56">            TimeSystem.resetTime(loadTime(doc));</span>
+
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            for (NumberToken token: TimeSystem.getTimePlaces()){</span>
+<span class="nc" id="L59">                output.objectList.add(token);</span>
+<span class="nc" id="L60">            }</span>
+
+        }
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        for (NumberToken token : ScoreSystem.getPlaces()) {</span>
+<span class="fc" id="L64">            output.objectList.add(token);</span>
+<span class="fc" id="L65">        }</span>
+<span class="fc" id="L66">        Application.lifeSystem.updateLifes();</span>
+<span class="fc" id="L67">        output.objectList.add(Application.lifeSystem);</span>
+<span class="fc" id="L68">        return output;</span>
+    }
+
+    /**
+     * Method that reads the balls from the XML-file and parses them into Ball objects.
+     * @param ballList - NodeList of the different balls to be parsed.
+     * @return - Arraylist with Ball objects.
+     */
+    public static ArrayList&lt;Ball&gt; loadBalls(NodeList ballList){
+<span class="nc" id="L77">        ArrayList&lt;Ball&gt; ballArray = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        for (int i = 0; i &lt; ballList.getLength(); i++) {</span>
+<span class="nc" id="L80">            Node ballNode = ballList.item(i);</span>
+<span class="nc" id="L81">            Element ballElement = (Element) ballNode;</span>
+
+<span class="nc" id="L83">            int int_Xpos = Integer.parseInt(ballElement.getElementsByTagName(&quot;x&quot;).item(0).getTextContent());</span>
+<span class="nc" id="L84">            int int_Ypos = Integer.parseInt(ballElement.getElementsByTagName(&quot;y&quot;).item(0).getTextContent());</span>
+
+<span class="nc" id="L86">            int size = Integer.parseInt(ballElement.getElementsByTagName(&quot;size&quot;).item(0)</span>
+<span class="nc" id="L87">                .getTextContent());</span>
+
+<span class="nc" id="L89">            String direction = ballElement.getElementsByTagName(&quot;direction&quot;).item(0).getTextContent();</span>
+<span class="nc" id="L90">            BallMovement ballMovement = BallMovement.valueOf(direction);</span>
+<span class="nc" id="L91">            Ball ball = new Ball(int_Xpos, int_Ypos, ballMovement, size);</span>
+<span class="nc" id="L92">            ballArray.add(ball);</span>
+        }
+<span class="nc" id="L94">        return ballArray;</span>
+    }
+
+    /**
+     * Method that reads the players from the XML-file and parses them into Player objects.
+     * Simular to the loadBalls method
+     * @param playerlist - NodeList of the players that should be parsed.
+     * @return - ArrayList of Player objects.
+     */
+    public static ArrayList&lt;Player&gt; loadPlayer(NodeList playerlist){
+<span class="nc" id="L104">        ArrayList&lt;Player&gt; playerArray = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        for (int i = 0; i &lt; playerlist.getLength(); i++){</span>
+<span class="nc" id="L106">            Node playernode = playerlist.item(i);</span>
+<span class="nc" id="L107">            Element playerElement = (Element) playernode;</span>
+
+<span class="nc" id="L109">            int int_Xpos = Integer.parseInt(playerElement.getElementsByTagName(&quot;x&quot;).item(0).getTextContent());</span>
+<span class="nc" id="L110">            int int_Ypos = Integer.parseInt(playerElement.getElementsByTagName(&quot;y&quot;).item(0).getTextContent());</span>
+
+<span class="nc" id="L112">            Player player = new Player(int_Xpos, int_Ypos);</span>
+<span class="nc" id="L113">            playerArray.add(player);</span>
+        }
+<span class="nc" id="L115">        return playerArray;</span>
+    }
+
+    /**
+     * method to read time form an XML-file
+     * @param doc {@link Document} to be read from
+     * @return - returns an int contained in the {@code &lt;time&gt;&lt;/time&gt;}
+     */
+    public static int loadTime(Document doc){
+<span class="nc" id="L124">        return Integer.parseInt(doc.getElementsByTagName(&quot;time&quot;).item(0).getTextContent());</span>
+    }
+
+    /**
+     * Method to create a FileReader to read the XML-file.
+     * @param xmlFile - Path/name of the XML-file to be parsed.
+     * @return - returns a new FileReader if no exception is thrown,
+     * else it will return null.
+     */
+    public static Document createFileReader(String xmlFile) throws ParserConfigurationException, SAXException {
+<span class="fc" id="L134">        InputStream in = Level.class.getResourceAsStream(xmlFile);</span>
+<span class="fc" id="L135">        DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();</span>
+
+        try {
+<span class="fc" id="L138">            return documentBuilder.parse(in);</span>
+<span class="fc" id="L139">        } catch (IOException | IllegalArgumentException e) {</span>
+            //TODO Fix this shit
+<span class="fc" id="L141">            e.printStackTrace();</span>
+<span class="fc" id="L142">            return null;</span>
+        }
+    }
+
+    @Override
+    /**
+     * Update method for the level class.
+     * Checks if the level is completed and if so, it loads a new level.
+     * Updates all components in level when the level is not ended.
+     */
+    public void doUpdate() {
+<span class="fc" id="L153">        boolean levelEnded = true;</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">        for(GameObject object: objectList) {</span>
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">            if (object instanceof Ball) {</span>
+<span class="nc" id="L156">                levelEnded = false;</span>
+            }
+<span class="fc" id="L158">        }</span>
+
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">        if(levelEnded){</span>
+            try {
+<span class="fc" id="L162">                nextLevel();</span>
+<span class="nc" id="L163">            } catch (ParserConfigurationException | SAXException e) {</span>
+<span class="nc" id="L164">                e.printStackTrace();</span>
+<span class="pc" id="L165">            }</span>
+        } else {
+<span class="nc" id="L167">            new ArrayList&lt;&gt;(objectList).forEach(GameObject::doUpdate);</span>
+        }
+<span class="fc" id="L169">    }</span>
+
+    /**
+     * Attempst to load the new level (WIP)
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     */
+    private void nextLevel() throws ParserConfigurationException, SAXException {
+<span class="fc" id="L177">        Board currentBoard = Application.getBoard();</span>
+<span class="fc" id="L178">        currentBoard.setLevelCount(currentBoard.getLevelCount()+1);</span>
+<span class="fc" id="L179">        Screen newScreen = null;</span>
+<span class="fc" id="L180">        String levelLocation = &quot;/levels/level&quot; + currentBoard.getLevelCount() + &quot;.xml&quot;;</span>
+<span class="fc bfc" id="L181" title="All 2 branches covered.">        if(createFileReader(levelLocation) != null){</span>
+            try {
+<span class="fc" id="L183">                newScreen = Level.createFromXML(&quot;/levels/level&quot; + currentBoard.getLevelCount() + &quot;.xml&quot;);</span>
+            }
+<span class="nc" id="L185">            catch (IOException e) {</span>
+<span class="nc" id="L186">                e.printStackTrace();</span>
+<span class="pc" id="L187">            }</span>
+        } else{
+            //set behaviour when all levels have been completed here.
+<span class="fc" id="L190">            newScreen = new WinScreen();</span>
+        }
+<span class="fc" id="L192">        currentBoard.changeScreen(newScreen);</span>
+<span class="fc" id="L193">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

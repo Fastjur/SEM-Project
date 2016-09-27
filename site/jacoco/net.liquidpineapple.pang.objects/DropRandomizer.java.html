@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DropRandomizer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sem-project</a> &gt; <a href="index.source.html" class="el_package">net.liquidpineapple.pang.objects</a> &gt; <span class="el_source">DropRandomizer.java</span></div><h1>DropRandomizer.java</h1><pre class="source lang-java linenums">package net.liquidpineapple.pang.objects;
+
+import lombok.Getter;
+import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.logger.Logger;
+
+import java.util.Random;
+
+/**
+ * Created by Erik on 22-9-2016.
+ */
+public class DropRandomizer {
+
+<span class="fc" id="L14">    @Getter</span>
+    @SuppressWarnings(&quot;PMD.UnusedPrivateField&quot;) // It is used in the generated getter method
+<span class="fc" id="L16">    private static DropRandomizer instance = new DropRandomizer();</span>
+
+    private static Random randomizer;
+
+    /**
+     * Singleton constructor for DropRandomizer
+     */
+<span class="fc" id="L23">    private DropRandomizer() {</span>
+<span class="fc" id="L24">        Logger.info(&quot;Randomizer starting.&quot;);</span>
+<span class="fc" id="L25">        randomizer = new Random();</span>
+<span class="fc" id="L26">    }</span>
+
+    /**
+     * Rolls for an drop and if it does roll postive creates that drop at startX startY.
+     *
+     * Currently set up to:
+     * 30% Bronze coin 10p
+     * 20% Silver coin 100p
+     * 10% Gold coin 1000p
+     * 8% 1 of 4 colored Gems 1500p
+     * 2% A heart that gives a life and 1p
+     *
+     * @param startX
+     * @param startY
+     */
+    public static void rollRandomdrop(double startX, double startY) {
+<span class="fc" id="L42">        int roll = randomizer.nextInt(100);</span>
+<span class="fc" id="L43">        Drop randomDrop  = null;</span>
+<span class="pc bpc" id="L44" title="2 of 4 branches missed.">        if(0 &lt;= roll &amp;&amp; roll &lt; 30){</span>
+<span class="nc" id="L45">             randomDrop  = new Drop(&quot;/sprites/drops/coinBronze.png&quot;, startX, startY, 0, 1, 10);</span>
+        }
+<span class="pc bpc" id="L47" title="2 of 4 branches missed.">        else if(30 &lt;= roll &amp;&amp; roll &lt;50 ){</span>
+<span class="nc" id="L48">             randomDrop  = new Drop(&quot;/sprites/drops/coinSilver.png&quot;, startX, startY, 0, 1, 100);</span>
+        }
+<span class="pc bpc" id="L50" title="2 of 4 branches missed.">        else if(50 &lt;= roll &amp;&amp; roll &lt;60 ){</span>
+<span class="nc" id="L51">             randomDrop  = new Drop(&quot;/sprites/drops/coinGold.png&quot;, startX, startY, 0, 1, 1000);</span>
+        }
+<span class="pc bpc" id="L53" title="2 of 4 branches missed.">        else if(60 &lt;= roll &amp;&amp; roll &lt;62 ){</span>
+<span class="nc" id="L54">             randomDrop  = new Drop(&quot;/sprites/drops/gemBlue.png&quot;, startX, startY, 0, 1, 1500);</span>
+        }
+<span class="pc bpc" id="L56" title="2 of 4 branches missed.">        else if(62 &lt;= roll &amp;&amp; roll &lt;64 ){</span>
+<span class="nc" id="L57">             randomDrop  = new Drop(&quot;/sprites/drops/gemRed.png&quot;, startX, startY, 0, 1, 1500);</span>
+        }
+<span class="pc bpc" id="L59" title="2 of 4 branches missed.">        else if(64 &lt;= roll &amp;&amp; roll &lt;66 ){</span>
+<span class="nc" id="L60">             randomDrop  = new Drop(&quot;/sprites/drops/gemYellow.png&quot;, startX, startY, 0, 1, 1500);</span>
+        }
+<span class="pc bpc" id="L62" title="2 of 4 branches missed.">        else if(66 &lt;= roll &amp;&amp; roll &lt;68 ) {</span>
+<span class="nc" id="L63">             randomDrop  = new Drop(&quot;/sprites/drops/gemGreen.png&quot;, startX, startY, 0, 1, 1500);</span>
+        }
+<span class="pc bpc" id="L65" title="2 of 4 branches missed.">        else if(68 &lt;= roll &amp;&amp; roll &lt;70 ) {</span>
+<span class="nc" id="L66">             randomDrop  = new Drop(&quot;/sprites/drops/heart.png&quot;, startX, startY, 0, 1, 1, 1);</span>
+        }
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if( randomDrop  != null){</span>
+<span class="nc" id="L69">            Application.getBoard().addObject( randomDrop );</span>
+        }
+<span class="fc" id="L71">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

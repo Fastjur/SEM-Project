@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Ball.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sem-project</a> &gt; <a href="index.source.html" class="el_package">net.liquidpineapple.pang.objects</a> &gt; <span class="el_source">Ball.java</span></div><h1>Ball.java</h1><pre class="source lang-java linenums">package net.liquidpineapple.pang.objects;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.gui.ScoreSystem;
+import net.liquidpineapple.pang.logger.Logger;
+
+/**
+ * Class that represents the ball.
+ * Created by Erik on 7-9-2016.
+ */
+<span class="pc" id="L13">@Data</span>
+<span class="nc bnc" id="L14" title="All 14 branches missed.">@EqualsAndHashCode(callSuper = true)</span>
+public class Ball extends GameObject {
+
+    //Size 1 is the smallest ball.
+<span class="fc" id="L18">    private int ballSize;</span>
+<span class="fc" id="L19">    private double movX;</span>
+<span class="fc" id="L20">    private double movY;</span>
+
+
+    private static final String textureLocationBlue = &quot;/sprites/Balls/blue.png&quot;;
+    private static final String textureLocationGreen = &quot;/sprites/Balls/green.png&quot;;
+    private static final String textureLocationRed = &quot;/sprites/Balls/red.png&quot;;
+    private static final String textureLocationYellow = &quot;/sprites/Balls/yellow.png&quot;;
+
+    /**
+     * Creates a ball with a set horizontal speed and a variable vertical speed depending on size.
+     *
+     * @param startX - X-coordinate to make the ball
+     * @param startY - Y-coordinate to make the ball
+     * @param direction - Direction the ball should move, valid inputs are: &quot;left&quot; and &quot;right&quot;, anything else randomizes the direction.
+     * @param sizeIn - The desired size of the ball, Greater then 4 or smaller then 0 results in a size 4 ball.
+     */
+    public Ball(double startX, double startY, BallMovement direction, int sizeIn){
+<span class="fc" id="L37">        super(textureLocationBlue, startX, startY);</span>
+
+<span class="fc bfc" id="L39" title="All 4 branches covered.">        if (sizeIn &gt; 0 &amp;&amp; sizeIn &lt; 5) {</span>
+<span class="fc" id="L40">            ballSize = sizeIn;</span>
+        } else {
+<span class="fc" id="L42">            ballSize = 4;</span>
+        }
+
+<span class="pc bpc" id="L45" title="1 of 4 branches missed.">        switch (ballSize) {</span>
+            case 1:
+<span class="fc" id="L47">                changeImage(textureLocationGreen); break;</span>
+            case 2:
+<span class="nc" id="L49">                changeImage(textureLocationRed); break;</span>
+            case 3:
+<span class="fc" id="L51">                changeImage(textureLocationYellow); break;</span>
+            default:
+<span class="fc" id="L53">                changeImage(textureLocationBlue); break;</span>
+        }
+
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (direction.equals(BallMovement.LEFT_MOVEMENT)) {</span>
+<span class="fc" id="L57">            movX = BallMovement.LEFT_MOVEMENT.getDx();</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        } else if (direction.equals(BallMovement.RIGHT_MOVEMENT)) {</span>
+<span class="fc" id="L59">            movX = BallMovement.RIGHT_MOVEMENT.getDx();</span>
+        }
+<span class="fc" id="L61">        movY = -2;</span>
+<span class="fc" id="L62">    }</span>
+
+    /**
+     * Method that updates the ball.
+     */
+    @Override
+    public void doUpdate() {
+<span class="fc" id="L69">        super.doUpdate();</span>
+
+<span class="fc" id="L71">        move();</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (yPos + this.getHeight() &gt; Application.getBoard().getHeight())</span>
+<span class="nc" id="L73">            yPos = Application.getBoard().getHeight() - this.getHeight();</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (xPos + this.getWidth() &gt; Application.getBoard().getWidth())</span>
+<span class="nc" id="L75">            xPos = Application.getBoard().getWidth() - this.getWidth();</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (xPos &lt; 0)</span>
+<span class="nc" id="L77">            xPos = 0;</span>
+
+<span class="pc bpc" id="L79" title="2 of 4 branches missed.">        if (xPos == 0 || xPos + this.getWidth() == Application.getBoard().getWidth()) {</span>
+<span class="nc" id="L80">            movX = -movX;</span>
+        }
+
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (yPos + this.getHeight() == Application.getBoard().getHeight()) {</span>
+<span class="nc" id="L84">            movY = -6;</span>
+    }
+
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">    if(collisionHook()){</span>
+<span class="nc" id="L88">        destroyball();</span>
+    }
+<span class="fc" id="L90">}</span>
+
+    /**
+     * Calculates and sets the next position the ball should be drawn in.
+     */
+    public void move(){
+<span class="fc" id="L96">        double oldX = xPos,</span>
+<span class="fc" id="L97">               oldY = yPos;</span>
+<span class="fc" id="L98">        xPos += movX;</span>
+<span class="fc" id="L99">        movY += 1/25.0;</span>
+<span class="fc" id="L100">        yPos += movY;</span>
+<span class="fc" id="L101">        Logger.info(&quot;Moved &quot; + this.toString() + &quot; from (&quot; + oldX + &quot;, &quot; + oldY + &quot;) to (&quot; + xPos</span>
+            + &quot;, &quot; + yPos + &quot;)&quot;);
+<span class="fc" id="L103">    }</span>
+
+    /**
+     * Method that checks whether the ball collides with the Hook.
+     * @return returns true if the hook is hit, returns false otherwise.
+     */
+    public boolean collisionHook(){
+<span class="fc" id="L110">        boolean hookInUse = false;</span>
+<span class="fc" id="L111">        HookAndRope activeRope = null;</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        for(GameObject o : Application.getBoard().getCurrentScreen().objectList){</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">            if(o instanceof HookAndRope){</span>
+<span class="nc" id="L114">                hookInUse = true;</span>
+<span class="nc" id="L115">                activeRope = (HookAndRope) o;</span>
+            }
+<span class="fc" id="L117">        }</span>
+
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">        if(!hookInUse){</span>
+<span class="fc" id="L120">            return false;</span>
+        }
+
+<span class="nc" id="L123">        double ropePos = activeRope.getXPos() + (activeRope.getWidth())/2;</span>
+
+<span class="nc bnc" id="L125" title="All 4 branches missed.">        if (ropePos - this.getXPos() &gt;= 0 &amp;&amp; ropePos - this.getXPos() &lt;= this.getWidth() &amp;&amp;</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            this.getYPos() + this.getHeight() &gt;= activeRope.getYPos()) {</span>
+<span class="nc" id="L127">            Application.getBoard().getCurrentScreen().objectList.remove(activeRope);</span>
+<span class="nc" id="L128">            Logger.info(&quot;Collision between &quot; + this + &quot; and &quot; + activeRope);</span>
+<span class="nc" id="L129">            return true;</span>
+        }
+
+<span class="nc" id="L132">        return false;</span>
+    }
+
+
+    /**
+     * Adds score (WIP), spawns two balls going left and right respectively on itself, and removes this ball.
+     */
+    public void destroyball(){
+<span class="nc" id="L140">        ScoreSystem.addScore(100);</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        if (ballSize != 1){</span>
+<span class="nc" id="L142">            Ball smallerBall = new Ball(xPos, yPos, BallMovement.LEFT_MOVEMENT, ballSize -1);</span>
+<span class="nc" id="L143">            Ball smallerBall2 = new Ball(xPos+1, yPos, BallMovement.RIGHT_MOVEMENT, ballSize -1);</span>
+<span class="nc" id="L144">            Application.getBoard().addObject(smallerBall);</span>
+<span class="nc" id="L145">            Application.getBoard().addObject(smallerBall2);</span>
+        }
+<span class="nc" id="L147">        DropRandomizer.rollRandomdrop(xPos+(this.getWidth()/2), yPos+(this.getHeight()/2));</span>
+        //remove ball
+<span class="nc" id="L149">        Logger.info(&quot;Removing &quot; + this);</span>
+<span class="nc" id="L150">        Application.getBoard().getCurrentScreen().objectList.remove(this);</span>
+<span class="nc" id="L151">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
