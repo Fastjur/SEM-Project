@@ -20,25 +20,20 @@ import java.io.IOException;
  */
 public class Board extends JPanel {
 
-    private final int boardWidth;
-    private final int boardHeight;
-    private Timer timer;
     @Getter
     private Screen currentScreen;
+
     @Getter
     @Setter
+    @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
     private int levelCount = 1;
 
     /**
      * Constructor of the board.
-     * @param boardWidth - The width of the board.
-     * @param boardHeight - The Height of the board.
      * @throws IOException - Throws exception.
      */
-    public Board(int boardWidth, int boardHeight) throws IOException {
+    public Board() throws IOException {
         super();
-        this.boardWidth = boardWidth;
-        this.boardHeight = boardHeight;
         setFocusable(true);
         requestFocus();
         addKeyListener(new InputHandler());

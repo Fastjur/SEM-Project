@@ -122,12 +122,11 @@ public class Ball extends GameObject {
 
         double ropePos = activeRope.getXPos() + (activeRope.getWidth())/2;
 
-        if(ropePos - this.getXPos() >= 0 && ropePos - this.getXPos() <= this.getWidth()) {
-            if(this.getYPos()+ this.getHeight() >= activeRope.getYPos()){
-                Application.getBoard().getCurrentScreen().objectList.remove(activeRope);
-                Logger.info("Collision between " + this + " and " + activeRope);
-                return true;
-            }
+        if (ropePos - this.getXPos() >= 0 && ropePos - this.getXPos() <= this.getWidth() &&
+            this.getYPos() + this.getHeight() >= activeRope.getYPos()) {
+            Application.getBoard().getCurrentScreen().objectList.remove(activeRope);
+            Logger.info("Collision between " + this + " and " + activeRope);
+            return true;
         }
 
         return false;
@@ -145,7 +144,7 @@ public class Ball extends GameObject {
             Application.getBoard().addObject(smallerBall);
             Application.getBoard().addObject(smallerBall2);
         }
-        Application.getDropRandomizer().rollRandomdrop(xPos+(this.getWidth()/2), yPos+(this.getHeight()/2));
+        DropRandomizer.getInstance().rollRandomdrop(xPos+(this.getWidth()/2), yPos+(this.getHeight()/2));
         //remove ball
         Logger.info("Removing " + this);
         Application.getBoard().getCurrentScreen().objectList.remove(this);

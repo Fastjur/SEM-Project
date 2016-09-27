@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.objects;
 
+import lombok.Getter;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
@@ -19,10 +20,15 @@ public class DropRandomizer {
 
     private ArrayList<Drop> randomList;
 
+    @Getter
+    @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
+    private static DropRandomizer instance = new DropRandomizer();
+
+
     /**
-     * Creates the DropRandomizer and sets the arraylist the Random Roll pulls it's result from.
+     * Singleton constructor for DropRandomizer
      */
-    public DropRandomizer() {
+    private DropRandomizer() {
         Logger.info("Randomizer starting.");
         randomList = new ArrayList<>();
         randomizer = new Random();
@@ -63,9 +69,9 @@ public class DropRandomizer {
 
         int length = randomList.size();
         int roll = randomizer.nextInt(TOTAL_CHANCE);
-        Drop randomDrop = randomList.get(roll);
 
         if (roll < length) {
+            Drop randomDrop = randomList.get(roll);
             randomDrop.setPos(startX, startY);
             Application.getBoard().addObject( randomDrop );
         }

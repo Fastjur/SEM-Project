@@ -1,7 +1,5 @@
 package net.liquidpineapple.pang.objects;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
@@ -27,7 +25,7 @@ public class Drop extends GameObject {
      * @param movY            as horizontal movement every update
      */
     public Drop(String textureLocation, double startX, double startY, double movX, double movY, int score, int livesChange){
-        super(textureLocation, startX, startY);g
+        super(textureLocation, startX, startY);
         this.score = score;
         this.movY = movY;
         this.movX = movX;
@@ -74,10 +72,10 @@ public class Drop extends GameObject {
 
     public void playerCollision() {
         ScoreSystem.addScore(score);
-        while(livesChange>0){
+        while(livesChange>0) {
             LifeSystem.gainLife();
             livesChange-=1;}
-        while(livesChange<0){
+        while(livesChange<0) {
             LifeSystem.loseLife();
             livesChange+=1;}
         Application.getBoard().getCurrentScreen().objectList.remove(this);

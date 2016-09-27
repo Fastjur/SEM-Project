@@ -1,7 +1,6 @@
 package net.liquidpineapple.pang.screens;
 
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.gui.NumberToken;
@@ -52,7 +51,7 @@ public class WinScreen extends Screen {
         super.doUpdate();
         if(InputHandler.isAnyKeyPressed()){
             Application.getBoard().setLevelCount(1);
-            Application.lifeKeeper.resetLives();
+            Application.lifeSystem.resetLives();
             Application.getScoreKeeper().resetScore();
             Application.getBoard().changeScreen(new MainMenu());
         }

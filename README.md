@@ -9,6 +9,13 @@
 
 ---
 
+# Project Summary Report and download
+
+[Please click here](https://fastjur.github.io/SEM-Project) to go to an overview of the project summary and project downloads  
+Alternatively [click here](https://github.com/Fastjur/SEM-Project/releases) to go to the latest release or [click here](https://fastjur.github.io/SEM-Project/site/) to go the Project Summary
+
+---
+
 # Installing and running the game
 
 1. Clone the repo
