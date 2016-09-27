@@ -10,7 +10,7 @@
     <item>
       <title>File: 38,
              Errors: 0,
-             Warnings: 1800,
+             Warnings: 1772,
              Infos: 0
       </title>
             <link>${project.url}/checkstyle.html</link>
@@ -63,7 +63,7 @@
                   0
                 </td>
                 <td>
-                  70
+                  68
                 </td>
                 <td>
                   0
@@ -175,7 +175,7 @@
                   0
                 </td>
                 <td>
-                  125
+                  126
                 </td>
                 <td>
                   0
@@ -553,7 +553,7 @@
                   0
                 </td>
                 <td>
-                  71
+                  44
                 </td>
                 <td>
                   0

@@ -65,17 +65,17 @@ public class Drop extends GameObject {
 <span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (yPos + this.getHeight() == Application.getBoard().getHeight()){</span>
 <span class="nc" id="L66">            movX = 0;</span>
         }
-<span class="pc bpc" id="L68" title="2 of 4 branches missed.">        else  if (xPos == 0 || xPos + this.getWidth() == Application.getBoard().getWidth()) {</span>
-<span class="nc" id="L69">            movX = -movX;</span>
+<span class="pc bpc" id="L68" title="1 of 4 branches missed.">        else  if (xPos == 0 || xPos + this.getWidth() == Application.getBoard().getWidth()) {</span>
+<span class="fc" id="L69">            movX = -movX;</span>
         }
 <span class="fc" id="L71">    }</span>
 
     public void playerCollision() {
 <span class="fc" id="L74">        ScoreSystem.addScore(score);</span>
-<span class="fc bfc" id="L75" title="All 2 branches covered.">        while(livesChange&gt;0){</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        while(livesChange&gt;0) {</span>
 <span class="fc" id="L76">            LifeSystem.gainLife();</span>
 <span class="fc" id="L77">            livesChange-=1;}</span>
-<span class="fc bfc" id="L78" title="All 2 branches covered.">        while(livesChange&lt;0){</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        while(livesChange&lt;0) {</span>
 <span class="fc" id="L79">            LifeSystem.loseLife();</span>
 <span class="fc" id="L80">            livesChange+=1;}</span>
 <span class="fc" id="L81">        Application.getBoard().getCurrentScreen().objectList.remove(this);</span>

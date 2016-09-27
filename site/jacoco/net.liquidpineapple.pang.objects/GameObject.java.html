@@ -29,50 +29,49 @@ public abstract class GameObject {
 <span class="fc" id="L29">        this.xPos = startX;</span>
 <span class="fc" id="L30">        this.yPos = startY;</span>
 <span class="fc" id="L31">        changeImage(textureLocation);</span>
-<span class="fc" id="L32">        Logger.info(&quot;GameObject registered at (&quot; + xPos + &quot;, &quot; + yPos + &quot;) with width &quot; + width +</span>
-            &quot; and height &quot; + height);
-<span class="fc" id="L34">    }</span>
+<span class="fc" id="L32">        Logger.info(&quot;GameObject registered at (&quot; + xPos + &quot;, &quot; + yPos + &quot;) with width &quot; + width + &quot; and height &quot; + height);</span>
+<span class="fc" id="L33">    }</span>
 
     public void changeImage(String textureLocation){
         ImageIcon imageIcon;
-<span class="fc" id="L38">        Logger.info(&quot;Registering object with texture &quot; + textureLocation);</span>
-<span class="fc" id="L39">        URL url = this.getClass().getResource(textureLocation);</span>
+<span class="fc" id="L37">        Logger.info(&quot;Registering object with texture &quot; + textureLocation);</span>
+<span class="fc" id="L38">        URL url = this.getClass().getResource(textureLocation);</span>
 
-<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (url == null) {</span>
-<span class="nc" id="L42">            throw new IllegalArgumentException(&quot;Could not find texture &quot; + textureLocation);</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if (url == null) {</span>
+<span class="nc" id="L41">            throw new IllegalArgumentException(&quot;Could not find texture &quot; + textureLocation);</span>
         }
 
-<span class="fc" id="L45">        imageIcon = new ImageIcon(url);</span>
-<span class="fc" id="L46">        image = imageIcon.getImage();</span>
-<span class="fc" id="L47">        getWidthAndHeight();</span>
-<span class="fc" id="L48">    }</span>
+<span class="fc" id="L44">        imageIcon = new ImageIcon(url);</span>
+<span class="fc" id="L45">        image = imageIcon.getImage();</span>
+<span class="fc" id="L46">        getWidthAndHeight();</span>
+<span class="fc" id="L47">    }</span>
 
     private void getWidthAndHeight() {
-<span class="fc" id="L51">        this.width = image.getWidth(null);</span>
-<span class="fc" id="L52">        this.height = image.getHeight(null);</span>
-<span class="fc" id="L53">    }</span>
+<span class="fc" id="L50">        this.width = image.getWidth(null);</span>
+<span class="fc" id="L51">        this.height = image.getHeight(null);</span>
+<span class="fc" id="L52">    }</span>
 
     public Rectangle2D.Double getBounds() {
-<span class="fc" id="L56">        return new Rectangle2D.Double(xPos, yPos, width, height);</span>
+<span class="fc" id="L55">        return new Rectangle2D.Double(xPos, yPos, width, height);</span>
     }
 
     //A Ellipse2D.float does also exists in case we need to be more accurate.
     protected Ellipse2D.Double getEllipseBounds() {
-<span class="nc" id="L61">        return new Ellipse2D.Double(xPos, yPos, width, height);</span>
+<span class="nc" id="L60">        return new Ellipse2D.Double(xPos, yPos, width, height);</span>
     }
 
-    public void setPos(int xPos, int yPos) {
-<span class="fc" id="L65">        this.xPos = xPos;</span>
-<span class="fc" id="L66">        this.yPos = yPos;</span>
-<span class="fc" id="L67">        Logger.info(&quot;Set position for &quot; + this.toString() + &quot;to (&quot; + xPos + &quot;,&quot; + yPos + &quot;)&quot;);</span>
-<span class="fc" id="L68">    }</span>
+    public void setPos(double xPos, double yPos) {
+<span class="fc" id="L64">        this.xPos = xPos;</span>
+<span class="fc" id="L65">        this.yPos = yPos;</span>
+<span class="fc" id="L66">        Logger.info(&quot;Set position for &quot; + this.toString() + &quot;to (&quot; + xPos + &quot;,&quot; + yPos + &quot;)&quot;);</span>
+<span class="fc" id="L67">    }</span>
 
     public void doDrawing(Graphics2D graphics2D, ImageObserver imageObserver) {
-<span class="fc" id="L71">        graphics2D.drawImage(this.getImage(), (int)Math.round(this.getXPos()), (int)Math.round(this.getYPos()), imageObserver);</span>
-<span class="fc" id="L72">    }</span>
+<span class="fc" id="L70">        graphics2D.drawImage(this.getImage(), (int)Math.round(this.getXPos()), (int)Math.round(this.getYPos()), imageObserver);</span>
+<span class="fc" id="L71">    }</span>
 
     public void doUpdate() {
 
-<span class="fc" id="L76">    }</span>
+<span class="fc" id="L75">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

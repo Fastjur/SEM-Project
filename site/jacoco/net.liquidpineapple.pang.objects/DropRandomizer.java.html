@@ -4,30 +4,57 @@ import lombok.Getter;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
+import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by Erik on 22-9-2016.
- */
 public class DropRandomizer {
 
-<span class="fc" id="L14">    @Getter</span>
-    @SuppressWarnings(&quot;PMD.UnusedPrivateField&quot;) // It is used in the generated getter method
-<span class="fc" id="L16">    private static DropRandomizer instance = new DropRandomizer();</span>
+    private Random randomizer;
+    private static final int BRONZE_NUM = 30;
+    private static final int SILVER_NUM = 20;
+    private static final int GOLD_NUM = 10;
+    private static final int GEM_NUM = 8;
+    private static final int TOTAL_GEMS = 4;
+    private static final int HEART_NUM = 2;
+    private static final int TOTAL_CHANCE = 100;
 
-    private static Random randomizer;
+    private ArrayList&lt;Drop&gt; randomList;
+
+<span class="fc" id="L23">    @Getter</span>
+    @SuppressWarnings(&quot;PMD.UnusedPrivateField&quot;) // It is used in the generated getter method
+<span class="fc" id="L25">    private static DropRandomizer instance = new DropRandomizer();</span>
+
 
     /**
      * Singleton constructor for DropRandomizer
      */
-<span class="fc" id="L23">    private DropRandomizer() {</span>
-<span class="fc" id="L24">        Logger.info(&quot;Randomizer starting.&quot;);</span>
-<span class="fc" id="L25">        randomizer = new Random();</span>
-<span class="fc" id="L26">    }</span>
+<span class="fc" id="L31">    private DropRandomizer() {</span>
+<span class="fc" id="L32">        Logger.info(&quot;Randomizer starting.&quot;);</span>
+<span class="fc" id="L33">        randomList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L34">        randomizer = new Random();</span>
+
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        for (int i = 0; i &lt; BRONZE_NUM; i++) {</span>
+<span class="fc" id="L37">            randomList.add(new Drop(&quot;/sprites/drops/coinBronze.png&quot;, 0, 0, 0, 1, 10));</span>
+        }
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        for (int i = 0; i &lt; SILVER_NUM; i++) {</span>
+<span class="fc" id="L40">            randomList.add(new Drop(&quot;/sprites/drops/coinSilver.png&quot;, 0, 0, 0, 1, 100));</span>
+        }
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        for (int i = 0; i &lt; GOLD_NUM; i++) {</span>
+<span class="fc" id="L43">            randomList.add(new Drop(&quot;/sprites/drops/coinGold.png&quot;, 0, 0, 0, 1, 1000));</span>
+        }
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        for (int i = 0; i &lt;(GEM_NUM / TOTAL_GEMS); i++) {</span>
+<span class="fc" id="L46">            randomList.add(new Drop(&quot;/sprites/drops/gemBlue.png&quot;, 0, 0, 0, 1, 1500));</span>
+<span class="fc" id="L47">            randomList.add(new Drop(&quot;/sprites/drops/gemRed.png&quot;, 0, 0, 0, 1, 1500));</span>
+<span class="fc" id="L48">            randomList.add(new Drop(&quot;/sprites/drops/gemYellow.png&quot;, 0, 0, 0, 1, 1500));</span>
+<span class="fc" id="L49">            randomList.add(new Drop(&quot;/sprites/drops/gemGreen.png&quot;, 0, 0, 0, 1, 1500));</span>
+        }
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        for (int i = 0; i &lt; HEART_NUM; i++) {</span>
+<span class="fc" id="L52">            randomList.add(new Drop(&quot;/sprites/drops/heart.png&quot;, 0, 0, 0, 1, 1, 1));</span>
+        }
+<span class="fc" id="L54">    }</span>
 
     /**
-     * Rolls for an drop and if it does roll postive creates that drop at startX startY.
-     *
+     * Rolls for a drop and if it does roll positive creates that drop at startX startY.
      * Currently set up to:
      * 30% Bronze coin 10p
      * 20% Silver coin 100p
@@ -35,39 +62,19 @@ public class DropRandomizer {
      * 8% 1 of 4 colored Gems 1500p
      * 2% A heart that gives a life and 1p
      *
-     * @param startX
-     * @param startY
+     * @param startX Start position X
+     * @param startY Start position Y
      */
-    public static void rollRandomdrop(double startX, double startY) {
-<span class="fc" id="L42">        int roll = randomizer.nextInt(100);</span>
-<span class="fc" id="L43">        Drop randomDrop  = null;</span>
-<span class="pc bpc" id="L44" title="2 of 4 branches missed.">        if(0 &lt;= roll &amp;&amp; roll &lt; 30){</span>
-<span class="nc" id="L45">             randomDrop  = new Drop(&quot;/sprites/drops/coinBronze.png&quot;, startX, startY, 0, 1, 10);</span>
+    public void rollRandomdrop(double startX, double startY) {
+
+<span class="fc" id="L70">        int length = randomList.size();</span>
+<span class="fc" id="L71">        int roll = randomizer.nextInt(TOTAL_CHANCE);</span>
+
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if (roll &lt; length) {</span>
+<span class="fc" id="L74">            Drop randomDrop = randomList.get(roll);</span>
+<span class="fc" id="L75">            randomDrop.setPos(startX, startY);</span>
+<span class="fc" id="L76">            Application.getBoard().addObject( randomDrop );</span>
         }
-<span class="pc bpc" id="L47" title="2 of 4 branches missed.">        else if(30 &lt;= roll &amp;&amp; roll &lt;50 ){</span>
-<span class="nc" id="L48">             randomDrop  = new Drop(&quot;/sprites/drops/coinSilver.png&quot;, startX, startY, 0, 1, 100);</span>
-        }
-<span class="pc bpc" id="L50" title="2 of 4 branches missed.">        else if(50 &lt;= roll &amp;&amp; roll &lt;60 ){</span>
-<span class="nc" id="L51">             randomDrop  = new Drop(&quot;/sprites/drops/coinGold.png&quot;, startX, startY, 0, 1, 1000);</span>
-        }
-<span class="pc bpc" id="L53" title="2 of 4 branches missed.">        else if(60 &lt;= roll &amp;&amp; roll &lt;62 ){</span>
-<span class="nc" id="L54">             randomDrop  = new Drop(&quot;/sprites/drops/gemBlue.png&quot;, startX, startY, 0, 1, 1500);</span>
-        }
-<span class="pc bpc" id="L56" title="2 of 4 branches missed.">        else if(62 &lt;= roll &amp;&amp; roll &lt;64 ){</span>
-<span class="nc" id="L57">             randomDrop  = new Drop(&quot;/sprites/drops/gemRed.png&quot;, startX, startY, 0, 1, 1500);</span>
-        }
-<span class="pc bpc" id="L59" title="2 of 4 branches missed.">        else if(64 &lt;= roll &amp;&amp; roll &lt;66 ){</span>
-<span class="nc" id="L60">             randomDrop  = new Drop(&quot;/sprites/drops/gemYellow.png&quot;, startX, startY, 0, 1, 1500);</span>
-        }
-<span class="pc bpc" id="L62" title="2 of 4 branches missed.">        else if(66 &lt;= roll &amp;&amp; roll &lt;68 ) {</span>
-<span class="nc" id="L63">             randomDrop  = new Drop(&quot;/sprites/drops/gemGreen.png&quot;, startX, startY, 0, 1, 1500);</span>
-        }
-<span class="pc bpc" id="L65" title="2 of 4 branches missed.">        else if(68 &lt;= roll &amp;&amp; roll &lt;70 ) {</span>
-<span class="nc" id="L66">             randomDrop  = new Drop(&quot;/sprites/drops/heart.png&quot;, startX, startY, 0, 1, 1, 1);</span>
-        }
-<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if( randomDrop  != null){</span>
-<span class="nc" id="L69">            Application.getBoard().addObject( randomDrop );</span>
-        }
-<span class="fc" id="L71">    }</span>
+<span class="fc" id="L78">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

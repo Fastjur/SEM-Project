@@ -69,8 +69,8 @@ public class Ball extends GameObject {
 <span class="fc" id="L69">        super.doUpdate();</span>
 
 <span class="fc" id="L71">        move();</span>
-<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (yPos + this.getHeight() &gt; Application.getBoard().getHeight())</span>
-<span class="nc" id="L73">            yPos = Application.getBoard().getHeight() - this.getHeight();</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        if (yPos + this.getHeight() &gt; Application.getBoard().getHeight())</span>
+<span class="fc" id="L73">            yPos = Application.getBoard().getHeight() - this.getHeight();</span>
 <span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (xPos + this.getWidth() &gt; Application.getBoard().getWidth())</span>
 <span class="nc" id="L75">            xPos = Application.getBoard().getWidth() - this.getWidth();</span>
 <span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (xPos &lt; 0)</span>
@@ -80,8 +80,8 @@ public class Ball extends GameObject {
 <span class="nc" id="L80">            movX = -movX;</span>
         }
 
-<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (yPos + this.getHeight() == Application.getBoard().getHeight()) {</span>
-<span class="nc" id="L84">            movY = -6;</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (yPos + this.getHeight() == Application.getBoard().getHeight()) {</span>
+<span class="fc" id="L84">            movY = -6;</span>
     }
 
 <span class="pc bpc" id="L87" title="1 of 2 branches missed.">    if(collisionHook()){</span>
@@ -144,7 +144,7 @@ public class Ball extends GameObject {
 <span class="nc" id="L144">            Application.getBoard().addObject(smallerBall);</span>
 <span class="nc" id="L145">            Application.getBoard().addObject(smallerBall2);</span>
         }
-<span class="nc" id="L147">        DropRandomizer.rollRandomdrop(xPos+(this.getWidth()/2), yPos+(this.getHeight()/2));</span>
+<span class="nc" id="L147">        DropRandomizer.getInstance().rollRandomdrop(xPos+(this.getWidth()/2), yPos+(this.getHeight()/2));</span>
         //remove ball
 <span class="nc" id="L149">        Logger.info(&quot;Removing &quot; + this);</span>
 <span class="nc" id="L150">        Application.getBoard().getCurrentScreen().objectList.remove(this);</span>
