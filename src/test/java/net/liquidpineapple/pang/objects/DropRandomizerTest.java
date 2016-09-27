@@ -22,7 +22,7 @@ public class DropRandomizerTest {
 
     @Test
     public void testRollRandomDrop(){
-        DropRandomizer.rollRandomdrop(0,0);
+        DropRandomizer.getInstance().rollRandomdrop(0,0);
         //This is a randomized process, it doest have any guaranteed result and you can't input anything to ensure it either... :/
     }
 

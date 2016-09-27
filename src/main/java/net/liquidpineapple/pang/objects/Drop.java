@@ -72,10 +72,10 @@ public class Drop extends GameObject {
 
     public void playerCollision() {
         ScoreSystem.addScore(score);
-        while(livesChange>0){
+        while(livesChange>0) {
             LifeSystem.gainLife();
             livesChange-=1;}
-        while(livesChange<0){
+        while(livesChange<0) {
             LifeSystem.loseLife();
             livesChange+=1;}
         Application.getBoard().getCurrentScreen().objectList.remove(this);
