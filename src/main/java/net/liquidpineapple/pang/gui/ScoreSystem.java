@@ -14,15 +14,20 @@ import java.util.ArrayList;
 public class ScoreSystem {
 
     @Getter
+    @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
+    private static ScoreSystem instance = new ScoreSystem();
+
+    @Getter
     @Setter
     private static int score;
+
     @Getter
     private static ArrayList<NumberToken> Places;
 
     /**
-     * The constructor for the scoresystem.
+     * The singleton constructor for the ScoreSystem.
      */
-    public ScoreSystem() {
+    private ScoreSystem() {
         score = 0;
         Logger.info("ScoreSystem starting.");
         //These are from right to left.

@@ -30,20 +30,14 @@ public class Application extends JFrame {
     // Set to true to prevent loosing lives
     public static final boolean cheatMode = false;
 
-    public static LifeSystem lifeKeeper;
+    public static LifeSystem lifeSystem;
 
     @Getter
     private static Board board;
 
     @Getter
-    private static DropRandomizer dropRandomizer;
-
-    @Getter
     @Setter
     private static ScoreSystem scoreKeeper;
-
-    @Getter
-    private static TimeSystem timeSystem;
 
     private Properties properties;
 
@@ -70,10 +64,10 @@ public class Application extends JFrame {
         setResizable(false);
         setSize(width, height);
 
-        scoreKeeper = new ScoreSystem();
-        lifeKeeper = new LifeSystem();
-        dropRandomizer = new DropRandomizer();
-        board = new Board(width, height);
+        scoreKeeper = ScoreSystem.getInstance();
+        lifeSystem = LifeSystem.getInstance();
+        DropRandomizer.getInstance();
+        board = new Board();
         add(board);
         Logger.info("Initialized with width: " + width + " and height: " + height);
 
@@ -85,7 +79,7 @@ public class Application extends JFrame {
 
         Logger.info("Application started successfully!");
 
-        timeSystem = new TimeSystem();
+        TimeSystem.getInstance();
 
         Runnable doUpdateRunnable = () -> {
             long beforeTime, timeDiff, sleep;
@@ -103,7 +97,7 @@ public class Application extends JFrame {
                 try {
                     board.doUpdate();
                     scoreKeeper.displayscore();
-                    lifeKeeper.updateLifes();
+                    lifeSystem.updateLifes();
 
                     beforeTime = System.currentTimeMillis();
                     Thread.sleep(sleep);
@@ -155,5 +149,14 @@ public class Application extends JFrame {
                 Logger.error(e.getMessage(), e);
             }
         });
+    }
+
+    /**
+     * Close the application
+     */
+    public void close() {
+        Logger.info("Shutting down. Goodbye!");
+        AudioSystem.stop();
+        dispose();
     }
 }

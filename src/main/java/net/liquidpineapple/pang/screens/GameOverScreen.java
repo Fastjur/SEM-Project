@@ -1,7 +1,6 @@
 package net.liquidpineapple.pang.screens;
 
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.gui.NumberToken;
@@ -50,7 +49,7 @@ public class GameOverScreen extends Screen {
     public void doUpdate() {
         super.doUpdate();
         if(InputHandler.isAnyKeyPressed()){
-                Application.lifeKeeper.resetLives();
+                Application.lifeSystem.resetLives();
                 Application.getScoreKeeper().resetScore();
                 Application.getBoard().changeScreen(new MainMenu());
         }

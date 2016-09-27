@@ -2,7 +2,6 @@ package net.liquidpineapple.pang.objects;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.extern.slf4j.Slf4j;
 import net.liquidpineapple.pang.logger.Logger;
 
 import javax.swing.*;

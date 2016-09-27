@@ -2,7 +2,6 @@ package net.liquidpineapple.pang.objects;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 

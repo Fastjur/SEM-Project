@@ -16,14 +16,19 @@ public class LifeSystem extends GameObject {
     private static final String textureH1 = "/sprites/hearts1.png";
     private static final String textureH2 = "/sprites/hearts2.png";
     private static final String textureH3 = "/sprites/hearts3.png";
+
     @Getter
     private static int lives;
     private int lastLives;
 
+    @Getter
+    @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
+    private static LifeSystem instance = new LifeSystem();
+
     /**
-     * Constructor for the life system.
+     * Singleton constructor for the life system.
      */
-    public LifeSystem(){
+    private LifeSystem(){
         super(textureH3,636,5);
         Logger.info("LifeSystem starting.");
         lives = 3;
@@ -59,6 +64,7 @@ public class LifeSystem extends GameObject {
 
                     Application.getBoard().setLevelCount(1);
                     Application.getBoard().changeScreen(new GameOverScreen());
+                    TimeSystem.stop();
 
                     break;
             }

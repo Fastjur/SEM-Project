@@ -1,28 +1,34 @@
 package net.liquidpineapple.pang.objects;
 
 import net.liquidpineapple.pang.Application;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 /**
  * Created by Erik on 22-9-2016.
  */
 public class DropRandomizerTest {
 
-    private static String PROPERTIES_LOCATION = "/config.properties";
+    private static Application app;
+    private static final String CONFIG_PROPERTIES = "/config.properties";
 
     @Before
-    public void testinit() throws Throwable{
-        Application app = new Application(PROPERTIES_LOCATION);
+    public void setUp() throws Throwable{
+        app = new Application(CONFIG_PROPERTIES);
         app.start();
+        DropRandomizer.getInstance();
     }
 
     @Test
-    public void testifitruns(){
-        Application.getDropRandomizer().rollRandomdrop(0,0);
+    public void testRollRandomDrop(){
+        DropRandomizer.rollRandomdrop(0,0);
         //This is a randomized process, it doest have any guaranteed result and you can't input anything to ensure it either... :/
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        app.close();
     }
 
 }

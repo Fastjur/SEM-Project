@@ -10,6 +10,7 @@ import lombok.Getter;
 public class Logger {
 
     @Getter
+    @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
     private static Logger instance = new Logger();
 
     private static int level;

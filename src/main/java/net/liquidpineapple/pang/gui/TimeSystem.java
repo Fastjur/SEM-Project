@@ -18,6 +18,10 @@ public class TimeSystem {
     private static Timer interval;
 
     @Getter
+    @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
+    private static TimeSystem instance = new TimeSystem();
+
+    @Getter
     private static ArrayList<NumberToken> timePlaces;
 
     private ActionListener timerAction = new ActionListener()
@@ -36,8 +40,10 @@ public class TimeSystem {
         }
     };
 
-    public TimeSystem() {
-
+    /**
+     * Singleton constructor
+     */
+    private TimeSystem() {
         Logger.info("TimeSystem Starting.");
         interval = new Timer(1000, timerAction);
         interval.setRepeats(true);
@@ -64,6 +70,13 @@ public class TimeSystem {
             calctime /= 10;
             i++;
         }
+    }
+
+    /**
+     * Stops the timer from ticking. The time will stay at the same value
+     */
+    public static void stop() {
+        interval.stop();
     }
 
 }

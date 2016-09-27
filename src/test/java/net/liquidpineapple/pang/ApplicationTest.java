@@ -1,6 +1,8 @@
 package net.liquidpineapple.pang;
 
 import net.liquidpineapple.pang.screens.Level;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -13,11 +15,12 @@ import static junit.framework.TestCase.assertFalse;
  */
 public class ApplicationTest {
 
-    private static String PROPERTIES_LOCATION = "/config.properties";
+    private Application app;
+    private static final String PROPERTIES_LOCATION = "/config.properties";
 
-    @Test
-    public void testStartup() throws Throwable {
-        Application app = new Application(PROPERTIES_LOCATION);
+    @Before
+    public void setUp() throws Exception {
+        app = new Application(PROPERTIES_LOCATION);
         app.start();
     }
 
@@ -29,8 +32,6 @@ public class ApplicationTest {
 
     @Test
     public void testScreenChangeToLevel() throws Throwable {
-        Application app = new Application(PROPERTIES_LOCATION);
-        app.start();
         Application.getBoard().changeScreen(Level.createFromXML("src/main/resources/levels/level9000.xml"));
     }
 
@@ -38,5 +39,10 @@ public class ApplicationTest {
     public void testNotInCheatMode() throws Throwable {
         assertFalse("Hey there, I know our game is hard. But let's not push any code with cheat " +
             "mode on! Set the boolean 'cheatMode' in application to false!", Application.cheatMode);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        app.close();
     }
 }

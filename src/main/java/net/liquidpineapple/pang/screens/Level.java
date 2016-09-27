@@ -29,8 +29,6 @@ import java.util.ArrayList;
  */
 public class Level extends Screen {
 
-    private static final int BOTTOM_OFFSET = 10;
-
     public Level() {
     }
 
@@ -65,7 +63,8 @@ public class Level extends Screen {
         for (NumberToken token : ScoreSystem.getPlaces()) {
             output.objectList.add(token);
         }
-        output.objectList.add(Application.lifeKeeper);
+        Application.lifeSystem.updateLifes();
+        output.objectList.add(Application.lifeSystem);
         return output;
     }
 
@@ -86,7 +85,6 @@ public class Level extends Screen {
 
             int size = Integer.parseInt(ballElement.getElementsByTagName("size").item(0)
                 .getTextContent());
-            String color = ballElement.getElementsByTagName("color").item(0).getTextContent();
 
             String direction = ballElement.getElementsByTagName("direction").item(0).getTextContent();
             BallMovement ballMovement = BallMovement.valueOf(direction);

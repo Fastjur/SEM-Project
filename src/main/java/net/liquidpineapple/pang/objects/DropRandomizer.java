@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.objects;
 
+import lombok.Getter;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
@@ -10,9 +11,16 @@ import java.util.Random;
  */
 public class DropRandomizer {
 
-    private Random randomizer;
+    @Getter
+    @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
+    private static DropRandomizer instance = new DropRandomizer();
 
-    public DropRandomizer(){
+    private static Random randomizer;
+
+    /**
+     * Singleton constructor for DropRandomizer
+     */
+    private DropRandomizer() {
         Logger.info("Randomizer starting.");
         randomizer = new Random();
     }
@@ -30,7 +38,7 @@ public class DropRandomizer {
      * @param startX
      * @param startY
      */
-    public void rollRandomdrop(double startX, double startY) {
+    public static void rollRandomdrop(double startX, double startY) {
         int roll = randomizer.nextInt(100);
         Drop randomDrop  = null;
         if(0 <= roll && roll < 30){

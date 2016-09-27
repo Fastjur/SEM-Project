@@ -15,15 +15,16 @@ public class AudioSystem {
     private static Player player;
     private static String loopingSound = "";
     private static boolean isRunning;
+    private static boolean playMusic = true;
 
     public static void start() {
+        playMusic = true;
         new Thread(() -> {
             playLoop();
         }).start();
     }
 
     private static void playLoop() {
-        Logger.info("Music loop is running");
         isRunning = true;
         byte[] buffer = null;
         try {
@@ -37,14 +38,13 @@ public class AudioSystem {
                     currentLoop = loopingSound;
                 }
 
-                if (buffer != null) {
+                if (buffer != null && playMusic) {
+                    Logger.info("Music loop is running");
                     player = new Player(new ByteArrayInputStream(buffer));
                     player.play();
                 }
             }
-        } catch(JavaLayerException e) {
-            Logger.error("The AudioSystem has crashed.", e);
-        } catch(IOException e) {
+        } catch(JavaLayerException | IOException e) {
             Logger.error("The AudioSystem has crashed.", e);
         }
         isRunning = false;
@@ -55,5 +55,14 @@ public class AudioSystem {
             player.close();
         }
         loopingSound = newLoopingSound;
+    }
+
+    public static void stop() {
+        playMusic = false;
+        try {
+            player.close();
+        } catch(NullPointerException e){
+            Logger.warning("Attempted to close player but was null");
+        }
     }
 }
