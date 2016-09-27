@@ -4,57 +4,51 @@ import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
-/**
- * Created by Erik on 22-9-2016.
- */
 public class DropRandomizer {
 
     private Random randomizer;
-    private final int bronzeNum = 30;
-    private final int silverNum = 20;
-    private final int goldNum = 10;
-    private final int gemNum = 8;
-    private final int heartNum = 2;
-    private final int nullNum = 100-heartNum-gemNum-goldNum-silverNum-bronzeNum;
+    private static final int BRONZE_NUM = 30;
+    private static final int SILVER_NUM = 20;
+    private static final int GOLD_NUM = 10;
+    private static final int GEM_NUM = 8;
+    private static final int TOTAL_GEMS = 4;
+    private static final int HEART_NUM = 2;
+    private static final int TOTAL_CHANCE = 100;
 
     private ArrayList<Drop> randomList;
 
-
-    public DropRandomizer(){
+    /**
+     * Creates the DropRandomizer and sets the arraylist the Random Roll pulls it's result from.
+     */
+    public DropRandomizer() {
         Logger.info("Randomizer starting.");
         randomList = new ArrayList<>();
         randomizer = new Random();
 
-        for(int i=0 ;i<bronzeNum; i++){
+        for (int i = 0; i < BRONZE_NUM; i++) {
             randomList.add(new Drop("/sprites/drops/coinBronze.png", 0, 0, 0, 1, 10));
         }
-        for(int i=0 ;i<silverNum; i++){
+        for (int i = 0; i < SILVER_NUM; i++) {
             randomList.add(new Drop("/sprites/drops/coinSilver.png", 0, 0, 0, 1, 100));
         }
-        for(int i=0 ;i<goldNum; i++){
+        for (int i = 0; i < GOLD_NUM; i++) {
             randomList.add(new Drop("/sprites/drops/coinGold.png", 0, 0, 0, 1, 1000));
         }
-        for(int i=0 ;i<(gemNum/4); i++) {
+        for (int i = 0; i <(GEM_NUM / TOTAL_GEMS); i++) {
             randomList.add(new Drop("/sprites/drops/gemBlue.png", 0, 0, 0, 1, 1500));
             randomList.add(new Drop("/sprites/drops/gemRed.png", 0, 0, 0, 1, 1500));
             randomList.add(new Drop("/sprites/drops/gemYellow.png", 0, 0, 0, 1, 1500));
             randomList.add(new Drop("/sprites/drops/gemGreen.png", 0, 0, 0, 1, 1500));
         }
-        for (int i = 0; i < heartNum; i++) {
+        for (int i = 0; i < HEART_NUM; i++) {
             randomList.add(new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 1, 1));
-        }
-        for (int i = 0; i < nullNum; i++) {
-            randomList.add(null);
         }
     }
 
     /**
      * Rolls for a drop and if it does roll positive creates that drop at startX startY.
-     *
      * Currently set up to:
      * 30% Bronze coin 10p
      * 20% Silver coin 100p
@@ -68,10 +62,10 @@ public class DropRandomizer {
     public void rollRandomdrop(double startX, double startY) {
 
         int length = randomList.size();
-        int roll = randomizer.nextInt(length);
+        int roll = randomizer.nextInt(TOTAL_CHANCE);
         Drop randomDrop = randomList.get(roll);
 
-        if( randomDrop  != null){
+        if (roll < length) {
             randomDrop.setPos(startX, startY);
             Application.getBoard().addObject( randomDrop );
         }
