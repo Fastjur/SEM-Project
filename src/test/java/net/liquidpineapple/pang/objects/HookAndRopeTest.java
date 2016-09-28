@@ -1,13 +1,13 @@
 package net.liquidpineapple.pang.objects;
 
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import net.liquidpineapple.pang.Application;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Tim on 13-9-2016.
@@ -20,7 +20,7 @@ public class HookAndRopeTest {
   private HookAndRope hookAndRope;
   private static final int XCOORD = 400;
   private static final int MAXY = 300;
-  private final double DELTA = 0.0;
+  private static final double DELTA = 0.0;
 
   private Application app;
 
@@ -39,8 +39,8 @@ public class HookAndRopeTest {
    */
   @Test
   public void constructorTest() throws Exception {
-    assertEquals(hookAndRope.getXPos(), XCOORD, DELTA);
-    assertEquals(hookAndRope.getYPos(), 600, DELTA);
+    assertEquals(hookAndRope.getXpos(), XCOORD, DELTA);
+    assertEquals(hookAndRope.getYpos(), 600, DELTA);
   }
 
   /**
@@ -48,9 +48,9 @@ public class HookAndRopeTest {
    */
   @Test
   public void moveTest() throws Exception {
-    assertEquals(600, hookAndRope.getYPos(), DELTA);
+    assertEquals(600, hookAndRope.getYpos(), DELTA);
     hookAndRope.move();
-    assertEquals(597, hookAndRope.getYPos(), DELTA);
+    assertEquals(597, hookAndRope.getYpos(), DELTA);
   }
 
   /**
@@ -59,9 +59,9 @@ public class HookAndRopeTest {
   @Test
   public void hitTopMoveTest() throws Exception {
     HookAndRope rope = new HookAndRope(500, 584);
-    assertEquals(600, rope.getYPos(), DELTA);
+    assertEquals(600, rope.getYpos(), DELTA);
     rope.move();
-    assertEquals(597, rope.getYPos(), DELTA);
+    assertEquals(597, rope.getYpos(), DELTA);
     rope.move();
     assertFalse(Application.getBoard().containsObject(rope));
   }

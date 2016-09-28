@@ -1,13 +1,12 @@
 package net.liquidpineapple.pang.objects;
 
+import static org.junit.Assert.assertEquals;
+
 import net.liquidpineapple.pang.gui.NumberToken;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Erik on 13-9-2016.

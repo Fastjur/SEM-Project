@@ -78,20 +78,20 @@ public class Ball extends GameObject {
     super.doUpdate();
 
     move();
-    if (yPos + this.getHeight() > Application.getBoard().getHeight()) {
-      yPos = Application.getBoard().getHeight() - this.getHeight();
+    if (ypos + this.getHeight() > Application.getBoard().getHeight()) {
+      ypos = Application.getBoard().getHeight() - this.getHeight();
     }
-    if (xPos + this.getWidth() > Application.getBoard().getWidth()) {
-      xPos = Application.getBoard().getWidth() - this.getWidth();
+    if (xpos + this.getWidth() > Application.getBoard().getWidth()) {
+      xpos = Application.getBoard().getWidth() - this.getWidth();
     }
-    if (xPos < 0) {
-      xPos = 0;
+    if (xpos < 0) {
+      xpos = 0;
     }
-    if (xPos == 0 || xPos + this.getWidth() == Application.getBoard().getWidth()) {
+    if (xpos == 0 || xpos + this.getWidth() == Application.getBoard().getWidth()) {
       movX = -movX;
     }
 
-    if (yPos + this.getHeight() == Application.getBoard().getHeight()) {
+    if (ypos + this.getHeight() == Application.getBoard().getHeight()) {
       movY = -6;
     }
 
@@ -104,13 +104,13 @@ public class Ball extends GameObject {
    * Calculates and sets the next position the ball should be drawn in.
    */
   public void move() {
-    oldX = xPos;
-    oldY = yPos;
-    xPos += movX;
+    oldX = xpos;
+    oldY = ypos;
+    xpos += movX;
     movY += 1 / 25.0;
-    yPos += movY;
-    Logger.info("Moved " + this.toString() + " from (" + oldX + ", " + oldY + ") to (" + xPos
-        + ", " + yPos + ")");
+    ypos += movY;
+    Logger.info("Moved " + this.toString() + " from (" + oldX + ", " + oldY + ") to (" + xpos
+        + ", " + ypos + ")");
   }
 
   /**
@@ -132,10 +132,10 @@ public class Ball extends GameObject {
       return false;
     }
 
-    double ropePos = activeRope.getXPos() + (activeRope.getWidth()) / 2;
+    double ropePos = activeRope.getXpos() + (activeRope.getWidth()) / 2;
 
-    if (ropePos - this.getXPos() >= 0 && ropePos - this.getXPos() <= this.getWidth()
-        && this.getYPos() + this.getHeight() >= activeRope.getYPos()) {
+    if (ropePos - this.getXpos() >= 0 && ropePos - this.getXpos() <= this.getWidth()
+        && this.getYpos() + this.getHeight() >= activeRope.getYpos()) {
 
       Application.getBoard().getCurrentScreen().objectList.remove(activeRope);
       Logger.info("Collision between " + this + " and " + activeRope);
@@ -153,12 +153,12 @@ public class Ball extends GameObject {
   public void destroyball() {
     ScoreSystem.addScore(100);
     if (ballSize != 1) {
-      Ball smallerBall = new Ball(xPos, yPos, BallMovement.LEFT_MOVEMENT, ballSize - 1);
-      Ball smallerBall2 = new Ball(xPos + 1, yPos, BallMovement.RIGHT_MOVEMENT, ballSize - 1);
+      Ball smallerBall = new Ball(xpos, ypos, BallMovement.LEFT_MOVEMENT, ballSize - 1);
+      Ball smallerBall2 = new Ball(xpos + 1, ypos, BallMovement.RIGHT_MOVEMENT, ballSize - 1);
       Application.getBoard().addObject(smallerBall);
       Application.getBoard().addObject(smallerBall2);
     }
-    DropRandomizer.getInstance().rollRandomdrop(xPos + (this.getWidth() / 2), yPos
+    DropRandomizer.getInstance().rollRandomdrop(xpos + (this.getWidth() / 2), ypos
         + (this.getHeight() / 2));
     //remove ball
     Logger.info("Removing " + this);

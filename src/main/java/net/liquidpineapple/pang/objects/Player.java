@@ -44,17 +44,17 @@ public class Player extends GameObject {
    * Method that moves the player.
    */
   public void move() {
-    oldX = xPos;
-    xPos += dx;
-    if (xPos < 1) {
-      xPos = 1;
+    oldX = xpos;
+    xpos += dx;
+    if (xpos < 1) {
+      xpos = 1;
     }
     int boardWidth = Application.getBoard().getWidth();
     double playerMaxPosX = boardWidth - this.getWidth();
-    if (xPos > playerMaxPosX) {
-      xPos = playerMaxPosX;
+    if (xpos > playerMaxPosX) {
+      xpos = playerMaxPosX;
     }
-    Logger.info("Moved " + this + " from x: " + oldX + " to x: " + xPos);
+    Logger.info("Moved " + this + " from x: " + oldX + " to x: " + xpos);
   }
 
   @Override
@@ -83,7 +83,7 @@ public class Player extends GameObject {
         }
       }
       if (!hookInUse) {
-        HookAndRope newRope = new HookAndRope(getXPos(), 0);
+        HookAndRope newRope = new HookAndRope(getXpos(), 0);
         Application.getBoard().addObject(newRope);
       }
     }
@@ -101,10 +101,10 @@ public class Player extends GameObject {
   public boolean collisionPlayer() {
     for (GameObject object : Application.getBoard().getCurrentScreen().objectList) {
       if (object instanceof Ball || object instanceof Drop) {
-        double playerPos = this.getXPos() + (this.getImage().getWidth(null)) / 2;
+        double playerPos = this.getXpos() + (this.getImage().getWidth(null)) / 2;
 
-        if (playerPos - object.getXPos() >= 0 && playerPos - object.getXPos() <= object.getWidth()
-            && object.getYPos() + object.getHeight() >= this.getYPos()) {
+        if (playerPos - object.getXpos() >= 0 && playerPos - object.getXpos() <= object.getWidth()
+            && object.getYpos() + object.getHeight() >= this.getYpos()) {
 
           Logger.info("Player Collided with object:" + object);
           if (object instanceof Drop) {

@@ -1,18 +1,18 @@
 package net.liquidpineapple.pang.objects;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import net.liquidpineapple.pang.Application;
-import net.liquidpineapple.pang.screens.Screen;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.*;
+import java.awt.Image;
+import java.awt.Rectangle;
 
-import java.awt.*;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import javax.swing.ImageIcon;
 
 /**
  * @author Jurriaan Den Toonder
@@ -26,11 +26,15 @@ public class PlayerTest {
   private static final int startY = 20;
 
   private static final String defaultTexture = "/sprites/no-texture.png";
-  private final double DELTA = 0.01;
+  private static final double DELTA = 0.01;
   private static String PROPERTIES_LOCATION = "/config.properties";
 
   private Player player;
 
+  /**
+   * Setup test.
+   * @throws Throwable - throwable.
+   */
   @Before
   public void setUp() throws Throwable {
     app = new Application(PROPERTIES_LOCATION);
@@ -52,8 +56,8 @@ public class PlayerTest {
   @Test
   public void testSetPos() throws Exception {
     player.setPos(5, 6);
-    assertEquals(5, player.getXPos(), DELTA);
-    assertEquals(6, player.getYPos(), DELTA);
+    assertEquals(5, player.getXpos(), DELTA);
+    assertEquals(6, player.getYpos(), DELTA);
   }
 
   @Test
@@ -66,37 +70,37 @@ public class PlayerTest {
 
   @Test
   public void testConstructor() throws Exception {
-    assertEquals(player.getXPos(), startX, 0.0000001);
-    assertEquals(player.getYPos(), startY, 0.0000001);
+    assertEquals(player.getXpos(), startX, 0.0000001);
+    assertEquals(player.getYpos(), startY, 0.0000001);
 
   }
 
   @Test
-  public void testMoveLEFT() throws Exception {
+  public void testMoveLeft() throws Exception {
     player.setDx(-DELTA);
     player.move();
     System.out.println(startX - DELTA);
-    assertEquals(player.getXPos(), startX - DELTA, 0.001);
+    assertEquals(player.getXpos(), startX - DELTA, 0.001);
   }
 
   @Test
-  public void testMoveRIGHT() throws Exception {
+  public void testMoveRight() throws Exception {
     player.setDx(DELTA);
     player.move();
-    assertEquals(player.getXPos(), startX + DELTA, 0.001);
+    assertEquals(player.getXpos(), startX + DELTA, 0.001);
   }
 
   @Test
-  public void testMoveNODIRECTION() throws Exception {
+  public void testMoveNoDirection() throws Exception {
     player.setDx(0);
     player.move();
-    assertEquals(player.getXPos(), startX, 0.0000001);
+    assertEquals(player.getXpos(), startX, 0.0000001);
   }
 
   @Test
   public void testCollision() throws Exception {
-    player.setXPos(100);
-    player.setYPos(100);
+    player.setXpos(100);
+    player.setYpos(100);
     Ball ball = new Ball(100, 100, BallMovement.LEFT_MOVEMENT, 1);
     Application.getBoard().addObject(ball);
     assertTrue(player.collisionPlayer());
@@ -104,8 +108,8 @@ public class PlayerTest {
 
   @Test
   public void testDoUpdate() throws Exception {
-    player.setXPos(100);
-    player.setYPos(100);
+    player.setXpos(100);
+    player.setYpos(100);
 
   }
 }

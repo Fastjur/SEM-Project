@@ -1,5 +1,8 @@
 package net.liquidpineapple.pang.logger;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,8 +10,6 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Date;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Jurriaan Den Toonder
@@ -21,6 +22,9 @@ public class LoggerTest {
   private final PrintStream oldStdOut = System.out;
   private final PrintStream oldStdErr = System.err;
 
+  /**
+   * Setup test.
+   */
   @Before
   public void setUpStreams() {
     System.setOut(new PrintStream(outContent));
@@ -28,6 +32,9 @@ public class LoggerTest {
     Logger.setLevel(LoggerTypes.INFO);
   }
 
+  /**
+   * Cleanup test.
+   */
   @After
   public void cleanUpStreams() {
     System.setOut(oldStdOut);
@@ -37,17 +44,17 @@ public class LoggerTest {
   @Test
   public void testSetLevel() throws Exception {
     String time = String.valueOf(new Date().getTime());
-    final String EXPECTED_WARN_AND_INFO = "[WARNING] " + time + System.lineSeparator() +
-        "[INFO] " + time + System.lineSeparator();
-    final String EXPECTED_WARNING = "[WARNING] " + time + System.lineSeparator();
-    final String EXPECTED_ERROR = "[ERROR] " + time + System.lineSeparator();
+    final String expected_warn_and_info = "[WARNING] " + time + System.lineSeparator()
+        + "[INFO] " + time + System.lineSeparator();
+    final String expected_warning = "[WARNING] " + time + System.lineSeparator();
+    final String expected_error = "[ERROR] " + time + System.lineSeparator();
 
     Logger.setLevel(LoggerTypes.WARNING);
 
     // Check that only the warning line is printed
     Logger.warning(time);
     Logger.info(time);
-    assertEquals(EXPECTED_WARNING, outContent.toString());
+    assertEquals(expected_warning, outContent.toString());
 
     outContent.reset();
 
@@ -56,7 +63,7 @@ public class LoggerTest {
     Logger.error(time);
     Logger.warning(time);
     Logger.info(time);
-    assertEquals(EXPECTED_ERROR, errContent.toString());
+    assertEquals(expected_error, errContent.toString());
 
     outContent.reset();
     errContent.reset();
@@ -66,8 +73,8 @@ public class LoggerTest {
     Logger.error(time);
     Logger.warning(time);
     Logger.info(time);
-    assertEquals(EXPECTED_ERROR, errContent.toString());
-    assertEquals(EXPECTED_WARN_AND_INFO, outContent.toString());
+    assertEquals(expected_error, errContent.toString());
+    assertEquals(expected_warn_and_info, outContent.toString());
   }
 
   @Test
@@ -97,8 +104,8 @@ public class LoggerTest {
   @Test
   public void testError1() throws Exception {
     String log = "We are logging this yay!";
-    String expected = "[ERROR] We are logging this yay!" + System.lineSeparator() +
-        "java.lang.IllegalArgumentException: Some exception";
+    String expected = "[ERROR] We are logging this yay!" + System.lineSeparator()
+        + "java.lang.IllegalArgumentException: Some exception";
     Exception exception = new IllegalArgumentException("Some exception");
     Logger.error(log, exception);
     assertTrue(errContent.toString().startsWith(expected));

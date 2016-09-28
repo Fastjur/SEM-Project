@@ -1,11 +1,11 @@
 package net.liquidpineapple.pang.objects;
 
+import static org.junit.Assert.assertEquals;
+
 import net.liquidpineapple.pang.gui.LifeSystem;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Erik on 13-9-2016.
@@ -18,7 +18,7 @@ public class LifeSystemTest {
   }
 
   @Test
-  public void Gainliveat3() {
+  public void gainliveat3() {
     while (LifeSystem.getLives() < 3) {
       LifeSystem.gainLife();
     }
@@ -27,7 +27,7 @@ public class LifeSystemTest {
   }
 
   @Test
-  public void Loseliveat3andthengain() {
+  public void loseliveat3Andthengain() {
     while (LifeSystem.getLives() < 3) {
       LifeSystem.gainLife();
     }

@@ -56,8 +56,8 @@ public class Drop extends GameObject {
    * Calculates and sets the next position the ball should be drawn in.
    */
   public void move() {
-    xPos += movX;
-    yPos += movY;
+    xpos += movX;
+    ypos += movY;
   }
 
   /**
@@ -68,19 +68,19 @@ public class Drop extends GameObject {
     super.doUpdate();
 
     move();
-    if (yPos + this.getHeight() > Application.getBoard().getHeight()) {
-      yPos = Application.getBoard().getHeight() - this.getHeight();
+    if (ypos + this.getHeight() > Application.getBoard().getHeight()) {
+      ypos = Application.getBoard().getHeight() - this.getHeight();
     }
-    if (xPos + this.getWidth() > Application.getBoard().getWidth()) {
-      xPos = Application.getBoard().getWidth() - this.getWidth();
+    if (xpos + this.getWidth() > Application.getBoard().getWidth()) {
+      xpos = Application.getBoard().getWidth() - this.getWidth();
     }
-    if (xPos < 0) {
-      xPos = 0;
+    if (xpos < 0) {
+      xpos = 0;
     }
 
-    if (yPos + this.getHeight() == Application.getBoard().getHeight()) {
+    if (ypos + this.getHeight() == Application.getBoard().getHeight()) {
       movX = 0;
-    } else if (xPos == 0 || xPos + this.getWidth() == Application.getBoard().getWidth()) {
+    } else if (xpos == 0 || xpos + this.getWidth() == Application.getBoard().getWidth()) {
       movX = -movX;
     }
   }

@@ -35,16 +35,16 @@ public class HookAndRope extends GameObject {
    * Method to move the hook upwards.
    */
   public void move() {
-    double oldY = yPos;
-    yPos -= dy;
+    double oldY = ypos;
+    ypos -= dy;
 
-    //if yPos reaches 0, the top of the frame has been reached,
-    // and yPos should go to boardHeight again
-    if (yPos <= maxY) {
+    //if ypos reaches 0, the top of the frame has been reached,
+    // and ypos should go to boardHeight again
+    if (ypos <= maxY) {
       Application.getBoard().getCurrentScreen().objectList.remove(this);
     }
 
-    Logger.info("Moved " + this + " from y: " + oldY + " to y: " + yPos);
+    Logger.info("Moved " + this + " from y: " + oldY + " to y: " + ypos);
   }
 
   /**
