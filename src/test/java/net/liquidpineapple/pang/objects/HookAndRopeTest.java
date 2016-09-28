@@ -1,13 +1,13 @@
 package net.liquidpineapple.pang.objects;
 
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertEquals;
-
 import net.liquidpineapple.pang.Application;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Tim on 13-9-2016.
@@ -31,7 +31,7 @@ public class HookAndRopeTest {
   public void setUp() throws Exception {
     app = new Application(PROPERTIES_LOCATION);
     app.start();
-    hookAndRope = new HookAndRope(XCOORD, MAXY);
+    hookAndRope = new HookAndRope(XCOORD, MAXY, null);
   }
 
   /**
@@ -58,7 +58,7 @@ public class HookAndRopeTest {
    */
   @Test
   public void hitTopMoveTest() throws Exception {
-    HookAndRope rope = new HookAndRope(500, 584);
+    HookAndRope rope = new HookAndRope(500, 584, null);
     assertEquals(600, rope.getYpos(), DELTA);
     rope.move();
     assertEquals(597, rope.getYpos(), DELTA);

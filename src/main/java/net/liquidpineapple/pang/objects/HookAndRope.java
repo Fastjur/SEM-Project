@@ -1,10 +1,10 @@
 package net.liquidpineapple.pang.objects;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Created by Tim on 9-9-2016.
@@ -15,10 +15,10 @@ import net.liquidpineapple.pang.logger.Logger;
 @EqualsAndHashCode(callSuper = true)
 public class HookAndRope extends GameObject {
 
-  //TODO: remove white background for sprite
   private static final String textureLocation = "/sprites/beam.png";
   private final double maxY;
   private double dy = 3; //specify upspeed rope here.
+  private Player player;
 
   /**
    * Constructor for the HookAndRope class
@@ -26,9 +26,10 @@ public class HookAndRope extends GameObject {
    * @param startX - Xlocation where the hook should go up.
    * @param maxY   - Maximum height the rope should go up to.
    */
-  public HookAndRope(double startX, double maxY) {
+  public HookAndRope(double startX, double maxY, Player player) {
     super(textureLocation, startX, 600);
     this.maxY = maxY;
+    this.player = player;
   }
 
   /**
@@ -41,6 +42,7 @@ public class HookAndRope extends GameObject {
     //if ypos reaches 0, the top of the frame has been reached,
     // and ypos should go to boardHeight again
     if (ypos <= maxY) {
+      player.activeHooks--;
       Application.getBoard().getCurrentScreen().objectList.remove(this);
     }
 

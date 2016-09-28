@@ -1,11 +1,12 @@
 package net.liquidpineapple.pang.objects;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.playerschemes.PlayerScheme;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Jurriaan Den Toonder
@@ -18,6 +19,7 @@ public class Player extends GameObject {
   private boolean isHit = false;
   private double oldX;
   private PlayerScheme playerScheme;
+  public int activeHooks = 0;
 
   private enum PlayerMovement {
     LEFT_DIRECTION(-4 / 5.0),
@@ -73,16 +75,10 @@ public class Player extends GameObject {
     }
 
     if (playerScheme.shootPressed()) {
-      boolean hookInUse = false;
-      for (GameObject o : Application.getBoard().getCurrentScreen().objectList) {
-        if (o instanceof HookAndRope) {
-          hookInUse = true;
-
-        }
-      }
-      if (!hookInUse) {
-        HookAndRope newRope = new HookAndRope(getXpos(), 0);
+      if (activeHooks < 1) {
+        HookAndRope newRope = new HookAndRope(getXpos(), 0, this);
         Application.getBoard().addObject(newRope);
+        activeHooks++;
       }
     }
 
