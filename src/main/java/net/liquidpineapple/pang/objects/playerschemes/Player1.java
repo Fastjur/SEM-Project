@@ -5,6 +5,7 @@ import net.liquidpineapple.pang.InputHandler;
 import java.awt.event.KeyEvent;
 
 /**
+ * The PlayerScheme for the first player.
  * @author Govert de Gans
  * @date 2016-09-28
  */
