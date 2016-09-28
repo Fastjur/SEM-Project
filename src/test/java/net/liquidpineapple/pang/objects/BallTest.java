@@ -1,66 +1,66 @@
 package net.liquidpineapple.pang.objects;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class BallTest {
 
-    private Ball TestBallLeft = new Ball(0, 0, BallMovement.LEFT_MOVEMENT, 4);
-    private Ball TestBallRight = new Ball(0, 0, BallMovement.RIGHT_MOVEMENT, 3);
-    private Ball TestBallIncorrectSizeGreater = new Ball(0, 0, BallMovement.LEFT_MOVEMENT, 6);
-    private Ball TestBallIncorrectSizeSmaller = new Ball(0, 0, BallMovement.RIGHT_MOVEMENT, 0);
-    private final double DELTA = 0.01;
+  private Ball testBallLeft = new Ball(0, 0, BallMovement.LEFT_MOVEMENT, 4);
+  private Ball testBallRight = new Ball(0, 0, BallMovement.RIGHT_MOVEMENT, 3);
+  private Ball testBallIncorrectSizeGreater = new Ball(0, 0, BallMovement.LEFT_MOVEMENT, 6);
+  private Ball testBallIncorrectSizeSmaller = new Ball(0, 0, BallMovement.RIGHT_MOVEMENT, 0);
+  private static final double DELTA = 0.01;
 
-    //Tests if the constructor handles left and right correctly.
-    @Test
-    public void testConstructorDirection() throws Throwable {
-        assertEquals(-2/5.0, TestBallLeft.getMovX(), DELTA);
-        assertEquals(2/5.0, TestBallRight.getMovX(), DELTA);
-    }
+  //Tests if the constructor handles left and right correctly.
+  @Test
+  public void testConstructorDirection() throws Throwable {
+    assertEquals(-2 / 5.0, testBallLeft.getMovX(), DELTA);
+    assertEquals(2 / 5.0, testBallRight.getMovX(), DELTA);
+  }
 
-   //Tests if the constructor handles sets movY correctly.
-    @Test
-    public void testConstructorYSpeed() throws Throwable {
-        assertEquals(-2.0, TestBallLeft.getMovY(), DELTA);
-        assertEquals(-2.0, TestBallRight.getMovY(), DELTA);
-    }
+  //Tests if the constructor handles sets movY correctly.
+  @Test
+  public void testConstructorYSpeed() throws Throwable {
+    assertEquals(-2.0, testBallLeft.getMovY(), DELTA);
+    assertEquals(-2.0, testBallRight.getMovY(), DELTA);
+  }
 
 
-    //Tests if the constructor handles size correctly
-    @Test
-    public void testConstructorSize() throws Throwable {
-        assertEquals(4, TestBallLeft.getBallSize());
-        assertEquals(3, TestBallRight.getBallSize());
-    }
+  //Tests if the constructor handles size correctly
+  @Test
+  public void testConstructorSize() throws Throwable {
+    assertEquals(4, testBallLeft.getBallSize());
+    assertEquals(3, testBallRight.getBallSize());
+  }
 
-    //Tests if the constructor handles incorrect sizes correctly
-    @Test
-    public void testIncorrectSize() throws Throwable {
-        assertEquals(4, TestBallIncorrectSizeGreater.getBallSize());
-        assertEquals(4, TestBallIncorrectSizeSmaller.getBallSize());
-    }
+  //Tests if the constructor handles incorrect sizes correctly
+  @Test
+  public void testIncorrectSize() throws Throwable {
+    assertEquals(4, testBallIncorrectSizeGreater.getBallSize());
+    assertEquals(4, testBallIncorrectSizeSmaller.getBallSize());
+  }
 
-    @Test
-    public void testMove() throws Exception {
-        TestBallLeft.setPos(5, 5);
-        TestBallLeft.setMovX(1);
+  @Test
+  public void testMove() throws Exception {
+    testBallLeft.setPos(5, 5);
+    testBallLeft.setMovX(1);
 
-        TestBallLeft.move();
-        assertEquals(6, TestBallLeft.getXPos(), DELTA);
+    testBallLeft.move();
+    assertEquals(6, testBallLeft.getXpos(), DELTA);
 
-        TestBallLeft.setMovX(-1);
-        TestBallLeft.move();
-        assertEquals(5, TestBallLeft.getXPos(), DELTA);
+    testBallLeft.setMovX(-1);
+    testBallLeft.move();
+    assertEquals(5, testBallLeft.getXpos(), DELTA);
 
-        TestBallLeft.setMovY(1);
-        TestBallLeft.move();
-        assertEquals(2.16, TestBallLeft.getYPos(), DELTA);
+    testBallLeft.setMovY(1);
+    testBallLeft.move();
+    assertEquals(2.16, testBallLeft.getYpos(), DELTA);
 
-        TestBallLeft.setMovY(-1);
-        TestBallLeft.move();
-        assertEquals(1.2000000000000002, TestBallLeft.getYPos(), DELTA);
+    testBallLeft.setMovY(-1);
+    testBallLeft.move();
+    assertEquals(1.2000000000000002, testBallLeft.getYpos(), DELTA);
 
-    }
+  }
 
 }
