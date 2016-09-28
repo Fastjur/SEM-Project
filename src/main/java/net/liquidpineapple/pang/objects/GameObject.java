@@ -28,6 +28,7 @@ public abstract class GameObject {
     public GameObject(String textureLocation, double startX, double startY) {
         this.xPos = startX;
         this.yPos = startY;
+
         changeImage(textureLocation);
         Logger.info("GameObject registered at (" + xPos + ", " + yPos + ") with width " + width + " and height " + height);
     }

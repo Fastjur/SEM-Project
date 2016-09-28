@@ -38,6 +38,7 @@ public class Application extends JFrame {
   private static Board board;
 
   @Getter
+
   @Setter
   private static ScoreSystem scoreKeeper;
 
