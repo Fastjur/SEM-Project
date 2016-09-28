@@ -32,6 +32,6 @@ public class Player1 implements PlayerScheme {
   }
 
   public String getBeamTextureName() {
-    return "/sprites/beam1aa.png";
+    return "/sprites/beam1.png";
   }
 }
