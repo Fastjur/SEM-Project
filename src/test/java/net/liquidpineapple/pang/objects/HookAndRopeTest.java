@@ -1,14 +1,14 @@
 package net.liquidpineapple.pang.objects;
 
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.objects.playerschemes.Player1;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Tim on 13-9-2016.

@@ -1,12 +1,12 @@
 package net.liquidpineapple.pang.objects;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.playerschemes.PlayerScheme;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * @author Jurriaan Den Toonder

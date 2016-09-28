@@ -1,16 +1,19 @@
 package net.liquidpineapple.pang.objects;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.objects.playerschemes.Player1;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
+import java.awt.Rectangle;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import javax.swing.ImageIcon;
 
 /**
  * @author Jurriaan Den Toonder

@@ -1,5 +1,8 @@
 package net.liquidpineapple.pang;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
@@ -15,9 +18,6 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * The main application, extends {@link JFrame}
@@ -53,7 +53,7 @@ public class Application extends JFrame {
    *
    * @param propertiesLocation {@link String} URL to resource file with configuration settings
    * @throws IOException Thrown when properties file can not be read
-     */
+   */
   public Application(String propertiesLocation) throws IOException {
     super();
     Logger.info("Starting application...");
@@ -71,7 +71,7 @@ public class Application extends JFrame {
    * Starts the application.
    *
    * @throws IOException Thrown when resource file containing properties can not be read
-     */
+   */
   public void start() throws IOException {
     Integer width = Integer.valueOf(properties.getProperty("application-width"));
     Integer height = Integer.valueOf(properties.getProperty("application-height"));

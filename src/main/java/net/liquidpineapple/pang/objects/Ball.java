@@ -1,11 +1,11 @@
 package net.liquidpineapple.pang.objects;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.logger.Logger;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * Class that represents the ball.
