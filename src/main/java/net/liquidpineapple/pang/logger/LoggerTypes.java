@@ -7,18 +7,18 @@ import lombok.Getter;
  * @date 2016/09/21.
  */
 public enum LoggerTypes {
-    INFO("[INFO]", 1),
-    WARNING("[WARNING]", 2),
-    ERROR("[ERROR]", 3);
+  INFO("[INFO]", 1),
+  WARNING("[WARNING]", 2),
+  ERROR("[ERROR]", 3);
 
-    @Getter
-    private String prefix;
+  @Getter
+  private String prefix;
 
-    @Getter
-    private int priority;
+  @Getter
+  private int priority;
 
-    LoggerTypes(String prefix, int priority) {
-        this.prefix = prefix;
-        this.priority = priority;
-    }
+  LoggerTypes(String prefix, int priority) {
+    this.prefix = prefix;
+    this.priority = priority;
+  }
 }

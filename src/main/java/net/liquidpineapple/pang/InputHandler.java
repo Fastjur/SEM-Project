@@ -13,81 +13,83 @@ import java.util.HashSet;
  * @author Govert de Gans
  * @date 2016-09-12
  */
-public class InputHandler implements MouseListener, KeyListener{
+public class InputHandler implements MouseListener, KeyListener {
 
-    private static HashSet<Integer> keysPressed = new HashSet<>();
-    private static Point mousePos;
-    private static int mouseButtonPressed;
+  private static HashSet<Integer> keysPressed = new HashSet<>();
+  private static Point mousePos;
+  private static int mouseButtonPressed;
 
-    public InputHandler() {}
+  public InputHandler() {
+  }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        keysPressed.add(e.getKeyCode());
-    }
+  @Override
+  public void keyPressed(KeyEvent e) {
+    keysPressed.add(e.getKeyCode());
+  }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-        keysPressed.remove(e.getKeyCode());
-    }
+  @Override
+  public void keyReleased(KeyEvent e) {
+    keysPressed.remove(e.getKeyCode());
+  }
 
-    @Override
-    public void keyTyped(KeyEvent e) {}
+  @Override
+  public void keyTyped(KeyEvent e) {
+  }
 
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
+  @Override
+  public void mouseClicked(MouseEvent e) {
 
-    }
+  }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        mousePos = new Point(e.getX(), e.getY());
-        mouseButtonPressed = e.getButton();
-        Logger.info("pang-1");
-    }
+  @Override
+  public void mousePressed(MouseEvent e) {
+    mousePos = new Point(e.getX(), e.getY());
+    mouseButtonPressed = e.getButton();
+    Logger.info("pang-1");
+  }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        mouseButtonPressed = 0;
-    }
+  @Override
+  public void mouseReleased(MouseEvent e) {
+    mouseButtonPressed = 0;
+  }
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
+  @Override
+  public void mouseEntered(MouseEvent e) {
 
-    }
+  }
 
-    @Override
-    public void mouseExited(MouseEvent e) {
+  @Override
+  public void mouseExited(MouseEvent e) {
 
-    }
+  }
 
-    public static boolean isKeyPressed(int keyCode) {
-        return keysPressed.contains(keyCode);
-    }
+  public static boolean isKeyPressed(int keyCode) {
+    return keysPressed.contains(keyCode);
+  }
 
-    public static boolean isAnyKeyPressed() {
-        return !keysPressed.isEmpty();
-    }
+  public static boolean isAnyKeyPressed() {
+    return !keysPressed.isEmpty();
+  }
 
-    public static boolean isLeftMouseButtonDown() {
-        return mouseButtonPressed == MouseEvent.BUTTON1;
-    }
+  public static boolean isLeftMouseButtonDown() {
+    return mouseButtonPressed == MouseEvent.BUTTON1;
+  }
 
-    public static boolean isRightMouseButtonDown() {
-        return mouseButtonPressed == MouseEvent.BUTTON2;
-    }
+  public static boolean isRightMouseButtonDown() {
+    return mouseButtonPressed == MouseEvent.BUTTON2;
+  }
 
-    public static boolean isMiddleMouseButtonDown() {
-        return mouseButtonPressed == MouseEvent.BUTTON3;
-    }
+  public static boolean isMiddleMouseButtonDown() {
+    return mouseButtonPressed == MouseEvent.BUTTON3;
+  }
 
-    public static Point getMousePos() {
-        return mousePos;
-    }
+  public static Point getMousePos() {
+    return mousePos;
+  }
 
-    public static void clearState() {
-        keysPressed.clear();
-        mouseButtonPressed = 0;
-    }
+  public static void clearState() {
+    keysPressed.clear();
+    mouseButtonPressed = 0;
+  }
 }

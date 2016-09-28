@@ -1,7 +1,5 @@
 package net.liquidpineapple.pang;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
@@ -9,13 +7,16 @@ import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.DropRandomizer;
 
-import java.awt.EventQueue;
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
+
+import javax.swing.*;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * The main application, extends {@link JFrame}
@@ -25,15 +26,12 @@ import javax.swing.WindowConstants;
  */
 public class Application extends JFrame {
 
-  private static String PROPERTIES_LOCATION = "/config.properties";
-  private static final int UPDATE_DELAY = 10;
-  private static final int DRAW_DELAY = 5;
-
   // Set to true to prevent loosing lives
   public static final boolean cheatMode = false;
-
+  private static final int UPDATE_DELAY = 10;
+  private static final int DRAW_DELAY = 5;
   public static LifeSystem lifeSystem;
-
+  private static String PROPERTIES_LOCATION = "/config.properties";
   @Getter
   private static Board board;
 
@@ -48,7 +46,7 @@ public class Application extends JFrame {
    *
    * @param propertiesLocation {@link String} URL to resource file with configuration settings
    * @throws IOException Thrown when properties file can not be read
-     */
+   */
   public Application(String propertiesLocation) throws IOException {
     super();
     Logger.info("Starting application...");
@@ -63,10 +61,27 @@ public class Application extends JFrame {
   }
 
   /**
+   * Main method of the application.
+   *
+   * @param args Command line arguments
+   */
+  public static void main(String[] args) {
+    EventQueue.invokeLater(() -> {
+      Application app = null;
+      try {
+        app = new Application(PROPERTIES_LOCATION);
+        app.start();
+      } catch (IOException ex) {
+        Logger.error(ex.getMessage(), ex);
+      }
+    });
+  }
+
+  /**
    * Starts the application.
    *
    * @throws IOException Thrown when resource file containing properties can not be read
-     */
+   */
   public void start() throws IOException {
     Integer width = Integer.valueOf(properties.getProperty("application-width"));
     Integer height = Integer.valueOf(properties.getProperty("application-height"));
@@ -155,23 +170,6 @@ public class Application extends JFrame {
 
     AudioSystem.start();
     AudioSystem.changeLoopingSound("/sounds/bg.mp3");
-  }
-
-  /**
-   * Main method of the application.
-   *
-   * @param args Command line arguments
-   */
-  public static void main(String[] args) {
-    EventQueue.invokeLater(() -> {
-      Application app = null;
-      try {
-        app = new Application(PROPERTIES_LOCATION);
-        app.start();
-      } catch (IOException ex) {
-        Logger.error(ex.getMessage(), ex);
-      }
-    });
   }
 
   /**
