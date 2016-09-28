@@ -69,7 +69,7 @@ public class WinScreen extends Screen {
     int pos = 0;
 
     while (calcscore > 0) {
-      places.get(pos).SetScoreToken(calcscore % 10);
+      places.get(pos).setScoreToken(calcscore % 10);
       calcscore /= 10;
       pos++;
     }
