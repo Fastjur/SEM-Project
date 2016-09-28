@@ -119,11 +119,9 @@ public class Ball extends GameObject {
    * @return returns true if the hook is hit, returns false otherwise.
    */
   public boolean collisionHook() {
-    boolean hookInUse = false;
     HookAndRope activeRope = null;
     for (GameObject o : Application.getBoard().getCurrentScreen().objectList) {
       if (o instanceof HookAndRope) {
-        hookInUse = true;
         activeRope = (HookAndRope) o;
 
         double ropePos = activeRope.getXpos() + (activeRope.getWidth()) / 2;

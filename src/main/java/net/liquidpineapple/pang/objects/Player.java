@@ -74,12 +74,10 @@ public class Player extends GameObject {
       dx = PlayerMovement.NO_MOVEMENT.dx;
     }
 
-    if (playerScheme.shootPressed()) {
-      if (activeHooks < 1) {
-        HookAndRope newRope = new HookAndRope(getXpos(), 0, this);
-        Application.getBoard().addObject(newRope);
-        activeHooks++;
-      }
+    if (playerScheme.shootPressed() && activeHooks < 1) {
+      HookAndRope newRope = new HookAndRope(getXpos(), 0, this);
+      Application.getBoard().addObject(newRope);
+      activeHooks++;
     }
 
     if (collisionPlayer() && !isHit && !Application.cheatMode) {

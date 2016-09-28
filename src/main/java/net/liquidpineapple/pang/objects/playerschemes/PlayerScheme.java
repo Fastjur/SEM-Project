@@ -6,15 +6,15 @@ package net.liquidpineapple.pang.objects.playerschemes;
  * @date 2016-09-28
  */
 public interface PlayerScheme {
-  public String getTextureName();
+  String getTextureName();
 
-  public boolean leftPressed();
+  boolean leftPressed();
 
-  public boolean rightPressed();
+  boolean rightPressed();
 
-  public boolean shootPressed();
+  boolean shootPressed();
 
-  public String getName();
+  String getName();
 
-  public String getBeamTextureName();
+  String getBeamTextureName();
 }
