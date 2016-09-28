@@ -1,18 +1,16 @@
 package net.liquidpineapple.pang.objects;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import net.liquidpineapple.pang.Application;
-
+import net.liquidpineapple.pang.objects.playerschemes.Player1;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.Image;
-import java.awt.Rectangle;
+import javax.swing.*;
+import java.awt.*;
 
-import javax.swing.ImageIcon;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Jurriaan Den Toonder
@@ -39,7 +37,7 @@ public class PlayerTest {
   public void setUp() throws Throwable {
     app = new Application(PROPERTIES_LOCATION);
     app.start();
-    player = new Player(startX, startY);
+    player = new Player(startX, startY, new Player1());
   }
 
   @After

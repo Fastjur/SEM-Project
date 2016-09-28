@@ -2,13 +2,10 @@ package net.liquidpineapple.pang.objects;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 import net.liquidpineapple.pang.Application;
-import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.logger.Logger;
-
-import java.awt.event.KeyEvent;
+import net.liquidpineapple.pang.objects.playerschemes.PlayerScheme;
 
 /**
  * @author Jurriaan Den Toonder
@@ -18,9 +15,9 @@ import java.awt.event.KeyEvent;
 @EqualsAndHashCode(callSuper = true)
 public class Player extends GameObject {
 
-  private static final String textureLocation = "/sprites/player/p1_front.png";
-  public static boolean isHit = false;
+  private boolean isHit = false;
   private double oldX;
+  private PlayerScheme playerScheme;
 
   private enum PlayerMovement {
     LEFT_DIRECTION(-4 / 5.0),
@@ -36,8 +33,9 @@ public class Player extends GameObject {
 
   private double dx;
 
-  public Player(double startX, double startY) {
-    super(textureLocation, startX, startY);
+  public Player(double startX, double startY, PlayerScheme playerScheme) {
+    super(playerScheme.getTextureName(), startX, startY);
+    this.playerScheme = playerScheme;
   }
 
   /**
@@ -61,20 +59,20 @@ public class Player extends GameObject {
   public void doUpdate() {
     super.doUpdate();
 
-    if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {
-      if (!InputHandler.isKeyPressed(KeyEvent.VK_D)) {
+    if (playerScheme.leftPressed()) {
+      if (!playerScheme.rightPressed()) {
         dx = PlayerMovement.LEFT_DIRECTION.dx;
         move();
       }
 
-    } else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {
+    } else if (playerScheme.rightPressed()) {
       dx = PlayerMovement.RIGHT_DIRECTION.dx;
       move();
     } else {
       dx = PlayerMovement.NO_MOVEMENT.dx;
     }
 
-    if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
+    if (playerScheme.shootPressed()) {
       boolean hookInUse = false;
       for (GameObject o : Application.getBoard().getCurrentScreen().objectList) {
         if (o instanceof HookAndRope) {
@@ -106,7 +104,7 @@ public class Player extends GameObject {
         if (playerPos - object.getXpos() >= 0 && playerPos - object.getXpos() <= object.getWidth()
             && object.getYpos() + object.getHeight() >= this.getYpos()) {
 
-          Logger.info("Player Collided with object:" + object);
+          Logger.info(playerScheme.getName() + " collided with object:" + object);
           if (object instanceof Drop) {
             Drop drop = (Drop) object;
             drop.playerCollision();
