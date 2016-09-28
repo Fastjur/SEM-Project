@@ -2,6 +2,7 @@
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
@@ -9,49 +10,51 @@ import net.liquidpineapple.pang.logger.Logger;
  * Created by Tim on 9-9-2016.
  * Class that represents the hook system in the game.
  */
-<span class="pc" id="L12">@Data</span>
-<span class="pc bpc" id="L13" title="10 of 12 branches missed.">@EqualsAndHashCode(callSuper = true)</span>
-public class HookAndRope extends GameObject{
+<span class="pc" id="L13">@Data</span>
 
-    //TODO: remove white background for sprite
-    private static final String textureLocation = &quot;/sprites/beam.png&quot;;
-<span class="fc" id="L18">    private final double maxY;</span>
-<span class="fc" id="L19">    private double dy = 3; //specify upspeed rope here.</span>
+<span class="pc bpc" id="L15" title="10 of 12 branches missed.">@EqualsAndHashCode(callSuper = true)</span>
+public class HookAndRope extends GameObject {
 
-    /**
-     * Constructor for the HookAndRope class
-     * @param startX - Xlocation where the hook should go up.
-     * @param maxY - Maximum height the rope should go up to.
-     */
-    public HookAndRope(double startX, double maxY) {
-<span class="fc" id="L27">        super(textureLocation, startX, 600);</span>
-<span class="fc" id="L28">        this.maxY = maxY;</span>
-<span class="fc" id="L29">    }</span>
+  //TODO: remove white background for sprite
+  private static final String textureLocation = &quot;/sprites/beam.png&quot;;
+<span class="fc" id="L20">  private final double maxY;</span>
+<span class="fc" id="L21">  private double dy = 3; //specify upspeed rope here.</span>
 
-    /**
-     * Method to move the hook upwards.
-     */
-    public void move(){
-<span class="fc" id="L35">        double oldY = yPos;</span>
-<span class="fc" id="L36">        yPos -= dy;</span>
+  /**
+   * Constructor for the HookAndRope class
+   *
+   * @param startX - Xlocation where the hook should go up.
+   * @param maxY   - Maximum height the rope should go up to.
+   */
+  public HookAndRope(double startX, double maxY) {
+<span class="fc" id="L30">    super(textureLocation, startX, 600);</span>
+<span class="fc" id="L31">    this.maxY = maxY;</span>
+<span class="fc" id="L32">  }</span>
 
-        //if yPos reaches 0, the top of the frame has been reached,
-        // and yPos should go to boardHeight again
-<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if(yPos&lt;=maxY){</span>
-<span class="nc" id="L41">            Application.getBoard().getCurrentScreen().objectList.remove(this);</span>
-        }
+  /**
+   * Method to move the hook upwards.
+   */
+  public void move() {
+<span class="fc" id="L38">    double oldY = ypos;</span>
+<span class="fc" id="L39">    ypos -= dy;</span>
 
-<span class="fc" id="L44">        Logger.info(&quot;Moved &quot; + this + &quot; from y: &quot; + oldY + &quot; to y: &quot; + yPos);</span>
-<span class="fc" id="L45">    }</span>
+    //if ypos reaches 0, the top of the frame has been reached,
+    // and ypos should go to boardHeight again
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">    if (ypos &lt;= maxY) {</span>
+<span class="nc" id="L44">      Application.getBoard().getCurrentScreen().objectList.remove(this);</span>
+    }
 
-    /**
-     * method to update the position of the hook,
-     * iff its in use.
-     */
-    public void doUpdate() {
-<span class="nc" id="L52">        super.doUpdate();</span>
-<span class="nc" id="L53">        move();</span>
-<span class="nc" id="L54">    }</span>
+<span class="fc" id="L47">    Logger.info(&quot;Moved &quot; + this + &quot; from y: &quot; + oldY + &quot; to y: &quot; + ypos);</span>
+<span class="fc" id="L48">  }</span>
+
+  /**
+   * method to update the position of the hook,
+   * iff its in use.
+   */
+  public void doUpdate() {
+<span class="nc" id="L55">    super.doUpdate();</span>
+<span class="nc" id="L56">    move();</span>
+<span class="nc" id="L57">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

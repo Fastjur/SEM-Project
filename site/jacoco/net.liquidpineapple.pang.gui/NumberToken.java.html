@@ -3,69 +3,77 @@
 import lombok.Getter;
 import net.liquidpineapple.pang.objects.GameObject;
 
+
+
 /**
  * Created by Erik on 12-9-2016.
  */
 public class NumberToken extends GameObject {
 
-    @Getter
-    private int currentnumber;
-    private static final String textureLocation0 = &quot;/sprites/numbers/hud_0.png&quot;;
-    private static final String textureLocation1 = &quot;/sprites/numbers/hud_1.png&quot;;
-    private static final String textureLocation2 = &quot;/sprites/numbers/hud_2.png&quot;;
-    private static final String textureLocation3 = &quot;/sprites/numbers/hud_3.png&quot;;
-    private static final String textureLocation4 = &quot;/sprites/numbers/hud_4.png&quot;;
-    private static final String textureLocation5 = &quot;/sprites/numbers/hud_5.png&quot;;
-    private static final String textureLocation6 = &quot;/sprites/numbers/hud_6.png&quot;;
-    private static final String textureLocation7 = &quot;/sprites/numbers/hud_7.png&quot;;
-    private static final String textureLocation8 = &quot;/sprites/numbers/hud_8.png&quot;;
-    private static final String textureLocation9 = &quot;/sprites/numbers/hud_9.png&quot;;
+  private static final String textureLocation0 = &quot;/sprites/numbers/hud_0.png&quot;;
+  private static final String textureLocation1 = &quot;/sprites/numbers/hud_1.png&quot;;
+  private static final String textureLocation2 = &quot;/sprites/numbers/hud_2.png&quot;;
+  private static final String textureLocation3 = &quot;/sprites/numbers/hud_3.png&quot;;
+  private static final String textureLocation4 = &quot;/sprites/numbers/hud_4.png&quot;;
+  private static final String textureLocation5 = &quot;/sprites/numbers/hud_5.png&quot;;
+  private static final String textureLocation6 = &quot;/sprites/numbers/hud_6.png&quot;;
+  private static final String textureLocation7 = &quot;/sprites/numbers/hud_7.png&quot;;
+  private static final String textureLocation8 = &quot;/sprites/numbers/hud_8.png&quot;;
+  private static final String textureLocation9 = &quot;/sprites/numbers/hud_9.png&quot;;
+  @Getter
+  private int currentnumber;
 
-    public NumberToken(int X, int Y){
-<span class="fc" id="L25">        super(textureLocation0, X, Y);</span>
-<span class="fc" id="L26">    }</span>
+  public NumberToken(int xpos, int ypos) {
+<span class="fc" id="L27">    super(textureLocation0, xpos, ypos);</span>
+<span class="fc" id="L28">  }</span>
 
-    public void SetScoreToken(int Number){
-<span class="fc bfc" id="L29" title="All 2 branches covered.">        if(Number != currentnumber) {</span>
-<span class="pc bpc" id="L30" title="5 of 11 branches missed.">            switch (Number) {</span>
-                case 0:
-<span class="fc" id="L32">                    changeImage(textureLocation0);</span>
-<span class="fc" id="L33">                    break;</span>
-                case 1:
-<span class="fc" id="L35">                    changeImage(textureLocation1);</span>
-<span class="fc" id="L36">                    break;</span>
-                case 2:
-<span class="nc" id="L38">                    changeImage(textureLocation2);</span>
-<span class="nc" id="L39">                    break;</span>
-                case 3:
-<span class="nc" id="L41">                    changeImage(textureLocation3);</span>
-<span class="nc" id="L42">                    break;</span>
-                case 4:
-<span class="nc" id="L44">                    changeImage(textureLocation4);</span>
-<span class="nc" id="L45">                    break;</span>
-                case 5:
-<span class="fc" id="L47">                    changeImage(textureLocation5);</span>
-<span class="fc" id="L48">                    break;</span>
-                case 6:
-<span class="fc" id="L50">                    changeImage(textureLocation6);</span>
-<span class="fc" id="L51">                    break;</span>
-                case 7:
-<span class="nc" id="L53">                    changeImage(textureLocation7);</span>
-<span class="nc" id="L54">                    break;</span>
-                case 8:
-<span class="fc" id="L56">                    changeImage(textureLocation8);</span>
-<span class="fc" id="L57">                    break;</span>
-                case 9:
-<span class="fc" id="L59">                    changeImage(textureLocation9);</span>
-                    break;
-            }
-        }
-<span class="fc" id="L63">        currentnumber = Number;</span>
-<span class="fc" id="L64">    }</span>
-
-    public int getcurrentnumber(){
-<span class="fc" id="L67">        return currentnumber;</span>
+  /**
+   * creates a numbertoken on the screen.
+   * @param number - index of the number.
+   */
+  public void setScoreToken(int number) {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">    if (number != currentnumber) {</span>
+<span class="pc bpc" id="L36" title="5 of 11 branches missed.">      switch (number) {</span>
+        case 0:
+<span class="fc" id="L38">          changeImage(textureLocation0);</span>
+<span class="fc" id="L39">          break;</span>
+        case 1:
+<span class="fc" id="L41">          changeImage(textureLocation1);</span>
+<span class="fc" id="L42">          break;</span>
+        case 2:
+<span class="nc" id="L44">          changeImage(textureLocation2);</span>
+<span class="nc" id="L45">          break;</span>
+        case 3:
+<span class="nc" id="L47">          changeImage(textureLocation3);</span>
+<span class="nc" id="L48">          break;</span>
+        case 4:
+<span class="nc" id="L50">          changeImage(textureLocation4);</span>
+<span class="nc" id="L51">          break;</span>
+        case 5:
+<span class="fc" id="L53">          changeImage(textureLocation5);</span>
+<span class="fc" id="L54">          break;</span>
+        case 6:
+<span class="fc" id="L56">          changeImage(textureLocation6);</span>
+<span class="fc" id="L57">          break;</span>
+        case 7:
+<span class="nc" id="L59">          changeImage(textureLocation7);</span>
+<span class="nc" id="L60">          break;</span>
+        case 8:
+<span class="fc" id="L62">          changeImage(textureLocation8);</span>
+<span class="fc" id="L63">          break;</span>
+        case 9:
+<span class="fc" id="L65">          changeImage(textureLocation9);</span>
+<span class="fc" id="L66">          break;</span>
+        default:
+          break;
+      }
     }
+<span class="fc" id="L71">    currentnumber = number;</span>
+<span class="fc" id="L72">  }</span>
+
+  public int getcurrentnumber() {
+<span class="fc" id="L75">    return currentnumber;</span>
+  }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

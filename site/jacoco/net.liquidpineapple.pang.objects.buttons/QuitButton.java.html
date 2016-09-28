@@ -4,26 +4,29 @@ import net.liquidpineapple.pang.logger.Logger;
 
 /**
  * Class that represents the object for the Quitbutton.
+ *
  * @author Jaap-Jan
  * @date 9-9-2016.
  */
-public class QuitButton extends Button{
-    /**
-     * Constructor of the Quitbutton.
-     * @param startX - The X location where the button should be on the screen.
-     * @param startY - The Y location where the button should be on the screen.
-     */
-    public QuitButton(double startX, double startY) {
-<span class="fc" id="L17">        super(&quot;/images/quit.png&quot;, startX, startY);</span>
-<span class="fc" id="L18">    }</span>
 
-    /**
-     * Method that exits the game when the button is clicked.
-     */
-    @Override
-    public void onClick() {
-<span class="nc" id="L25">        Logger.info(&quot;Close&quot;);</span>
-<span class="nc" id="L26">        System.exit(0);</span>
-<span class="nc" id="L27">    }</span>
+public class QuitButton extends Button {
+  /**
+   * Constructor of the Quitbutton.
+   *
+   * @param startX - The X location where the button should be on the screen.
+   * @param startY - The Y location where the button should be on the screen.
+   */
+  public QuitButton(double startX, double startY) {
+<span class="fc" id="L20">    super(&quot;/images/quit.png&quot;, startX, startY);</span>
+<span class="fc" id="L21">  }</span>
+
+  /**
+   * Method that exits the game when the button is clicked.
+   */
+  @Override
+  public void onClick() {
+<span class="nc" id="L28">    Logger.info(&quot;Close&quot;);</span>
+<span class="nc" id="L29">    System.exit(0);</span>
+<span class="nc" id="L30">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

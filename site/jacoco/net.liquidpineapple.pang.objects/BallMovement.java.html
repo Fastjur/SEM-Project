@@ -2,19 +2,20 @@
 
 import lombok.Getter;
 
+
 /**
- * @author Jurriaan Den Toonder
- *         Created on 12-9-16
+ * Enum for the ball movement.
+ * @author Jurriaan Den Toonder Created on 12-9-16
  */
-<span class="pc" id="L9">public enum BallMovement {</span>
-<span class="fc" id="L10">    LEFT_MOVEMENT(-2/5.0),</span>
-<span class="fc" id="L11">    RIGHT_MOVEMENT(2/5.0);</span>
+<span class="pc" id="L10">public enum BallMovement {</span>
+<span class="fc" id="L11">  LEFT_MOVEMENT(-2 / 5.0),</span>
+<span class="fc" id="L12">  RIGHT_MOVEMENT(2 / 5.0);</span>
 
-<span class="fc" id="L13">    @Getter</span>
-    private final double dx;
+<span class="fc" id="L14">  @Getter</span>
+  private final double dx;
 
-<span class="fc" id="L16">    BallMovement(double dx) {</span>
-<span class="fc" id="L17">        this.dx = dx;</span>
-<span class="fc" id="L18">    }</span>
+<span class="fc" id="L17">  BallMovement(double dx) {</span>
+<span class="fc" id="L18">    this.dx = dx;</span>
+<span class="fc" id="L19">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

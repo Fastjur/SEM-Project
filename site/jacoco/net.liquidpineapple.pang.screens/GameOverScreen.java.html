@@ -1,74 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GameOverScreen.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sem-project</a> &gt; <a href="index.source.html" class="el_package">net.liquidpineapple.pang.screens</a> &gt; <span class="el_source">GameOverScreen.java</span></div><h1>GameOverScreen.java</h1><pre class="source lang-java linenums">package net.liquidpineapple.pang.screens;
 
 import lombok.Getter;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.gui.NumberToken;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 
-import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+
+
 
 /**
  * Class that represents the game over screen.
+ *
  * @author Jaap-Jan
  * @date 21-9-2016.
  */
 public class GameOverScreen extends Screen {
-<span class="fc" id="L19">    @Getter</span>
-    private static ArrayList&lt;NumberToken&gt; places;
-    /**
-     * Constructor for the game over screen.
-     */
-<span class="fc" id="L24">    public GameOverScreen() {</span>
-        try {
-<span class="fc" id="L26">            backgroundImage = ImageIO.read(Level.class.getResource(&quot;/sprites/gameover.png&quot;));</span>
-<span class="nc" id="L27">        } catch (IOException e) {</span>
-<span class="nc" id="L28">            e.printStackTrace();</span>
-<span class="fc" id="L29">        }</span>
+<span class="fc" id="L23">  @Getter</span>
+  private static ArrayList&lt;NumberToken&gt; places;
 
-        //These are from right to left.
-<span class="fc" id="L32">        places = new ArrayList&lt;&gt;(9);</span>
-<span class="fc" id="L33">        int numberPosX = 524;</span>
-<span class="fc" id="L34">        int numberPosY = 300;</span>
-<span class="fc" id="L35">        int numberOfTokens = 9;</span>
-<span class="fc bfc" id="L36" title="All 2 branches covered.">        for(int i = 0; i&lt;numberOfTokens; i++) {</span>
-<span class="fc" id="L37">            NumberToken token = new NumberToken(numberPosX, numberPosY);</span>
-<span class="fc" id="L38">            places.add(token);</span>
-<span class="fc" id="L39">            objectList.add(token);</span>
-<span class="fc" id="L40">            numberPosX -= 32;</span>
-        }
-<span class="fc" id="L42">        displayscore();</span>
-<span class="fc" id="L43">    }</span>
+  /**
+   * Constructor for the game over screen.
+   */
+<span class="fc" id="L29">  public GameOverScreen() {</span>
+    try {
+<span class="fc" id="L31">      backgroundImage = ImageIO.read(Level.class.getResource(&quot;/sprites/gameover.png&quot;));</span>
+<span class="nc" id="L32">    } catch (IOException ex) {</span>
+<span class="nc" id="L33">      ex.printStackTrace();</span>
+<span class="fc" id="L34">    }</span>
 
-    /**
-     * Method that updates the game over screen.
-     */
-    @Override
-    public void doUpdate() {
-<span class="fc" id="L50">        super.doUpdate();</span>
-<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if(InputHandler.isAnyKeyPressed()){</span>
-<span class="nc" id="L52">                Application.lifeSystem.resetLives();</span>
-<span class="nc" id="L53">                Application.getScoreKeeper().resetScore();</span>
-<span class="nc" id="L54">                Application.getBoard().changeScreen(new MainMenu());</span>
-        }
-<span class="fc" id="L56">    }</span>
+    //These are from right to left.
+<span class="fc" id="L37">    places = new ArrayList&lt;&gt;(9);</span>
+<span class="fc" id="L38">    int numberPosX = 524;</span>
+<span class="fc" id="L39">    int numberPosY = 300;</span>
+<span class="fc" id="L40">    int numberOfTokens = 9;</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">    for (int i = 0; i &lt; numberOfTokens; i++) {</span>
+<span class="fc" id="L42">      NumberToken token = new NumberToken(numberPosX, numberPosY);</span>
+<span class="fc" id="L43">      places.add(token);</span>
+<span class="fc" id="L44">      objectList.add(token);</span>
+<span class="fc" id="L45">      numberPosX -= 32;</span>
+    }
+<span class="fc" id="L47">    displayscore();</span>
+<span class="fc" id="L48">  }</span>
 
-    /**
-     * Method that makes the score display on the screen.
-     */
-    public void displayscore() {
-<span class="fc" id="L62">        int calcscore = ScoreSystem.getScore();</span>
-<span class="fc" id="L63">        int i = 0;</span>
+  /**
+   * Method that updates the game over screen.
+   */
+  @Override
+  public void doUpdate() {
+<span class="fc" id="L55">    super.doUpdate();</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">    if (InputHandler.isAnyKeyPressed()) {</span>
+<span class="nc" id="L57">      Application.lifeSystem.resetLives();</span>
+<span class="nc" id="L58">      Application.getScoreKeeper().resetScore();</span>
+<span class="nc" id="L59">      Application.getBoard().changeScreen(new MainMenu());</span>
+    }
+<span class="fc" id="L61">  }</span>
 
-<span class="fc bfc" id="L65" title="All 2 branches covered.">        while(calcscore&gt;0){</span>
-<span class="fc" id="L66">            places.get(i).SetScoreToken(calcscore % 10);</span>
-<span class="fc" id="L67">            calcscore /= 10;</span>
-<span class="fc" id="L68">            i++;</span>
-        }
-<span class="fc" id="L70">        doUpdate();</span>
-<span class="fc" id="L71">    }</span>
+  /**
+   * Method that makes the score display on the screen.
+   */
+  public void displayscore() {
+<span class="fc" id="L67">    int calcscore = ScoreSystem.getScore();</span>
+<span class="fc" id="L68">    int pos = 0;</span>
+
+<span class="fc bfc" id="L70" title="All 2 branches covered.">    while (calcscore &gt; 0) {</span>
+<span class="fc" id="L71">      places.get(pos).setScoreToken(calcscore % 10);</span>
+<span class="fc" id="L72">      calcscore /= 10;</span>
+<span class="fc" id="L73">      pos++;</span>
+    }
+<span class="fc" id="L75">    doUpdate();</span>
+<span class="fc" id="L76">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

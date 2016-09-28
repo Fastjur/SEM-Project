@@ -2,6 +2,7 @@
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.gui.LifeSystem;
@@ -13,101 +14,112 @@ import java.awt.event.KeyEvent;
  * @author Jurriaan Den Toonder
  * @date 2016/09/06.
  */
-<span class="fc" id="L16">@Data</span>
-<span class="nc bnc" id="L17" title="All 10 branches missed.">@EqualsAndHashCode(callSuper = true)</span>
+<span class="pc" id="L17">@Data</span>
+<span class="nc bnc" id="L18" title="All 12 branches missed.">@EqualsAndHashCode(callSuper = true)</span>
 public class Player extends GameObject {
 
-    private static final String textureLocation = &quot;/sprites/player/p1_front.png&quot;;
-<span class="fc" id="L21">    public static boolean isHit = false;</span>
+  private static final String textureLocation = &quot;/sprites/player/p1_front.png&quot;;
+<span class="fc" id="L22">  public static boolean isHit = false;</span>
+<span class="fc" id="L23">  private double oldX;</span>
 
-<span class="nc" id="L23">    private enum PlayerMovement {</span>
-<span class="nc" id="L24">        LEFT_DIRECTION(-4/5.0),</span>
-<span class="nc" id="L25">        RIGHT_DIRECTION(4/5.0),</span>
-<span class="nc" id="L26">        NO_MOVEMENT(0);</span>
+<span class="nc" id="L25">  private enum PlayerMovement {</span>
+<span class="nc" id="L26">    LEFT_DIRECTION(-4 / 5.0),</span>
+<span class="nc" id="L27">    RIGHT_DIRECTION(4 / 5.0),</span>
+<span class="nc" id="L28">    NO_MOVEMENT(0);</span>
 
-        private final double dx;
-<span class="nc" id="L29">        PlayerMovement(double dx) {</span>
-<span class="nc" id="L30">            this.dx = dx;</span>
-<span class="nc" id="L31">        }</span>
+    private final double dx;
+
+<span class="nc" id="L32">    PlayerMovement(double dx) {</span>
+<span class="nc" id="L33">      this.dx = dx;</span>
+<span class="nc" id="L34">    }</span>
+  }
+
+<span class="fc" id="L37">  private double dx;</span>
+
+  public Player(double startX, double startY) {
+<span class="fc" id="L40">    super(textureLocation, startX, startY);</span>
+<span class="fc" id="L41">  }</span>
+
+  /**
+   * Method that moves the player.
+   */
+  public void move() {
+<span class="fc" id="L47">    oldX = xpos;</span>
+<span class="fc" id="L48">    xpos += dx;</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">    if (xpos &lt; 1) {</span>
+<span class="nc" id="L50">      xpos = 1;</span>
     }
-<span class="fc" id="L33">    private double dx;</span>
-
-    public Player(double startX, double startY) {
-<span class="fc" id="L36">        super(textureLocation, startX, startY);</span>
-<span class="fc" id="L37">    }</span>
-
-    public void move() {
-<span class="fc" id="L40">        double oldX = xPos;</span>
-<span class="fc" id="L41">        xPos += dx;</span>
-<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (xPos &lt; 1) {</span>
-<span class="nc" id="L43">            xPos = 1;</span>
-        }
-<span class="fc" id="L45">        int boardWidth = Application.getBoard().getWidth();</span>
-<span class="fc" id="L46">        double playerMaxPosX = boardWidth - this.getWidth();</span>
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (xPos &gt; playerMaxPosX) {</span>
-<span class="nc" id="L48">            xPos = playerMaxPosX;</span>
-        }
-<span class="fc" id="L50">        Logger.info(&quot;Moved &quot; + this + &quot; from x: &quot; + oldX + &quot; to x: &quot; + xPos);</span>
-<span class="fc" id="L51">    }</span>
-
-    @Override
-    public void doUpdate() {
-<span class="nc" id="L55">        super.doUpdate();</span>
-
-<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {</span>
-<span class="nc bnc" id="L58" title="All 2 branches missed.">            if(!InputHandler.isKeyPressed(KeyEvent.VK_D)) {</span>
-<span class="nc" id="L59">                dx = PlayerMovement.LEFT_DIRECTION.dx;</span>
-<span class="nc" id="L60">                move();</span>
-            }
-
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        } else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {</span>
-<span class="nc" id="L64">            dx = PlayerMovement.RIGHT_DIRECTION.dx;</span>
-<span class="nc" id="L65">            move();</span>
-        } else {
-<span class="nc" id="L67">            dx = PlayerMovement.NO_MOVEMENT.dx;</span>
-        }
-
-<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {</span>
-<span class="nc" id="L71">            boolean hookInUse = false;</span>
-<span class="nc bnc" id="L72" title="All 2 branches missed.">            for(GameObject o : Application.getBoard().getCurrentScreen().objectList){</span>
-<span class="nc bnc" id="L73" title="All 2 branches missed.">                if(o instanceof HookAndRope){</span>
-<span class="nc" id="L74">                    hookInUse = true;</span>
-                }
-<span class="nc" id="L76">            }</span>
-<span class="nc bnc" id="L77" title="All 2 branches missed.">            if(!hookInUse){</span>
-<span class="nc" id="L78">                HookAndRope newRope = new HookAndRope(getXPos(), 0);</span>
-<span class="nc" id="L79">                Application.getBoard().addObject(newRope);</span>
-            }
-        }
-
-<span class="nc bnc" id="L83" title="All 4 branches missed.">        if (collisionPlayer() &amp;&amp; !isHit &amp;&amp; !Application.cheatMode) {</span>
-<span class="nc" id="L84">            LifeSystem.loseLife();</span>
-<span class="nc" id="L85">            isHit = true;</span>
-        }
-<span class="nc" id="L87">    }</span>
-
-    public boolean collisionPlayer(){
-<span class="pc bpc" id="L90" title="1 of 2 branches missed.">        for(GameObject object : Application.getBoard().getCurrentScreen().objectList) {</span>
-<span class="pc bpc" id="L91" title="1 of 4 branches missed.">            if(object instanceof Ball || object instanceof Drop) {</span>
-<span class="fc" id="L92">                double playerPos = this.getXPos() + (this.getImage().getWidth(null))/2;</span>
-
-<span class="pc bpc" id="L94" title="2 of 4 branches missed.">                if (playerPos - object.getXPos() &gt;= 0 &amp;&amp; playerPos - object.getXPos() &lt;= object.getWidth() &amp;&amp;</span>
-<span class="pc bpc" id="L95" title="1 of 2 branches missed.">                    object.getYPos() + object.getHeight() &gt;= this.getYPos()) {</span>
-
-<span class="fc" id="L97">                    Logger.info(&quot;Player Collided with object:&quot; + object);</span>
-<span class="pc bpc" id="L98" title="1 of 2 branches missed.">                    if (object instanceof Drop) {</span>
-<span class="nc" id="L99">                        Drop drop = (Drop) object;</span>
-<span class="nc" id="L100">                        drop.playerCollision();</span>
-<span class="nc" id="L101">                        return false;</span>
-                    } else {
-<span class="fc" id="L103">                        return true;</span>
-                    }
-
-                }
-            }
-<span class="fc" id="L108">        }</span>
-<span class="nc" id="L109">        isHit = false;</span>
-<span class="nc" id="L110">        return false;</span>
+<span class="fc" id="L52">    int boardWidth = Application.getBoard().getWidth();</span>
+<span class="fc" id="L53">    double playerMaxPosX = boardWidth - this.getWidth();</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">    if (xpos &gt; playerMaxPosX) {</span>
+<span class="nc" id="L55">      xpos = playerMaxPosX;</span>
     }
+<span class="fc" id="L57">    Logger.info(&quot;Moved &quot; + this + &quot; from x: &quot; + oldX + &quot; to x: &quot; + xpos);</span>
+<span class="fc" id="L58">  }</span>
+
+  @Override
+  public void doUpdate() {
+<span class="nc" id="L62">    super.doUpdate();</span>
+
+<span class="nc bnc" id="L64" title="All 2 branches missed.">    if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">      if (!InputHandler.isKeyPressed(KeyEvent.VK_D)) {</span>
+<span class="nc" id="L66">        dx = PlayerMovement.LEFT_DIRECTION.dx;</span>
+<span class="nc" id="L67">        move();</span>
+      }
+
+<span class="nc bnc" id="L70" title="All 2 branches missed.">    } else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {</span>
+<span class="nc" id="L71">      dx = PlayerMovement.RIGHT_DIRECTION.dx;</span>
+<span class="nc" id="L72">      move();</span>
+    } else {
+<span class="nc" id="L74">      dx = PlayerMovement.NO_MOVEMENT.dx;</span>
+    }
+
+<span class="nc bnc" id="L77" title="All 2 branches missed.">    if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {</span>
+<span class="nc" id="L78">      boolean hookInUse = false;</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">      for (GameObject o : Application.getBoard().getCurrentScreen().objectList) {</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (o instanceof HookAndRope) {</span>
+<span class="nc" id="L81">          hookInUse = true;</span>
+
+        }
+<span class="nc" id="L84">      }</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">      if (!hookInUse) {</span>
+<span class="nc" id="L86">        HookAndRope newRope = new HookAndRope(getXpos(), 0);</span>
+<span class="nc" id="L87">        Application.getBoard().addObject(newRope);</span>
+      }
+    }
+
+<span class="nc bnc" id="L91" title="All 4 branches missed.">    if (collisionPlayer() &amp;&amp; !isHit &amp;&amp; !Application.cheatMode) {</span>
+<span class="nc" id="L92">      LifeSystem.loseLife();</span>
+<span class="nc" id="L93">      isHit = true;</span>
+    }
+<span class="nc" id="L95">  }</span>
+
+  /**
+   * Method that handles the collision of a player with a ball.
+   * @return a true if player collides with the ball, false otherwise.
+   */
+  public boolean collisionPlayer() {
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">    for (GameObject object : Application.getBoard().getCurrentScreen().objectList) {</span>
+<span class="pc bpc" id="L103" title="1 of 4 branches missed.">      if (object instanceof Ball || object instanceof Drop) {</span>
+<span class="fc" id="L104">        double playerPos = this.getXpos() + (this.getImage().getWidth(null)) / 2;</span>
+
+<span class="pc bpc" id="L106" title="2 of 4 branches missed.">        if (playerPos - object.getXpos() &gt;= 0 &amp;&amp; playerPos - object.getXpos() &lt;= object.getWidth()</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">            &amp;&amp; object.getYpos() + object.getHeight() &gt;= this.getYpos()) {</span>
+
+<span class="fc" id="L109">          Logger.info(&quot;Player Collided with object:&quot; + object);</span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">          if (object instanceof Drop) {</span>
+<span class="nc" id="L111">            Drop drop = (Drop) object;</span>
+<span class="nc" id="L112">            drop.playerCollision();</span>
+<span class="nc" id="L113">            return false;</span>
+          } else {
+<span class="fc" id="L115">            return true;</span>
+          }
+
+        }
+      }
+<span class="fc" id="L120">    }</span>
+<span class="nc" id="L121">    isHit = false;</span>
+<span class="nc" id="L122">    return false;</span>
+  }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

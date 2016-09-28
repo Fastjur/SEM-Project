@@ -2,10 +2,13 @@
 
 import lombok.Getter;
 import lombok.Setter;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
 import java.util.ArrayList;
+
+
 
 /**
  * Class that represents the ScoreSystem.
@@ -13,62 +16,66 @@ import java.util.ArrayList;
  */
 public class ScoreSystem {
 
-<span class="fc" id="L16">    @Getter</span>
-    @SuppressWarnings(&quot;PMD.UnusedPrivateField&quot;) // It is used in the generated getter method
-<span class="fc" id="L18">    private static ScoreSystem instance = new ScoreSystem();</span>
+<span class="fc" id="L19">  @Getter</span>
+  @SuppressWarnings(&quot;PMD.UnusedPrivateField&quot;) // It is used in the generated getter method
+<span class="fc" id="L21">  private static ScoreSystem instance = new ScoreSystem();</span>
 
-<span class="fc" id="L20">    @Getter</span>
-<span class="fc" id="L21">    @Setter</span>
-    private static int score;
+<span class="fc" id="L23">  @Getter</span>
+<span class="fc" id="L24">  @Setter</span>
+  private static int score;
 
-<span class="fc" id="L24">    @Getter</span>
-    private static ArrayList&lt;NumberToken&gt; Places;
+<span class="fc" id="L27">  @Getter</span>
+  private static ArrayList&lt;NumberToken&gt; Places;
 
-    /**
-     * The singleton constructor for the ScoreSystem.
-     */
-<span class="fc" id="L30">    private ScoreSystem() {</span>
-<span class="fc" id="L31">        score = 0;</span>
-<span class="fc" id="L32">        Logger.info(&quot;ScoreSystem starting.&quot;);</span>
-        //These are from right to left.
-<span class="fc" id="L34">        Places = new ArrayList&lt;&gt;(9);</span>
-<span class="fc" id="L35">        Places.add(new NumberToken(261,5));</span>
-<span class="fc" id="L36">        Places.add(new NumberToken(229,5));</span>
-<span class="fc" id="L37">        Places.add(new NumberToken(197,5));</span>
-<span class="fc" id="L38">        Places.add(new NumberToken(165,5));</span>
-<span class="fc" id="L39">        Places.add(new NumberToken(133,5));</span>
-<span class="fc" id="L40">        Places.add(new NumberToken(101,5));</span>
-<span class="fc" id="L41">        Places.add(new NumberToken(69,5));</span>
-<span class="fc" id="L42">        Places.add(new NumberToken(37,5));</span>
-<span class="fc" id="L43">        Places.add(new NumberToken(5,5));</span>
-<span class="fc" id="L44">        displayscore();</span>
-<span class="fc" id="L45">    }</span>
+  /**
+   * The singleton constructor for the ScoreSystem.
+   */
+<span class="fc" id="L33">  private ScoreSystem() {</span>
+<span class="fc" id="L34">    score = 0;</span>
+<span class="fc" id="L35">    Logger.info(&quot;ScoreSystem starting.&quot;);</span>
+    //These are from right to left.
+<span class="fc" id="L37">    Places = new ArrayList&lt;&gt;(9);</span>
+<span class="fc" id="L38">    Places.add(new NumberToken(261, 5));</span>
+<span class="fc" id="L39">    Places.add(new NumberToken(229, 5));</span>
+<span class="fc" id="L40">    Places.add(new NumberToken(197, 5));</span>
+<span class="fc" id="L41">    Places.add(new NumberToken(165, 5));</span>
+<span class="fc" id="L42">    Places.add(new NumberToken(133, 5));</span>
+<span class="fc" id="L43">    Places.add(new NumberToken(101, 5));</span>
+<span class="fc" id="L44">    Places.add(new NumberToken(69, 5));</span>
+<span class="fc" id="L45">    Places.add(new NumberToken(37, 5));</span>
+<span class="fc" id="L46">    Places.add(new NumberToken(5, 5));</span>
+<span class="fc" id="L47">    displayscore();</span>
+<span class="fc" id="L48">  }</span>
 
-    public static void addScore(int scoreIn) {
-<span class="fc" id="L48">        score += scoreIn;</span>
-<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        if (score &gt; 999999999) {</span>
-<span class="nc" id="L50">            score = 999999999;</span>
-        }
-<span class="fc" id="L52">    }</span>
+  /**
+   * method to add a value to the score.
+   * @param scoreIn - number to be added to the score.
+   */
+  public static void addScore(int scoreIn) {
+<span class="fc" id="L55">    score += scoreIn;</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">    if (score &gt; 999999999) {</span>
+<span class="nc" id="L57">      score = 999999999;</span>
+    }
+<span class="fc" id="L59">  }</span>
 
-    /**
-     * Method that makes the current score displayed on the screen correctly.
-     */
-    public void displayscore() {
-<span class="fc" id="L58">        int calcscore = score;</span>
-<span class="fc" id="L59">        int i = 0;</span>
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        while(calcscore&gt;0){</span>
-<span class="fc" id="L61">            Places.get(i).SetScoreToken(calcscore % 10);</span>
-<span class="fc" id="L62">            calcscore /= 10;</span>
-<span class="fc" id="L63">            i++;</span>
-        }
-<span class="fc" id="L65">    }</span>
+  /**
+   * Method that makes the current score displayed on the screen correctly.
+   */
+  public void displayscore() {
+<span class="fc" id="L65">    int calcscore = score;</span>
+<span class="fc" id="L66">    int increment = 0;</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">    while (calcscore &gt; 0) {</span>
+<span class="fc" id="L68">      Places.get(increment).setScoreToken(calcscore % 10);</span>
+<span class="fc" id="L69">      calcscore /= 10;</span>
+<span class="fc" id="L70">      increment++;</span>
+    }
+<span class="fc" id="L72">  }</span>
 
-    /**
-     * Resets the score when the player died.
-     */
-    public void resetScore(){
-<span class="fc" id="L71">        Application.setScoreKeeper(new ScoreSystem());</span>
-<span class="fc" id="L72">    }</span>
+  /**
+   * Resets the score when the player died.
+   */
+  public void resetScore() {
+<span class="fc" id="L78">    Application.setScoreKeeper(new ScoreSystem());</span>
+<span class="fc" id="L79">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

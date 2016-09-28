@@ -7,78 +7,98 @@ import net.liquidpineapple.pang.gui.ScoreSystem;
 /**
  * Created by Erik on 22-9-2016.
  */
+
 public class Drop extends GameObject {
 
-    private int score;
-    private double movY;
-    private double movX;
-    private int livesChange;
+  private int score;
+  private double movY;
+  private double movX;
+  private int livesChange;
 
-    /**
-     * Creates a new drop.
-     *
-     * @param textureLocation as image
-     * @param startX          as start position X
-     * @param startY          as start position Y
-     * @param score           as score change when this pickup collides with player
-     * @param movX            as vertical movement every update
-     * @param movY            as horizontal movement every update
-     */
-    public Drop(String textureLocation, double startX, double startY, double movX, double movY, int score, int livesChange){
-<span class="fc" id="L28">        super(textureLocation, startX, startY);</span>
-<span class="fc" id="L29">        this.score = score;</span>
-<span class="fc" id="L30">        this.movY = movY;</span>
-<span class="fc" id="L31">        this.movX = movX;</span>
-<span class="fc" id="L32">        this.livesChange = livesChange;</span>
-<span class="fc" id="L33">    }</span>
+  /**
+   * Creates a new drop.
+   *
+   * @param textureLocation as image
+   * @param startX          as start position X
+   * @param startY          as start position Y
+   * @param score           as score change when this pickup collides with player
+   * @param movX            as vertical movement every update
+   * @param movY            as horizontal movement every update
+   */
+  public Drop(String textureLocation, double startX, double startY, double movX, double movY,
+              int score, int livesChange) {
+<span class="fc" id="L30">    super(textureLocation, startX, startY);</span>
+<span class="fc" id="L31">    this.score = score;</span>
+<span class="fc" id="L32">    this.movY = movY;</span>
+<span class="fc" id="L33">    this.movX = movX;</span>
+<span class="fc" id="L34">    this.livesChange = livesChange;</span>
+<span class="fc" id="L35">  }</span>
 
-    public Drop(String textureLocation, double startX, double startY, double movX, double movY, int score){
-<span class="fc" id="L36">        super(textureLocation, startX, startY);</span>
-<span class="fc" id="L37">        this.score = score;</span>
-<span class="fc" id="L38">        this.movY = movY;</span>
-<span class="fc" id="L39">        this.movX = movX;</span>
-<span class="fc" id="L40">    }</span>
+  /**
+   * Method that creates a new drop.
+   *
+   * @param textureLocation as image
+   * @param startX          as start position X
+   * @param startY          as start position Y
+   * @param score           as score change when this pickup collides with player
+   * @param movX            as vertical movement every update
+   * @param movY            as horizontal movement every update
+   */
+  public Drop(String textureLocation, double startX, double startY, double movX, double movY,
+              int score) {
+<span class="fc" id="L49">    super(textureLocation, startX, startY);</span>
+<span class="fc" id="L50">    this.score = score;</span>
+<span class="fc" id="L51">    this.movY = movY;</span>
+<span class="fc" id="L52">    this.movX = movX;</span>
+<span class="fc" id="L53">  }</span>
 
-    /**
-     * Calculates and sets the next position the ball should be drawn in.
-     */
-    public void move(){
-<span class="fc" id="L46">        xPos += movX;</span>
-<span class="fc" id="L47">        yPos += movY;</span>
-<span class="fc" id="L48">    }</span>
+  /**
+   * Calculates and sets the next position the ball should be drawn in.
+   */
+  public void move() {
+<span class="fc" id="L59">    xpos += movX;</span>
+<span class="fc" id="L60">    ypos += movY;</span>
+<span class="fc" id="L61">  }</span>
 
-    /**
-     * Method that updates the drop.
-     */
-    @Override
-    public void doUpdate() {
-<span class="fc" id="L55">        super.doUpdate();</span>
+  /**
+   * Method that updates the drop.
+   */
+  @Override
+  public void doUpdate() {
+<span class="fc" id="L68">    super.doUpdate();</span>
 
-<span class="fc" id="L57">        move();</span>
-<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if (yPos + this.getHeight() &gt; Application.getBoard().getHeight())</span>
-<span class="nc" id="L59">            yPos = Application.getBoard().getHeight() - this.getHeight();</span>
-<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (xPos + this.getWidth() &gt; Application.getBoard().getWidth())</span>
-<span class="nc" id="L61">            xPos = Application.getBoard().getWidth() - this.getWidth();</span>
-<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (xPos &lt; 0)</span>
-<span class="nc" id="L63">            xPos = 0;</span>
+<span class="fc" id="L70">    move();</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">    if (ypos + this.getHeight() &gt; Application.getBoard().getHeight()) {</span>
+<span class="nc" id="L72">      ypos = Application.getBoard().getHeight() - this.getHeight();</span>
+    }
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">    if (xpos + this.getWidth() &gt; Application.getBoard().getWidth()) {</span>
+<span class="nc" id="L75">      xpos = Application.getBoard().getWidth() - this.getWidth();</span>
+    }
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">    if (xpos &lt; 0) {</span>
+<span class="nc" id="L78">      xpos = 0;</span>
+    }
 
-<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (yPos + this.getHeight() == Application.getBoard().getHeight()){</span>
-<span class="nc" id="L66">            movX = 0;</span>
-        }
-<span class="pc bpc" id="L68" title="1 of 4 branches missed.">        else  if (xPos == 0 || xPos + this.getWidth() == Application.getBoard().getWidth()) {</span>
-<span class="fc" id="L69">            movX = -movX;</span>
-        }
-<span class="fc" id="L71">    }</span>
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">    if (ypos + this.getHeight() == Application.getBoard().getHeight()) {</span>
+<span class="nc" id="L82">      movX = 0;</span>
+<span class="pc bpc" id="L83" title="1 of 4 branches missed.">    } else if (xpos == 0 || xpos + this.getWidth() == Application.getBoard().getWidth()) {</span>
+<span class="fc" id="L84">      movX = -movX;</span>
+    }
+<span class="fc" id="L86">  }</span>
 
-    public void playerCollision() {
-<span class="fc" id="L74">        ScoreSystem.addScore(score);</span>
-<span class="fc bfc" id="L75" title="All 2 branches covered.">        while(livesChange&gt;0) {</span>
-<span class="fc" id="L76">            LifeSystem.gainLife();</span>
-<span class="fc" id="L77">            livesChange-=1;}</span>
-<span class="fc bfc" id="L78" title="All 2 branches covered.">        while(livesChange&lt;0) {</span>
-<span class="fc" id="L79">            LifeSystem.loseLife();</span>
-<span class="fc" id="L80">            livesChange+=1;}</span>
-<span class="fc" id="L81">        Application.getBoard().getCurrentScreen().objectList.remove(this);</span>
-<span class="fc" id="L82">    }</span>
+  /**
+   * Method that handles the collision with a player.
+   */
+  public void playerCollision() {
+<span class="fc" id="L92">    ScoreSystem.addScore(score);</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">    while (livesChange &gt; 0) {</span>
+<span class="fc" id="L94">      LifeSystem.gainLife();</span>
+<span class="fc" id="L95">      livesChange -= 1;</span>
+    }
+<span class="fc bfc" id="L97" title="All 2 branches covered.">    while (livesChange &lt; 0) {</span>
+<span class="fc" id="L98">      LifeSystem.loseLife();</span>
+<span class="fc" id="L99">      livesChange += 1;</span>
+    }
+<span class="fc" id="L101">    Application.getBoard().getCurrentScreen().objectList.remove(this);</span>
+<span class="fc" id="L102">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -2,76 +2,99 @@
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 import net.liquidpineapple.pang.logger.Logger;
 
-import javax.swing.*;
-import java.awt.*;
+
+import java.awt.Graphics2D;
+import java.awt.Image;
+
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.ImageObserver;
 import java.net.URL;
 
+import javax.swing.ImageIcon;
+
 /**
  * @author Jurriaan Den Toonder
  * @date 2016/09/07.
  */
-<span class="pc" id="L18">@Data</span>
-<span class="pc bpc" id="L19" title="18 of 22 branches missed.">@EqualsAndHashCode</span>
+<span class="pc" id="L23">@Data</span>
+<span class="pc bpc" id="L24" title="18 of 22 branches missed.">@EqualsAndHashCode</span>
 public abstract class GameObject {
 
-<span class="fc" id="L22">    protected double xPos;</span>
-<span class="fc" id="L23">    protected double yPos;</span>
-<span class="fc" id="L24">    private double width;</span>
-<span class="fc" id="L25">    private double height;</span>
-<span class="fc" id="L26">    private Image image;</span>
+<span class="fc" id="L27">  protected double xpos;</span>
+<span class="fc" id="L28">  protected double ypos;</span>
+<span class="fc" id="L29">  private double width;</span>
+<span class="fc" id="L30">  private double height;</span>
+<span class="fc" id="L31">  private Image image;</span>
 
-<span class="fc" id="L28">    public GameObject(String textureLocation, double startX, double startY) {</span>
-<span class="fc" id="L29">        this.xPos = startX;</span>
-<span class="fc" id="L30">        this.yPos = startY;</span>
-<span class="fc" id="L31">        changeImage(textureLocation);</span>
-<span class="fc" id="L32">        Logger.info(&quot;GameObject registered at (&quot; + xPos + &quot;, &quot; + yPos + &quot;) with width &quot; + width + &quot; and height &quot; + height);</span>
-<span class="fc" id="L33">    }</span>
+  /**
+   * Constructor for gameobject.
+   * @param textureLocation - texture storage location of object.
+   * @param startX - x pos of object.
+   * @param startY - y pos of object.
+   */
+<span class="fc" id="L39">  public GameObject(String textureLocation, double startX, double startY) {</span>
+<span class="fc" id="L40">    this.xpos = startX;</span>
+<span class="fc" id="L41">    this.ypos = startY;</span>
 
-    public void changeImage(String textureLocation){
-        ImageIcon imageIcon;
-<span class="fc" id="L37">        Logger.info(&quot;Registering object with texture &quot; + textureLocation);</span>
-<span class="fc" id="L38">        URL url = this.getClass().getResource(textureLocation);</span>
+<span class="fc" id="L43">    changeImage(textureLocation);</span>
+<span class="fc" id="L44">    Logger.info(&quot;GameObject registered at (&quot; + xpos + &quot;, &quot; + ypos + &quot;) with width &quot; + width</span>
+        + &quot; and height &quot; + height);
+<span class="fc" id="L46">  }</span>
 
-<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if (url == null) {</span>
-<span class="nc" id="L41">            throw new IllegalArgumentException(&quot;Could not find texture &quot; + textureLocation);</span>
-        }
+  /**
+   * Method that changes the image.
+   * @param textureLocation - image storage location.
+   */
+  public void changeImage(String textureLocation) {
+    ImageIcon imageIcon;
+<span class="fc" id="L54">    Logger.info(&quot;Registering object with texture &quot; + textureLocation);</span>
+<span class="fc" id="L55">    URL url = this.getClass().getResource(textureLocation);</span>
 
-<span class="fc" id="L44">        imageIcon = new ImageIcon(url);</span>
-<span class="fc" id="L45">        image = imageIcon.getImage();</span>
-<span class="fc" id="L46">        getWidthAndHeight();</span>
-<span class="fc" id="L47">    }</span>
-
-    private void getWidthAndHeight() {
-<span class="fc" id="L50">        this.width = image.getWidth(null);</span>
-<span class="fc" id="L51">        this.height = image.getHeight(null);</span>
-<span class="fc" id="L52">    }</span>
-
-    public Rectangle2D.Double getBounds() {
-<span class="fc" id="L55">        return new Rectangle2D.Double(xPos, yPos, width, height);</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">    if (url == null) {</span>
+<span class="nc" id="L58">      throw new IllegalArgumentException(&quot;Could not find texture &quot; + textureLocation);</span>
     }
 
-    //A Ellipse2D.float does also exists in case we need to be more accurate.
-    protected Ellipse2D.Double getEllipseBounds() {
-<span class="nc" id="L60">        return new Ellipse2D.Double(xPos, yPos, width, height);</span>
-    }
+<span class="fc" id="L61">    imageIcon = new ImageIcon(url);</span>
+<span class="fc" id="L62">    image = imageIcon.getImage();</span>
+<span class="fc" id="L63">    getWidthAndHeight();</span>
+<span class="fc" id="L64">  }</span>
 
-    public void setPos(double xPos, double yPos) {
-<span class="fc" id="L64">        this.xPos = xPos;</span>
-<span class="fc" id="L65">        this.yPos = yPos;</span>
-<span class="fc" id="L66">        Logger.info(&quot;Set position for &quot; + this.toString() + &quot;to (&quot; + xPos + &quot;,&quot; + yPos + &quot;)&quot;);</span>
-<span class="fc" id="L67">    }</span>
+  private void getWidthAndHeight() {
+<span class="fc" id="L67">    this.width = image.getWidth(null);</span>
+<span class="fc" id="L68">    this.height = image.getHeight(null);</span>
+<span class="fc" id="L69">  }</span>
 
-    public void doDrawing(Graphics2D graphics2D, ImageObserver imageObserver) {
-<span class="fc" id="L70">        graphics2D.drawImage(this.getImage(), (int)Math.round(this.getXPos()), (int)Math.round(this.getYPos()), imageObserver);</span>
-<span class="fc" id="L71">    }</span>
+  public Rectangle2D.Double getBounds() {
+<span class="fc" id="L72">    return new Rectangle2D.Double(xpos, ypos, width, height);</span>
+  }
 
-    public void doUpdate() {
+  //A Ellipse2D.float does also exists in case we need to be more accurate.
+  protected Ellipse2D.Double getEllipseBounds() {
+<span class="nc" id="L77">    return new Ellipse2D.Double(xpos, ypos, width, height);</span>
+  }
 
-<span class="fc" id="L75">    }</span>
+  /**
+   * Method that sets the position of an object.
+   * @param xposition - x pos of object.
+   * @param yposition - y pos of object.
+   */
+  public void setPos(double xposition, double yposition) {
+<span class="fc" id="L86">    this.xpos = xposition;</span>
+<span class="fc" id="L87">    this.ypos = yposition;</span>
+<span class="fc" id="L88">    Logger.info(&quot;Set position for &quot; + this.toString() + &quot;to (&quot; + xposition + &quot;,&quot; + yposition + &quot;)&quot;);</span>
+<span class="fc" id="L89">  }</span>
+
+  public void doDrawing(Graphics2D graphics2D, ImageObserver imageObserver) {
+<span class="fc" id="L92">    graphics2D.drawImage(this.getImage(), (int) Math.round(this.getXpos()),</span>
+<span class="fc" id="L93">        (int) Math.round(this.getYpos()), imageObserver);</span>
+<span class="fc" id="L94">  }</span>
+
+  public void doUpdate() {
+
+<span class="fc" id="L98">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

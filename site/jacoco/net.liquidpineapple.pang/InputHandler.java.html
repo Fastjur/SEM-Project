@@ -2,7 +2,7 @@
 
 import net.liquidpineapple.pang.logger.Logger;
 
-import java.awt.*;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -10,85 +10,90 @@ import java.awt.event.MouseListener;
 import java.util.HashSet;
 
 /**
+ * Class that represents the handler for mouseclicks and keypresses.
+ *
  * @author Govert de Gans
  * @date 2016-09-12
  */
-public class InputHandler implements MouseListener, KeyListener{
+public class InputHandler implements MouseListener, KeyListener {
 
-<span class="fc" id="L18">    private static HashSet&lt;Integer&gt; keysPressed = new HashSet&lt;&gt;();</span>
-    private static Point mousePos;
-    private static int mouseButtonPressed;
+<span class="fc" id="L20">  private static HashSet&lt;Integer&gt; keysPressed = new HashSet&lt;&gt;();</span>
+  private static Point mousePos;
+  private static int mouseButtonPressed;
 
-<span class="fc" id="L22">    public InputHandler() {}</span>
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-<span class="nc" id="L26">        keysPressed.add(e.getKeyCode());</span>
-<span class="nc" id="L27">    }</span>
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-<span class="nc" id="L31">        keysPressed.remove(e.getKeyCode());</span>
-<span class="nc" id="L32">    }</span>
-
-    @Override
-<span class="nc" id="L35">    public void keyTyped(KeyEvent e) {}</span>
+<span class="fc" id="L24">  public InputHandler() {</span>
+<span class="fc" id="L25">  }</span>
 
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
+  @Override
+  public void keyPressed(KeyEvent event) {
+<span class="nc" id="L30">    keysPressed.add(event.getKeyCode());</span>
+<span class="nc" id="L31">  }</span>
 
-<span class="nc" id="L41">    }</span>
+  @Override
+  public void keyReleased(KeyEvent event) {
+<span class="nc" id="L35">    keysPressed.remove(event.getKeyCode());</span>
+<span class="nc" id="L36">  }</span>
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-<span class="nc" id="L45">        mousePos = new Point(e.getX(), e.getY());</span>
-<span class="nc" id="L46">        mouseButtonPressed = e.getButton();</span>
-<span class="nc" id="L47">        Logger.info(&quot;pang-1&quot;);</span>
-<span class="nc" id="L48">    }</span>
+  @Override
+  public void keyTyped(KeyEvent event) {
+<span class="nc" id="L40">  }</span>
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-<span class="nc" id="L52">        mouseButtonPressed = 0;</span>
-<span class="nc" id="L53">    }</span>
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
+  @Override
+  public void mouseClicked(MouseEvent event) {
 
-<span class="fc" id="L58">    }</span>
+<span class="nc" id="L46">  }</span>
 
-    @Override
-    public void mouseExited(MouseEvent e) {
+  @Override
+  public void mousePressed(MouseEvent event) {
+<span class="nc" id="L50">    mousePos = new Point(event.getX(), event.getY());</span>
+<span class="nc" id="L51">    mouseButtonPressed = event.getButton();</span>
+<span class="nc" id="L52">    Logger.info(&quot;pang-1&quot;);</span>
+<span class="nc" id="L53">  }</span>
 
-<span class="nc" id="L63">    }</span>
+  @Override
+  public void mouseReleased(MouseEvent event) {
+<span class="nc" id="L57">    mouseButtonPressed = 0;</span>
+<span class="nc" id="L58">  }</span>
 
-    public static boolean isKeyPressed(int keyCode) {
-<span class="nc" id="L66">        return keysPressed.contains(keyCode);</span>
-    }
+  @Override
+  public void mouseEntered(MouseEvent event) {
 
-    public static boolean isAnyKeyPressed() {
-<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        return !keysPressed.isEmpty();</span>
-    }
+<span class="fc" id="L63">  }</span>
 
-    public static boolean isLeftMouseButtonDown() {
-<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        return mouseButtonPressed == MouseEvent.BUTTON1;</span>
-    }
+  @Override
+  public void mouseExited(MouseEvent event) {
 
-    public static boolean isRightMouseButtonDown() {
-<span class="nc bnc" id="L78" title="All 2 branches missed.">        return mouseButtonPressed == MouseEvent.BUTTON2;</span>
-    }
+<span class="nc" id="L68">  }</span>
 
-    public static boolean isMiddleMouseButtonDown() {
-<span class="nc bnc" id="L82" title="All 2 branches missed.">        return mouseButtonPressed == MouseEvent.BUTTON3;</span>
-    }
+  public static boolean isKeyPressed(int keyCode) {
+<span class="nc" id="L71">    return keysPressed.contains(keyCode);</span>
+  }
 
-    public static Point getMousePos() {
-<span class="nc" id="L86">        return mousePos;</span>
-    }
+  public static boolean isAnyKeyPressed() {
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">    return !keysPressed.isEmpty();</span>
+  }
 
-    public static void clearState() {
-<span class="nc" id="L90">        keysPressed.clear();</span>
-<span class="nc" id="L91">        mouseButtonPressed = 0;</span>
-<span class="nc" id="L92">    }</span>
+  public static boolean isLeftMouseButtonDown() {
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">    return mouseButtonPressed == MouseEvent.BUTTON1;</span>
+  }
+
+  public static boolean isRightMouseButtonDown() {
+<span class="nc bnc" id="L83" title="All 2 branches missed.">    return mouseButtonPressed == MouseEvent.BUTTON2;</span>
+  }
+
+  public static boolean isMiddleMouseButtonDown() {
+<span class="nc bnc" id="L87" title="All 2 branches missed.">    return mouseButtonPressed == MouseEvent.BUTTON3;</span>
+  }
+
+  public static Point getMousePos() {
+<span class="nc" id="L91">    return mousePos;</span>
+  }
+
+  public static void clearState() {
+<span class="nc" id="L95">    keysPressed.clear();</span>
+<span class="nc" id="L96">    mouseButtonPressed = 0;</span>
+<span class="nc" id="L97">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

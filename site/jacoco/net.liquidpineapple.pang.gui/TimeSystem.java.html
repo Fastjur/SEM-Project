@@ -3,10 +3,13 @@
 import lombok.Getter;
 import net.liquidpineapple.pang.logger.Logger;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.Timer;
+
+
 
 
 /**
@@ -14,70 +17,76 @@ import java.util.ArrayList;
  */
 public class TimeSystem {
 
-    private static int time;
-    private static Timer interval;
+  private static int time;
+  private static Timer interval;
 
-<span class="fc" id="L20">    @Getter</span>
-    @SuppressWarnings(&quot;PMD.UnusedPrivateField&quot;) // It is used in the generated getter method
-<span class="fc" id="L22">    private static TimeSystem instance = new TimeSystem();</span>
+<span class="fc" id="L23">  @Getter</span>
+  @SuppressWarnings(&quot;PMD.UnusedPrivateField&quot;) // It is used in the generated getter method
+<span class="fc" id="L25">  private static TimeSystem instance = new TimeSystem();</span>
 
-<span class="nc" id="L24">    @Getter</span>
-    private static ArrayList&lt;NumberToken&gt; timePlaces;
+<span class="nc" id="L27">  @Getter</span>
+  private static ArrayList&lt;NumberToken&gt; timePlaces;
 
-<span class="fc" id="L27">    private ActionListener timerAction = new ActionListener()</span>
-<span class="fc" id="L28">    {</span>
-        @Override
-        public void actionPerformed(ActionEvent ae)
-        {
-<span class="nc bnc" id="L32" title="All 2 branches missed.">            if(time &gt; 0){</span>
-<span class="nc" id="L33">                time -= 1;}</span>
-            //Here the proper behaviour when time is run out should be replaced, for now it will add 60 seconds and lose a life.
-<span class="nc bnc" id="L35" title="All 2 branches missed.">            if(time == 0){</span>
-<span class="nc" id="L36">                LifeSystem.loseLife();</span>
-<span class="nc" id="L37">                time = 60;</span>
-            }
-<span class="nc" id="L39">            updatetime();</span>
-<span class="nc" id="L40">        }</span>
-    };
+<span class="fc" id="L30">  private ActionListener timerAction = new ActionListener() {</span>
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+<span class="nc bnc" id="L33" title="All 2 branches missed.">      if (time &gt; 0) {</span>
+<span class="nc" id="L34">        time -= 1;</span>
+      }
+      //Here the proper behaviour when time is run out should be replaced,
+      //for now it will add 60 seconds and lose a life.
+<span class="nc bnc" id="L38" title="All 2 branches missed.">      if (time == 0) {</span>
+<span class="nc" id="L39">        LifeSystem.loseLife();</span>
+<span class="nc" id="L40">        time = 60;</span>
+      }
+<span class="nc" id="L42">      updatetime();</span>
+<span class="nc" id="L43">    }</span>
+  };
 
-    /**
-     * Singleton constructor
-     */
-<span class="fc" id="L46">    private TimeSystem() {</span>
-<span class="fc" id="L47">        Logger.info(&quot;TimeSystem Starting.&quot;);</span>
-<span class="fc" id="L48">        interval = new Timer(1000, timerAction);</span>
-<span class="fc" id="L49">        interval.setRepeats(true);</span>
-<span class="fc" id="L50">    }</span>
+  /**
+   * Singleton constructor.
+   */
+<span class="fc" id="L49">  private TimeSystem() {</span>
+<span class="fc" id="L50">    Logger.info(&quot;TimeSystem Starting.&quot;);</span>
+<span class="fc" id="L51">    interval = new Timer(1000, timerAction);</span>
+<span class="fc" id="L52">    interval.setRepeats(true);</span>
+<span class="fc" id="L53">  }</span>
 
-    public static void resetTime(int inTime) {
-<span class="nc" id="L53">        time = inTime;</span>
-<span class="nc bnc" id="L54" title="All 2 branches missed.">        if(time &gt; 999){time = 999;}</span>
+  /**
+   * Method to reset the time to a certain number.
+   * @param inTime - time to be reset to.
+   */
+  public static void resetTime(int inTime) {
+<span class="nc" id="L60">    time = inTime;</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">    if (time &gt; 999) {</span>
+<span class="nc" id="L62">      time = 999;</span>
+    }
 
-        //These are from right to left.
-<span class="nc" id="L57">        timePlaces = new ArrayList&lt;&gt;(3);</span>
-<span class="nc" id="L58">        timePlaces.add(new NumberToken(755,52));</span>
-<span class="nc" id="L59">        timePlaces.add(new NumberToken(723,52));</span>
-<span class="nc" id="L60">        timePlaces.add(new NumberToken(691,52));</span>
-<span class="nc" id="L61">        updatetime();</span>
-<span class="nc" id="L62">        interval.start();</span>
-<span class="nc" id="L63">    }</span>
+    //These are from right to left.
+<span class="nc" id="L66">    timePlaces = new ArrayList&lt;&gt;(3);</span>
+<span class="nc" id="L67">    timePlaces.add(new NumberToken(755, 52));</span>
+<span class="nc" id="L68">    timePlaces.add(new NumberToken(723, 52));</span>
+<span class="nc" id="L69">    timePlaces.add(new NumberToken(691, 52));</span>
+<span class="nc" id="L70">    updatetime();</span>
+<span class="nc" id="L71">    interval.start();</span>
+<span class="nc" id="L72">  }</span>
 
-    private static void updatetime() {
-<span class="nc" id="L66">        int calctime = time;</span>
-<span class="nc" id="L67">        int i = 0;</span>
-<span class="nc bnc" id="L68" title="All 2 branches missed.">        while(i&lt;3){</span>
-<span class="nc" id="L69">            timePlaces.get(i).SetScoreToken(calctime % 10);</span>
-<span class="nc" id="L70">            calctime /= 10;</span>
-<span class="nc" id="L71">            i++;</span>
-        }
-<span class="nc" id="L73">    }</span>
+  private static void updatetime() {
+<span class="nc" id="L75">    int calctime = time;</span>
+<span class="nc" id="L76">    int incrementer = 0;</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">    while (incrementer &lt; 3) {</span>
+<span class="nc" id="L78">      timePlaces.get(incrementer).setScoreToken(calctime % 10);</span>
+<span class="nc" id="L79">      calctime /= 10;</span>
+<span class="nc" id="L80">      incrementer++;</span>
+    }
+<span class="nc" id="L82">  }</span>
 
-    /**
-     * Stops the timer from ticking. The time will stay at the same value
-     */
-    public static void stop() {
-<span class="nc" id="L79">        interval.stop();</span>
-<span class="nc" id="L80">    }</span>
+  /**
+   * Stops the timer from ticking. The time will stay at the same value
+   */
+  public static void stop() {
+<span class="nc" id="L88">    interval.stop();</span>
+<span class="nc" id="L89">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

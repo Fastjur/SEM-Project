@@ -4,66 +4,80 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import net.liquidpineapple.pang.logger.Logger;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 /**
+ * Audiosystem for the application. Plays the background music.
+ *
  * @author Govert de Gans
  * @date 2016-09-22
  */
-<span class="nc" id="L13">public class AudioSystem {</span>
 
-    private static Player player;
-<span class="fc" id="L16">    private static String loopingSound = &quot;&quot;;</span>
-    private static boolean isRunning;
-<span class="fc" id="L18">    private static boolean playMusic = true;</span>
+<span class="nc" id="L18">public class AudioSystem {</span>
 
-    public static void start() {
-<span class="fc" id="L21">        playMusic = true;</span>
-<span class="fc" id="L22">        new Thread(() -&gt; {</span>
-<span class="fc" id="L23">            playLoop();</span>
-<span class="fc" id="L24">        }).start();</span>
-<span class="fc" id="L25">    }</span>
+  private static Player player;
+<span class="fc" id="L21">  private static String loopingSound = &quot;&quot;;</span>
+  private static boolean isRunning;
+<span class="fc" id="L23">  private static boolean playMusic = true;</span>
 
-    private static void playLoop() {
-<span class="fc" id="L28">        isRunning = true;</span>
-<span class="fc" id="L29">        byte[] buffer = null;</span>
-        try {
-<span class="fc" id="L31">            String currentLoop = &quot;&quot;;</span>
-            while (true) {
-<span class="fc bfc" id="L33" title="All 2 branches covered.">                if (!currentLoop.equals(loopingSound)) {</span>
-<span class="fc" id="L34">                    BufferedInputStream resourceStream = new BufferedInputStream(</span>
-<span class="fc" id="L35">                        Application.class.getResourceAsStream(loopingSound));</span>
-<span class="fc" id="L36">                    buffer = new byte[resourceStream.available()];</span>
-<span class="fc" id="L37">                    resourceStream.read(buffer);</span>
-<span class="fc" id="L38">                    currentLoop = loopingSound;</span>
-                }
+  /**
+   * Start the background music loop.
+   */
+  public static void start() {
+<span class="fc" id="L29">    playMusic = true;</span>
+<span class="fc" id="L30">    new Thread(AudioSystem::playLoop).start();</span>
+<span class="fc" id="L31">  }</span>
 
-<span class="pc bpc" id="L41" title="1 of 4 branches missed.">                if (buffer != null &amp;&amp; playMusic) {</span>
-<span class="fc" id="L42">                    Logger.info(&quot;Music loop is running&quot;);</span>
-<span class="nc" id="L43">                    player = new Player(new ByteArrayInputStream(buffer));</span>
-<span class="nc" id="L44">                    player.play();</span>
-                }
-            }
-<span class="fc" id="L47">        } catch(JavaLayerException | IOException e) {</span>
-<span class="fc" id="L48">            Logger.error(&quot;The AudioSystem has crashed.&quot;, e);</span>
+  private static void playLoop() {
+<span class="fc" id="L34">    isRunning = true;</span>
+<span class="fc" id="L35">    byte[] buffer = null;</span>
+    try {
+<span class="fc" id="L37">      String currentLoop = &quot;&quot;;</span>
+      while (true) {
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (!currentLoop.equals(loopingSound)) {</span>
+<span class="fc" id="L40">          BufferedInputStream resourceStream = new BufferedInputStream(</span>
+<span class="fc" id="L41">              Application.class.getResourceAsStream(loopingSound));</span>
+<span class="fc" id="L42">          buffer = new byte[resourceStream.available()];</span>
+<span class="fc" id="L43">          resourceStream.read(buffer);</span>
+<span class="fc" id="L44">          currentLoop = loopingSound;</span>
         }
-<span class="fc" id="L50">        isRunning = false;</span>
-<span class="fc" id="L51">    }</span>
 
-    public static void changeLoopingSound(String newLoopingSound) {
-<span class="pc bpc" id="L54" title="1 of 6 branches missed.">        if (!loopingSound.equals(&quot;&quot;) &amp;&amp; isRunning &amp;&amp; player != null) {</span>
-<span class="nc" id="L55">            player.close();</span>
+<span class="pc bpc" id="L47" title="1 of 4 branches missed.">        if (buffer != null &amp;&amp; playMusic) {</span>
+<span class="fc" id="L48">          Logger.info(&quot;Music loop is running&quot;);</span>
+<span class="nc" id="L49">          player = new Player(new ByteArrayInputStream(buffer));</span>
+<span class="nc" id="L50">          player.play();</span>
         }
-<span class="fc" id="L57">        loopingSound = newLoopingSound;</span>
-<span class="fc" id="L58">    }</span>
+      }
+<span class="fc" id="L53">    } catch (JavaLayerException | IOException ex) {</span>
+<span class="fc" id="L54">      Logger.error(&quot;The AudioSystem has crashed.&quot;, ex);</span>
+    }
+<span class="fc" id="L56">    isRunning = false;</span>
+<span class="fc" id="L57">  }</span>
 
-    public static void stop() {
-<span class="fc" id="L61">        playMusic = false;</span>
-        try {
-<span class="nc" id="L63">            player.close();</span>
-<span class="fc" id="L64">        } catch(NullPointerException e){</span>
-<span class="fc" id="L65">            Logger.warning(&quot;Attempted to close player but was null&quot;);</span>
-<span class="nc" id="L66">        }</span>
-<span class="fc" id="L67">    }</span>
+  /**
+   * Change the looping background music to another file.
+   *
+   * @param newLoopingSound {@link String} URL to the new looping sound.
+   */
+  public static void changeLoopingSound(String newLoopingSound) {
+<span class="pc bpc" id="L65" title="1 of 6 branches missed.">    if (!loopingSound.equals(&quot;&quot;) &amp;&amp; isRunning &amp;&amp; player != null) {</span>
+<span class="nc" id="L66">      player.close();</span>
+    }
+<span class="fc" id="L68">    loopingSound = newLoopingSound;</span>
+<span class="fc" id="L69">  }</span>
+
+  /**
+   * Stops the music from playing.
+   */
+  public static void stop() {
+<span class="fc" id="L75">    playMusic = false;</span>
+    try {
+<span class="nc" id="L77">      player.close();</span>
+<span class="fc" id="L78">    } catch (NullPointerException ex) {</span>
+<span class="fc" id="L79">      Logger.warning(&quot;Attempted to close player but was null&quot;);</span>
+<span class="nc" id="L80">    }</span>
+<span class="fc" id="L81">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

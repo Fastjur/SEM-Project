@@ -6,26 +6,29 @@ import net.liquidpineapple.pang.screens.ControlsScreen;
 
 /**
  * Class that represents the object for the SinglePlayer button.
+ *
  * @author Govert de Gans
  * @date 2016-09-08
  */
-public class SinglePlayerButton extends Button {
-    /**
-     * Constructor of the SinglePlayer button.
-     * @param startX - The X location where the button should be on the screen.
-     * @param startY - The Y location where the button should be on the screen.
-     */
-    public SinglePlayerButton(double startX, double startY) {
-<span class="fc" id="L19">        super(&quot;/images/singleplayer.png&quot;, startX, startY);</span>
-<span class="fc" id="L20">    }</span>
 
-    /**
-     * Method that starts a SinglePlayer game when the button is clicked.
-     */
-    @Override
-    public void onClick() {
-<span class="nc" id="L27">        Logger.info(&quot;I change the screen now&quot;);</span>
-<span class="nc" id="L28">        Application.getBoard().changeScreen(new ControlsScreen());</span>
-<span class="nc" id="L29">    }</span>
+public class SinglePlayerButton extends Button {
+  /**
+   * Constructor of the SinglePlayer button.
+   *
+   * @param startX - The X location where the button should be on the screen.
+   * @param startY - The Y location where the button should be on the screen.
+   */
+  public SinglePlayerButton(double startX, double startY) {
+<span class="fc" id="L22">    super(&quot;/images/singleplayer.png&quot;, startX, startY);</span>
+<span class="fc" id="L23">  }</span>
+
+  /**
+   * Method that starts a SinglePlayer game when the button is clicked.
+   */
+  @Override
+  public void onClick() {
+<span class="nc" id="L30">    Logger.info(&quot;I change the screen now&quot;);</span>
+<span class="nc" id="L31">    Application.getBoard().changeScreen(new ControlsScreen());</span>
+<span class="nc" id="L32">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -6,20 +6,21 @@ import lombok.Getter;
  * @author Jurriaan Den Toonder
  * @date 2016/09/21.
  */
-<span class="pc" id="L9">public enum LoggerTypes {</span>
-<span class="fc" id="L10">    INFO(&quot;[INFO]&quot;, 1),</span>
-<span class="fc" id="L11">    WARNING(&quot;[WARNING]&quot;, 2),</span>
-<span class="fc" id="L12">    ERROR(&quot;[ERROR]&quot;, 3);</span>
 
-<span class="fc" id="L14">    @Getter</span>
-    private String prefix;
+<span class="pc" id="L10">public enum LoggerTypes {</span>
+<span class="fc" id="L11">  INFO(&quot;[INFO]&quot;, 1),</span>
+<span class="fc" id="L12">  WARNING(&quot;[WARNING]&quot;, 2),</span>
+<span class="fc" id="L13">  ERROR(&quot;[ERROR]&quot;, 3);</span>
 
-<span class="fc" id="L17">    @Getter</span>
-    private int priority;
+<span class="fc" id="L15">  @Getter</span>
+  private String prefix;
 
-<span class="fc" id="L20">    LoggerTypes(String prefix, int priority) {</span>
-<span class="fc" id="L21">        this.prefix = prefix;</span>
-<span class="fc" id="L22">        this.priority = priority;</span>
-<span class="fc" id="L23">    }</span>
+<span class="fc" id="L18">  @Getter</span>
+  private int priority;
+
+<span class="fc" id="L21">  LoggerTypes(String prefix, int priority) {</span>
+<span class="fc" id="L22">    this.prefix = prefix;</span>
+<span class="fc" id="L23">    this.priority = priority;</span>
+<span class="fc" id="L24">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
