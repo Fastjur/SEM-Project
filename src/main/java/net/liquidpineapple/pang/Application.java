@@ -1,7 +1,5 @@
 package net.liquidpineapple.pang;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
@@ -14,8 +12,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * The main application, extends {@link JFrame}
@@ -31,6 +33,8 @@ public class Application extends JFrame {
 
   // Set to true to prevent loosing lives
   public static final boolean cheatMode = false;
+
+  public static boolean multiplayer;
 
   public static LifeSystem lifeSystem;
 

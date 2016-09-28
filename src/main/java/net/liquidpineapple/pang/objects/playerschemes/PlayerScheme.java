@@ -15,4 +15,6 @@ public interface PlayerScheme {
   public boolean shootPressed();
 
   public String getName();
+
+  public String getBeamTextureName();
 }

@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.screens;
 
+import net.liquidpineapple.pang.objects.buttons.MultiPlayerButton;
 import net.liquidpineapple.pang.objects.buttons.QuitButton;
 import net.liquidpineapple.pang.objects.buttons.SinglePlayerButton;
 
@@ -24,7 +25,8 @@ public class MainMenu extends Screen {
       ex.printStackTrace();
     }
 
-    objectList.add(new SinglePlayerButton(200, 250));
-    objectList.add(new QuitButton(200, 370));
+    objectList.add(new SinglePlayerButton(200, 220));
+    objectList.add(new MultiPlayerButton(200, 325));
+    objectList.add(new QuitButton(200, 455));
   }
 }

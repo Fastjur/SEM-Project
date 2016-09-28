@@ -23,7 +23,11 @@ public class ControlsScreen extends Screen {
    */
   public ControlsScreen() {
     try {
-      backgroundImage = ImageIO.read(Level.class.getResource("/sprites/controlsbg.png"));
+      if (Application.multiplayer) {
+        backgroundImage = ImageIO.read(Level.class.getResource("/sprites/controlsbg2p.png"));
+      } else {
+        backgroundImage = ImageIO.read(Level.class.getResource("/sprites/controlsbg.png"));
+      }
     } catch (IOException ex) {
       ex.printStackTrace();
     }

@@ -15,7 +15,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class HookAndRope extends GameObject {
 
-  private static final String textureLocation = "/sprites/beam.png";
   private final double maxY;
   private double dy = 3; //specify upspeed rope here.
   private Player player;
@@ -27,7 +26,7 @@ public class HookAndRope extends GameObject {
    * @param maxY   - Maximum height the rope should go up to.
    */
   public HookAndRope(double startX, double maxY, Player player) {
-    super(textureLocation, startX, 600);
+    super(player.getPlayerScheme().getBeamTextureName(), startX, 600);
     this.maxY = maxY;
     this.player = player;
   }
