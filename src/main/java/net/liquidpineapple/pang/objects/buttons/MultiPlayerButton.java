@@ -8,18 +8,18 @@ import net.liquidpineapple.pang.screens.ControlsScreen;
  * Class that represents the object for the SinglePlayer button.
  *
  * @author Govert de Gans
- * @date 2016-09-08
+ * @date 2016-09-28
  */
 
-public class SinglePlayerButton extends Button {
+public class MultiPlayerButton extends Button {
   /**
    * Constructor of the SinglePlayer button.
    *
    * @param startX - The X location where the button should be on the screen.
    * @param startY - The Y location where the button should be on the screen.
    */
-  public SinglePlayerButton(double startX, double startY) {
-    super("/images/singleplayer.png", startX, startY);
+  public MultiPlayerButton(double startX, double startY) {
+    super("/images/multiplayer.png", startX, startY);
   }
 
   /**
@@ -28,7 +28,7 @@ public class SinglePlayerButton extends Button {
   @Override
   public void onClick() {
     Logger.info("I change the screen now");
-    Application.multiplayer = false;
+    Application.multiplayer = true;
     Application.getBoard().changeScreen(new ControlsScreen());
   }
 }

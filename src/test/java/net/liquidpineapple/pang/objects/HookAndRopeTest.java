@@ -4,6 +4,7 @@ import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.objects.playerschemes.Player1;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,6 +19,7 @@ public class HookAndRopeTest {
   private static final String PROPERTIES_LOCATION = "/config.properties";
 
   private HookAndRope hookAndRope;
+  private Player player;
   private static final int XCOORD = 400;
   private static final int MAXY = 300;
   private static final double DELTA = 0.0;
@@ -31,7 +33,8 @@ public class HookAndRopeTest {
   public void setUp() throws Exception {
     app = new Application(PROPERTIES_LOCATION);
     app.start();
-    hookAndRope = new HookAndRope(XCOORD, MAXY);
+    player = new Player(0, 0, new Player1());
+    hookAndRope = new HookAndRope(XCOORD, MAXY, player);
   }
 
   /**
@@ -58,7 +61,7 @@ public class HookAndRopeTest {
    */
   @Test
   public void hitTopMoveTest() throws Exception {
-    HookAndRope rope = new HookAndRope(500, 584);
+    HookAndRope rope = new HookAndRope(500, 584, player);
     assertEquals(600, rope.getYpos(), DELTA);
     rope.move();
     assertEquals(597, rope.getYpos(), DELTA);

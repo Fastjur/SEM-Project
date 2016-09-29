@@ -9,6 +9,8 @@ import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.BallMovement;
 import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.objects.Player;
+import net.liquidpineapple.pang.objects.playerschemes.Player1;
+import net.liquidpineapple.pang.objects.playerschemes.Player2;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,6 +21,7 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -119,8 +122,11 @@ public class Level extends Screen {
       int intYpos = Integer.parseInt(playerElement.getElementsByTagName("y")
           .item(0).getTextContent());
 
-      Player player = new Player(intXpos, intYpos);
-      playerArray.add(player);
+      if (i == 0) {
+        playerArray.add(new Player(intXpos, intYpos, new Player1()));
+      } else if (i == 1 && Application.multiplayer) {
+        playerArray.add(new Player(intXpos, intYpos, new Player2()));
+      }
     }
     return playerArray;
   }

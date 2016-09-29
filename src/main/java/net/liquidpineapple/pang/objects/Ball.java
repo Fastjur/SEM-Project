@@ -119,29 +119,23 @@ public class Ball extends GameObject {
    * @return returns true if the hook is hit, returns false otherwise.
    */
   public boolean collisionHook() {
-    boolean hookInUse = false;
     HookAndRope activeRope = null;
     for (GameObject o : Application.getBoard().getCurrentScreen().objectList) {
       if (o instanceof HookAndRope) {
-        hookInUse = true;
         activeRope = (HookAndRope) o;
+
+        double ropePos = activeRope.getXpos() + (activeRope.getWidth()) / 2;
+
+        if (ropePos - this.getXpos() >= 0 && ropePos - this.getXpos() <= this.getWidth()
+            && this.getYpos() + this.getHeight() >= activeRope.getYpos()) {
+
+          activeRope.getPlayer().activeHooks--;
+          Application.getBoard().getCurrentScreen().objectList.remove(activeRope);
+          Logger.info("Collision between " + this + " and " + activeRope);
+          return true;
+        }
       }
     }
-
-    if (!hookInUse) {
-      return false;
-    }
-
-    double ropePos = activeRope.getXpos() + (activeRope.getWidth()) / 2;
-
-    if (ropePos - this.getXpos() >= 0 && ropePos - this.getXpos() <= this.getWidth()
-        && this.getYpos() + this.getHeight() >= activeRope.getYpos()) {
-
-      Application.getBoard().getCurrentScreen().objectList.remove(activeRope);
-      Logger.info("Collision between " + this + " and " + activeRope);
-      return true;
-    }
-
     return false;
   }
 

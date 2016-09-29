@@ -2,6 +2,7 @@ package net.liquidpineapple.pang;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
@@ -14,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -32,6 +34,8 @@ public class Application extends JFrame {
   // Set to true to prevent loosing lives
   public static final boolean cheatMode = false;
 
+  public static boolean multiplayer;
+
   public static LifeSystem lifeSystem;
 
   @Getter
@@ -49,7 +53,7 @@ public class Application extends JFrame {
    *
    * @param propertiesLocation {@link String} URL to resource file with configuration settings
    * @throws IOException Thrown when properties file can not be read
-     */
+   */
   public Application(String propertiesLocation) throws IOException {
     super();
     Logger.info("Starting application...");
@@ -67,7 +71,7 @@ public class Application extends JFrame {
    * Starts the application.
    *
    * @throws IOException Thrown when resource file containing properties can not be read
-     */
+   */
   public void start() throws IOException {
     Integer width = Integer.valueOf(properties.getProperty("application-width"));
     Integer height = Integer.valueOf(properties.getProperty("application-height"));

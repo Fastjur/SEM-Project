@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.objects.playerschemes.Player1;
 
 import org.junit.After;
 import org.junit.Before;
@@ -39,7 +40,7 @@ public class PlayerTest {
   public void setUp() throws Throwable {
     app = new Application(PROPERTIES_LOCATION);
     app.start();
-    player = new Player(startX, startY);
+    player = new Player(startX, startY, new Player1());
   }
 
   @After
