@@ -3,9 +3,10 @@
 ---
 
 ## Current build status
-[![Stories in Ready](https://badge.waffle.io/Fastjur/SEM-Project.png?label=ready&title=Ready)](https://waffle.io/Fastjur/SEM-Project)
-[![Build Status](https://travis-ci.org/Fastjur/SEM-Project.svg?branch=master)](https://travis-ci.org/Fastjur/SEM-Project)
-[![CodeCoverage](https://codecov.io/gh/Fastjur/SEM-Project/branch/master/graph/badge.svg)](https://codecov.io/gh/Fastjur/SEM-Project)
+[Waffle](https://waffle.io/Fastjur/SEM-Project)
+[![Build Status](https://travis-ci.com/Fastjur/SEM-Project.svg?token=ZYkj5b8eBfLppnyaikyc&branch=master)](https://travis-ci.com/Fastjur/SEM-Project)
+[![codecov](https://codecov.io/gh/Fastjur/SEM-Project/branch/master/graph/badge.svg?token=3WonhjrCjs)](https://codecov.io/gh/Fastjur/SEM-Project)
+
 
 ---
 
