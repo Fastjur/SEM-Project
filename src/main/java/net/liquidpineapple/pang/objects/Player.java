@@ -68,10 +68,10 @@ public class Player extends GameObject {
   public void doUpdate() {
     super.doUpdate();
 
-    if (TimeSystem.getFrozen() > 0) {
+    if (TimeSystem.getFrozen() > 0 && !frozen) {
       frozen = true;
       this.changeImage(playerScheme.getFrozenTextureName());
-    } else if (frozen) {
+    } else if (frozen && TimeSystem.getFrozen() == 0) {
       frozen = false;
       if (shield > 0) {
         this.changeImage(playerScheme.getShieldTextureName());
