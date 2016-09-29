@@ -4,7 +4,12 @@ import lombok.Getter;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
-import net.liquidpineapple.pang.objects.powerups.*;
+import net.liquidpineapple.pang.objects.powerups.BombDrop;
+import net.liquidpineapple.pang.objects.powerups.FreezeTimeDrop;
+import net.liquidpineapple.pang.objects.powerups.HeartDrop;
+import net.liquidpineapple.pang.objects.powerups.HookDrop;
+import net.liquidpineapple.pang.objects.powerups.ShieldDrop;
+import net.liquidpineapple.pang.objects.powerups.StickyHookDrop;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,9 +28,9 @@ public class DropRandomizer {
   private static final int HOOK_NUM = 5;
   private static final int SHIELD_NUM = 5;
   private static final int BOMB_NUM = 5;
-  private static final int FROZEN_NUM = 100;
+  private static final int FROZEN_NUM = 5;
   private static final int STICKY_NUM = 5;
-  private static final int TOTAL_CHANCE = 200;
+  private static final int TOTAL_CHANCE = 100;
 
   private ArrayList<Drop> randomList;
   private static final int TOTAL_GEMS = 4;

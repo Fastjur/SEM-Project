@@ -20,7 +20,7 @@ public class Player2 implements PlayerScheme {
   }
 
   public String getShieldTextureName() {
-    return "/sprites/player/p2_frozen.png";
+    return "/sprites/player/p2_shielded.png";
   }
 
   public boolean leftPressed() {

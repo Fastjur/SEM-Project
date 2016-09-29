@@ -177,6 +177,7 @@ public class Level extends Screen {
 
     if (levelEnded) {
       try {
+        ScoreSystem.addScore(TimeSystem.getTime());
         nextLevel();
       } catch (ParserConfigurationException | SAXException ex) {
         ex.printStackTrace();

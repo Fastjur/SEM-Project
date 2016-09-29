@@ -66,12 +66,16 @@ public class Player extends GameObject {
   public void doUpdate() {
     super.doUpdate();
 
-    if(TimeSystem.getFrozen() > 0){
+    if (TimeSystem.getFrozen() > 0) {
       frozen = true;
       this.changeImage(playerScheme.getFrozenTextureName());
-    } else if (frozen = true) {
+    } else if (frozen) {
       frozen = false;
-      this.changeImage(playerScheme.getTextureName());
+      if (shield > 0) {
+        this.changeImage(playerScheme.getShieldTextureName());
+      } else {
+        this.changeImage(playerScheme.getTextureName());
+      }
     }
 
     if (playerScheme.leftPressed()) {
@@ -134,7 +138,7 @@ public class Player extends GameObject {
     return false;
   }
 
-  public void setShield(int shield) {
+  public final void setShield(int shield) {
     this.shield = shield;
     this.changeImage(playerScheme.getShieldTextureName());
   }
