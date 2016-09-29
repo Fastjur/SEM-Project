@@ -9,9 +9,8 @@ install:
 script:
 - mvn jacoco:prepare-agent test jacoco:report
 after_success:
-- mvn site
 - utility/push-javadoc-to-gh-pages.sh
-- bash <(curl -s https://codecov.io/bash) -t dade18b1-ecba-4d9f-88e9-23697ab65094
+- bash <(curl -s https://codecov.io/bash) -t ${CODECOV_TOKEN}
 env:
   global:
     secure: bGcQTw4+jokl3xZdHYe0SfFwxcLizdQD25ADjRqYpRf6KwHJF+Kwr+71ytI1CIy+c2eD0oAudZSMZSRrtmE8DDsVxXE+96I23qPgWvnVdPFwW9skWkKalk7JHWkg93lep8V8vvQp4bllV3I8XdkLNMBpQDJmZ1cVf9emNCfYXr0AOdUkkPT+fOxvT3IhIbeGPNzAkNetxy0kKrLdJ64O1tJ1teLiG6+xLQGcJz8gwGFq/beyXfIo0mhC2LjA8MBI96qHVQ0yL1BdPtUYOp4hYUHP9l30WjF0RUkqIGJYxYDXOP1PN3TU36OvrHJ/YPGRpW/7Y5SnAjl7Fv/9DXhg4EDAwMVoNx061gkgCwew1lMSYsYZNjqJqaaDjQzDKMwtBYrKbYvTgrN5vEB9yDHRq/YjW/CheRQ85qpzmE+Pu1KUqD/MXLsLw49MzUkg5kmIw792ZG8bCdNCDvn9DLwsDRg68VxqEHXpBjKcc59xev/SmRfLKmb2lvA4UEl7/hsizwsOIDH+3QuCFvFiZd8f3Ytzbrt1rTFZ8XqI3zM9jmjSUkd32MXfstGOt3dPvdKLqLDctYdnJQJUtwDdC22rrDEYoqgl0xZ37Qy8r+NXABS+IsnXWnBBMLY9+LtgFzpWn8yEFTMpk8T+1I3FhPTi+58vWKqtE85I1H75PNk/q28=

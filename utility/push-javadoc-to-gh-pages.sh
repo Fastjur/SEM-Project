@@ -4,6 +4,7 @@ if [ "$TRAVIS_REPO_SLUG" == "Fastjur/SEM-Project" ] && [ "$TRAVIS_JDK_VERSION" =
 
   echo -e "Publishing javadoc...\n"
 
+  mvn clean site
   cp -R target/site $HOME/site-latest
 
   cd $HOME
