@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.objects.playerschemes;
 
+
 /**
  * The PlayerScheme interface implements all methods that differ per player.
  * @author Govert de Gans
@@ -17,6 +18,8 @@ public interface PlayerScheme {
   boolean rightPressed();
 
   boolean shootPressed();
+
+  int shootKey();
 
   String getName();
 

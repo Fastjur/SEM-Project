@@ -67,6 +67,10 @@ public class InputHandler implements MouseListener, KeyListener {
 
   }
 
+  public static void shotDone(int keyCode) {
+    keysPressed.remove(keyCode);
+  }
+
   public static boolean isKeyPressed(int keyCode) {
     return keysPressed.contains(keyCode);
   }

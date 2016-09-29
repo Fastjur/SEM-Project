@@ -4,10 +4,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.playerschemes.PlayerScheme;
+
 
 /**
  * @author Jurriaan Den Toonder
@@ -95,6 +97,7 @@ public class Player extends GameObject {
       HookAndRope newRope = new HookAndRope(getXpos(), 0, this, hookRemoveDelay);
       Application.getBoard().addObject(newRope);
       activeHooks++;
+      InputHandler.shotDone(playerScheme.shootKey());
     }
 
     if (collisionPlayer() && !isHit && !Application.cheatMode && !frozen) {
