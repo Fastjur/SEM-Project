@@ -28,7 +28,8 @@ public class SinglePlayerButton extends Button {
   @Override
   public void onClick() {
 <span class="nc" id="L30">    Logger.info(&quot;I change the screen now&quot;);</span>
-<span class="nc" id="L31">    Application.getBoard().changeScreen(new ControlsScreen());</span>
-<span class="nc" id="L32">  }</span>
+<span class="nc" id="L31">    Application.multiplayer = false;</span>
+<span class="nc" id="L32">    Application.getBoard().changeScreen(new ControlsScreen());</span>
+<span class="nc" id="L33">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

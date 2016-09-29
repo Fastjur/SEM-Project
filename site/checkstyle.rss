@@ -8,7 +8,7 @@
     <language>en-us</language>
     <copyright>&#169;2016</copyright>
     <item>
-      <title>File: 38,
+      <title>File: 42,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -30,6 +30,20 @@
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#net.liquidpineapple.pang.screens.ControlsScreen.java">net/liquidpineapple/pang/screens/ControlsScreen.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#net.liquidpineapple.pang.objects.playerschemes.Player2.java">net/liquidpineapple/pang/objects/playerschemes/Player2.java</a>
                 </td>
                 <td>
                   0
@@ -142,6 +156,20 @@
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#net.liquidpineapple.pang.screens.ControlsScreenTest.java">net/liquidpineapple/pang/screens/ControlsScreenTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#net.liquidpineapple.pang.objects.buttons.MultiPlayerButton.java">net/liquidpineapple/pang/objects/buttons/MultiPlayerButton.java</a>
                 </td>
                 <td>
                   0
@@ -323,6 +351,20 @@
               </tr>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#net.liquidpineapple.pang.objects.playerschemes.PlayerScheme.java">net/liquidpineapple/pang/objects/playerschemes/PlayerScheme.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#net.liquidpineapple.pang.screens.Level.java">net/liquidpineapple/pang/screens/Level.java</a>
                 </td>
                 <td>
@@ -450,6 +492,20 @@
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#net.liquidpineapple.pang.objects.buttons.SinglePlayerButton.java">net/liquidpineapple/pang/objects/buttons/SinglePlayerButton.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#net.liquidpineapple.pang.objects.playerschemes.Player1.java">net/liquidpineapple/pang/objects/playerschemes/Player1.java</a>
                 </td>
                 <td>
                   0

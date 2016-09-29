@@ -9,6 +9,8 @@ import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.BallMovement;
 import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.objects.Player;
+import net.liquidpineapple.pang.objects.playerschemes.Player1;
+import net.liquidpineapple.pang.objects.playerschemes.Player2;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,6 +21,7 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,8 +34,8 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class Level extends Screen {
 
-<span class="fc" id="L34">  public Level() {</span>
-<span class="fc" id="L35">  }</span>
+<span class="fc" id="L37">  public Level() {</span>
+<span class="fc" id="L38">  }</span>
 
   /**
    * Method that parses a XML-file into a level.
@@ -43,33 +46,33 @@ public class Level extends Screen {
   public static Level createFromXml(String xmlFile)
       throws IOException, ParserConfigurationException, SAXException {
 
-<span class="fc" id="L46">    Level output = new Level();</span>
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">    if (createFileReader(xmlFile) != null) {</span>
-<span class="nc" id="L48">      Document doc = createFileReader(xmlFile);</span>
-<span class="nc" id="L49">      String backgroundPath = &quot;/sprites/&quot;</span>
-<span class="nc" id="L50">          + doc.getElementsByTagName(&quot;background&quot;).item(0).getTextContent();</span>
-<span class="nc" id="L51">      output.backgroundImage = ImageIO.read(Level.class.getResource(backgroundPath));</span>
+<span class="fc" id="L49">    Level output = new Level();</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">    if (createFileReader(xmlFile) != null) {</span>
+<span class="nc" id="L51">      Document doc = createFileReader(xmlFile);</span>
+<span class="nc" id="L52">      String backgroundPath = &quot;/sprites/&quot;</span>
+<span class="nc" id="L53">          + doc.getElementsByTagName(&quot;background&quot;).item(0).getTextContent();</span>
+<span class="nc" id="L54">      output.backgroundImage = ImageIO.read(Level.class.getResource(backgroundPath));</span>
 
-<span class="nc bnc" id="L53" title="All 2 branches missed.">      for (Ball ball : loadBalls(doc.getElementsByTagName(&quot;ball&quot;))) {</span>
-<span class="nc" id="L54">        output.objectList.add(ball);</span>
-<span class="nc" id="L55">      }</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">      for (Ball ball : loadBalls(doc.getElementsByTagName(&quot;ball&quot;))) {</span>
+<span class="nc" id="L57">        output.objectList.add(ball);</span>
+<span class="nc" id="L58">      }</span>
 
-<span class="nc bnc" id="L57" title="All 2 branches missed.">      for (Player player : loadPlayer(doc.getElementsByTagName(&quot;player&quot;))) {</span>
-<span class="nc" id="L58">        output.objectList.add(player);</span>
-<span class="nc" id="L59">      }</span>
-<span class="nc" id="L60">      TimeSystem.resetTime(loadTime(doc));</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">      for (Player player : loadPlayer(doc.getElementsByTagName(&quot;player&quot;))) {</span>
+<span class="nc" id="L61">        output.objectList.add(player);</span>
+<span class="nc" id="L62">      }</span>
+<span class="nc" id="L63">      TimeSystem.resetTime(loadTime(doc));</span>
 
-<span class="nc bnc" id="L62" title="All 2 branches missed.">      for (NumberToken token : TimeSystem.getTimePlaces()) {</span>
-<span class="nc" id="L63">        output.objectList.add(token);</span>
-<span class="nc" id="L64">      }</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">      for (NumberToken token : TimeSystem.getTimePlaces()) {</span>
+<span class="nc" id="L66">        output.objectList.add(token);</span>
+<span class="nc" id="L67">      }</span>
 
     }
-<span class="fc bfc" id="L67" title="All 2 branches covered.">    for (NumberToken token : ScoreSystem.getPlaces()) {</span>
-<span class="fc" id="L68">      output.objectList.add(token);</span>
-<span class="fc" id="L69">    }</span>
-<span class="fc" id="L70">    Application.lifeSystem.updateLifes();</span>
-<span class="fc" id="L71">    output.objectList.add(Application.lifeSystem);</span>
-<span class="fc" id="L72">    return output;</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">    for (NumberToken token : ScoreSystem.getPlaces()) {</span>
+<span class="fc" id="L71">      output.objectList.add(token);</span>
+<span class="fc" id="L72">    }</span>
+<span class="fc" id="L73">    Application.lifeSystem.updateLifes();</span>
+<span class="fc" id="L74">    output.objectList.add(Application.lifeSystem);</span>
+<span class="fc" id="L75">    return output;</span>
   }
 
   /**
@@ -79,26 +82,26 @@ public class Level extends Screen {
    * @return - Arraylist with Ball objects.
    */
   public static ArrayList&lt;Ball&gt; loadBalls(NodeList ballList) {
-<span class="nc" id="L82">    ArrayList&lt;Ball&gt; ballArray = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L85">    ArrayList&lt;Ball&gt; ballArray = new ArrayList&lt;&gt;();</span>
 
-<span class="nc bnc" id="L84" title="All 2 branches missed.">    for (int i = 0; i &lt; ballList.getLength(); i++) {</span>
-<span class="nc" id="L85">      Node ballNode = ballList.item(i);</span>
-<span class="nc" id="L86">      Element ballElement = (Element) ballNode;</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">    for (int i = 0; i &lt; ballList.getLength(); i++) {</span>
+<span class="nc" id="L88">      Node ballNode = ballList.item(i);</span>
+<span class="nc" id="L89">      Element ballElement = (Element) ballNode;</span>
 
-<span class="nc" id="L88">      int intXpos = Integer.parseInt(ballElement.getElementsByTagName(&quot;x&quot;)</span>
-<span class="nc" id="L89">          .item(0).getTextContent());</span>
-<span class="nc" id="L90">      int intYpos = Integer.parseInt(ballElement.getElementsByTagName(&quot;y&quot;)</span>
-<span class="nc" id="L91">          .item(0).getTextContent());</span>
+<span class="nc" id="L91">      int intXpos = Integer.parseInt(ballElement.getElementsByTagName(&quot;x&quot;)</span>
+<span class="nc" id="L92">          .item(0).getTextContent());</span>
+<span class="nc" id="L93">      int intYpos = Integer.parseInt(ballElement.getElementsByTagName(&quot;y&quot;)</span>
+<span class="nc" id="L94">          .item(0).getTextContent());</span>
 
-<span class="nc" id="L93">      int size = Integer.parseInt(ballElement.getElementsByTagName(&quot;size&quot;).item(0)</span>
-<span class="nc" id="L94">          .getTextContent());</span>
+<span class="nc" id="L96">      int size = Integer.parseInt(ballElement.getElementsByTagName(&quot;size&quot;).item(0)</span>
+<span class="nc" id="L97">          .getTextContent());</span>
 
-<span class="nc" id="L96">      String direction = ballElement.getElementsByTagName(&quot;direction&quot;).item(0).getTextContent();</span>
-<span class="nc" id="L97">      BallMovement ballMovement = BallMovement.valueOf(direction);</span>
-<span class="nc" id="L98">      Ball ball = new Ball(intXpos, intYpos, ballMovement, size);</span>
-<span class="nc" id="L99">      ballArray.add(ball);</span>
+<span class="nc" id="L99">      String direction = ballElement.getElementsByTagName(&quot;direction&quot;).item(0).getTextContent();</span>
+<span class="nc" id="L100">      BallMovement ballMovement = BallMovement.valueOf(direction);</span>
+<span class="nc" id="L101">      Ball ball = new Ball(intXpos, intYpos, ballMovement, size);</span>
+<span class="nc" id="L102">      ballArray.add(ball);</span>
     }
-<span class="nc" id="L101">    return ballArray;</span>
+<span class="nc" id="L104">    return ballArray;</span>
   }
 
   /**
@@ -109,20 +112,23 @@ public class Level extends Screen {
    * @return - ArrayList of Player objects.
    */
   public static ArrayList&lt;Player&gt; loadPlayer(NodeList playerlist) {
-<span class="nc" id="L112">    ArrayList&lt;Player&gt; playerArray = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L113" title="All 2 branches missed.">    for (int i = 0; i &lt; playerlist.getLength(); i++) {</span>
-<span class="nc" id="L114">      Node playernode = playerlist.item(i);</span>
-<span class="nc" id="L115">      Element playerElement = (Element) playernode;</span>
+<span class="nc" id="L115">    ArrayList&lt;Player&gt; playerArray = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">    for (int i = 0; i &lt; playerlist.getLength(); i++) {</span>
+<span class="nc" id="L117">      Node playernode = playerlist.item(i);</span>
+<span class="nc" id="L118">      Element playerElement = (Element) playernode;</span>
 
-<span class="nc" id="L117">      int intXpos = Integer.parseInt(playerElement.getElementsByTagName(&quot;x&quot;)</span>
-<span class="nc" id="L118">          .item(0).getTextContent());</span>
-<span class="nc" id="L119">      int intYpos = Integer.parseInt(playerElement.getElementsByTagName(&quot;y&quot;)</span>
-<span class="nc" id="L120">          .item(0).getTextContent());</span>
+<span class="nc" id="L120">      int intXpos = Integer.parseInt(playerElement.getElementsByTagName(&quot;x&quot;)</span>
+<span class="nc" id="L121">          .item(0).getTextContent());</span>
+<span class="nc" id="L122">      int intYpos = Integer.parseInt(playerElement.getElementsByTagName(&quot;y&quot;)</span>
+<span class="nc" id="L123">          .item(0).getTextContent());</span>
 
-<span class="nc" id="L122">      Player player = new Player(intXpos, intYpos);</span>
-<span class="nc" id="L123">      playerArray.add(player);</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">      if (i == 0) {</span>
+<span class="nc" id="L126">        playerArray.add(new Player(intXpos, intYpos, new Player1()));</span>
+<span class="nc bnc" id="L127" title="All 4 branches missed.">      } else if (i == 1 &amp;&amp; Application.multiplayer) {</span>
+<span class="nc" id="L128">        playerArray.add(new Player(intXpos, intYpos, new Player2()));</span>
+      }
     }
-<span class="nc" id="L125">    return playerArray;</span>
+<span class="nc" id="L131">    return playerArray;</span>
   }
 
   /**
@@ -132,7 +138,7 @@ public class Level extends Screen {
    * @return - returns an int contained in the {@code &lt;time&gt;&lt;/time&gt;}
    */
   public static int loadTime(Document doc) {
-<span class="nc" id="L135">    return Integer.parseInt(doc.getElementsByTagName(&quot;time&quot;).item(0).getTextContent());</span>
+<span class="nc" id="L141">    return Integer.parseInt(doc.getElementsByTagName(&quot;time&quot;).item(0).getTextContent());</span>
   }
 
   /**
@@ -143,15 +149,15 @@ public class Level extends Screen {
    */
   public static Document createFileReader(String xmlFile)
       throws ParserConfigurationException, SAXException {
-<span class="fc" id="L146">    InputStream in = Level.class.getResourceAsStream(xmlFile);</span>
-<span class="fc" id="L147">    DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();</span>
+<span class="fc" id="L152">    InputStream in = Level.class.getResourceAsStream(xmlFile);</span>
+<span class="fc" id="L153">    DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();</span>
 
     try {
-<span class="fc" id="L150">      return documentBuilder.parse(in);</span>
-<span class="fc" id="L151">    } catch (IOException | IllegalArgumentException ex) {</span>
+<span class="fc" id="L156">      return documentBuilder.parse(in);</span>
+<span class="fc" id="L157">    } catch (IOException | IllegalArgumentException ex) {</span>
       //TODO Fix this shit
-<span class="fc" id="L153">      ex.printStackTrace();</span>
-<span class="fc" id="L154">      return null;</span>
+<span class="fc" id="L159">      ex.printStackTrace();</span>
+<span class="fc" id="L160">      return null;</span>
     }
   }
 
@@ -162,43 +168,43 @@ public class Level extends Screen {
    * Updates all components in level when the level is not ended.
    */
   public void doUpdate() {
-<span class="fc" id="L165">    boolean levelEnded = true;</span>
-<span class="fc bfc" id="L166" title="All 2 branches covered.">    for (GameObject object : objectList) {</span>
-<span class="pc bpc" id="L167" title="1 of 2 branches missed.">      if (object instanceof Ball) {</span>
-<span class="nc" id="L168">        levelEnded = false;</span>
+<span class="fc" id="L171">    boolean levelEnded = true;</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">    for (GameObject object : objectList) {</span>
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">      if (object instanceof Ball) {</span>
+<span class="nc" id="L174">        levelEnded = false;</span>
       }
-<span class="fc" id="L170">    }</span>
+<span class="fc" id="L176">    }</span>
 
-<span class="pc bpc" id="L172" title="1 of 2 branches missed.">    if (levelEnded) {</span>
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">    if (levelEnded) {</span>
       try {
-<span class="fc" id="L174">        nextLevel();</span>
-<span class="nc" id="L175">      } catch (ParserConfigurationException | SAXException ex) {</span>
-<span class="nc" id="L176">        ex.printStackTrace();</span>
-<span class="pc" id="L177">      }</span>
+<span class="fc" id="L180">        nextLevel();</span>
+<span class="nc" id="L181">      } catch (ParserConfigurationException | SAXException ex) {</span>
+<span class="nc" id="L182">        ex.printStackTrace();</span>
+<span class="pc" id="L183">      }</span>
     } else {
-<span class="nc" id="L179">      new ArrayList&lt;&gt;(objectList).forEach(GameObject::doUpdate);</span>
+<span class="nc" id="L185">      new ArrayList&lt;&gt;(objectList).forEach(GameObject::doUpdate);</span>
     }
-<span class="fc" id="L181">  }</span>
+<span class="fc" id="L187">  }</span>
 
   /**
    * Attempst to load the new level (WIP).
    */
   private void nextLevel() throws ParserConfigurationException, SAXException {
-<span class="fc" id="L187">    Board currentBoard = Application.getBoard();</span>
-<span class="fc" id="L188">    currentBoard.setLevelCount(currentBoard.getLevelCount() + 1);</span>
-<span class="fc" id="L189">    Screen newScreen = null;</span>
-<span class="fc" id="L190">    String levelLocation = &quot;/levels/level&quot; + currentBoard.getLevelCount() + &quot;.xml&quot;;</span>
-<span class="fc bfc" id="L191" title="All 2 branches covered.">    if (createFileReader(levelLocation) != null) {</span>
+<span class="fc" id="L193">    Board currentBoard = Application.getBoard();</span>
+<span class="fc" id="L194">    currentBoard.setLevelCount(currentBoard.getLevelCount() + 1);</span>
+<span class="fc" id="L195">    Screen newScreen = null;</span>
+<span class="fc" id="L196">    String levelLocation = &quot;/levels/level&quot; + currentBoard.getLevelCount() + &quot;.xml&quot;;</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">    if (createFileReader(levelLocation) != null) {</span>
       try {
-<span class="fc" id="L193">        newScreen = Level.createFromXml(&quot;/levels/level&quot; + currentBoard.getLevelCount() + &quot;.xml&quot;);</span>
-<span class="nc" id="L194">      } catch (IOException ex) {</span>
-<span class="nc" id="L195">        ex.printStackTrace();</span>
-<span class="pc" id="L196">      }</span>
+<span class="fc" id="L199">        newScreen = Level.createFromXml(&quot;/levels/level&quot; + currentBoard.getLevelCount() + &quot;.xml&quot;);</span>
+<span class="nc" id="L200">      } catch (IOException ex) {</span>
+<span class="nc" id="L201">        ex.printStackTrace();</span>
+<span class="pc" id="L202">      }</span>
     } else {
       //set behaviour when all levels have been completed here.
-<span class="fc" id="L199">      newScreen = new WinScreen();</span>
+<span class="fc" id="L205">      newScreen = new WinScreen();</span>
     }
-<span class="fc" id="L201">    currentBoard.changeScreen(newScreen);</span>
-<span class="fc" id="L202">  }</span>
+<span class="fc" id="L207">    currentBoard.changeScreen(newScreen);</span>
+<span class="fc" id="L208">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
