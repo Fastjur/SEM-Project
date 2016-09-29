@@ -3,6 +3,7 @@ package net.liquidpineapple.pang.objects;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
 
@@ -32,9 +33,10 @@ public abstract class GameObject {
 
   /**
    * Constructor for gameobject.
+   *
    * @param textureLocation - texture storage location of object.
-   * @param startX - x pos of object.
-   * @param startY - y pos of object.
+   * @param startX          - x pos of object.
+   * @param startY          - y pos of object.
    */
   public GameObject(String textureLocation, double startX, double startY) {
     this.xpos = startX;
@@ -47,19 +49,26 @@ public abstract class GameObject {
 
   /**
    * Method that changes the image.
+   *
    * @param textureLocation - image storage location.
    */
   public void changeImage(String textureLocation) {
     ImageIcon imageIcon;
     Logger.info("Registering object with texture " + textureLocation);
-    URL url = this.getClass().getResource(textureLocation);
 
-    if (url == null) {
-      throw new IllegalArgumentException("Could not find texture " + textureLocation);
+    Image img;
+    if ((img = Application.imageCache.getOrDefault(textureLocation, null)) != null) {
+      this.image = img;
+    } else {
+      URL url = this.getClass().getResource(textureLocation);
+      if (url == null) {
+        throw new IllegalArgumentException("Could not find texture " + textureLocation);
+      }
+      imageIcon = new ImageIcon(url);
+      image = imageIcon.getImage();
+      Application.imageCache.put(textureLocation, image);
+      Logger.info("Loaded image " + textureLocation);
     }
-
-    imageIcon = new ImageIcon(url);
-    image = imageIcon.getImage();
     getWidthAndHeight();
   }
 
@@ -79,6 +88,7 @@ public abstract class GameObject {
 
   /**
    * Method that sets the position of an object.
+   *
    * @param xposition - x pos of object.
    * @param yposition - y pos of object.
    */
