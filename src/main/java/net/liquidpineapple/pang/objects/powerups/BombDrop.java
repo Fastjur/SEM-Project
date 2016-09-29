@@ -24,7 +24,8 @@ public class BombDrop extends Drop {
    */
   @Override
   public void playerCollision(Player player) {
-    for (GameObject object : new ArrayList<>(Application.getBoard().getCurrentScreen().objectList)) {
+    for (GameObject object :
+        new ArrayList<>(Application.getBoard().getCurrentScreen().objectList)) {
       if (object instanceof Ball) {
         ((Ball) object).destroyball();
       }

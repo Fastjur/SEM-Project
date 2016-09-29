@@ -1,13 +1,10 @@
 package net.liquidpineapple.pang.objects;
 
 import lombok.Getter;
-
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
-import net.liquidpineapple.pang.objects.powerups.BombDrop;
-import net.liquidpineapple.pang.objects.powerups.HeartDrop;
-import net.liquidpineapple.pang.objects.powerups.HookDrop;
-import net.liquidpineapple.pang.objects.powerups.ShieldDrop;
+
+import net.liquidpineapple.pang.objects.powerups.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,19 +14,23 @@ import java.util.Random;
  */
 public class DropRandomizer {
 
+  @SuppressWarnings("Checkstyle:AvoidStarImport") // We want all powerups, so powerups.* only makes sense.
   private Random randomizer;
   private static final int BRONZE_NUM = 1;
   private static final int SILVER_NUM = 1;
   private static final int GOLD_NUM = 1;
   private static final int GEM_NUM = 1;
-  private static final int TOTAL_GEMS = 1;
   private static final int HEART_NUM = 1;
   private static final int HOOK_NUM = 1;
   private static final int SHIELD_NUM = 1;
-  private static final int BOMB_NUM = 100;
+  private static final int BOMB_NUM = 1;
+  private static final int FROZEN_NUM = 100;
   private static final int TOTAL_CHANCE = 100;
 
   private ArrayList<Drop> randomList;
+  private static final int TOTAL_GEMS = 4;
+  //Whatever you do, don't put this to 0
+  // Should be 4 unless you add different types of gems.
 
   @Getter
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
@@ -70,6 +71,9 @@ public class DropRandomizer {
     }
     for (int i = 0; i < BOMB_NUM; i++) {
       randomList.add(new BombDrop("/sprites/drops/bomb.png", 0, 0, 0, 1, 1));
+    }
+    for (int i = 0; i < FROZEN_NUM; i++) {
+      randomList.add(new FreezeTimeDrop("/sprites/drops/fireball.png", 0, 0, 0, 1, 1, 5));
     }
   }
 

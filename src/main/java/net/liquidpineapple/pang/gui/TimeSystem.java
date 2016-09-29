@@ -20,8 +20,8 @@ public class TimeSystem {
 
   private static int time;
   private static Timer interval;
-  @Setter
-  private int frozen = 0;
+  @Getter
+  private static int frozen = 0;
 
   @Getter
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
@@ -35,8 +35,7 @@ public class TimeSystem {
     public void actionPerformed(ActionEvent ae) {
       if (time > 0 && frozen == 0) {
         time -= 1;
-      }
-      else{
+      } else {
         frozen -= 1;
       }
       //Here the proper behaviour when time is run out should be replaced,
@@ -64,6 +63,7 @@ public class TimeSystem {
    */
   public static void resetTime(int inTime) {
     time = inTime;
+    frozen = 0;
     if (time > 999) {
       time = 999;
     }
@@ -76,6 +76,11 @@ public class TimeSystem {
     updatetime();
     interval.start();
   }
+
+  public static void setFrozen(int freezeTime) {
+    frozen = freezeTime;
+  }
+
 
   private static void updatetime() {
     int calctime = time;

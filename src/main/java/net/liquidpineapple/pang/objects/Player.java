@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.LifeSystem;
+import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.playerschemes.PlayerScheme;
 
@@ -82,7 +83,7 @@ public class Player extends GameObject {
       activeHooks++;
     }
 
-    if (collisionPlayer() && !isHit && !Application.cheatMode) {
+    if (collisionPlayer() && !isHit && !Application.cheatMode && !(TimeSystem.getFrozen() > 0)) {
       if (shield > 0) {
         shield -= 1;
       } else {
