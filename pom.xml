@@ -37,7 +37,6 @@
     <properties>
         <argLine>-Xmx2048m -Xms1024m</argLine>
         <checkstyle.version>7.1.1</checkstyle.version>
-        <coveralls.version>4.2.0</coveralls.version>
         <jacoco.version>0.7.6.201602180812</jacoco.version>
         <jdk.version>1.8</jdk.version>
         <junit.version>4.12</junit.version>
@@ -79,11 +78,6 @@
                     <target>${jdk.version}</target>
                 </configuration>
                 <version>${maven.compiler.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
-                <version>${coveralls.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
