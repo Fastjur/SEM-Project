@@ -6,7 +6,6 @@ import lombok.Setter;
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
-import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.DropRandomizer;
 
@@ -96,7 +95,7 @@ public class Application extends JFrame {
 
     Logger.info("Application started successfully!");
 
-    TimeSystem.getInstance();
+//    TimeSystem.getInstance();
 
     Runnable doUpdateRunnable = () -> {
       long beforeTime;
