@@ -18,8 +18,6 @@ import org.junit.Test;
 public class DropTest {
 
   private static final String PROPERTIES_LOCATION = "/config.properties";
-  private Drop drop1Live = new HeartDrop("/sprites/drops/heart.png", 0, 0, 0, 1, 0, 1);
-  private Drop droplose2Live = new HeartDrop("/sprites/drops/heart.png", 0, 0, 0, 1, 0, -2);
   private Player testplayer = new Player(0,0,new Player1());
 
   private static final double DELTA = 0.01;
@@ -34,15 +32,6 @@ public class DropTest {
   public void setUp() throws Exception {
     app = new Application(PROPERTIES_LOCATION);
     app.start();
-  }
-
-  @Test
-  public void testlifegain() {
-    int oldlives = LifeSystem.getLives();
-    droplose2Live.playerCollision(testplayer);
-    assertEquals(oldlives - 2, LifeSystem.getLives());
-    drop1Live.playerCollision(testplayer);
-    assertEquals(oldlives - 1, LifeSystem.getLives());
   }
 
   @Test

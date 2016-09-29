@@ -17,6 +17,9 @@ public class StickyHookDrop extends Drop {
                         double movX, double movY, int score, int stickyDelayTime) {
     super(textureLocation, startX, startY, movX, movY, score);
     this.stickyDelayTime = stickyDelayTime;
+    if ( stickyDelayTime < 0) {
+      this.stickyDelayTime = 0;
+    }
   }
 
   /**
