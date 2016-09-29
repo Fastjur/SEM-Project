@@ -5,6 +5,7 @@ import lombok.Getter;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.gui.NumberToken;
+import net.liquidpineapple.pang.gui.ScoreSystem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class WinScreen extends Screen {
    * Method that makes the score display on the screen.
    */
   public void displayscore() {
-    int calcscore = Application.getScoreKeeper().getScore();
+    int calcscore = ScoreSystem.getScore();
     int pos = 0;
 
     while (calcscore > 0) {

@@ -6,14 +6,15 @@ import lombok.Setter;
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
-import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.DropRandomizer;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.swing.JFrame;
@@ -35,7 +36,7 @@ public class Application extends JFrame {
   public static final boolean cheatMode = false;
 
   public static boolean multiplayer;
-
+  public static HashMap<String, Image> imageCache = new HashMap<String, Image>();
   public static LifeSystem lifeSystem;
 
   @Getter
@@ -96,7 +97,7 @@ public class Application extends JFrame {
 
     Logger.info("Application started successfully!");
 
-    TimeSystem.getInstance();
+//    TimeSystem.getInstance();
 
     Runnable doUpdateRunnable = () -> {
       long beforeTime;
