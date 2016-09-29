@@ -3,6 +3,7 @@ package net.liquidpineapple.pang.objects;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
 
@@ -52,15 +53,21 @@ public abstract class GameObject {
   public void changeImage(String textureLocation) {
     ImageIcon imageIcon;
     Logger.info("Registering object with texture " + textureLocation);
-    URL url = this.getClass().getResource(textureLocation);
 
-    if (url == null) {
-      throw new IllegalArgumentException("Could not find texture " + textureLocation);
+    Image img;
+    if ((img = Application.imageCache.getOrDefault(textureLocation, null)) != null) {
+      this.image = img;
+    } else {
+      URL url = this.getClass().getResource(textureLocation);
+      if (url == null) {
+        throw new IllegalArgumentException("Could not find texture " + textureLocation);
+      }
+      imageIcon = new ImageIcon(url);
+      image = imageIcon.getImage();
+      Application.imageCache.put(textureLocation, image);
+      Logger.info("Loaded image " + textureLocation);
     }
-
-    imageIcon = new ImageIcon(url);
-    image = imageIcon.getImage();
-    getWidthAndHeight();
+      getWidthAndHeight();
   }
 
   private void getWidthAndHeight() {
