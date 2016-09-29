@@ -23,9 +23,9 @@ public class DropRandomizer {
   private static final int HOOK_NUM = 5;
   private static final int SHIELD_NUM = 5;
   private static final int BOMB_NUM = 5;
-  private static final int FROZEN_NUM = 5;
+  private static final int FROZEN_NUM = 100;
   private static final int STICKY_NUM = 5;
-  private static final int TOTAL_CHANCE = 100;
+  private static final int TOTAL_CHANCE = 200;
 
   private ArrayList<Drop> randomList;
   private static final int TOTAL_GEMS = 4;
@@ -67,13 +67,13 @@ public class DropRandomizer {
       randomList.add(new HookDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 3));
     }
     for (int i = 0; i < SHIELD_NUM; i++) {
-      randomList.add(new ShieldDrop("/sprites/drops/star.png", 0, 0, 0, 1, 1, 1));
+      randomList.add(new ShieldDrop("/sprites/drops/shieldBronze.png", 0, 0, 0, 1, 1, 1));
     }
     for (int i = 0; i < BOMB_NUM; i++) {
       randomList.add(new BombDrop("/sprites/drops/bomb.png", 0, 0, 0, 1, 1));
     }
     for (int i = 0; i < FROZEN_NUM; i++) {
-      randomList.add(new FreezeTimeDrop("/sprites/drops/fireball.png", 0, 0, 0, 1, 1, 5));
+      randomList.add(new FreezeTimeDrop("/sprites/drops/freezeIcon.png", 0, 0, 0, 1, 1, 5));
     }
     for (int i = 0; i < STICKY_NUM; i++) {
       randomList.add(new StickyHookDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 2));

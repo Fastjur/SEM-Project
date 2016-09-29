@@ -24,6 +24,7 @@ public class Player extends GameObject {
   public int maximumHooks = 1;
   public int shield = 0;
   public int hookRemoveDelay = 0;
+  private  boolean frozen = false;
 
   private enum PlayerMovement {
     LEFT_DIRECTION(-4 / 5.0),
@@ -65,6 +66,14 @@ public class Player extends GameObject {
   public void doUpdate() {
     super.doUpdate();
 
+    if(TimeSystem.getFrozen() > 0){
+      frozen = true;
+      this.changeImage(playerScheme.getFrozenTextureName());
+    } else if (frozen = true) {
+      frozen = false;
+      this.changeImage(playerScheme.getTextureName());
+    }
+
     if (playerScheme.leftPressed()) {
       if (!playerScheme.rightPressed()) {
         dx = PlayerMovement.LEFT_DIRECTION.dx;
@@ -84,9 +93,12 @@ public class Player extends GameObject {
       activeHooks++;
     }
 
-    if (collisionPlayer() && !isHit && !Application.cheatMode && !(TimeSystem.getFrozen() > 0)) {
+    if (collisionPlayer() && !isHit && !Application.cheatMode && !frozen) {
       if (shield > 0) {
         shield -= 1;
+        if (shield == 0) {
+          this.changeImage(playerScheme.getTextureName());
+        }
       } else {
         LifeSystem.loseLife();
       }
@@ -120,5 +132,10 @@ public class Player extends GameObject {
     }
     isHit = false;
     return false;
+  }
+
+  public void setShield(int shield) {
+    this.shield = shield;
+    this.changeImage(playerScheme.getShieldTextureName());
   }
 }

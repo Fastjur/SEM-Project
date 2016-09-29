@@ -8,6 +8,10 @@ package net.liquidpineapple.pang.objects.playerschemes;
 public interface PlayerScheme {
   String getTextureName();
 
+  String getFrozenTextureName();
+
+  String getShieldTextureName();
+
   boolean leftPressed();
 
   boolean rightPressed();
