@@ -19,6 +19,7 @@ import net.liquidpineapple.pang.objects.playerschemes.PlayerScheme;
 @EqualsAndHashCode(callSuper = true)
 public class Player extends GameObject {
 
+  private boolean shootheld = false;
   private boolean isHit = false;
   private double oldX;
   private PlayerScheme playerScheme;
@@ -93,11 +94,14 @@ public class Player extends GameObject {
       dx = PlayerMovement.NO_MOVEMENT.dx;
     }
 
-    if (playerScheme.shootPressed() && activeHooks < maximumHooks) {
+    if (playerScheme.shootPressed() && !shootheld && activeHooks < maximumHooks) {
       HookAndRope newRope = new HookAndRope(getXpos(), 0, this, hookRemoveDelay);
       Application.getBoard().addObject(newRope);
       activeHooks++;
-      InputHandler.shotDone(playerScheme.shootKey());
+      shootheld = true;
+    }
+    if (!playerScheme.shootPressed() && shootheld) {
+      shootheld = false;
     }
 
     if (collisionPlayer() && !isHit && !Application.cheatMode && !frozen) {

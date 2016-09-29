@@ -35,10 +35,6 @@ public class Player2 implements PlayerScheme {
     return InputHandler.isKeyPressed(KeyEvent.VK_UP);
   }
 
-  public int shootKey() {
-    return KeyEvent.VK_UP;
-  }
-
   public String getName() {
     return "Player 1";
   }

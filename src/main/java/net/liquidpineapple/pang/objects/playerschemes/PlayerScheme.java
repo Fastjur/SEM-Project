@@ -19,8 +19,6 @@ public interface PlayerScheme {
 
   boolean shootPressed();
 
-  int shootKey();
-
   String getName();
 
   String getBeamTextureName();
