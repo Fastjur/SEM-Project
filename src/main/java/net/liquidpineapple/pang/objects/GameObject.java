@@ -33,9 +33,10 @@ public abstract class GameObject {
 
   /**
    * Constructor for gameobject.
+   *
    * @param textureLocation - texture storage location of object.
-   * @param startX - x pos of object.
-   * @param startY - y pos of object.
+   * @param startX          - x pos of object.
+   * @param startY          - y pos of object.
    */
   public GameObject(String textureLocation, double startX, double startY) {
     this.xpos = startX;
@@ -48,6 +49,7 @@ public abstract class GameObject {
 
   /**
    * Method that changes the image.
+   *
    * @param textureLocation - image storage location.
    */
   public void changeImage(String textureLocation) {
@@ -67,7 +69,7 @@ public abstract class GameObject {
       Application.imageCache.put(textureLocation, image);
       Logger.info("Loaded image " + textureLocation);
     }
-      getWidthAndHeight();
+    getWidthAndHeight();
   }
 
   private void getWidthAndHeight() {
@@ -86,6 +88,7 @@ public abstract class GameObject {
 
   /**
    * Method that sets the position of an object.
+   *
    * @param xposition - x pos of object.
    * @param yposition - y pos of object.
    */
