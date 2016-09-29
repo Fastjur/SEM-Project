@@ -18,14 +18,14 @@ import java.util.Random;
 public class DropRandomizer {
 
   private Random randomizer;
-  private static final int BRONZE_NUM = 0;
-  private static final int SILVER_NUM = 0;
-  private static final int GOLD_NUM = 0;
-  private static final int GEM_NUM = 0;
-  private static final int TOTAL_GEMS = 0;
-  private static final int HEART_NUM = 0;
-  private static final int HOOK_NUM = 0;
-  private static final int SHIELD_NUM = 0;
+  private static final int BRONZE_NUM = 1;
+  private static final int SILVER_NUM = 1;
+  private static final int GOLD_NUM = 1;
+  private static final int GEM_NUM = 1;
+  private static final int TOTAL_GEMS = 1;
+  private static final int HEART_NUM = 1;
+  private static final int HOOK_NUM = 1;
+  private static final int SHIELD_NUM = 1;
   private static final int BOMB_NUM = 100;
   private static final int TOTAL_CHANCE = 100;
 

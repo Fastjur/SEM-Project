@@ -6,12 +6,12 @@ import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.objects.Player;
 
+import java.util.ArrayList;
+
 public class BombDrop extends Drop {
 
   /**
-   *
    * Creates a drop, when picked up this drop breaks all the balls 1 time.
-   *
    */
   public BombDrop(String textureLocation, double startX, double startY, double movX, double movY,
                   int score) {
@@ -24,7 +24,7 @@ public class BombDrop extends Drop {
    */
   @Override
   public void playerCollision(Player player) {
-    for (GameObject object : Application.getBoard().getCurrentScreen().objectList) {
+    for (GameObject object : new ArrayList<>(Application.getBoard().getCurrentScreen().objectList)) {
       if (object instanceof Ball) {
         ((Ball) object).destroyball();
       }
