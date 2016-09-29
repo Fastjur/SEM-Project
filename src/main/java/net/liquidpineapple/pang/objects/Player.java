@@ -23,6 +23,7 @@ public class Player extends GameObject {
   public int activeHooks = 0;
   public int maximumHooks = 1;
   public int shield = 0;
+  public int hookRemoveDelay = 0;
 
   private enum PlayerMovement {
     LEFT_DIRECTION(-4 / 5.0),
@@ -78,7 +79,7 @@ public class Player extends GameObject {
     }
 
     if (playerScheme.shootPressed() && activeHooks < maximumHooks) {
-      HookAndRope newRope = new HookAndRope(getXpos(), 0, this);
+      HookAndRope newRope = new HookAndRope(getXpos(), 0, this, hookRemoveDelay);
       Application.getBoard().addObject(newRope);
       activeHooks++;
     }

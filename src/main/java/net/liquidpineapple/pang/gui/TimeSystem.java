@@ -18,6 +18,7 @@ import javax.swing.Timer;
  */
 public class TimeSystem {
 
+  @Getter
   private static int time;
   private static Timer interval;
   @Getter

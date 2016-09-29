@@ -34,7 +34,7 @@ public class HookAndRopeTest {
     app = new Application(PROPERTIES_LOCATION);
     app.start();
     player = new Player(0, 0, new Player1());
-    hookAndRope = new HookAndRope(XCOORD, MAXY, player);
+    hookAndRope = new HookAndRope(XCOORD, MAXY, player, 0);
   }
 
   /**
@@ -61,7 +61,7 @@ public class HookAndRopeTest {
    */
   @Test
   public void hitTopMoveTest() throws Exception {
-    HookAndRope rope = new HookAndRope(500, 584, player);
+    HookAndRope rope = new HookAndRope(500, 584, player, 0);
     assertEquals(600, rope.getYpos(), DELTA);
     rope.move();
     assertEquals(597, rope.getYpos(), DELTA);

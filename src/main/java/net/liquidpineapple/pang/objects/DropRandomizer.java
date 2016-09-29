@@ -14,7 +14,6 @@ import java.util.Random;
  */
 public class DropRandomizer {
 
-  @SuppressWarnings("Checkstyle:AvoidStarImport") // We want all powerups, so powerups.* only makes sense.
   private Random randomizer;
   private static final int BRONZE_NUM = 1;
   private static final int SILVER_NUM = 1;
@@ -24,7 +23,8 @@ public class DropRandomizer {
   private static final int HOOK_NUM = 1;
   private static final int SHIELD_NUM = 1;
   private static final int BOMB_NUM = 1;
-  private static final int FROZEN_NUM = 100;
+  private static final int FROZEN_NUM = 1;
+  private static final int STICKY_NUM = 100;
   private static final int TOTAL_CHANCE = 100;
 
   private ArrayList<Drop> randomList;
@@ -74,6 +74,9 @@ public class DropRandomizer {
     }
     for (int i = 0; i < FROZEN_NUM; i++) {
       randomList.add(new FreezeTimeDrop("/sprites/drops/fireball.png", 0, 0, 0, 1, 1, 5));
+    }
+    for (int i = 0; i < STICKY_NUM; i++) {
+      randomList.add(new StickyHookDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 2));
     }
   }
 
