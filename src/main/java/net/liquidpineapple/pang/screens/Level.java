@@ -18,9 +18,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import java.awt.Graphics2D;
+import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
@@ -34,7 +37,11 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class Level extends Screen {
 
+  private LinkedList<GameObject> hudObjectList;
+
   public Level() {
+    super();
+    hudObjectList = new LinkedList<GameObject>();
   }
 
   /**
@@ -63,15 +70,15 @@ public class Level extends Screen {
       TimeSystem.resetTime(loadTime(doc));
 
       for (NumberToken token : TimeSystem.getTimePlaces()) {
-        output.objectList.add(token);
+        output.hudObjectList.add(token);
       }
 
     }
     for (NumberToken token : ScoreSystem.getPlaces()) {
-      output.objectList.add(token);
+      output.hudObjectList.add(token);
     }
     Application.lifeSystem.updateLifes();
-    output.objectList.add(Application.lifeSystem);
+    output.hudObjectList.add(Application.lifeSystem);
     return output;
   }
 
@@ -205,5 +212,13 @@ public class Level extends Screen {
       newScreen = new WinScreen();
     }
     currentBoard.changeScreen(newScreen);
+  }
+
+  @Override
+  public void doDrawing(Graphics2D graphics2D, ImageObserver imageObserver) {
+    super.doDrawing(graphics2D, imageObserver);
+    for (GameObject hudObject : hudObjectList) {
+      hudObject.doDrawing(graphics2D, imageObserver);
+    }
   }
 }

@@ -30,7 +30,17 @@
             </roles>
             <timezone>Europe/Amsterdam</timezone>
         </developer>
-
+		<developer>
+            <name>Govert de Gans</name>
+            <email>grappigegovert@hotmail.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>Europe/Amsterdam</timezone>
+			<properties>
+                <picUrl>https://dl.dropboxusercontent.com/s/aouoezcupenoclk/squiwa.png</picUrl>
+            </properties>
+        </developer>
 
     </developers>
 
