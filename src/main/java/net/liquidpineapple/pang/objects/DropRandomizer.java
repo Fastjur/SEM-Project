@@ -4,6 +4,10 @@ import lombok.Getter;
 
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
+import net.liquidpineapple.pang.objects.powerups.BombDrop;
+import net.liquidpineapple.pang.objects.powerups.HeartDrop;
+import net.liquidpineapple.pang.objects.powerups.HookDrop;
+import net.liquidpineapple.pang.objects.powerups.ShieldDrop;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,12 +18,15 @@ import java.util.Random;
 public class DropRandomizer {
 
   private Random randomizer;
-  private static final int BRONZE_NUM = 30;
-  private static final int SILVER_NUM = 20;
-  private static final int GOLD_NUM = 10;
-  private static final int GEM_NUM = 8;
-  private static final int TOTAL_GEMS = 4;
-  private static final int HEART_NUM = 2;
+  private static final int BRONZE_NUM = 0;
+  private static final int SILVER_NUM = 0;
+  private static final int GOLD_NUM = 0;
+  private static final int GEM_NUM = 0;
+  private static final int TOTAL_GEMS = 0;
+  private static final int HEART_NUM = 0;
+  private static final int HOOK_NUM = 0;
+  private static final int SHIELD_NUM = 0;
+  private static final int BOMB_NUM = 100;
   private static final int TOTAL_CHANCE = 100;
 
   private ArrayList<Drop> randomList;
@@ -53,7 +60,16 @@ public class DropRandomizer {
       randomList.add(new Drop("/sprites/drops/gemGreen.png", 0, 0, 0, 1, 1500));
     }
     for (int i = 0; i < HEART_NUM; i++) {
-      randomList.add(new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 1, 1));
+      randomList.add(new HeartDrop("/sprites/drops/heart.png", 0, 0, 0, 1, 1, 1));
+    }
+    for (int i = 0; i < HOOK_NUM; i++) {
+      randomList.add(new HookDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 3));
+    }
+    for (int i = 0; i < SHIELD_NUM; i++) {
+      randomList.add(new ShieldDrop("/sprites/drops/star.png", 0, 0, 0, 1, 1, 1));
+    }
+    for (int i = 0; i < BOMB_NUM; i++) {
+      randomList.add(new BombDrop("/sprites/drops/bomb.png", 0, 0, 0, 1, 1));
     }
   }
 

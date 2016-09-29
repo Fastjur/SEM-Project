@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.liquidpineapple.pang.logger.Logger;
 
 import java.awt.event.ActionEvent;
@@ -19,6 +20,8 @@ public class TimeSystem {
 
   private static int time;
   private static Timer interval;
+  @Setter
+  private int frozen = 0;
 
   @Getter
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
@@ -30,8 +33,11 @@ public class TimeSystem {
   private ActionListener timerAction = new ActionListener() {
     @Override
     public void actionPerformed(ActionEvent ae) {
-      if (time > 0) {
+      if (time > 0 && frozen == 0) {
         time -= 1;
+      }
+      else{
+        frozen -= 1;
       }
       //Here the proper behaviour when time is run out should be replaced,
       //for now it will add 60 seconds and lose a life.

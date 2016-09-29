@@ -20,6 +20,8 @@ public class Player extends GameObject {
   private double oldX;
   private PlayerScheme playerScheme;
   public int activeHooks = 0;
+  public int maximumHooks = 1;
+  public int shield = 0;
 
   private enum PlayerMovement {
     LEFT_DIRECTION(-4 / 5.0),
@@ -74,14 +76,18 @@ public class Player extends GameObject {
       dx = PlayerMovement.NO_MOVEMENT.dx;
     }
 
-    if (playerScheme.shootPressed() && activeHooks < 1) {
+    if (playerScheme.shootPressed() && activeHooks < maximumHooks) {
       HookAndRope newRope = new HookAndRope(getXpos(), 0, this);
       Application.getBoard().addObject(newRope);
       activeHooks++;
     }
 
     if (collisionPlayer() && !isHit && !Application.cheatMode) {
-      LifeSystem.loseLife();
+      if (shield > 0) {
+        shield -= 1;
+      } else {
+        LifeSystem.loseLife();
+      }
       isHit = true;
     }
   }
@@ -101,7 +107,7 @@ public class Player extends GameObject {
           Logger.info(playerScheme.getName() + " collided with object:" + object);
           if (object instanceof Drop) {
             Drop drop = (Drop) object;
-            drop.playerCollision();
+            drop.playerCollision(this);
             return false;
           } else {
             return true;
