@@ -1,14 +1,9 @@
 package net.liquidpineapple.pang.objects.powerups;
 
-import net.liquidpineapple.pang.Application;
-import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.TimeSystem;
-import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.Drop;
-import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.objects.Player;
 
-import java.util.ArrayList;
 
 public class FreezeTimeDrop extends Drop {
 

@@ -15,16 +15,16 @@ import java.util.Random;
 public class DropRandomizer {
 
   private Random randomizer;
-  private static final int BRONZE_NUM = 1;
-  private static final int SILVER_NUM = 1;
-  private static final int GOLD_NUM = 1;
-  private static final int GEM_NUM = 1;
-  private static final int HEART_NUM = 1;
-  private static final int HOOK_NUM = 1;
-  private static final int SHIELD_NUM = 1;
-  private static final int BOMB_NUM = 1;
-  private static final int FROZEN_NUM = 1;
-  private static final int STICKY_NUM = 100;
+  private static final int BRONZE_NUM = 20;
+  private static final int SILVER_NUM = 15;
+  private static final int GOLD_NUM = 10;
+  private static final int GEM_NUM = 8;
+  private static final int HEART_NUM = 5;
+  private static final int HOOK_NUM = 5;
+  private static final int SHIELD_NUM = 5;
+  private static final int BOMB_NUM = 5;
+  private static final int FROZEN_NUM = 5;
+  private static final int STICKY_NUM = 5;
   private static final int TOTAL_CHANCE = 100;
 
   private ArrayList<Drop> randomList;
@@ -82,12 +82,6 @@ public class DropRandomizer {
 
   /**
    * Rolls for a drop and if it does roll positive creates that drop at startX startY.
-   * Currently set up to:
-   * 30% Bronze coin 10p
-   * 20% Silver coin 100p
-   * 10% Gold coin 1000p
-   * 8% 1 of 4 colored Gems 1500p
-   * 2% A heart that gives a life and 1p
    *
    * @param startX Start position X
    * @param startY Start position Y

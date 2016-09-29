@@ -1,7 +1,6 @@
 package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
-import lombok.Setter;
 import net.liquidpineapple.pang.logger.Logger;
 
 import java.awt.event.ActionEvent;

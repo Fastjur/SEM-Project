@@ -1,6 +1,5 @@
 package net.liquidpineapple.pang.objects.powerups;
 
-import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
 
