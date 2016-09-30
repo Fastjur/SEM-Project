@@ -17,8 +17,11 @@ import javax.swing.Timer;
  */
 public class TimeSystem {
 
+  @Getter
   private static int time;
   private static Timer interval;
+  @Getter
+  private static int frozen = 0;
 
   @Getter
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
@@ -30,8 +33,10 @@ public class TimeSystem {
   private ActionListener timerAction = new ActionListener() {
     @Override
     public void actionPerformed(ActionEvent ae) {
-      if (time > 0) {
+      if (time > 0 && frozen == 0) {
         time -= 1;
+      } else {
+        frozen -= 1;
       }
       //Here the proper behaviour when time is run out should be replaced,
       //for now it will add 60 seconds and lose a life.
@@ -58,6 +63,7 @@ public class TimeSystem {
    */
   public static void resetTime(int inTime) {
     time = inTime;
+    frozen = 0;
     if (time > 999) {
       time = 999;
     }
@@ -70,6 +76,11 @@ public class TimeSystem {
     updatetime();
     interval.start();
   }
+
+  public static void setFrozen(int freezeTime) {
+    frozen = freezeTime;
+  }
+
 
   private static void updatetime() {
     int calctime = time;

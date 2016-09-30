@@ -6,6 +6,8 @@ import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 
+import net.liquidpineapple.pang.objects.playerschemes.Player1;
+import net.liquidpineapple.pang.objects.powerups.HeartDrop;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,8 +18,7 @@ import org.junit.Test;
 public class DropTest {
 
   private static final String PROPERTIES_LOCATION = "/config.properties";
-  private Drop drop1Live = new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 0, 1);
-  private Drop droplose2Live = new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 0, -2);
+  private Player testplayer = new Player(0,0,new Player1());
 
   private static final double DELTA = 0.01;
 
@@ -34,20 +35,11 @@ public class DropTest {
   }
 
   @Test
-  public void testlifegain() {
-    int oldlives = LifeSystem.getLives();
-    droplose2Live.playerCollision();
-    assertEquals(oldlives - 2, LifeSystem.getLives());
-    drop1Live.playerCollision();
-    assertEquals(oldlives - 1, LifeSystem.getLives());
-  }
-
-  @Test
   public void testscore() {
     int oldscore = ScoreSystem.getScore();
-    drop100P.playerCollision();
+    drop100P.playerCollision(testplayer);
     assertEquals(oldscore + 100, ScoreSystem.getScore());
-    drop1000P.playerCollision();
+    drop1000P.playerCollision(testplayer);
     assertEquals(oldscore + 1100, ScoreSystem.getScore());
   }
 

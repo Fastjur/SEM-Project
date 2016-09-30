@@ -5,8 +5,10 @@ import lombok.EqualsAndHashCode;
 
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.LifeSystem;
+import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.playerschemes.PlayerScheme;
+
 
 /**
  * @author Jurriaan Den Toonder
@@ -16,10 +18,15 @@ import net.liquidpineapple.pang.objects.playerschemes.PlayerScheme;
 @EqualsAndHashCode(callSuper = true)
 public class Player extends GameObject {
 
+  private boolean shootheld = false;
   private boolean isHit = false;
   private double oldX;
   private PlayerScheme playerScheme;
   public int activeHooks = 0;
+  public int maximumHooks = 1;
+  public int shield = 0;
+  public int hookRemoveDelay = 0;
+  private  boolean frozen = false;
 
   private enum PlayerMovement {
     LEFT_DIRECTION(-4 / 5.0),
@@ -61,6 +68,18 @@ public class Player extends GameObject {
   public void doUpdate() {
     super.doUpdate();
 
+    if (TimeSystem.getFrozen() > 0 && !frozen) {
+      frozen = true;
+      this.changeImage(playerScheme.getFrozenTextureName());
+    } else if (frozen && TimeSystem.getFrozen() == 0) {
+      frozen = false;
+      if (shield > 0) {
+        this.changeImage(playerScheme.getShieldTextureName());
+      } else {
+        this.changeImage(playerScheme.getTextureName());
+      }
+    }
+
     if (playerScheme.leftPressed()) {
       if (!playerScheme.rightPressed()) {
         dx = PlayerMovement.LEFT_DIRECTION.dx;
@@ -74,14 +93,25 @@ public class Player extends GameObject {
       dx = PlayerMovement.NO_MOVEMENT.dx;
     }
 
-    if (playerScheme.shootPressed() && activeHooks < 1) {
-      HookAndRope newRope = new HookAndRope(getXpos(), 0, this);
+    if (playerScheme.shootPressed() && !shootheld && activeHooks < maximumHooks) {
+      HookAndRope newRope = new HookAndRope(getXpos(), 0, this, hookRemoveDelay);
       Application.getBoard().addObject(newRope);
       activeHooks++;
+      shootheld = true;
+    }
+    if (!playerScheme.shootPressed() && shootheld) {
+      shootheld = false;
     }
 
-    if (collisionPlayer() && !isHit && !Application.cheatMode) {
-      LifeSystem.loseLife();
+    if (collisionPlayer() && !isHit && !Application.cheatMode && !frozen) {
+      if (shield > 0) {
+        shield -= 1;
+        if (shield == 0) {
+          this.changeImage(playerScheme.getTextureName());
+        }
+      } else {
+        LifeSystem.loseLife();
+      }
       isHit = true;
     }
   }
@@ -101,7 +131,7 @@ public class Player extends GameObject {
           Logger.info(playerScheme.getName() + " collided with object:" + object);
           if (object instanceof Drop) {
             Drop drop = (Drop) object;
-            drop.playerCollision();
+            drop.playerCollision(this);
             return false;
           } else {
             return true;
@@ -112,5 +142,10 @@ public class Player extends GameObject {
     }
     isHit = false;
     return false;
+  }
+
+  public final void setShield(int shield) {
+    this.shield = shield;
+    this.changeImage(playerScheme.getShieldTextureName());
   }
 }

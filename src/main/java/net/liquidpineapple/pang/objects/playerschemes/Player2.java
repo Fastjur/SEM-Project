@@ -15,6 +15,14 @@ public class Player2 implements PlayerScheme {
     return "/sprites/player/p2_front.png";
   }
 
+  public String getFrozenTextureName() {
+    return "/sprites/player/p2_frozen.png";
+  }
+
+  public String getShieldTextureName() {
+    return "/sprites/player/p2_shielded.png";
+  }
+
   public boolean leftPressed() {
     return InputHandler.isKeyPressed(KeyEvent.VK_LEFT);
   }

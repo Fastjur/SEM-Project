@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.objects.playerschemes;
 
+
 /**
  * The PlayerScheme interface implements all methods that differ per player.
  * @author Govert de Gans
@@ -7,6 +8,10 @@ package net.liquidpineapple.pang.objects.playerschemes;
  */
 public interface PlayerScheme {
   String getTextureName();
+
+  String getFrozenTextureName();
+
+  String getShieldTextureName();
 
   boolean leftPressed();
 
