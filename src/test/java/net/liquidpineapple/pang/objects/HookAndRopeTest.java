@@ -66,7 +66,7 @@ public class HookAndRopeTest {
     rope.move();
     assertEquals(597, rope.getYpos(), DELTA);
     rope.move();
-    assertFalse(Application.getBoard().containsObject(rope));
+    assertFalse(Application.getBoard().getCurrentScreen().objectList.contains(rope));
   }
 
   @After

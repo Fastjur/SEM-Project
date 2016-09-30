@@ -94,30 +94,4 @@ public class Board extends JPanel {
     Graphics2D g2d = (Graphics2D) graphics;
     currentScreen.doDrawing(g2d, this);
   }
-
-  /**
-   * Method that updates the screen.
-   */
-  public void doUpdate() {
-    this.currentScreen.doUpdate();
-  }
-
-  /**
-   * Method that makes the addition of gameObjects possible.
-   *
-   * @param object - The object to add.
-   */
-  public synchronized void addObject(GameObject object) {
-    currentScreen.objectList.add(object);
-  }
-
-  /**
-   * A method that checks if an object is in the current screen.
-   *
-   * @param object - The object to check.
-   * @return an boolean that is true if the object is in the screen, false otherwise.
-   */
-  public synchronized boolean containsObject(GameObject object) {
-    return currentScreen.objectList.contains(object);
-  }
 }

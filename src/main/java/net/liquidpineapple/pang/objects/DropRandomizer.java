@@ -99,7 +99,7 @@ public class DropRandomizer {
     if (roll < length) {
       Drop randomDrop = randomList.get(roll);
       randomDrop.setPos(startX, startY);
-      Application.getBoard().addObject(randomDrop);
+      Application.getBoard().getCurrentScreen().objectList.add(randomDrop);
     }
   }
 }

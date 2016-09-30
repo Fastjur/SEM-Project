@@ -149,8 +149,8 @@ public class Ball extends GameObject {
     if (ballSize != 1) {
       Ball smallerBall = new Ball(xpos, ypos, BallMovement.LEFT_MOVEMENT, ballSize - 1);
       Ball smallerBall2 = new Ball(xpos + 1, ypos, BallMovement.RIGHT_MOVEMENT, ballSize - 1);
-      Application.getBoard().addObject(smallerBall);
-      Application.getBoard().addObject(smallerBall2);
+      Application.getBoard().getCurrentScreen().objectList.add(smallerBall);
+      Application.getBoard().getCurrentScreen().objectList.add(smallerBall2);
     }
     DropRandomizer.getInstance().rollRandomdrop(xpos + (this.getWidth() / 2), ypos
         + (this.getHeight() / 2));

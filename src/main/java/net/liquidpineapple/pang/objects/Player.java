@@ -95,7 +95,7 @@ public class Player extends GameObject {
 
     if (playerScheme.shootPressed() && !shootheld && activeHooks < maximumHooks) {
       HookAndRope newRope = new HookAndRope(getXpos(), 0, this, hookRemoveDelay);
-      Application.getBoard().addObject(newRope);
+      Application.getBoard().getCurrentScreen().objectList.add(newRope);
       activeHooks++;
       shootheld = true;
     }

@@ -96,8 +96,7 @@ public class Application extends JFrame {
     setVisible(true);
 
     Logger.info("Application started successfully!");
-
-//    TimeSystem.getInstance();
+    //TimeSystem.getInstance();
 
     Runnable doUpdateRunnable = () -> {
       long beforeTime;
@@ -116,7 +115,7 @@ public class Application extends JFrame {
         }
 
         try {
-          board.doUpdate();
+          board.getCurrentScreen().doUpdate();
           scoreKeeper.displayscore();
           lifeSystem.updateLifes();
 
