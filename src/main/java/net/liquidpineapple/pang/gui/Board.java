@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.logger.Logger;
-import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.screens.MainMenu;
 import net.liquidpineapple.pang.screens.Screen;
 
