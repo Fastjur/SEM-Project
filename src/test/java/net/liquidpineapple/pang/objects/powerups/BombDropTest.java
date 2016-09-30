@@ -1,5 +1,7 @@
 package net.liquidpineapple.pang.objects.powerups;
 
+import static org.junit.Assert.assertFalse;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.BallMovement;
@@ -10,7 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
+
 
 /**
  * Created by Erik on 22-9-2016.
@@ -29,11 +31,11 @@ public class BombDropTest {
 
   @Test
   public void testBombDrop() {
-    Drop Hook = new BombDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1);
+    Drop hook = new BombDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1);
     Ball smallerBall = new Ball(0, 0, BallMovement.LEFT_MOVEMENT, 1);
     Application.getBoard().getCurrentScreen().objectList.add(smallerBall);
     Player testplayer = new Player(0,0,new Player1());
-    Hook.playerCollision(testplayer);
+    hook.playerCollision(testplayer);
     assertFalse(Application.getBoard().getCurrentScreen().objectList.contains(smallerBall));
   }
 

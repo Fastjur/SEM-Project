@@ -1,16 +1,15 @@
 package net.liquidpineapple.pang.objects.powerups;
 
+import static org.junit.Assert.assertEquals;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.LifeSystem;
-import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
 import net.liquidpineapple.pang.objects.playerschemes.Player1;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Erik on 22-9-2016.
