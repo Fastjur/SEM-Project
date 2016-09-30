@@ -2,15 +2,28 @@ package net.liquidpineapple.pang.objects;
 
 import static org.junit.Assert.assertEquals;
 
+import net.liquidpineapple.pang.Application;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class BallTest {
+
+  private static final String PROPERTIES_LOCATION = "/config.properties";
+  private Application app;
 
   private Ball testBallLeft = new Ball(0, 0, BallMovement.LEFT_MOVEMENT, 4);
   private Ball testBallRight = new Ball(0, 0, BallMovement.RIGHT_MOVEMENT, 3);
   private Ball testBallIncorrectSizeGreater = new Ball(0, 0, BallMovement.LEFT_MOVEMENT, 6);
   private Ball testBallIncorrectSizeSmaller = new Ball(0, 0, BallMovement.RIGHT_MOVEMENT, 0);
   private static final double DELTA = 0.01;
+
+  @Before
+  public void setUp() throws Exception {
+    app = new Application(PROPERTIES_LOCATION);
+    app.start();
+  }
+
 
   //Tests if the constructor handles left and right correctly.
   @Test
@@ -41,6 +54,12 @@ public class BallTest {
     assertEquals(4, testBallIncorrectSizeSmaller.getBallSize());
   }
 
+  //Tests if the destroyball works.
+  @Test
+  public void testBallDestroy() {
+    testBallLeft.destroyball();
+  }
+
   @Test
   public void testMove() throws Exception {
     testBallLeft.setPos(5, 5);
@@ -61,6 +80,11 @@ public class BallTest {
     testBallLeft.move();
     assertEquals(1.2000000000000002, testBallLeft.getYpos(), DELTA);
 
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    app.close();
   }
 
 }

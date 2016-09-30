@@ -31,10 +31,10 @@ public class BombDropTest {
   public void testBombDrop() {
     Drop Hook = new BombDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1);
     Ball smallerBall = new Ball(0, 0, BallMovement.LEFT_MOVEMENT, 1);
-    Application.getBoard().addObject(smallerBall);
+    Application.getBoard().getCurrentScreen().objectList.add(smallerBall);
     Player testplayer = new Player(0,0,new Player1());
     Hook.playerCollision(testplayer);
-    assertFalse(Application.getBoard().containsObject(smallerBall));
+    assertFalse(Application.getBoard().getCurrentScreen().objectList.contains(smallerBall));
   }
 
   @After

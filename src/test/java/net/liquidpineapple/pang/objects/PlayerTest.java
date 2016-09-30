@@ -103,7 +103,7 @@ public class PlayerTest {
     player.setXpos(100);
     player.setYpos(100);
     Ball ball = new Ball(100, 100, BallMovement.LEFT_MOVEMENT, 1);
-    Application.getBoard().addObject(ball);
+    Application.getBoard().getCurrentScreen().objectList.add(ball);
     assertTrue(player.collisionPlayer());
   }
 

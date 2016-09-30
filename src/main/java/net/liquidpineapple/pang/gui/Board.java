@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.logger.Logger;
-import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.screens.MainMenu;
 import net.liquidpineapple.pang.screens.Screen;
 
@@ -93,31 +92,5 @@ public class Board extends JPanel {
   private void doDrawing(Graphics graphics) {
     Graphics2D g2d = (Graphics2D) graphics;
     currentScreen.doDrawing(g2d, this);
-  }
-
-  /**
-   * Method that updates the screen.
-   */
-  public void doUpdate() {
-    this.currentScreen.doUpdate();
-  }
-
-  /**
-   * Method that makes the addition of gameObjects possible.
-   *
-   * @param object - The object to add.
-   */
-  public synchronized void addObject(GameObject object) {
-    currentScreen.objectList.add(object);
-  }
-
-  /**
-   * A method that checks if an object is in the current screen.
-   *
-   * @param object - The object to check.
-   * @return an boolean that is true if the object is in the screen, false otherwise.
-   */
-  public synchronized boolean containsObject(GameObject object) {
-    return currentScreen.objectList.contains(object);
   }
 }
