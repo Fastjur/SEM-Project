@@ -7,6 +7,7 @@ import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.logger.Logger;
+import net.liquidpineapple.pang.logger.LoggerTypes;
 import net.liquidpineapple.pang.objects.DropRandomizer;
 
 import java.awt.EventQueue;
@@ -168,6 +169,21 @@ public class Application extends JFrame {
    * @param args Command line arguments
    */
   public static void main(String[] args) {
+    LoggerTypes type = LoggerTypes.INFO;
+    if (args.length > 0) {
+      String loggerLevel = args[0].toUpperCase();
+      try {
+        type = LoggerTypes.valueOf(loggerLevel);
+      } catch (IllegalArgumentException ex) {
+        Logger.warning("Invalid first command line argument: " + loggerLevel);
+        Logger.warning("Valid arguments are:");
+        for (LoggerTypes loggerType : LoggerTypes.values()) {
+          Logger.warning("  " + loggerType);
+        }
+      }
+    }
+    Logger.setLevel(type);
+
     EventQueue.invokeLater(() -> {
       Application app = null;
       try {

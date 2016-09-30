@@ -1,11 +1,10 @@
 package net.liquidpineapple.pang.objects;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.TimeSystem;
-import net.liquidpineapple.pang.logger.Logger;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Created by Tim on 9-9-2016.
@@ -41,7 +40,6 @@ public class HookAndRope extends GameObject {
    * Method to move the hook upwards.
    */
   public void move() {
-    final double oldY = ypos;
     ypos -= dy;
 
     //if ypos reaches 0, the top of the frame has been reached,
@@ -54,8 +52,6 @@ public class HookAndRope extends GameObject {
       player.activeHooks--;
       Application.getBoard().getCurrentScreen().objectList.remove(this);
     }
-
-    Logger.info("Moved " + this + " from y: " + oldY + " to y: " + ypos);
   }
 
   /**
