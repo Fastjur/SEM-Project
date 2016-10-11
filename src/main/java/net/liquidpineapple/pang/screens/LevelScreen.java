@@ -40,6 +40,7 @@ public class LevelScreen extends Screen {
 
   private LinkedList<GameObject> hudObjectList;
 
+
   public LevelScreen() {
     super();
     hudObjectList = new LinkedList<GameObject>();
@@ -60,6 +61,9 @@ public class LevelScreen extends Screen {
       String backgroundPath = "/sprites/"
           + doc.getElementsByTagName("background").item(0).getTextContent();
       output.backgroundImage = ImageIO.read(LevelScreen.class.getResource(backgroundPath));
+
+      int levelDifficulty = Integer.parseInt(doc.getElementsByTagName("difficulty").item(0).getTextContent());
+      output.setDifficulty(levelDifficulty);
 
       for (Ball ball : loadBalls(doc.getElementsByTagName("ball"))) {
         output.objectList.add(ball);

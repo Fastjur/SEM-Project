@@ -1,5 +1,8 @@
 package net.liquidpineapple.pang.screens;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import net.liquidpineapple.pang.objects.GameObject;
 
 
@@ -19,6 +22,9 @@ public abstract class Screen {
 
   public LinkedList<GameObject> objectList;
   protected Image backgroundImage;
+  @Getter
+  @Setter
+  private int difficulty;
 
 
   /**

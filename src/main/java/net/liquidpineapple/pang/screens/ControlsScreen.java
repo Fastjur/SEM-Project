@@ -40,13 +40,9 @@ public class ControlsScreen extends Screen {
   public void doUpdate() {
     super.doUpdate();
     if (InputHandler.isAnyKeyPressed()) {
-      try {
         Application.lifeSystem.resetLives();
         Application.getScoreKeeper().resetScore();
-        Application.getBoard().changeScreen(LevelScreen.createFromXml("/levels/singleplayer/level1.xml"));
-      } catch (IOException | ParserConfigurationException | SAXException ex) {
-        Logger.error("Could not load level", ex);
-      }
+        Application.getBoard().changeScreen((Screen) Application.getBoard().getLevels().next());
     }
   }
 }

@@ -1,5 +1,6 @@
 <level>
 	<background>bg.png</background>
+  <difficulty>1</difficulty>
 	<objects>
 		<ball>
 			<position>
