@@ -3,6 +3,7 @@ package net.liquidpineapple.pang.objects.buttons;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.screens.ControlsScreen;
+import net.liquidpineapple.pang.screens.SinglePlayerLevels;
 
 /**
  * Class that represents the object for the SinglePlayer button.
@@ -29,6 +30,8 @@ public class SinglePlayerButton extends Button {
   public void onClick() {
     Logger.info("I change the screen now");
     Application.multiplayer = false;
+    SinglePlayerLevels levels = new SinglePlayerLevels();
+    Application.getBoard().setLevels(levels.createIterator());
     Application.getBoard().changeScreen(new ControlsScreen());
   }
 }

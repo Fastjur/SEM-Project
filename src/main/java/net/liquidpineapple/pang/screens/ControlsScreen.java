@@ -24,9 +24,9 @@ public class ControlsScreen extends Screen {
   public ControlsScreen() {
     try {
       if (Application.multiplayer) {
-        backgroundImage = ImageIO.read(Level.class.getResource("/sprites/controlsbg2p.png"));
+        backgroundImage = ImageIO.read(LevelScreen.class.getResource("/sprites/controlsbg2p.png"));
       } else {
-        backgroundImage = ImageIO.read(Level.class.getResource("/sprites/controlsbg.png"));
+        backgroundImage = ImageIO.read(LevelScreen.class.getResource("/sprites/controlsbg.png"));
       }
     } catch (IOException ex) {
       ex.printStackTrace();
@@ -43,7 +43,7 @@ public class ControlsScreen extends Screen {
       try {
         Application.lifeSystem.resetLives();
         Application.getScoreKeeper().resetScore();
-        Application.getBoard().changeScreen(Level.createFromXml("/levels/level1.xml"));
+        Application.getBoard().changeScreen(LevelScreen.createFromXml("/levels/singleplayer/level1.xml"));
       } catch (IOException | ParserConfigurationException | SAXException ex) {
         Logger.error("Could not load level", ex);
       }
