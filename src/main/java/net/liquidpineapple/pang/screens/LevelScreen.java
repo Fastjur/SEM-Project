@@ -72,6 +72,7 @@ public class LevelScreen extends Screen {
       for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
         output.objectList.add(player);
       }
+      loadTime(doc);
       TimeSystem.resetTime(loadTime(doc));
 
       for (NumberToken token : TimeSystem.getTimePlaces()) {
@@ -204,7 +205,7 @@ public class LevelScreen extends Screen {
    */
   private void nextLevel() throws ParserConfigurationException, SAXException {
     Board currentBoard = Application.getBoard();
-    Screen newScreen;
+    Screen newScreen = null;
 
     if (currentBoard.getLevels().hasNext()) {
       newScreen = (Screen) currentBoard.getLevels().next();
