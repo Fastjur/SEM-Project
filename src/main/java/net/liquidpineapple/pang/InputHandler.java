@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.HashSet;
 
+import lombok.Getter;
+
 /**
  * Class that represents the handler for mouseclicks and keypresses.
  *
@@ -18,6 +20,8 @@ import java.util.HashSet;
 public class InputHandler implements MouseListener, KeyListener {
 
   private static HashSet<Integer> keysPressed = new HashSet<>();
+  @Getter
+  private static HashSet<Integer> keysDown = new HashSet<>();
   private static Point mousePos;
   private static int mouseButtonPressed;
 
@@ -28,11 +32,15 @@ public class InputHandler implements MouseListener, KeyListener {
   @Override
   public void keyPressed(KeyEvent event) {
     keysPressed.add(event.getKeyCode());
+    if(!keysDown.contains(event.getKeyCode())){
+      keysDown.add(event.getKeyCode());
+    }
   }
 
   @Override
   public void keyReleased(KeyEvent event) {
     keysPressed.remove(event.getKeyCode());
+    keysDown.remove(event.getKeyCode());
   }
 
   @Override
