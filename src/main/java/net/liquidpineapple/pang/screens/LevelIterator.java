@@ -22,6 +22,7 @@ import edu.emory.mathcs.backport.java.util.Collections;
 
 /**
  * Created by Tim on 10-10-2016.
+ * Class that creates an iterator over the levels
  */
 public abstract class LevelIterator {
   private ArrayList<Screen> levels = new ArrayList<>();
@@ -30,6 +31,13 @@ public abstract class LevelIterator {
     return levels.iterator();
   }
 
+  /**
+   * Method that loads the array of levels when we play from a .jar file.
+   * @param jarFile - the jarfile from which we play.
+   * @param path - path to the levels folder.
+   * @throws IOException - Exception thrown when there goes something
+   * wrong with reading/closing the jar.
+   */
   private void loadArrayJAR(File jarFile, String path) throws IOException {
     // Run with JAR file
     final JarFile jar = new JarFile(jarFile);
@@ -37,7 +45,7 @@ public abstract class LevelIterator {
     while (entries.hasMoreElements()) {
       final String name = entries.nextElement().getName();
       if (name.startsWith(path + "/")) { //filter according to the path
-        try {
+        try { //try to create screens
           Screen levelScreen = LevelScreen.createFromXml("/" + name);
           levels.add(levelScreen);
         } catch (IOException ioEx) {
@@ -51,7 +59,7 @@ public abstract class LevelIterator {
     }
     jar.close();
 
-    // Sorting
+    // Sorting, because the reading in the jar file is not alphabetic
     Collections.sort(levels, new Comparator<LevelScreen>() {
       @Override
       public int compare(LevelScreen level1, LevelScreen level2) {
@@ -66,13 +74,16 @@ public abstract class LevelIterator {
     });
   }
 
+  /**
+   * Method that loads the array with levels when we play from the IDE.
+   * @param directory - directory of the levels.
+   */
   private void loadArrayIDE(final String directory) {
-    System.out.println("loadArrayIDE");
+    //get the files from the directory
     File[] files = new File(Application.class.getResource("/" + directory).getFile()).listFiles();
     Pattern pattern = Pattern.compile("levels\\\\(single|multi)player\\\\level\\d*.xml");
 
     for (File file : files) {
-      System.out.println(file.toPath());
       if (!file.isDirectory()) {
         try {
           Matcher m = pattern.matcher(file.getPath());
@@ -80,7 +91,7 @@ public abstract class LevelIterator {
           while (m.find()) {
             path = "/" + m.group(0);
           }
-          System.out.println(path);
+          //create level using the path to the level.
           Screen newScreen = LevelScreen.createFromXml(path);
           levels.add(newScreen);
         } catch (IOException ioEx) {
@@ -95,6 +106,10 @@ public abstract class LevelIterator {
   }
 
 
+  /**
+   * Method to fill the array with levels.
+   * @param path - path from where the levels should be loaded.
+   */
   public void initArray(final String path) {
     final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
     if (jarFile.isFile()) { //Run with JAR
