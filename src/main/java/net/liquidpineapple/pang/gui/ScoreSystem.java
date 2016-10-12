@@ -81,6 +81,7 @@ public class ScoreSystem {
       for (NumberToken token : Places) {
         token.setScoreToken(0);
       }
+      setScore(0);
     }
   }
 }
