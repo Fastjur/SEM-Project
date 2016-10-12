@@ -11,7 +11,7 @@ public class SinglePlayerLevels extends LevelIterator {
   private static final String DIRECTORY = "levels/singleplayer";
 
   /**
-   * Method to fill the levels array with singleplayerlevels
+   * Method to fill the levels array with singleplayerlevels.
    */
   public SinglePlayerLevels() {
     super.initArray(DIRECTORY);

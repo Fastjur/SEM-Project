@@ -2,13 +2,10 @@ package net.liquidpineapple.pang.screens;
 
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
-import net.liquidpineapple.pang.logger.Logger;
-import org.xml.sax.SAXException;
 
 import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.xml.parsers.ParserConfigurationException;
 
+import javax.imageio.ImageIO;
 
 
 /**
@@ -40,9 +37,9 @@ public class ControlsScreen extends Screen {
   public void doUpdate() {
     super.doUpdate();
     if (InputHandler.isAnyKeyPressed()) {
-        Application.lifeSystem.resetLives();
-        Application.getScoreKeeper().resetScore();
-        Application.getBoard().changeScreen((Screen) Application.getBoard().getLevels().next());
+      Application.lifeSystem.resetLives();
+      Application.getScoreKeeper().resetScore();
+      Application.getBoard().changeScreen((Screen) Application.getBoard().getLevels().next());
     }
   }
 }

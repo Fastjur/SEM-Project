@@ -11,7 +11,7 @@ public class MultiPlayerLevels extends LevelIterator {
   private static final String DIRECTORY = "levels/multiplayer";
 
   /**
-   * Method to fill the arraylist with levels
+   * Method to fill the arraylist with levels.
    */
   public MultiPlayerLevels() {
     super.initArray(DIRECTORY);

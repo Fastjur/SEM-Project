@@ -72,7 +72,7 @@ public class TimeSystem {
       timePlaces.add(new NumberToken(723, 52));
       timePlaces.add(new NumberToken(691, 52));
     } else {
-      for(NumberToken token : timePlaces){
+      for (NumberToken token : timePlaces) {
         token.setScoreToken(0);
       }
     }

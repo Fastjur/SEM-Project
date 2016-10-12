@@ -62,7 +62,8 @@ public class LevelScreen extends Screen {
           + doc.getElementsByTagName("background").item(0).getTextContent();
       output.backgroundImage = ImageIO.read(LevelScreen.class.getResource(backgroundPath));
 
-      int levelDifficulty = Integer.parseInt(doc.getElementsByTagName("difficulty").item(0).getTextContent());
+      int levelDifficulty = Integer.parseInt(doc.getElementsByTagName("difficulty")
+          .item(0).getTextContent());
       output.setDifficulty(levelDifficulty);
 
       for (Ball ball : loadBalls(doc.getElementsByTagName("ball"))) {

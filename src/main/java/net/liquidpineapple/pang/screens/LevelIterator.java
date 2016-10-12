@@ -1,5 +1,7 @@
 package net.liquidpineapple.pang.screens;
 
+import edu.emory.mathcs.backport.java.util.Collections;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
@@ -18,8 +20,6 @@ import java.util.regex.Pattern;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import edu.emory.mathcs.backport.java.util.Collections;
-
 /**
  * Created by Tim on 10-10-2016.
  * Class that creates an iterator over the levels
@@ -33,12 +33,13 @@ public abstract class LevelIterator {
 
   /**
    * Method that loads the array of levels when we play from a .jar file.
+   *
    * @param jarFile - the jarfile from which we play.
-   * @param path - path to the levels folder.
-   * @throws IOException - Exception thrown when there goes something
-   * wrong with reading/closing the jar.
+   * @param path    - path to the levels folder.
+   * @throws IOException - Exception thrown when there goes something wrong with reading/closing the
+   *                     jar.
    */
-  private void loadArrayJAR(File jarFile, String path) throws IOException {
+  private void loadArrayJar(File jarFile, String path) throws IOException {
     // Run with JAR file
     final JarFile jar = new JarFile(jarFile);
     final Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
@@ -76,9 +77,10 @@ public abstract class LevelIterator {
 
   /**
    * Method that loads the array with levels when we play from the IDE.
+   *
    * @param directory - directory of the levels.
    */
-  private void loadArrayIDE(final String directory) {
+  private void loadArrayIde(final String directory) {
     //get the files from the directory
     File[] files = new File(Application.class.getResource("/" + directory).getFile()).listFiles();
     Pattern pattern = Pattern.compile("levels\\\\(single|multi)player\\\\level\\d*.xml");
@@ -86,10 +88,10 @@ public abstract class LevelIterator {
     for (File file : files) {
       if (!file.isDirectory()) {
         try {
-          Matcher m = pattern.matcher(file.getPath());
+          Matcher matcher = pattern.matcher(file.getPath());
           String path = "";
-          while (m.find()) {
-            path = "/" + m.group(0);
+          while (matcher.find()) {
+            path = "/" + matcher.group(0);
           }
           //create level using the path to the level.
           Screen newScreen = LevelScreen.createFromXml(path);
@@ -108,18 +110,20 @@ public abstract class LevelIterator {
 
   /**
    * Method to fill the array with levels.
+   *
    * @param path - path from where the levels should be loaded.
    */
   public void initArray(final String path) {
-    final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+    final File jarFile = new File(getClass().getProtectionDomain()
+        .getCodeSource().getLocation().getPath());
     if (jarFile.isFile()) { //Run with JAR
       try {
-        loadArrayJAR(jarFile, path);
+        loadArrayJar(jarFile, path);
       } catch (IOException ioEx) {
         Logger.error("Error opening/closing JAR", ioEx);
       }
     } else { // Run with IDE
-      loadArrayIDE(path);
+      loadArrayIde(path);
     }
   }
 }
