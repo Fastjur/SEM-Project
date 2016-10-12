@@ -9,6 +9,8 @@ import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.BallMovement;
 import net.liquidpineapple.pang.objects.GameObject;
+import net.liquidpineapple.pang.objects.Player;
+import net.liquidpineapple.pang.objects.playerschemes.Player1;
 import net.liquidpineapple.pang.xmlHandler;
 
 import org.xml.sax.SAXException;
@@ -56,34 +58,66 @@ public class LevelEditor extends Screen {
       if (InputHandler.getKeysDown().contains(49)) {
         InputHandler.getKeysDown().clear();
         int size = 1;
-        int offset = 15;
+        int offset = 0;
+        try {
+          Image ballImage = ImageIO.read(Level.class.getResource("/sprites/Balls/green.png"));
+          offset = ballImage.getWidth(null) / 2;
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
       }
       //key 2 pressed, add ball with size 2
       if (InputHandler.getKeysDown().contains(50)) {
         InputHandler.getKeysDown().clear();
         int size = 2;
-        int offset = 25;
+        int offset = 0;
+        try {
+          Image ballImage = ImageIO.read(Level.class.getResource("/sprites/Balls/red.png"));
+          offset = ballImage.getWidth(null) / 2;
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
       }
       //key 3 pressed, add ball with size 3
       if (InputHandler.getKeysDown().contains(51)) {
         InputHandler.getKeysDown().clear();
         int size = 3;
-        int offset = 40;
+        int offset = 0;
+        try {
+          Image ballImage = ImageIO.read(Level.class.getResource("/sprites/Balls/yellow.png"));
+          offset = ballImage.getWidth(null) / 2;
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
       }
       //key 4 pressed, add ball with size 4
       if (InputHandler.getKeysDown().contains(52)) {
         InputHandler.getKeysDown().clear();
         int size = 4;
-        int offset = 50;
+        int offset = 0;
+        try {
+          Image ballImage = ImageIO.read(Level.class.getResource("/sprites/Balls/blue.png"));
+          offset = ballImage.getWidth(null) / 2;
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
         addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
       }
       //key 5 pressed, add player
       if (InputHandler.getKeysDown().contains(53)) {
         InputHandler.getKeysDown().clear();
-
+        int offset = 0;
+        int fixedPlayerYpos = 475;
+        try {
+          Image ballImage = ImageIO.read(Level.class.getResource("/sprites/player/p1_front.png"));
+          offset = ballImage.getWidth(null) / 2;
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        addedObjects.add(new Player(intXpos - offset, fixedPlayerYpos, new Player1()));
       }
       //key p pressed, play the last saved level
       if (InputHandler.getKeysDown().contains(80)) {
@@ -113,9 +147,18 @@ public class LevelEditor extends Screen {
       Point pointc = Application.getBoard().getLocationOnScreen();
       int mouseXpos = (int) (pointb.getX() - pointc.getX());
       int mouseYpos = (int) (pointb.getY() - pointc.getY());
-      selectedObject.setXpos(mouseXpos - (selectedObject.getWidth() / 2));
-      selectedObject.setYpos(mouseYpos - (selectedObject.getHeight() / 2));
-
+      double newXpos = mouseXpos - (selectedObject.getWidth() / 2);
+      double newYpos = mouseYpos - (selectedObject.getHeight() / 2);
+      if (mouseXpos >= 0 + (selectedObject.getWidth() / 2)
+          && mouseXpos + (selectedObject.getWidth() / 2) <= Application.getBoard().getWidth()) {
+        selectedObject.setXpos(newXpos);
+      }
+      if (selectedObject instanceof Ball) {
+        if (mouseYpos >= 0 + (selectedObject.getHeight() / 2)
+            && mouseYpos + (selectedObject.getHeight() / 2) <= Application.getBoard().getHeight()) {
+          selectedObject.setYpos(newYpos);
+        }
+      }
     }
   }
 
@@ -132,6 +175,6 @@ public class LevelEditor extends Screen {
     Level level = new Level();
     level.objectList = addedObjects;
 
-    xmlHandler.createXmlFromLevel(level,120);
+    xmlHandler.createXmlFromLevel(level, 120);
   }
 }
