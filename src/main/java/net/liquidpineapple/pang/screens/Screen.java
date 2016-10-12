@@ -22,6 +22,7 @@ public abstract class Screen {
 
   public LinkedList<GameObject> objectList;
   protected Image backgroundImage;
+  @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
   @Getter
   @Setter
   private int difficulty;

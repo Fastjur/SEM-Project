@@ -1,7 +1,5 @@
 package net.liquidpineapple.pang.screens;
 
-import java.util.Iterator;
-
 /**
  * Created by Tim on 11-10-2016.
  * Class that creates an iterator with multiplayer levels.
@@ -17,12 +15,4 @@ public class MultiPlayerLevels extends LevelIterator {
     super.initArray(DIRECTORY);
   }
 
-  /**
-   * Method to create an iterator over the multiplayer levels.
-   * @return iterator over the multiplayerlevels.
-   */
-  @Override
-  public Iterator createIterator() {
-    return super.createIterator();
-  }
 }
