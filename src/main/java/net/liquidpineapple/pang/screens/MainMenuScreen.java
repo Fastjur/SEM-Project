@@ -14,13 +14,13 @@ import javax.imageio.ImageIO;
  * @author Govert de Gans
  * @date 2016-09-08
  */
-public class MainMenu extends Screen {
+public class MainMenuScreen extends Screen {
   /**
    * Constructor of the Main menu.
    */
-  public MainMenu() {
+  public MainMenuScreen() {
     try {
-      backgroundImage = ImageIO.read(Level.class.getResource("/sprites/titlebg.png"));
+      backgroundImage = ImageIO.read(LevelScreen.class.getResource("/sprites/titlebg.png"));
     } catch (IOException ex) {
       ex.printStackTrace();
     }

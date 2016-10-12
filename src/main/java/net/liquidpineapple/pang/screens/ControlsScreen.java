@@ -2,13 +2,10 @@ package net.liquidpineapple.pang.screens;
 
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
-import net.liquidpineapple.pang.logger.Logger;
-import org.xml.sax.SAXException;
 
 import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.xml.parsers.ParserConfigurationException;
 
+import javax.imageio.ImageIO;
 
 
 /**
@@ -24,9 +21,9 @@ public class ControlsScreen extends Screen {
   public ControlsScreen() {
     try {
       if (Application.multiplayer) {
-        backgroundImage = ImageIO.read(Level.class.getResource("/sprites/controlsbg2p.png"));
+        backgroundImage = ImageIO.read(LevelScreen.class.getResource("/sprites/controlsbg2p.png"));
       } else {
-        backgroundImage = ImageIO.read(Level.class.getResource("/sprites/controlsbg.png"));
+        backgroundImage = ImageIO.read(LevelScreen.class.getResource("/sprites/controlsbg.png"));
       }
     } catch (IOException ex) {
       ex.printStackTrace();
@@ -40,13 +37,9 @@ public class ControlsScreen extends Screen {
   public void doUpdate() {
     super.doUpdate();
     if (InputHandler.isAnyKeyPressed()) {
-      try {
-        Application.lifeSystem.resetLives();
-        Application.getScoreKeeper().resetScore();
-        Application.getBoard().changeScreen(Level.createFromXml("/levels/level1.xml"));
-      } catch (IOException | ParserConfigurationException | SAXException ex) {
-        Logger.error("Could not load level", ex);
-      }
+      Application.lifeSystem.resetLives();
+      Application.getScoreKeeper().resetScore();
+      Application.getBoard().changeScreen((Screen) Application.getBoard().getLevels().next());
     }
   }
 }

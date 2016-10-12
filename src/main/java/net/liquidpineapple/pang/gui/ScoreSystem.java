@@ -9,7 +9,6 @@ import net.liquidpineapple.pang.logger.Logger;
 import java.util.ArrayList;
 
 
-
 /**
  * Class that represents the ScoreSystem.
  * Created by Erik on 12-9-2016.
@@ -49,6 +48,7 @@ public class ScoreSystem {
 
   /**
    * method to add a value to the score.
+   *
    * @param scoreIn - number to be added to the score.
    */
   public static void addScore(int scoreIn) {
@@ -75,6 +75,13 @@ public class ScoreSystem {
    * Resets the score when the player died.
    */
   public void resetScore() {
-    Application.setScoreKeeper(new ScoreSystem());
+    if (Places.size() == 0) {
+      Application.setScoreKeeper(new ScoreSystem());
+    } else {
+      for (NumberToken token : Places) {
+        token.setScoreToken(0);
+      }
+      setScore(0);
+    }
   }
 }

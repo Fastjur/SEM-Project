@@ -28,7 +28,7 @@ public class GameOverScreen extends Screen {
    */
   public GameOverScreen() {
     try {
-      backgroundImage = ImageIO.read(Level.class.getResource("/sprites/gameover.png"));
+      backgroundImage = ImageIO.read(LevelScreen.class.getResource("/sprites/gameover.png"));
     } catch (IOException ex) {
       ex.printStackTrace();
     }
@@ -56,7 +56,7 @@ public class GameOverScreen extends Screen {
     if (InputHandler.isAnyKeyPressed()) {
       Application.lifeSystem.resetLives();
       Application.getScoreKeeper().resetScore();
-      Application.getBoard().changeScreen(new MainMenu());
+      Application.getBoard().changeScreen(new MainMenuScreen());
     }
   }
 

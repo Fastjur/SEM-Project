@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
+
 import net.liquidpineapple.pang.logger.Logger;
 
 import java.awt.event.ActionEvent;
@@ -8,8 +9,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
-
-
 
 
 /**
@@ -28,7 +27,7 @@ public class TimeSystem {
   private static TimeSystem instance = new TimeSystem();
 
   @Getter
-  private static ArrayList<NumberToken> timePlaces;
+  private static ArrayList<NumberToken> timePlaces = new ArrayList<>(3);
 
   private ActionListener timerAction = new ActionListener() {
     @Override
@@ -59,6 +58,7 @@ public class TimeSystem {
 
   /**
    * Method to reset the time to a certain number.
+   *
    * @param inTime - time to be reset to.
    */
   public static void resetTime(int inTime) {
@@ -67,12 +67,15 @@ public class TimeSystem {
     if (time > 999) {
       time = 999;
     }
-
-    //These are from right to left.
-    timePlaces = new ArrayList<>(3);
-    timePlaces.add(new NumberToken(755, 52));
-    timePlaces.add(new NumberToken(723, 52));
-    timePlaces.add(new NumberToken(691, 52));
+    if (timePlaces.size() == 0) {
+      timePlaces.add(new NumberToken(755, 52));
+      timePlaces.add(new NumberToken(723, 52));
+      timePlaces.add(new NumberToken(691, 52));
+    } else {
+      for (NumberToken token : timePlaces) {
+        token.setScoreToken(0);
+      }
+    }
     updatetime();
     interval.start();
   }

@@ -29,7 +29,7 @@ public class WinScreen extends Screen {
    */
   public WinScreen() {
     try {
-      backgroundImage = ImageIO.read(Level.class.getResource("/sprites/winscreen.png"));
+      backgroundImage = ImageIO.read(LevelScreen.class.getResource("/sprites/winscreen.png"));
     } catch (IOException ex) {
       ex.printStackTrace();
     }
@@ -55,10 +55,9 @@ public class WinScreen extends Screen {
   public void doUpdate() {
     super.doUpdate();
     if (InputHandler.isAnyKeyPressed()) {
-      Application.getBoard().setLevelCount(1);
       Application.lifeSystem.resetLives();
       Application.getScoreKeeper().resetScore();
-      Application.getBoard().changeScreen(new MainMenu());
+      Application.getBoard().changeScreen(new MainMenuScreen());
     }
   }
 
