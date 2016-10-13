@@ -2,6 +2,7 @@ package net.liquidpineapple.pang;
 
 import static junit.framework.TestCase.assertFalse;
 
+import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.screens.LevelScreen;
 import net.liquidpineapple.pang.screens.Screen;
 import net.liquidpineapple.pang.screens.SinglePlayerLevels;
@@ -48,6 +49,7 @@ public class ApplicationTest {
 
   @After
   public void tearDown() throws Exception {
+    ScoreSystem.setScore(0);
     app.close();
   }
 }
