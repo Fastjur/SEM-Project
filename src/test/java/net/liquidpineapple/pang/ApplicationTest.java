@@ -3,6 +3,8 @@ package net.liquidpineapple.pang;
 import static junit.framework.TestCase.assertFalse;
 
 import net.liquidpineapple.pang.screens.LevelScreen;
+import net.liquidpineapple.pang.screens.Screen;
+import net.liquidpineapple.pang.screens.SinglePlayerLevels;
 
 import org.junit.After;
 import org.junit.Before;
@@ -33,8 +35,9 @@ public class ApplicationTest {
 
   @Test
   public void testScreenChangeToLevel() throws Throwable {
-    Application.getBoard().changeScreen(
-        LevelScreen.createFromXml("src/main/resources/levels/level9000.xml"));
+    SinglePlayerLevels levels = new SinglePlayerLevels();
+    Application.getBoard().setLevels(levels.createIterator());
+    Application.getBoard().changeScreen((Screen) Application.getBoard().getLevels().next());
   }
 
   @Test
