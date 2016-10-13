@@ -129,8 +129,9 @@ public class LevelEditor extends Screen {
         createLevel();
       }
     }
+    //select the object
     GameObject selectedObject = null;
-    if (InputHandler.isLeftMouseButtonDown()) {
+    if (InputHandler.isLeftMouseButtonDown() || InputHandler.isRightMouseButtonDown()) {
       for (GameObject addedObject : addedObjects) {
         if (intXpos > addedObject.getXpos()
             && intXpos < addedObject.getXpos() + addedObject.getWidth()
@@ -141,6 +142,12 @@ public class LevelEditor extends Screen {
       }
     }
 
+    //delete an object
+    if (InputHandler.isRightMouseButtonDown() && selectedObject != null){
+      deleteObject(selectedObject);
+    }
+
+    //drag and drop
     while (InputHandler.isLeftMouseButtonDown() && selectedObject != null) {
       PointerInfo pointerInfo = MouseInfo.getPointerInfo();
       Point pointb = pointerInfo.getLocation();
@@ -176,5 +183,16 @@ public class LevelEditor extends Screen {
     level.objectList = addedObjects;
 
     xmlHandler.createXmlFromLevel(level, 120);
+  }
+
+  public void deleteObject(GameObject delete){
+    LinkedList<GameObject> templist = new LinkedList<>();
+    templist = addedObjects;
+    for(int i = 0; i < templist.size(); i++){
+      if(templist.get(i).equals(delete)){
+        addedObjects.remove(i);
+        break;
+      }
+    }
   }
 }

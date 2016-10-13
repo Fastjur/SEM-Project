@@ -88,11 +88,11 @@ public class InputHandler implements MouseListener, KeyListener {
   }
 
   public static boolean isRightMouseButtonDown() {
-    return mouseButtonPressed == MouseEvent.BUTTON2;
+    return mouseButtonPressed == MouseEvent.BUTTON3;
   }
 
   public static boolean isMiddleMouseButtonDown() {
-    return mouseButtonPressed == MouseEvent.BUTTON3;
+    return mouseButtonPressed == MouseEvent.BUTTON2;
   }
 
   public static Point getMousePos() {
