@@ -2,7 +2,11 @@ package net.liquidpineapple.pang;
 
 import static junit.framework.TestCase.assertFalse;
 
+import net.liquidpineapple.pang.gui.ScoreSystem;
+import net.liquidpineapple.pang.screens.ControlsScreen;
 import net.liquidpineapple.pang.screens.LevelScreen;
+import net.liquidpineapple.pang.screens.Screen;
+import net.liquidpineapple.pang.screens.SinglePlayerLevels;
 
 import org.junit.After;
 import org.junit.Before;
@@ -22,7 +26,9 @@ public class ApplicationTest {
   @Before
   public void setUp() throws Exception {
     app = new Application(PROPERTIES_LOCATION);
+    ScoreSystem.setScore(0);
     app.start();
+
   }
 
   @Test(expected = FileNotFoundException.class)
@@ -33,8 +39,7 @@ public class ApplicationTest {
 
   @Test
   public void testScreenChangeToLevel() throws Throwable {
-    Application.getBoard().changeScreen(
-        LevelScreen.createFromXml("src/main/resources/levels/level9000.xml"));
+    Application.getBoard().changeScreen(new ControlsScreen());
   }
 
   @Test
