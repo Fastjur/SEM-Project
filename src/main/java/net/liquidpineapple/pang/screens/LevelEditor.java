@@ -28,6 +28,7 @@ import javax.imageio.ImageIO;
  */
 public class LevelEditor extends Screen {
   public LinkedList<GameObject> addedObjects = new LinkedList<>();
+  private static boolean addedPlayer = false;
 
   /**
    * Constructor for the LevelEditor screen.
@@ -35,7 +36,7 @@ public class LevelEditor extends Screen {
    */
   public LevelEditor() {
     try {
-      backgroundImage = ImageIO.read(LevelScreen.class.getResource("/sprites/bg.png"));
+      backgroundImage = ImageIO.read(LevelScreen.class.getResource("/sprites/editorbg.png"));
     } catch (IOException ex) {
       ex.printStackTrace();
     }
@@ -108,14 +109,15 @@ public class LevelEditor extends Screen {
         addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
       }
       //key 5 pressed, add player
-      if (InputHandler.getKeysDown().contains(53)) {
+      if (InputHandler.getKeysDown().contains(53) && !addedPlayer) {
         InputHandler.getKeysDown().clear();
+        addedPlayer = true;
         int offset = 0;
         int fixedPlayerYpos = 475;
         try {
-          Image ballImage = ImageIO.read(LevelScreen.class
+          Image playerImage = ImageIO.read(LevelScreen.class
               .getResource("/sprites/player/p1_front.png"));
-          offset = ballImage.getWidth(null) / 2;
+          offset = playerImage.getWidth(null) / 2;
         } catch (IOException ioException) {
           ioException.printStackTrace();
         }
@@ -124,6 +126,7 @@ public class LevelEditor extends Screen {
       //key p pressed, play the last saved level
       if (InputHandler.getKeysDown().contains(80)) {
         InputHandler.getKeysDown().clear();
+        addedPlayer = false;
         UserCreatedLevels levels = new UserCreatedLevels();
         Application.getBoard().setLevels(levels.createIterator());
         Application.getBoard().changeScreen((Screen) Application.getBoard().getLevels().next());
@@ -131,7 +134,15 @@ public class LevelEditor extends Screen {
       //key s pressed, save the current level
       if (InputHandler.getKeysDown().contains(83)) {
         InputHandler.getKeysDown().clear();
-        createLevel();
+        if (addedPlayer) {
+          createLevel();
+        } else {
+          int fixedPlayerYpos = 475;
+          int fixedPlayerXpos = 380;
+          addedObjects.add(new Player(fixedPlayerXpos, fixedPlayerYpos, new Player1()));
+          addedPlayer = true;
+          createLevel();
+        }
       }
     }
     //select the object
@@ -149,6 +160,9 @@ public class LevelEditor extends Screen {
 
     //delete an object
     if (InputHandler.isRightMouseButtonDown() && selectedObject != null) {
+      if (selectedObject instanceof Player) {
+        addedPlayer = false;
+      }
       deleteObject(selectedObject);
     }
 
