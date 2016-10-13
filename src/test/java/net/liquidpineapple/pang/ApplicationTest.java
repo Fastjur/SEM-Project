@@ -34,7 +34,7 @@ public class ApplicationTest {
   @Test
   public void testScreenChangeToLevel() throws Throwable {
     Application.getBoard().changeScreen(
-        LevelScreen.createFromXml("src/main/resources/levels/level9000.xml"));
+        XmlHandler.createFromXml("src/main/resources/levels/singleplayer/level1.xml"));
   }
 
   @Test

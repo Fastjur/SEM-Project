@@ -2,27 +2,23 @@ package net.liquidpineapple.pang.screens;
 
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
-import net.liquidpineapple.pang.gui.NumberToken;
-import net.liquidpineapple.pang.gui.ScoreSystem;
-import net.liquidpineapple.pang.gui.TimeSystem;
-import net.liquidpineapple.pang.logger.Logger;
+import net.liquidpineapple.pang.XmlHandler;
 import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.BallMovement;
 import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.objects.Player;
 import net.liquidpineapple.pang.objects.playerschemes.Player1;
-import net.liquidpineapple.pang.xmlHandler;
 
-import org.xml.sax.SAXException;
-
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Class that represents the LevelEditor.
@@ -33,25 +29,29 @@ import javax.xml.parsers.ParserConfigurationException;
 public class LevelEditor extends Screen {
   public LinkedList<GameObject> addedObjects = new LinkedList<>();
 
+  /**
+   * Constructor for the LevelEditor screen.
+   * Tries to set background.
+   */
   public LevelEditor() {
     try {
-      backgroundImage = ImageIO.read(Level.class.getResource("/sprites/bg.png"));
+      backgroundImage = ImageIO.read(LevelScreen.class.getResource("/sprites/bg.png"));
     } catch (IOException ex) {
       ex.printStackTrace();
     }
   }
 
   /**
-   * Method that updates the Leveleditor
+   * Method that updates the Leveleditor.
    */
   @Override
   public void doUpdate() {
     super.doUpdate();
-    PointerInfo a = MouseInfo.getPointerInfo();
-    Point b = a.getLocation();
-    Point c = Application.getBoard().getLocationOnScreen();
-    int intXpos = (int) (b.getX() - c.getX());
-    int intYpos = (int) (b.getY() - c.getY());
+    PointerInfo pointerInfo = MouseInfo.getPointerInfo();
+    Point point1 = pointerInfo.getLocation();
+    Point point2 = Application.getBoard().getLocationOnScreen();
+    int intXpos = (int) (point1.getX() - point2.getX());
+    int intYpos = (int) (point1.getY() - point2.getY());
     if (InputHandler.isAnyKeyPressed()) {
       BallMovement ballMovement = BallMovement.valueOf("LEFT_MOVEMENT");
       //key 1 pressed, add ball with size 1
@@ -60,10 +60,10 @@ public class LevelEditor extends Screen {
         int size = 1;
         int offset = 0;
         try {
-          Image ballImage = ImageIO.read(Level.class.getResource("/sprites/Balls/green.png"));
+          Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/green.png"));
           offset = ballImage.getWidth(null) / 2;
-        } catch (IOException e) {
-          e.printStackTrace();
+        } catch (IOException ioException) {
+          ioException.printStackTrace();
         }
         addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
       }
@@ -73,10 +73,10 @@ public class LevelEditor extends Screen {
         int size = 2;
         int offset = 0;
         try {
-          Image ballImage = ImageIO.read(Level.class.getResource("/sprites/Balls/red.png"));
+          Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/red.png"));
           offset = ballImage.getWidth(null) / 2;
-        } catch (IOException e) {
-          e.printStackTrace();
+        } catch (IOException ioException) {
+          ioException.printStackTrace();
         }
         addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
       }
@@ -86,10 +86,11 @@ public class LevelEditor extends Screen {
         int size = 3;
         int offset = 0;
         try {
-          Image ballImage = ImageIO.read(Level.class.getResource("/sprites/Balls/yellow.png"));
+          Image ballImage = ImageIO.read(LevelScreen.class
+              .getResource("/sprites/Balls/yellow.png"));
           offset = ballImage.getWidth(null) / 2;
-        } catch (IOException e) {
-          e.printStackTrace();
+        } catch (IOException ioException) {
+          ioException.printStackTrace();
         }
         addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
       }
@@ -99,10 +100,10 @@ public class LevelEditor extends Screen {
         int size = 4;
         int offset = 0;
         try {
-          Image ballImage = ImageIO.read(Level.class.getResource("/sprites/Balls/blue.png"));
+          Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/blue.png"));
           offset = ballImage.getWidth(null) / 2;
-        } catch (IOException e) {
-          e.printStackTrace();
+        } catch (IOException ioException) {
+          ioException.printStackTrace();
         }
         addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
       }
@@ -112,16 +113,20 @@ public class LevelEditor extends Screen {
         int offset = 0;
         int fixedPlayerYpos = 475;
         try {
-          Image ballImage = ImageIO.read(Level.class.getResource("/sprites/player/p1_front.png"));
+          Image ballImage = ImageIO.read(LevelScreen.class
+              .getResource("/sprites/player/p1_front.png"));
           offset = ballImage.getWidth(null) / 2;
-        } catch (IOException e) {
-          e.printStackTrace();
+        } catch (IOException ioException) {
+          ioException.printStackTrace();
         }
         addedObjects.add(new Player(intXpos - offset, fixedPlayerYpos, new Player1()));
       }
       //key p pressed, play the last saved level
       if (InputHandler.getKeysDown().contains(80)) {
         InputHandler.getKeysDown().clear();
+        UserCreatedLevels levels = new UserCreatedLevels();
+        Application.getBoard().setLevels(levels.createIterator());
+        Application.getBoard().changeScreen((Screen) Application.getBoard().getLevels().next());
       }
       //key s pressed, save the current level
       if (InputHandler.getKeysDown().contains(83)) {
@@ -143,14 +148,14 @@ public class LevelEditor extends Screen {
     }
 
     //delete an object
-    if (InputHandler.isRightMouseButtonDown() && selectedObject != null){
+    if (InputHandler.isRightMouseButtonDown() && selectedObject != null) {
       deleteObject(selectedObject);
     }
 
     //drag and drop
     while (InputHandler.isLeftMouseButtonDown() && selectedObject != null) {
-      PointerInfo pointerInfo = MouseInfo.getPointerInfo();
-      Point pointb = pointerInfo.getLocation();
+      PointerInfo mousePoint = MouseInfo.getPointerInfo();
+      Point pointb = mousePoint.getLocation();
       Point pointc = Application.getBoard().getLocationOnScreen();
       int mouseXpos = (int) (pointb.getX() - pointc.getX());
       int mouseYpos = (int) (pointb.getY() - pointc.getY());
@@ -160,15 +165,17 @@ public class LevelEditor extends Screen {
           && mouseXpos + (selectedObject.getWidth() / 2) <= Application.getBoard().getWidth()) {
         selectedObject.setXpos(newXpos);
       }
-      if (selectedObject instanceof Ball) {
-        if (mouseYpos >= 0 + (selectedObject.getHeight() / 2)
-            && mouseYpos + (selectedObject.getHeight() / 2) <= Application.getBoard().getHeight()) {
-          selectedObject.setYpos(newYpos);
-        }
+      if (selectedObject instanceof Ball
+          && mouseYpos >= 0 + (selectedObject.getHeight() / 2)
+          && mouseYpos + (selectedObject.getHeight() / 2) <= Application.getBoard().getHeight()) {
+        selectedObject.setYpos(newYpos);
       }
     }
   }
 
+  /**
+   * Method used to draw the objects on the screen.
+   */
   @Override
   public void doDrawing(Graphics2D graphics2D, ImageObserver imageObserver) {
     super.doDrawing(graphics2D, imageObserver);
@@ -177,19 +184,27 @@ public class LevelEditor extends Screen {
     }
   }
 
+  /**
+   * Method used to parse the current objects on the screen into a xml-file.
+   */
   public void createLevel() {
 
-    Level level = new Level();
+    LevelScreen level = new LevelScreen();
     level.objectList = addedObjects;
 
-    xmlHandler.createXmlFromLevel(level, 120);
+    XmlHandler.createXmlFromLevel(level, 120);
   }
 
-  public void deleteObject(GameObject delete){
-    LinkedList<GameObject> templist = new LinkedList<>();
+  /**
+   * Method to delete objects from the screen.
+   *
+   * @param delete - Object which should be removed.
+   */
+  public void deleteObject(GameObject delete) {
+    LinkedList<GameObject> templist;
     templist = addedObjects;
-    for(int i = 0; i < templist.size(); i++){
-      if(templist.get(i).equals(delete)){
+    for (int i = 0; i < templist.size(); i++) {
+      if (templist.get(i).equals(delete)) {
         addedObjects.remove(i);
         break;
       }

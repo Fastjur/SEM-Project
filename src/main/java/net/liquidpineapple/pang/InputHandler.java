@@ -1,5 +1,7 @@
 package net.liquidpineapple.pang;
 
+import lombok.Getter;
+
 import net.liquidpineapple.pang.logger.Logger;
 
 import java.awt.Point;
@@ -8,8 +10,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.HashSet;
-
-import lombok.Getter;
 
 /**
  * Class that represents the handler for mouseclicks and keypresses.
@@ -32,7 +32,7 @@ public class InputHandler implements MouseListener, KeyListener {
   @Override
   public void keyPressed(KeyEvent event) {
     keysPressed.add(event.getKeyCode());
-    if(!keysDown.contains(event.getKeyCode())){
+    if (!keysDown.contains(event.getKeyCode())) {
       keysDown.add(event.getKeyCode());
     }
   }

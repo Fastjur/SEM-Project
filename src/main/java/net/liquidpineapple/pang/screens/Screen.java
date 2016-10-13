@@ -21,6 +21,7 @@ import java.util.LinkedList;
 public abstract class Screen {
 
   public LinkedList<GameObject> objectList;
+  @Setter
   protected Image backgroundImage;
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
   @Getter
