@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.screens;
 
+import net.liquidpineapple.pang.objects.buttons.LevelEditorButton;
 import net.liquidpineapple.pang.objects.buttons.MultiPlayerButton;
 import net.liquidpineapple.pang.objects.buttons.QuitButton;
 import net.liquidpineapple.pang.objects.buttons.SinglePlayerButton;
@@ -14,19 +15,20 @@ import javax.imageio.ImageIO;
  * @author Govert de Gans
  * @date 2016-09-08
  */
-public class MainMenu extends Screen {
+public class MainMenuScreen extends Screen {
   /**
    * Constructor of the Main menu.
    */
-  public MainMenu() {
+  public MainMenuScreen() {
     try {
-      backgroundImage = ImageIO.read(Level.class.getResource("/sprites/titlebg.png"));
+      backgroundImage = ImageIO.read(LevelScreen.class.getResource("/sprites/titlebg.png"));
     } catch (IOException ex) {
       ex.printStackTrace();
     }
 
     objectList.add(new SinglePlayerButton(200, 220));
-    objectList.add(new MultiPlayerButton(200, 325));
-    objectList.add(new QuitButton(200, 455));
+    objectList.add(new MultiPlayerButton(200, 300));
+    objectList.add(new LevelEditorButton(200, 380));
+    objectList.add(new QuitButton(200, 460));
   }
 }

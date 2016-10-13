@@ -32,14 +32,16 @@ import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Class that represents a level.
+ *
  * @author Govert de Gans
  * @date 2016-09-07
  */
-public class Level extends Screen {
+public class LevelScreen extends Screen {
 
   private LinkedList<GameObject> hudObjectList;
 
-  public Level() {
+
+  public LevelScreen() {
     super();
     hudObjectList = new LinkedList<GameObject>();
   }
@@ -50,15 +52,19 @@ public class Level extends Screen {
    * @param xmlFile - path/filename of the XML-file that should be parsed.
    * @return - returns a new level.
    */
-  public static Level createFromXml(String xmlFile)
+  public static LevelScreen createFromXml(String xmlFile)
       throws IOException, ParserConfigurationException, SAXException {
 
-    Level output = new Level();
+    LevelScreen output = new LevelScreen();
     if (createFileReader(xmlFile) != null) {
       Document doc = createFileReader(xmlFile);
       String backgroundPath = "/sprites/"
           + doc.getElementsByTagName("background").item(0).getTextContent();
-      output.backgroundImage = ImageIO.read(Level.class.getResource(backgroundPath));
+      output.backgroundImage = ImageIO.read(LevelScreen.class.getResource(backgroundPath));
+
+      int levelDifficulty = Integer.parseInt(doc.getElementsByTagName("difficulty")
+          .item(0).getTextContent());
+      output.setDifficulty(levelDifficulty);
 
       for (Ball ball : loadBalls(doc.getElementsByTagName("ball"))) {
         output.objectList.add(ball);
@@ -67,6 +73,7 @@ public class Level extends Screen {
       for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
         output.objectList.add(player);
       }
+      loadTime(doc);
       TimeSystem.resetTime(loadTime(doc));
 
       for (NumberToken token : TimeSystem.getTimePlaces()) {
@@ -156,9 +163,9 @@ public class Level extends Screen {
    */
   public static Document createFileReader(String xmlFile)
       throws ParserConfigurationException, SAXException {
-    InputStream in = Level.class.getResourceAsStream(xmlFile);
-    DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
+    DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+    InputStream in = LevelScreen.class.getResourceAsStream(xmlFile);
     try {
       return documentBuilder.parse(in);
     } catch (IOException | IllegalArgumentException ex) {
@@ -199,15 +206,10 @@ public class Level extends Screen {
    */
   private void nextLevel() throws ParserConfigurationException, SAXException {
     Board currentBoard = Application.getBoard();
-    currentBoard.setLevelCount(currentBoard.getLevelCount() + 1);
     Screen newScreen = null;
-    String levelLocation = "/levels/level" + currentBoard.getLevelCount() + ".xml";
-    if (createFileReader(levelLocation) != null) {
-      try {
-        newScreen = Level.createFromXml("/levels/level" + currentBoard.getLevelCount() + ".xml");
-      } catch (IOException ex) {
-        ex.printStackTrace();
-      }
+
+    if (currentBoard.getLevels().hasNext()) {
+      newScreen = (Screen) currentBoard.getLevels().next();
     } else {
       //set behaviour when all levels have been completed here.
       newScreen = new WinScreen();

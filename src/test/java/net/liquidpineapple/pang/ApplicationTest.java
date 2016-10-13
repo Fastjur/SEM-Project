@@ -2,7 +2,7 @@ package net.liquidpineapple.pang;
 
 import static junit.framework.TestCase.assertFalse;
 
-import net.liquidpineapple.pang.screens.Level;
+import net.liquidpineapple.pang.screens.LevelScreen;
 
 import org.junit.After;
 import org.junit.Before;
@@ -34,7 +34,7 @@ public class ApplicationTest {
   @Test
   public void testScreenChangeToLevel() throws Throwable {
     Application.getBoard().changeScreen(
-        Level.createFromXml("src/main/resources/levels/level9000.xml"));
+        LevelScreen.createFromXml("src/main/resources/levels/level9000.xml"));
   }
 
   @Test

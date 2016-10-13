@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.logger.Logger;
-import net.liquidpineapple.pang.screens.MainMenu;
+import net.liquidpineapple.pang.screens.MainMenuScreen;
 import net.liquidpineapple.pang.screens.Screen;
 
 import java.awt.Color;
@@ -13,9 +13,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.Iterator;
+
 import javax.swing.JPanel;
-
-
 
 
 /**
@@ -27,12 +27,11 @@ import javax.swing.JPanel;
 public class Board extends JPanel {
 
   @Getter
-  private Screen currentScreen;
-
-  @Getter
   @Setter
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
-  private int levelCount = 1;
+      Iterator levels;
+  @Getter
+  private Screen currentScreen;
 
   /**
    * Constructor of the board.
@@ -57,8 +56,8 @@ public class Board extends JPanel {
     setFocusable(true);
     setBackground(Color.BLACK);
 
-    currentScreen = new MainMenu();
-    Logger.info("MainMenu Created.");
+    currentScreen = new MainMenuScreen();
+    Logger.info("MainMenuScreen Created.");
   }
 
   /**
