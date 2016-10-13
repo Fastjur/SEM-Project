@@ -26,7 +26,9 @@ public class ApplicationTest {
   @Before
   public void setUp() throws Exception {
     app = new Application(PROPERTIES_LOCATION);
+    ScoreSystem.setScore(0);
     app.start();
+
   }
 
   @Test(expected = FileNotFoundException.class)
@@ -48,7 +50,6 @@ public class ApplicationTest {
 
   @After
   public void tearDown() throws Exception {
-    ScoreSystem.setScore(0);
     app.close();
   }
 }
