@@ -8,6 +8,7 @@ import net.liquidpineapple.pang.logger.Logger;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
@@ -27,6 +28,7 @@ public class AudioSystem {
   private static String loopingSound = "";
   private static boolean isRunning;
   private static boolean playMusic = true;
+  private static HashMap<String, byte[]> cachedEffects = new HashMap<>();
 
   /**
    * Start the background music loop.
@@ -89,8 +91,18 @@ public class AudioSystem {
   public static void playEffect(String path) {
     try {
       Logger.info("Playing sound effect " + path);
+      byte[] buffer;
+      if ((buffer = cachedEffects.getOrDefault(path, null)) == null) {
+        BufferedInputStream inputStream =
+            new BufferedInputStream(Application.class.getResourceAsStream(path));
+        buffer = new byte[inputStream.available()];
+        inputStream.read(buffer);
+        cachedEffects.put(path, buffer);
+      }
       Clip clip = javax.sound.sampled.AudioSystem.getClip();
-      clip.open(javax.sound.sampled.AudioSystem.getAudioInputStream(Application.class.getResourceAsStream(path)));
+      clip.open(javax.sound.sampled.AudioSystem.getAudioInputStream(
+          new ByteArrayInputStream(buffer)));
+
       clip.addLineListener((lineEvent) -> {
         if (lineEvent.getType() == LineEvent.Type.STOP)
           clip.close(); // close resources when clip is finished.
