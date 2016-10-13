@@ -18,6 +18,7 @@ public class HookDrop extends Drop {
                   int score, int hookChange) {
     super(textureLocation, startX, startY, movX, movY, score);
     this.hookChange = hookChange;
+    this.collectSound = "/sounds/genericPowerup.wav";
   }
 
 

@@ -16,6 +16,7 @@ public class StickyHookDrop extends Drop {
   public StickyHookDrop(String textureLocation, double startX, double startY,
                         double movX, double movY, int score, int stickyDelayTime) {
     super(textureLocation, startX, startY, movX, movY, score);
+    this.collectSound = "/sounds/genericPowerup.wav";
     this.stickyDelayTime = stickyDelayTime;
     if ( stickyDelayTime < 0) {
       this.stickyDelayTime = 0;
