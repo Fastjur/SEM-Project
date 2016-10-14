@@ -134,6 +134,8 @@ public class AudioSystem {
       Logger.error("Could not play sound effect", e);
     } catch (UnsupportedAudioFileException e) {
       Logger.error("The AudioSystem tried to play an unsupported audio file", e);
+    } catch (IllegalArgumentException e) {
+      Logger.error("Your system cannot play the specified audio file", e);
     }
   }
 }
