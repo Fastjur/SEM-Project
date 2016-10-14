@@ -29,7 +29,7 @@ public class Drop extends GameObject {
               int score) {
     super(textureLocation, startX, startY);
     this.score = score;
-    this.collectSound = "/sounds/coin.wav";
+    this.collectSound = "coin";
     this.movY = movY;
     this.movX = movX;
   }

@@ -17,7 +17,7 @@ public class HeartDrop extends Drop {
   public HeartDrop(String textureLocation, double startX, double startY, double movX, double movY,
                    int score, int livesChange) {
     super(textureLocation, startX, startY, movX, movY, score);
-    this.collectSound = "/sounds/genericPowerup.wav";
+    this.collectSound = "genericPowerup";
     this.livesChange = livesChange;
   }
 

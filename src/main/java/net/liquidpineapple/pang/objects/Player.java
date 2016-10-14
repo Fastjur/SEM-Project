@@ -62,6 +62,7 @@ public class Player extends GameObject {
     if (xpos > playerMaxPosX) {
       xpos = playerMaxPosX;
     }
+    AudioSystem.playEffect("step", false, 3);
     Logger.info("Moved " + this + " from x: " + oldX + " to x: " + xpos);
   }
 
@@ -97,7 +98,7 @@ public class Player extends GameObject {
     if (playerScheme.shootPressed() && !shootheld && activeHooks < maximumHooks) {
       HookAndRope newRope = new HookAndRope(getXpos(), 0, this, hookRemoveDelay);
       Application.getBoard().getCurrentScreen().objectList.add(newRope);
-      AudioSystem.playEffect("/sounds/lazor.wav");
+      AudioSystem.playEffect("lazor");
       activeHooks++;
       shootheld = true;
     }
