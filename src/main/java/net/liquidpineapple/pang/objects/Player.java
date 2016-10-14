@@ -116,6 +116,7 @@ public class Player extends GameObject {
         LifeSystem.loseLife();
       }
       isHit = true;
+      AudioSystem.playEffect("hit");
     }
   }
 
