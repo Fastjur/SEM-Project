@@ -18,6 +18,7 @@ public class ShieldDrop extends Drop {
                     int score, int shield) {
     super(textureLocation, startX, startY, movX, movY, score);
     this.shield = shield;
+    this.collectSound = "shield";
   }
 
 

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.AudioSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.logger.Logger;
 
@@ -156,6 +157,7 @@ public class Ball extends GameObject {
         + (this.getHeight() / 2));
     //remove ball
     Logger.info("Removing " + this);
+    AudioSystem.playEffect("pop");
     Application.getBoard().getCurrentScreen().objectList.remove(this);
   }
 

@@ -18,6 +18,7 @@ public class FreezeTimeDrop extends Drop {
   public FreezeTimeDrop(String textureLocation, double startX, double startY, double movX,
                         double movY, int score, int timeFrozen) {
     super(textureLocation, startX, startY, movX, movY, score);
+    this.collectSound = "genericPowerup";
     this.timeFrozen = timeFrozen;
     if ( timeFrozen < 0) {
       this.timeFrozen = 0;
