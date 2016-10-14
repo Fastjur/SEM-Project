@@ -62,22 +62,26 @@ public class LevelEditor extends Screen {
       //key 1 pressed, add ball with size 1
       if (InputHandler.isKeyDown(KeyEvent.VK_1)) {
         InputHandler.getKeysDown().clear();
-        addBallSize1();
+        int size = 1;
+        addBall(size);
       }
       //key 2 pressed, add ball with size 2
       if (InputHandler.isKeyDown(KeyEvent.VK_2)) {
         InputHandler.getKeysDown().clear();
-        addBallSize2();
+        int size = 2;
+        addBall(size);
       }
       //key 3 pressed, add ball with size 3
       if (InputHandler.isKeyDown(KeyEvent.VK_3)) {
         InputHandler.getKeysDown().clear();
-        addBallSize3();
+        int size = 3;
+        addBall(size);
       }
       //key 4 pressed, add ball with size 4
       if (InputHandler.isKeyDown(KeyEvent.VK_4)) {
         InputHandler.getKeysDown().clear();
-        addBallSize4();
+        int size = 4;
+        addBall(size);
       }
       //key 5 pressed, add player
       if (InputHandler.isKeyDown(KeyEvent.VK_5) && !addedPlayer) {
@@ -154,52 +158,13 @@ public class LevelEditor extends Screen {
     addedObjects.add(new Player(currentMouseX - offset, fixedPlayerYpos, new Player1()));
   }
 
-  private void addBallSize2() {
-    int size = 2;
-    int offset = 0;
-    try {
-      Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/red.png"));
-      offset = ballImage.getWidth(null) / 2;
-    } catch (IOException ioException) {
-      ioException.printStackTrace();
-    }
-    addedObjects.add(new Ball(currentMouseX - offset, currentMouseY - offset, ballMovement, size));
-  }
-
-  private void addBallSize3() {
-    int size = 3;
-    int offset = 0;
-    try {
-      Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/yellow.png"));
-      offset = ballImage.getWidth(null) / 2;
-    } catch (IOException ioException) {
-      ioException.printStackTrace();
-    }
-    addedObjects.add(new Ball(currentMouseX - offset, currentMouseY - offset, ballMovement, size));
-  }
-
-  private void addBallSize4() {
-    int size = 4;
-    int offset = 0;
-    try {
-      Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/blue.png"));
-      offset = ballImage.getWidth(null) / 2;
-    } catch (IOException ioException) {
-      ioException.printStackTrace();
-    }
-    addedObjects.add(new Ball(currentMouseX - offset, currentMouseY - offset, ballMovement, size));
-  }
-
-  private void addBallSize1() {
-    int size = 1;
-    int offset = 0;
-    try {
-      Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/green.png"));
-      offset = ballImage.getWidth(null) / 2;
-    } catch (IOException ioException) {
-      ioException.printStackTrace();
-    }
-    addedObjects.add(new Ball(currentMouseX - offset, currentMouseY - offset, ballMovement, size));
+  private void addBall(int ballSize) {
+    int size = ballSize;
+    Ball ball = new Ball(0,0, ballMovement, size);
+    int offset = (int) ball.getWidth()/2;
+    ball.setXpos(currentMouseX - offset);
+    ball.setYpos(currentMouseY - offset);
+    addedObjects.add(ball);
   }
 
   private void dragAndDrop(GameObject selectedObject) {
