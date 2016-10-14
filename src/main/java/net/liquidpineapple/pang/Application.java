@@ -21,7 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 /**
- * The main application, extends {@link JFrame}
+ * The main application, extends {@link JFrame}.
  *
  * @author Jurriaan Den Toonder
  * @date 2016/09/06.

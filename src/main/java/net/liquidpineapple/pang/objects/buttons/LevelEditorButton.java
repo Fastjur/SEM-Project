@@ -1,6 +1,8 @@
 package net.liquidpineapple.pang.objects.buttons;
 
+import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
+import net.liquidpineapple.pang.screens.LevelEditor;
 
 /**
  * Class that represents the object for the Quitbutton.
@@ -25,7 +27,7 @@ public class LevelEditorButton extends Button {
    */
   @Override
   public void onClick() {
-    Logger.info("Close");
-    System.exit(0);
+    Logger.info("Change screen to LevelEditor");
+    Application.getBoard().changeScreen(new LevelEditor());
   }
 }

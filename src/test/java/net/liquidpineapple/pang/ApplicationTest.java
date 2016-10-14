@@ -3,6 +3,7 @@ package net.liquidpineapple.pang;
 import static junit.framework.TestCase.assertFalse;
 
 import net.liquidpineapple.pang.gui.ScoreSystem;
+import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.screens.ControlsScreen;
 import net.liquidpineapple.pang.screens.LevelScreen;
 import net.liquidpineapple.pang.screens.Screen;
@@ -27,6 +28,7 @@ public class ApplicationTest {
   public void setUp() throws Exception {
     app = new Application(PROPERTIES_LOCATION);
     ScoreSystem.setScore(0);
+    TimeSystem.resetTime(1);
     app.start();
 
   }

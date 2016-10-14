@@ -3,6 +3,7 @@ package net.liquidpineapple.pang.screens;
 import edu.emory.mathcs.backport.java.util.Collections;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.XmlHandler;
 import net.liquidpineapple.pang.logger.Logger;
 
 import org.xml.sax.SAXException;
@@ -47,7 +48,7 @@ public abstract class LevelIterator {
       final String name = entries.nextElement().getName();
       if (name.startsWith(path + "/")) { //filter according to the path
         try { //try to create screens
-          Screen levelScreen = LevelScreen.createFromXml("/" + name);
+          Screen levelScreen = XmlHandler.createFromXml("/" + name);
           levels.add(levelScreen);
         } catch (IOException ioEx) {
           Logger.error("File not found", ioEx);
@@ -83,7 +84,7 @@ public abstract class LevelIterator {
   private void loadArrayIde(final String directory) {
     //get the files from the directory
     File[] files = new File(Application.class.getResource("/" + directory).getFile()).listFiles();
-    Pattern pattern = Pattern.compile("levels\\\\(single|multi)player\\\\level\\d*.xml");
+    Pattern pattern = Pattern.compile("levels\\\\((single|multi)player|custom)\\\\level\\d*.xml");
 
     for (File file : files) {
       if (!file.isDirectory()) {
@@ -94,7 +95,7 @@ public abstract class LevelIterator {
             path = "/" + matcher.group(0);
           }
           //create level using the path to the level.
-          Screen newScreen = LevelScreen.createFromXml(path);
+          Screen newScreen = XmlHandler.createFromXml(path);
           levels.add(newScreen);
         } catch (IOException ioEx) {
           Logger.error("File not found", ioEx);
