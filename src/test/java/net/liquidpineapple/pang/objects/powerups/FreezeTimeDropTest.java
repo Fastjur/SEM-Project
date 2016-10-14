@@ -7,6 +7,8 @@ import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
 import net.liquidpineapple.pang.objects.playerschemes.Player1;
+import net.liquidpineapple.pang.objects.playerschemes.Player2;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +34,9 @@ public class FreezeTimeDropTest {
   public void testHookSetNormal3() {
     Drop hook = new FreezeTimeDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 3);
     Player testplayer = new Player(0,0,new Player1());
+    Player testplayer2 = new Player(0,0,new Player2());
     hook.playerCollision(testplayer);
+    hook.playerCollision(testplayer2);
     assertEquals(TimeSystem.getFrozen(), 3);
   }
 
