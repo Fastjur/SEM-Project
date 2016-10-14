@@ -9,6 +9,8 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Random;
 
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
@@ -29,6 +31,8 @@ public class AudioSystem {
   private static boolean isRunning;
   private static boolean playMusic = true;
   private static HashMap<String, byte[]> cachedEffects = new HashMap<>();
+  private static HashSet<String> effectsPlaying = new HashSet<>();
+  private static Random rng = new Random();
 
   /**
    * Start the background music loop.
@@ -89,9 +93,24 @@ public class AudioSystem {
   }
 
   public static void playEffect(String path) {
+    playEffect(path, true, 1);
+  }
+
+  public static void playEffect(String name, boolean allowOverlap, int numSounds) {
+    if (!allowOverlap && effectsPlaying.contains(name))
+      return;
+
+    String path;
+    if (numSounds > 1) {
+      int num = rng.nextInt(numSounds);
+      path = "/sounds/" + name + num + ".wav";
+    } else {
+      path = "/sounds/" + name + ".wav";
+    }
+
+    Logger.info("Playing sound effect " + path);
+    byte[] buffer;
     try {
-      Logger.info("Playing sound effect " + path);
-      byte[] buffer;
       if ((buffer = cachedEffects.getOrDefault(path, null)) == null) {
         BufferedInputStream inputStream =
             new BufferedInputStream(Application.class.getResourceAsStream(path));
@@ -104,9 +123,12 @@ public class AudioSystem {
           new ByteArrayInputStream(buffer)));
 
       clip.addLineListener((lineEvent) -> {
-        if (lineEvent.getType() == LineEvent.Type.STOP)
+        if (lineEvent.getType() == LineEvent.Type.STOP) {
+          effectsPlaying.remove(name);
           clip.close(); // close resources when clip is finished.
+        }
       });
+      effectsPlaying.add(name);
       clip.start();
     } catch (LineUnavailableException | IOException e) {
       Logger.error("Could not play sound effect", e);
