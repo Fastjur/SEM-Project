@@ -84,7 +84,7 @@ public abstract class LevelIterator {
   private void loadArrayIde(final String directory) {
     //get the files from the directory
     File[] files = new File(Application.class.getResource("/" + directory).getFile()).listFiles();
-    Pattern pattern = Pattern.compile("levels\\\\(single|multi|custom)player\\\\level\\d*.xml");
+    Pattern pattern = Pattern.compile("levels\\\\((single|multi)player|custom)\\\\level\\d*.xml");
 
     for (File file : files) {
       if (!file.isDirectory()) {
