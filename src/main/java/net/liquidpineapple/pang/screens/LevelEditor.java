@@ -60,42 +60,35 @@ public class LevelEditor extends Screen {
     currentMouseY = (int) (point1.getY() - point2.getY());
     if (InputHandler.isAnyKeyPressed()) {
       //key 1 pressed, add ball with size 1
-      if (InputHandler.isKeyDown(KeyEvent.VK_1)) {
-        InputHandler.getKeysDown().clear();
+      if (InputHandler.isKeyPressed(KeyEvent.VK_1)) {
         int size = 1;
         addBall(size);
       }
       //key 2 pressed, add ball with size 2
-      if (InputHandler.isKeyDown(KeyEvent.VK_2)) {
-        InputHandler.getKeysDown().clear();
+      if (InputHandler.isKeyPressed(KeyEvent.VK_2)) {
         int size = 2;
         addBall(size);
       }
       //key 3 pressed, add ball with size 3
-      if (InputHandler.isKeyDown(KeyEvent.VK_3)) {
-        InputHandler.getKeysDown().clear();
+      if (InputHandler.isKeyPressed(KeyEvent.VK_3)) {
         int size = 3;
         addBall(size);
       }
       //key 4 pressed, add ball with size 4
-      if (InputHandler.isKeyDown(KeyEvent.VK_4)) {
-        InputHandler.getKeysDown().clear();
+      if (InputHandler.isKeyPressed(KeyEvent.VK_4)) {
         int size = 4;
         addBall(size);
       }
       //key 5 pressed, add player
-      if (InputHandler.isKeyDown(KeyEvent.VK_5) && !addedPlayer) {
-        InputHandler.getKeysDown().clear();
+      if (InputHandler.isKeyPressed(KeyEvent.VK_5) && !addedPlayer) {
         addPlayer();
       }
       //key p pressed, play the last saved level
-      if (InputHandler.isKeyDown(KeyEvent.VK_P)) {
-        InputHandler.getKeysDown().clear();
+      if (InputHandler.isKeyPressed(KeyEvent.VK_P)) {
         playGame();
       }
       //key s pressed, save the current level
-      if (InputHandler.isKeyDown(KeyEvent.VK_S)) {
-        InputHandler.getKeysDown().clear();
+      if (InputHandler.isKeyPressed(KeyEvent.VK_S)) {
         saveGame();
       }
     }
@@ -123,6 +116,8 @@ public class LevelEditor extends Screen {
     if (InputHandler.isLeftMouseButtonDown() && selectedObject != null) {
       dragAndDrop(selectedObject);
     }
+
+    InputHandler.clearKeys();
   }
 
   private void playGame() {
