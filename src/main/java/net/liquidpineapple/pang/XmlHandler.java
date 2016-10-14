@@ -41,8 +41,9 @@ public class XmlHandler {
 
   /**
    * Method which parses a Level into a xml file.
+   *
    * @param level - Level to be parsed
-   * @param time - Time the level may take.
+   * @param time  - Time the level may take.
    */
   public static void createXmlFromLevel(LevelScreen level, int time) {
     try {
@@ -69,54 +70,10 @@ public class XmlHandler {
       rootElement.appendChild(objects);
 
       // parse Balls
-      for (GameObject object : level.objectList) {
-        if (object instanceof Ball) {
-          Element ball = doc.createElement("ball");
-          objects.appendChild(ball);
-
-          Element position = doc.createElement("position");
-          ball.appendChild(position);
-
-          int xposInt = (int) (object.getXpos() + 0.5);
-          int yposInt = (int) (object.getYpos() + 0.5);
-
-          Element xelement = doc.createElement("x");
-          xelement.appendChild(doc.createTextNode(Integer.toString(xposInt)));
-          position.appendChild(xelement);
-          Element yelement = doc.createElement("y");
-          yelement.appendChild(doc.createTextNode(Integer.toString(yposInt)));
-          position.appendChild(yelement);
-
-          Element direction = doc.createElement("direction");
-          direction.appendChild(doc.createTextNode("LEFT_MOVEMENT"));
-          ball.appendChild(direction);
-
-          Element size = doc.createElement("size");
-          size.appendChild(doc.createTextNode(Integer.toString(((Ball) object).getBallSize())));
-          ball.appendChild(size);
-        }
-      }
+      parseBalls(objects, doc, level);
 
       //parse Players
-      for (GameObject object : level.objectList) {
-        if (object instanceof Player) {
-          Element player = doc.createElement("player");
-          objects.appendChild(player);
-
-          Element position = doc.createElement("position");
-          player.appendChild(position);
-
-          Element xelement = doc.createElement("x");
-          int xposInt = (int) (object.getXpos() + 0.5);
-          int yposInt = (int) (object.getYpos() + 0.5);
-          xelement.appendChild(doc.createTextNode(Integer.toString(xposInt)));
-          position.appendChild(xelement);
-          Element yelement = doc.createElement("y");
-          yelement.appendChild(doc.createTextNode(Integer.toString(yposInt)));
-          position.appendChild(yelement);
-
-        }
-      }
+      parsePlayer(objects, doc, level);
 
       //time element
       Element timeElement = doc.createElement("time");
@@ -137,6 +94,59 @@ public class XmlHandler {
       Logger.error(tfe.getStackTrace().toString(), tfe);
     }
 
+  }
+
+  private static void parsePlayer(Element objects, Document doc, LevelScreen level) {
+    for (GameObject object : level.objectList) {
+      if (object instanceof Player) {
+        Element player = doc.createElement("player");
+        objects.appendChild(player);
+
+        Element position = doc.createElement("position");
+        player.appendChild(position);
+
+        Element xelement = doc.createElement("x");
+        int xposInt = (int) (object.getXpos() + 0.5);
+        int yposInt = (int) (object.getYpos() + 0.5);
+        xelement.appendChild(doc.createTextNode(Integer.toString(xposInt)));
+        position.appendChild(xelement);
+        Element yelement = doc.createElement("y");
+        yelement.appendChild(doc.createTextNode(Integer.toString(yposInt)));
+        position.appendChild(yelement);
+
+      }
+    }
+
+  }
+
+  private static void parseBalls(Element objects, Document doc, LevelScreen level) {
+    for (GameObject object : level.objectList) {
+      if (object instanceof Ball) {
+        Element ball = doc.createElement("ball");
+        objects.appendChild(ball);
+
+        Element position = doc.createElement("position");
+        ball.appendChild(position);
+
+        int xposInt = (int) (object.getXpos() + 0.5);
+        int yposInt = (int) (object.getYpos() + 0.5);
+
+        Element xelement = doc.createElement("x");
+        xelement.appendChild(doc.createTextNode(Integer.toString(xposInt)));
+        position.appendChild(xelement);
+        Element yelement = doc.createElement("y");
+        yelement.appendChild(doc.createTextNode(Integer.toString(yposInt)));
+        position.appendChild(yelement);
+
+        Element direction = doc.createElement("direction");
+        direction.appendChild(doc.createTextNode("LEFT_MOVEMENT"));
+        ball.appendChild(direction);
+
+        Element size = doc.createElement("size");
+        size.appendChild(doc.createTextNode(Integer.toString(((Ball) object).getBallSize())));
+        ball.appendChild(size);
+      }
+    }
   }
 
   /**
