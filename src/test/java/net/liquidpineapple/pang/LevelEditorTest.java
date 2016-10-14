@@ -1,107 +1,92 @@
 package net.liquidpineapple.pang;
 
-import net.liquidpineapple.pang.gui.ScoreSystem;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
+
 import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.Player;
-import net.liquidpineapple.pang.objects.playerschemes.Player1;
 import net.liquidpineapple.pang.screens.LevelEditor;
-import org.junit.After;
+
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.concurrent.TimeUnit;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(InputHandler.class)
 public class LevelEditorTest {
-
-  private Application app;
-  private static final String PROPERTIES_LOCATION = "/config.properties";
-  private Robot robot;
-  private int windowX;
-  private int windowY;
-  private Point oldMousePos;
-  private LevelEditor levelEditScreen;
-  //Used to return the mouse to the old location, to not irrate developers with a mouse thats gone.
-
+  private LevelEditor levelEditor;
 
   @Before
-  public void setUp() throws Exception {
-    app = new Application(PROPERTIES_LOCATION);
-    ScoreSystem.setScore(0);
-    app.start();
-    try {
-      robot = new Robot();
-    } catch(AWTException e) {
-      e.printStackTrace();
-    };
-    windowX = app.getX();
-    windowY = app.getY();
-    oldMousePos = MouseInfo.getPointerInfo().getLocation();
-    levelEditScreen = new LevelEditor();
-    Application.getBoard().changeScreen(levelEditScreen);
-    assertTrue(levelEditScreen.addedObjects.isEmpty());
+  public void setUp() {
+    levelEditor = PowerMockito.spy(new LevelEditor());
+
   }
 
   @Test
-  public void placeSize1Ball() throws Exception {
-    robot.mouseMove(windowX + 100, windowY + 100);
-    robot.keyPress(KeyEvent.VK_1);
-    TimeUnit.MILLISECONDS.sleep(200);
-
-    assertEquals(1, ((Ball)levelEditScreen.addedObjects.get(0)).getBallSize());
-    levelEditScreen.addedObjects.remove(0);
+  public void testPlaceBallSize1() throws Exception {
+    PowerMockito.mockStatic(InputHandler.class);
+    Mockito.when(InputHandler.isKeyDown(KeyEvent.VK_1)).thenReturn(true);
+    PowerMockito.doNothing().when(levelEditor, "addBall", 1);
+    levelEditor.doUpdate();
+    PowerMockito.verifyPrivate(levelEditor).invoke("addBall", 1);
   }
 
   @Test
-  public void placeSize2Ball() throws Exception {
-    robot.mouseMove(windowX + 100, windowY + 100);
-    robot.keyPress(KeyEvent.VK_2);
-    TimeUnit.MILLISECONDS.sleep(200);
-
-    assertEquals(2, ((Ball)levelEditScreen.addedObjects.get(0)).getBallSize());
-    levelEditScreen.addedObjects.remove(0);
+  public void testPlaceBallSize2() throws Exception {
+    PowerMockito.mockStatic(InputHandler.class);
+    Mockito.when(InputHandler.isKeyDown(KeyEvent.VK_2)).thenReturn(true);
+    PowerMockito.doNothing().when(levelEditor, "addBall", 2);
+    levelEditor.doUpdate();
+    PowerMockito.verifyPrivate(levelEditor).invoke("addBall", 2);
   }
 
   @Test
-  public void placeSize3Ball() throws Exception {
-   robot.mouseMove(windowX + 100, windowY + 100);
-    robot.keyPress(KeyEvent.VK_3);
-    TimeUnit.MILLISECONDS.sleep(200);
-
-    assertEquals(3, ((Ball)levelEditScreen.addedObjects.get(0)).getBallSize());
-    levelEditScreen.addedObjects.remove(0);
+  public void testPlaceBallSize3() throws Exception {
+    PowerMockito.mockStatic(InputHandler.class);
+    Mockito.when(InputHandler.isKeyDown(KeyEvent.VK_3)).thenReturn(true);
+    PowerMockito.doNothing().when(levelEditor, "addBall", 3);
+    levelEditor.doUpdate();
+    PowerMockito.verifyPrivate(levelEditor).invoke("addBall", 3);
   }
 
   @Test
-  public void placeSize4Ball() throws Exception {
-     robot.mouseMove(windowX + 100, windowY + 100);
-    robot.keyPress(KeyEvent.VK_4);
-    TimeUnit.MILLISECONDS.sleep(200);
-
-    assertEquals(4, ((Ball)levelEditScreen.addedObjects.get(0)).getBallSize());
-    levelEditScreen.addedObjects.remove(0);
+  public void testPlaceBallSize4() throws Exception {
+    PowerMockito.mockStatic(InputHandler.class);
+    Mockito.when(InputHandler.isKeyDown(KeyEvent.VK_4)).thenReturn(true);
+    PowerMockito.doNothing().when(levelEditor, "addBall", 4);
+    levelEditor.doUpdate();
+    PowerMockito.verifyPrivate(levelEditor).invoke("addBall", 4);
   }
 
   @Test
-  public void placePlayer() throws Exception {
-    robot.mouseMove(windowX + 100, windowY + 100);
-    robot.keyPress(KeyEvent.VK_5);
-    TimeUnit.MILLISECONDS.sleep(200);
-
-    assertTrue(levelEditScreen.addedObjects.get(0).getClass().equals(
-        new Player(0,0,new Player1()).getClass()
-    ));
-    levelEditScreen.addedObjects.remove(0);
+  public void testAddBall() throws Exception {
+    Whitebox.invokeMethod(levelEditor, "addBall", 1);
+    assertEquals(levelEditor.addedObjects.size(), 1);
+    assertEquals(((Ball) levelEditor.addedObjects.get(0)).getBallSize(), 1);
   }
 
-  @After
-  public void tearDown() throws Exception {
-    robot.mouseMove(oldMousePos.x,oldMousePos.y);
-    app.close();
+  @Test
+  public void testPlacePlayer() throws Exception {
+    PowerMockito.mockStatic(InputHandler.class);
+    Mockito.when(InputHandler.isKeyDown(KeyEvent.VK_5)).thenReturn(true);
+    PowerMockito.doNothing().when(levelEditor, "addPlayer");
+    levelEditor.doUpdate();
+    PowerMockito.verifyPrivate(levelEditor, times(1)).invoke("addPlayer");
+  }
+
+  @Test
+  public void testAddPlayer() throws Exception {
+    Whitebox.invokeMethod(levelEditor, "addPlayer");
+    assertEquals(levelEditor.addedObjects.size(), 1);
+    assertTrue(levelEditor.addedObjects.get(0) instanceof Player);
   }
 }
