@@ -211,10 +211,9 @@ public class LevelEditor extends Screen {
    * @param delete - Object which should be removed.
    */
   public void deleteObject(GameObject delete) {
-    LinkedList<GameObject> templist;
-    templist = addedObjects;
-    for (int i = 0; i < templist.size(); i++) {
-      if (templist.get(i).equals(delete)) {
+    int size = addedObjects.size();
+    for (int i = 0; i < size; i++) {
+      if (addedObjects.get(i).equals(delete)) {
         addedObjects.remove(i);
         break;
       }
