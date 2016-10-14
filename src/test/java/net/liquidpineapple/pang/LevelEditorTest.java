@@ -64,6 +64,7 @@ public class LevelEditorTest {
     TimeUnit.MILLISECONDS.sleep(200);
 
     assertEquals(1, ((Ball)levelEditScreen.addedObjects.get(0)).getBallSize());
+    levelEditScreen.addedObjects.remove(0);
   }
 
   @Test
@@ -75,6 +76,7 @@ public class LevelEditorTest {
     TimeUnit.MILLISECONDS.sleep(200);
 
     assertEquals(2, ((Ball)levelEditScreen.addedObjects.get(0)).getBallSize());
+    levelEditScreen.addedObjects.remove(0);
   }
 
   @Test
@@ -86,6 +88,7 @@ public class LevelEditorTest {
     TimeUnit.MILLISECONDS.sleep(200);
 
     assertEquals(3, ((Ball)levelEditScreen.addedObjects.get(0)).getBallSize());
+    levelEditScreen.addedObjects.remove(0);
   }
 
   @Test
@@ -97,6 +100,7 @@ public class LevelEditorTest {
     TimeUnit.MILLISECONDS.sleep(200);
 
     assertEquals(4, ((Ball)levelEditScreen.addedObjects.get(0)).getBallSize());
+    levelEditScreen.addedObjects.remove(0);
   }
 
   @Test
@@ -110,6 +114,7 @@ public class LevelEditorTest {
     assertTrue(levelEditScreen.addedObjects.get(0).getClass().equals(
         new Player(0,0,new Player1()).getClass()
     ));
+    levelEditScreen.addedObjects.remove(0);
   }
 
   @After
