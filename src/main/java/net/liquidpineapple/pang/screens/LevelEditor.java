@@ -14,6 +14,7 @@ import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
+import java.awt.event.KeyEvent;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -29,6 +30,10 @@ import javax.imageio.ImageIO;
 public class LevelEditor extends Screen {
   public LinkedList<GameObject> addedObjects = new LinkedList<>();
   private static boolean addedPlayer = false;
+  private int currentMouseX = 0;
+  private int currentMouseY = 0;
+  private BallMovement ballMovement = BallMovement.valueOf("LEFT_MOVEMENT");
+  private static final int gametime = 120;
 
   /**
    * Constructor for the LevelEditor screen.
@@ -51,108 +56,53 @@ public class LevelEditor extends Screen {
     PointerInfo pointerInfo = MouseInfo.getPointerInfo();
     Point point1 = pointerInfo.getLocation();
     Point point2 = Application.getBoard().getLocationOnScreen();
-    int intXpos = (int) (point1.getX() - point2.getX());
-    int intYpos = (int) (point1.getY() - point2.getY());
+    currentMouseX = (int) (point1.getX() - point2.getX());
+    currentMouseY = (int) (point1.getY() - point2.getY());
     if (InputHandler.isAnyKeyPressed()) {
-      BallMovement ballMovement = BallMovement.valueOf("LEFT_MOVEMENT");
       //key 1 pressed, add ball with size 1
-      if (InputHandler.getKeysDown().contains(49)) {
+      if (InputHandler.isKeyDown(KeyEvent.VK_1)) {
         InputHandler.getKeysDown().clear();
-        int size = 1;
-        int offset = 0;
-        try {
-          Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/green.png"));
-          offset = ballImage.getWidth(null) / 2;
-        } catch (IOException ioException) {
-          ioException.printStackTrace();
-        }
-        addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
+        addBallSize1();
       }
       //key 2 pressed, add ball with size 2
-      if (InputHandler.getKeysDown().contains(50)) {
+      if (InputHandler.isKeyDown(KeyEvent.VK_2)) {
         InputHandler.getKeysDown().clear();
-        int size = 2;
-        int offset = 0;
-        try {
-          Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/red.png"));
-          offset = ballImage.getWidth(null) / 2;
-        } catch (IOException ioException) {
-          ioException.printStackTrace();
-        }
-        addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
+        addBallSize2();
       }
       //key 3 pressed, add ball with size 3
-      if (InputHandler.getKeysDown().contains(51)) {
+      if (InputHandler.isKeyDown(KeyEvent.VK_3)) {
         InputHandler.getKeysDown().clear();
-        int size = 3;
-        int offset = 0;
-        try {
-          Image ballImage = ImageIO.read(LevelScreen.class
-              .getResource("/sprites/Balls/yellow.png"));
-          offset = ballImage.getWidth(null) / 2;
-        } catch (IOException ioException) {
-          ioException.printStackTrace();
-        }
-        addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
+        addBallSize3();
       }
       //key 4 pressed, add ball with size 4
-      if (InputHandler.getKeysDown().contains(52)) {
+      if (InputHandler.isKeyDown(KeyEvent.VK_4)) {
         InputHandler.getKeysDown().clear();
-        int size = 4;
-        int offset = 0;
-        try {
-          Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/blue.png"));
-          offset = ballImage.getWidth(null) / 2;
-        } catch (IOException ioException) {
-          ioException.printStackTrace();
-        }
-        addedObjects.add(new Ball(intXpos - offset, intYpos - offset, ballMovement, size));
+        addBallSize4();
       }
       //key 5 pressed, add player
-      if (InputHandler.getKeysDown().contains(53) && !addedPlayer) {
+      if (InputHandler.isKeyDown(KeyEvent.VK_5) && !addedPlayer) {
         InputHandler.getKeysDown().clear();
-        addedPlayer = true;
-        int offset = 0;
-        int fixedPlayerYpos = 475;
-        try {
-          Image playerImage = ImageIO.read(LevelScreen.class
-              .getResource("/sprites/player/p1_front.png"));
-          offset = playerImage.getWidth(null) / 2;
-        } catch (IOException ioException) {
-          ioException.printStackTrace();
-        }
-        addedObjects.add(new Player(intXpos - offset, fixedPlayerYpos, new Player1()));
+        addPlayer();
       }
       //key p pressed, play the last saved level
-      if (InputHandler.getKeysDown().contains(80)) {
+      if (InputHandler.isKeyDown(KeyEvent.VK_P)) {
         InputHandler.getKeysDown().clear();
-        addedPlayer = false;
-        UserCreatedLevels levels = new UserCreatedLevels();
-        Application.getBoard().setLevels(levels.createIterator());
-        Application.getBoard().changeScreen((Screen) Application.getBoard().getLevels().next());
+        playGame();
       }
       //key s pressed, save the current level
-      if (InputHandler.getKeysDown().contains(83)) {
+      if (InputHandler.isKeyDown(KeyEvent.VK_S)) {
         InputHandler.getKeysDown().clear();
-        if (addedPlayer) {
-          createLevel();
-        } else {
-          int fixedPlayerYpos = 475;
-          int fixedPlayerXpos = 380;
-          addedObjects.add(new Player(fixedPlayerXpos, fixedPlayerYpos, new Player1()));
-          addedPlayer = true;
-          createLevel();
-        }
+        saveGame();
       }
     }
     //select the object
     GameObject selectedObject = null;
     if (InputHandler.isLeftMouseButtonDown() || InputHandler.isRightMouseButtonDown()) {
       for (GameObject addedObject : addedObjects) {
-        if (intXpos > addedObject.getXpos()
-            && intXpos < addedObject.getXpos() + addedObject.getWidth()
-            && intYpos > addedObject.getYpos()
-            && intYpos < addedObject.getYpos() + addedObject.getHeight()) {
+        if (currentMouseX > addedObject.getXpos()
+            && currentMouseX < addedObject.getXpos() + addedObject.getWidth()
+            && currentMouseY > addedObject.getYpos()
+            && currentMouseY < addedObject.getYpos() + addedObject.getHeight()) {
           selectedObject = addedObject;
         }
       }
@@ -165,8 +115,94 @@ public class LevelEditor extends Screen {
       }
       deleteObject(selectedObject);
     }
-
     //drag and drop
+    if (InputHandler.isLeftMouseButtonDown() && selectedObject != null) {
+      dragAndDrop(selectedObject);
+    }
+  }
+
+  private void playGame() {
+    addedPlayer = false;
+    UserCreatedLevels levels = new UserCreatedLevels();
+    Application.getBoard().setLevels(levels.createIterator());
+    Application.getBoard().changeScreen((Screen) Application.getBoard().getLevels().next());
+  }
+
+  private void saveGame() {
+    if (addedPlayer) {
+      createLevel();
+    } else {
+      int fixedPlayerYpos = 475;
+      int fixedPlayerXpos = 380;
+      addedObjects.add(new Player(fixedPlayerXpos, fixedPlayerYpos, new Player1()));
+      addedPlayer = true;
+      createLevel();
+    }
+  }
+
+  private void addPlayer() {
+    addedPlayer = true;
+    int offset = 0;
+    int fixedPlayerYpos = 475;
+    try {
+      Image playerImage = ImageIO.read(LevelScreen.class
+          .getResource("/sprites/player/p1_front.png"));
+      offset = playerImage.getWidth(null) / 2;
+    } catch (IOException ioException) {
+      ioException.printStackTrace();
+    }
+    addedObjects.add(new Player(currentMouseX - offset, fixedPlayerYpos, new Player1()));
+  }
+
+  private void addBallSize2() {
+    int size = 2;
+    int offset = 0;
+    try {
+      Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/red.png"));
+      offset = ballImage.getWidth(null) / 2;
+    } catch (IOException ioException) {
+      ioException.printStackTrace();
+    }
+    addedObjects.add(new Ball(currentMouseX - offset, currentMouseY - offset, ballMovement, size));
+  }
+
+  private void addBallSize3() {
+    int size = 3;
+    int offset = 0;
+    try {
+      Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/yellow.png"));
+      offset = ballImage.getWidth(null) / 2;
+    } catch (IOException ioException) {
+      ioException.printStackTrace();
+    }
+    addedObjects.add(new Ball(currentMouseX - offset, currentMouseY - offset, ballMovement, size));
+  }
+
+  private void addBallSize4() {
+    int size = 4;
+    int offset = 0;
+    try {
+      Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/blue.png"));
+      offset = ballImage.getWidth(null) / 2;
+    } catch (IOException ioException) {
+      ioException.printStackTrace();
+    }
+    addedObjects.add(new Ball(currentMouseX - offset, currentMouseY - offset, ballMovement, size));
+  }
+
+  private void addBallSize1() {
+    int size = 1;
+    int offset = 0;
+    try {
+      Image ballImage = ImageIO.read(LevelScreen.class.getResource("/sprites/Balls/green.png"));
+      offset = ballImage.getWidth(null) / 2;
+    } catch (IOException ioException) {
+      ioException.printStackTrace();
+    }
+    addedObjects.add(new Ball(currentMouseX - offset, currentMouseY - offset, ballMovement, size));
+  }
+
+  private void dragAndDrop(GameObject selectedObject) {
     while (InputHandler.isLeftMouseButtonDown() && selectedObject != null) {
       PointerInfo mousePoint = MouseInfo.getPointerInfo();
       Point pointb = mousePoint.getLocation();
@@ -206,7 +242,7 @@ public class LevelEditor extends Screen {
     LevelScreen level = new LevelScreen();
     level.objectList = addedObjects;
 
-    XmlHandler.createXmlFromLevel(level, 120);
+    XmlHandler.createXmlFromLevel(level, gametime);
   }
 
   /**
