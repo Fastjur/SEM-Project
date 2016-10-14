@@ -33,6 +33,7 @@ public class LevelEditor extends Screen {
   private int currentMouseX = 0;
   private int currentMouseY = 0;
   private BallMovement ballMovement = BallMovement.valueOf("LEFT_MOVEMENT");
+  private static final int gametime = 120;
 
   /**
    * Constructor for the LevelEditor screen.
@@ -241,7 +242,7 @@ public class LevelEditor extends Screen {
     LevelScreen level = new LevelScreen();
     level.objectList = addedObjects;
 
-    XmlHandler.createXmlFromLevel(level, 120);
+    XmlHandler.createXmlFromLevel(level, gametime);
   }
 
   /**
