@@ -29,7 +29,6 @@ public class PlayerTest {
 
   private static final String defaultTexture = "/sprites/no-texture.png";
   private static final double DELTA = 0.01;
-  private static String PROPERTIES_LOCATION = "/config.properties";
 
   private Player player;
   private Player player2;
@@ -40,7 +39,7 @@ public class PlayerTest {
    */
   @Before
   public void setUp() throws Throwable {
-    app = new Application(PROPERTIES_LOCATION);
+    app = new Application();
     app.start();
     player = new Player(startX, startY, new Player1());
     player2 = new Player(startX, startY, new Player2());

@@ -5,15 +5,10 @@ import static junit.framework.TestCase.assertFalse;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.screens.ControlsScreen;
-import net.liquidpineapple.pang.screens.LevelScreen;
-import net.liquidpineapple.pang.screens.Screen;
-import net.liquidpineapple.pang.screens.SinglePlayerLevels;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.FileNotFoundException;
 
 /**
  * @author Jurriaan Den Toonder
@@ -22,21 +17,14 @@ import java.io.FileNotFoundException;
 public class ApplicationTest {
 
   private Application app;
-  private static final String PROPERTIES_LOCATION = "/config.properties";
 
   @Before
   public void setUp() throws Exception {
-    app = new Application(PROPERTIES_LOCATION);
+    app = new Application();
     ScoreSystem.setScore(0);
     TimeSystem.resetTime(1);
     app.start();
 
-  }
-
-  @Test(expected = FileNotFoundException.class)
-  public void testWrongProperties() throws Throwable {
-    Application app = new Application("test");
-    app.start();
   }
 
   @Test
