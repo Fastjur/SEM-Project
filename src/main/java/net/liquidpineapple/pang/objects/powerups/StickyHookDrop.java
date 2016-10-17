@@ -17,10 +17,7 @@ public class StickyHookDrop extends Drop {
                         double movX, double movY, int score, int stickyDelayTime) {
     super(textureLocation, startX, startY, movX, movY, score);
     this.collectSound = "genericPowerup";
-    this.stickyDelayTime = stickyDelayTime;
-    if ( stickyDelayTime < 0) {
-      this.stickyDelayTime = 0;
-    }
+    this.stickyDelayTime = Math.max(stickyDelayTime, 0);
   }
 
   /**

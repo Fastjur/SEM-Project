@@ -40,8 +40,8 @@ public class WinScreenTest {
     ScoreSystem.setScore(10);
     winScreen.displayscore();
 
-    assertEquals(0, WinScreen.getPlaces().get(0).getcurrentnumber());
-    assertEquals(1, WinScreen.getPlaces().get(1).getcurrentnumber());
+    assertEquals(0, WinScreen.getPlaces().get(0).getCurrentnumber());
+    assertEquals(1, WinScreen.getPlaces().get(1).getCurrentnumber());
   }
 
 }

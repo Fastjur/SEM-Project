@@ -27,10 +27,7 @@ public class HookDrop extends Drop {
    */
   @Override
   public void playerCollision(Player player) {
-    player.setMaximumHooks(hookChange);
-    if ( player.getMaximumHooks() < 1) {
-      player.setMaximumHooks(1);
-    }
+    player.setMaximumHooks( Math.max(hookChange, 1));
     super.playerCollision(player);
   }
 }

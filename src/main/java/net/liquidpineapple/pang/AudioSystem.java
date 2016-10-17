@@ -96,9 +96,18 @@ public class AudioSystem {
     playEffect(path, true, 1);
   }
 
+  /**
+   * This method playes a sound effect
+   *
+   * @param name          The name of the sound file you want to play
+   * @param allowOverlap  Decides if this sound can play while the same sound is already playing
+   * @param numSounds     Allows add a number after the name of the sound file name,
+   *                      to easily play an order of sounds after eachother.
+     */
   public static void playEffect(String name, boolean allowOverlap, int numSounds) {
-    if (!allowOverlap && effectsPlaying.contains(name))
+    if (!allowOverlap && effectsPlaying.contains(name)) {
       return;
+    }
 
     String path;
     if (numSounds > 1) {
@@ -130,12 +139,12 @@ public class AudioSystem {
       });
       effectsPlaying.add(name);
       clip.start();
-    } catch (LineUnavailableException | IOException e) {
-      Logger.error("Could not play sound effect", e);
-    } catch (UnsupportedAudioFileException e) {
-      Logger.error("The AudioSystem tried to play an unsupported audio file", e);
-    } catch (IllegalArgumentException e) {
-      Logger.error("Your system cannot play the specified audio file", e);
+    } catch (LineUnavailableException | IOException ex) {
+      Logger.error("Could not play sound effect", ex);
+    } catch (UnsupportedAudioFileException ex) {
+      Logger.error("The AudioSystem tried to play an unsupported audio file", ex);
+    } catch (IllegalArgumentException ex) {
+      Logger.error("Your system cannot play the specified audio file", ex);
     }
   }
 }

@@ -54,14 +54,11 @@ public class Player extends GameObject {
   public void move() {
     oldX = xpos;
     xpos += dx;
-    if (xpos < 1) {
-      xpos = 1;
-    }
+    xpos = Math.max(xpos,1);
+
     int boardWidth = Application.getBoard().getWidth();
     double playerMaxPosX = boardWidth - this.getWidth();
-    if (xpos > playerMaxPosX) {
-      xpos = playerMaxPosX;
-    }
+    xpos = Math.min(xpos, playerMaxPosX);
     AudioSystem.playEffect("step", false, 3);
     Logger.info("Moved " + this + " from x: " + oldX + " to x: " + xpos);
   }

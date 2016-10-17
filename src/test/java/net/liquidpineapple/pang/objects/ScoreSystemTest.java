@@ -25,7 +25,7 @@ public class ScoreSystemTest {
   public void constructorTest() {
     assertEquals(0, ScoreSystem.getScore());
     for (NumberToken token : ScoreSystem.getPlaces()) {
-      assertEquals(0, token.getcurrentnumber());
+      assertEquals(0, token.getCurrentnumber());
     }
   }
 
@@ -38,9 +38,9 @@ public class ScoreSystemTest {
     assertEquals(856, ScoreSystem.getScore());
 
     scoreSystem.displayscore();
-    assertEquals(6, ScoreSystem.getPlaces().get(0).getcurrentnumber());
-    assertEquals(5, ScoreSystem.getPlaces().get(1).getcurrentnumber());
-    assertEquals(8, ScoreSystem.getPlaces().get(2).getcurrentnumber());
+    assertEquals(6, ScoreSystem.getPlaces().get(0).getCurrentnumber());
+    assertEquals(5, ScoreSystem.getPlaces().get(1).getCurrentnumber());
+    assertEquals(8, ScoreSystem.getPlaces().get(2).getCurrentnumber());
   }
 
 }

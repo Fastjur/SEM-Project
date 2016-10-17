@@ -156,7 +156,7 @@ public class LevelEditor extends Screen {
   private void addBall(int ballSize) {
     int size = ballSize;
     Ball ball = new Ball(0,0, ballMovement, size);
-    int offset = (int) ball.getWidth()/2;
+    int offset = (int) ball.getWidth() / 2;
     ball.setXpos(currentMouseX - offset);
     ball.setYpos(currentMouseY - offset);
     addedObjects.add(ball);

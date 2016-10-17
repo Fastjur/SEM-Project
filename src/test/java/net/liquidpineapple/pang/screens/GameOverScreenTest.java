@@ -43,8 +43,8 @@ public class GameOverScreenTest {
     ScoreSystem.setScore(10);
     gameOverScreen.displayscore();
 
-    assertEquals(0, GameOverScreen.getPlaces().get(0).getcurrentnumber());
-    assertEquals(1, GameOverScreen.getPlaces().get(1).getcurrentnumber());
+    assertEquals(0, GameOverScreen.getPlaces().get(0).getCurrentnumber());
+    assertEquals(1, GameOverScreen.getPlaces().get(1).getCurrentnumber());
   }
 
 

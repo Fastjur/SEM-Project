@@ -53,9 +53,7 @@ public class ScoreSystem {
    */
   public static void addScore(int scoreIn) {
     score += scoreIn;
-    if (score > 999999999) {
-      score = 999999999;
-    }
+    score = Math.min(score, 999999999);
   }
 
   /**
@@ -75,13 +73,9 @@ public class ScoreSystem {
    * Resets the score when the player died.
    */
   public void resetScore() {
-    if (Places.size() == 0) {
-      Application.setScoreKeeper(new ScoreSystem());
-    } else {
-      for (NumberToken token : Places) {
-        token.setScoreToken(0);
-      }
-      setScore(0);
+    for (NumberToken token : Places) {
+      token.setScoreToken(0);
     }
+    setScore(0);
   }
 }

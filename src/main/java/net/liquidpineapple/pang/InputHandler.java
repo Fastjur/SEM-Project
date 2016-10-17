@@ -2,7 +2,7 @@ package net.liquidpineapple.pang;
 
 import net.liquidpineapple.pang.logger.Logger;
 
-import java.awt.*;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -80,7 +80,7 @@ public class InputHandler implements MouseListener, KeyListener {
     return keysPressed.contains(keyCode);
   }
 
-  public static void clearKeys(){
+  public static void clearKeys() {
     keysPressed.clear();
   }
 
