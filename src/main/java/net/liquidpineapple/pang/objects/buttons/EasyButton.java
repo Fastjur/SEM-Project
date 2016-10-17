@@ -18,7 +18,7 @@ public class EasyButton extends Button {
    * @param startY          - The Y position where the image should be on the screen.
    */
   public EasyButton(double startX, double startY) {
-    super("/images/singleplayer.png", startX, startY);
+    super("/images/easy.png", startX, startY);
   }
 
   /**

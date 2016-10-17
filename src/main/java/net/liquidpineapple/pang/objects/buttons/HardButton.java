@@ -18,7 +18,7 @@ public class HardButton extends Button {
    * @param startY          - The Y position where the image should be on the screen.
    */
   public HardButton(double startX, double startY) {
-    super("/images/singleplayer.png", startX, startY);
+    super("/images/hard.png", startX, startY);
   }
 
   /**
