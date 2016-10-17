@@ -2,7 +2,9 @@ package net.liquidpineapple.pang;
 
 import static junit.framework.TestCase.assertFalse;
 
-import net.liquidpineapple.pang.screens.Level;
+import net.liquidpineapple.pang.gui.ScoreSystem;
+import net.liquidpineapple.pang.gui.TimeSystem;
+import net.liquidpineapple.pang.screens.ControlsScreen;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,13 +21,15 @@ public class ApplicationTest {
   @Before
   public void setUp() throws Exception {
     app = new Application();
+    ScoreSystem.setScore(0);
+    TimeSystem.resetTime(1);
     app.start();
+
   }
 
   @Test
   public void testScreenChangeToLevel() throws Throwable {
-    Application.getBoard().changeScreen(
-        Level.createFromXml("src/main/resources/levels/level9000.xml"));
+    Application.getBoard().changeScreen(new ControlsScreen());
   }
 
   @Test

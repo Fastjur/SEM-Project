@@ -2,7 +2,7 @@ package net.liquidpineapple.pang;
 
 import net.liquidpineapple.pang.logger.Logger;
 
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -17,6 +17,7 @@ import java.util.HashSet;
  */
 public class InputHandler implements MouseListener, KeyListener {
 
+  private static HashSet<Integer> keysDown = new HashSet<>();
   private static HashSet<Integer> keysPressed = new HashSet<>();
   private static Point mousePos;
   private static int mouseButtonPressed;
@@ -27,11 +28,15 @@ public class InputHandler implements MouseListener, KeyListener {
 
   @Override
   public void keyPressed(KeyEvent event) {
-    keysPressed.add(event.getKeyCode());
+    keysDown.add(event.getKeyCode());
+    if (!keysPressed.contains(event.getKeyCode())) {
+      keysPressed.add(event.getKeyCode());
+    }
   }
 
   @Override
   public void keyReleased(KeyEvent event) {
+    keysDown.remove(event.getKeyCode());
     keysPressed.remove(event.getKeyCode());
   }
 
@@ -67,12 +72,20 @@ public class InputHandler implements MouseListener, KeyListener {
 
   }
 
+  public static boolean isKeyDown(int keyCode) {
+    return keysDown.contains(keyCode);
+  }
+
   public static boolean isKeyPressed(int keyCode) {
     return keysPressed.contains(keyCode);
   }
 
+  public static void clearKeys(){
+    keysPressed.clear();
+  }
+
   public static boolean isAnyKeyPressed() {
-    return !keysPressed.isEmpty();
+    return !keysDown.isEmpty();
   }
 
   public static boolean isLeftMouseButtonDown() {
@@ -80,11 +93,11 @@ public class InputHandler implements MouseListener, KeyListener {
   }
 
   public static boolean isRightMouseButtonDown() {
-    return mouseButtonPressed == MouseEvent.BUTTON2;
+    return mouseButtonPressed == MouseEvent.BUTTON3;
   }
 
   public static boolean isMiddleMouseButtonDown() {
-    return mouseButtonPressed == MouseEvent.BUTTON3;
+    return mouseButtonPressed == MouseEvent.BUTTON2;
   }
 
   public static Point getMousePos() {
@@ -92,7 +105,7 @@ public class InputHandler implements MouseListener, KeyListener {
   }
 
   public static void clearState() {
-    keysPressed.clear();
+    keysDown.clear();
     mouseButtonPressed = 0;
   }
 }

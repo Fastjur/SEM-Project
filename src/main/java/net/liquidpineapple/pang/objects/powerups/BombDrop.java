@@ -16,6 +16,7 @@ public class BombDrop extends Drop {
   public BombDrop(String textureLocation, double startX, double startY, double movX, double movY,
                   int score) {
     super(textureLocation, startX, startY, movX, movY, score);
+    this.collectSound = "genericPowerup";
   }
 
 

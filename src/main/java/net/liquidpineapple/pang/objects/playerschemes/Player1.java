@@ -24,15 +24,15 @@ public class Player1 implements PlayerScheme {
   }
 
   public boolean leftPressed() {
-    return InputHandler.isKeyPressed(KeyEvent.VK_A);
+    return InputHandler.isKeyDown(KeyEvent.VK_A);
   }
 
   public boolean rightPressed() {
-    return InputHandler.isKeyPressed(KeyEvent.VK_D);
+    return InputHandler.isKeyDown(KeyEvent.VK_D);
   }
 
   public boolean shootPressed() {
-    return InputHandler.isKeyPressed(KeyEvent.VK_W);
+    return InputHandler.isKeyDown(KeyEvent.VK_W);
   }
 
   public String getName() {

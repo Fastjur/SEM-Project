@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.AudioSystem;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.logger.Logger;
@@ -59,6 +60,7 @@ public class Player extends GameObject {
     if (xpos > playerMaxPosX) {
       xpos = playerMaxPosX;
     }
+    AudioSystem.playEffect("step", false, 3);
   }
 
   @Override
@@ -93,6 +95,7 @@ public class Player extends GameObject {
     if (playerScheme.shootPressed() && !shootheld && activeHooks < maximumHooks) {
       HookAndRope newRope = new HookAndRope(getXpos(), 0, this, hookRemoveDelay);
       Application.getBoard().getCurrentScreen().objectList.add(newRope);
+      AudioSystem.playEffect("lazor");
       activeHooks++;
       shootheld = true;
     }
@@ -110,6 +113,7 @@ public class Player extends GameObject {
         LifeSystem.loseLife();
       }
       isHit = true;
+      AudioSystem.playEffect("hit");
     }
   }
 

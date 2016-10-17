@@ -1,5 +1,8 @@
 package net.liquidpineapple.pang.screens;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import net.liquidpineapple.pang.objects.GameObject;
 
 
@@ -18,7 +21,12 @@ import java.util.LinkedList;
 public abstract class Screen {
 
   public LinkedList<GameObject> objectList;
+  @Setter
   protected Image backgroundImage;
+  @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
+  @Getter
+  @Setter
+  private int difficulty;
 
 
   /**
