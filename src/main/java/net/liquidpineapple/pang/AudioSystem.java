@@ -96,9 +96,16 @@ public class AudioSystem {
     playEffect(path, true, 1);
   }
 
+  /**
+   * Plays a sound effect.
+   * @param name The name of the sound effect
+   * @param allowOverlap Should the sound be allowed to play multiple times at the same time?
+   * @param numSounds The number of different versions of this sound effect to choose from
+   */
   public static void playEffect(String name, boolean allowOverlap, int numSounds) {
-    if (!allowOverlap && effectsPlaying.contains(name))
+    if (!allowOverlap && effectsPlaying.contains(name)) {
       return;
+    }
 
     String path;
     if (numSounds > 1) {
@@ -117,8 +124,8 @@ public class AudioSystem {
         inputStream.read(buffer);
         cachedEffects.put(path, buffer);
         Logger.info("Loaded sound file " + path);
-      } catch (IOException e) {
-        Logger.error("An exception was thrown while reading a sound file", e);
+      } catch (IOException ex) {
+        Logger.error("An exception was thrown while reading a sound file", ex);
       }
     }
 
@@ -141,12 +148,12 @@ public class AudioSystem {
           }
         });
         clip.start();
-      } catch (UnsupportedAudioFileException e) {
-        Logger.error("The AudioSystem tried to play an unsupported audio file", e);
-      } catch (LineUnavailableException | IOException e) {
-        e.printStackTrace();
-      } catch (IllegalArgumentException e) {
-        Logger.error("Your system cannot play the specified audio file", e);
+      } catch (UnsupportedAudioFileException ex) {
+        Logger.error("The AudioSystem tried to play an unsupported audio file", ex);
+      } catch (LineUnavailableException | IOException ex) {
+        ex.printStackTrace();
+      } catch (IllegalArgumentException ex) {
+        Logger.error("Your system cannot play the specified audio file", ex);
       }
     }).start();
   }
