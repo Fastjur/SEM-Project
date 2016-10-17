@@ -3,7 +3,6 @@ package net.liquidpineapple.pang.gui;
 import lombok.Getter;
 import lombok.Setter;
 
-import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
 import java.util.ArrayList;
