@@ -19,8 +19,8 @@ public class DifficultyScreen extends Screen {
       ex.printStackTrace();
     }
 
-    objectList.add(new EasyButton(200, 220));
-    objectList.add(new MediumButton(200, 300));
-    objectList.add(new HardButton(200, 380));
+    objectList.add(new EasyButton(200, 250));
+    objectList.add(new MediumButton(200, 350));
+    objectList.add(new HardButton(200, 450));
   }
 }
