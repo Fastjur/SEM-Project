@@ -85,7 +85,7 @@ public class XmlHandler {
       Transformer transformer = transformerFactory.newTransformer();
       DOMSource source = new DOMSource(doc);
       StreamResult result = new StreamResult(new File(
-          LevelScreen.class.getResource("/levels/custom/level1.xml").getFile()));
+          LevelScreen.class.getResource("/levels/customlevel/level1.xml").getFile()));
       transformer.transform(source, result);
 
     } catch (ParserConfigurationException pce) {
