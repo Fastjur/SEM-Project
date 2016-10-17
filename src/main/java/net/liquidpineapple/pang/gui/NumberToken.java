@@ -9,6 +9,7 @@ import net.liquidpineapple.pang.objects.GameObject;
  * Created by Erik on 12-9-2016.
  */
 public class NumberToken extends GameObject {
+
   @Getter
   private int currentnumber;
 
@@ -21,7 +22,9 @@ public class NumberToken extends GameObject {
    * @param number - index of the number.
    */
   public void setScoreToken(int number) {
-    changeImage("/sprites/numbers/hud_" + number + ".png");
+    if (number != currentnumber) {
+      changeImage("/sprites/numbers/hud_" + number + ".png");
+    }
     currentnumber = number;
   }
 }
