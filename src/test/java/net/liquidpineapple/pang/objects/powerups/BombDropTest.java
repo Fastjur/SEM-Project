@@ -1,5 +1,7 @@
 package net.liquidpineapple.pang.objects.powerups;
 
+import static org.junit.Assert.assertFalse;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.BallMovement;
@@ -10,20 +12,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-
 /**
  * Created by Erik on 22-9-2016.
  */
 public class BombDropTest {
 
-  private static final String PROPERTIES_LOCATION = "/config.properties";
-
   private Application app;
 
   @Before
   public void setUp() throws Exception {
-    app = new Application(PROPERTIES_LOCATION);
+    app = new Application();
     app.start();
   }
 

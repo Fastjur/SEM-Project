@@ -8,8 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
-
 /**
  * @author Jurriaan Den Toonder
  * @date 2016/09/06.
@@ -17,17 +15,10 @@ import java.io.FileNotFoundException;
 public class ApplicationTest {
 
   private Application app;
-  private static final String PROPERTIES_LOCATION = "/config.properties";
 
   @Before
   public void setUp() throws Exception {
-    app = new Application(PROPERTIES_LOCATION);
-    app.start();
-  }
-
-  @Test(expected = FileNotFoundException.class)
-  public void testWrongProperties() throws Throwable {
-    Application app = new Application("test");
+    app = new Application();
     app.start();
   }
 

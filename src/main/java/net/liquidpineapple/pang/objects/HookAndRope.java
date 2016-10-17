@@ -1,10 +1,10 @@
 package net.liquidpineapple.pang.objects;
 
-import net.liquidpineapple.pang.Application;
-import net.liquidpineapple.pang.gui.TimeSystem;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.gui.TimeSystem;
 
 /**
  * Created by Tim on 9-9-2016.

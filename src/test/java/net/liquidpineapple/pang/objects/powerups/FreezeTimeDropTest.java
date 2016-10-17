@@ -16,13 +16,11 @@ import static org.junit.Assert.assertEquals;
  */
 public class FreezeTimeDropTest {
 
-  private static final String PROPERTIES_LOCATION = "/config.properties";
-
   private Application app;
 
   @Before
   public void setUp() throws Exception {
-    app = new Application(PROPERTIES_LOCATION);
+    app = new Application();
     app.start();
   }
 

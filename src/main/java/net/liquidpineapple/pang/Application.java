@@ -12,11 +12,8 @@ import net.liquidpineapple.pang.objects.DropRandomizer;
 
 import java.awt.EventQueue;
 import java.awt.Image;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
-import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -29,7 +26,6 @@ import javax.swing.WindowConstants;
  */
 public class Application extends JFrame {
 
-  private static String PROPERTIES_LOCATION = "/config.properties";
   private static final int UPDATE_DELAY = 10;
   private static final int DRAW_DELAY = 5;
 
@@ -37,36 +33,26 @@ public class Application extends JFrame {
   public static final boolean cheatMode = false;
 
   public static boolean multiplayer;
-  public static HashMap<String, Image> imageCache = new HashMap<String, Image>();
+  public static HashMap<String, Image> imageCache = new HashMap<>();
   public static LifeSystem lifeSystem;
 
   @Getter
   private static Board board;
 
   @Getter
-
   @Setter
   private static ScoreSystem scoreKeeper;
 
-  private Properties properties;
+  private PropertiesHandler propertiesHandler = PropertiesHandler.getInstance();
 
   /**
    * Constructor for the Application.
    *
-   * @param propertiesLocation {@link String} URL to resource file with configuration settings
    * @throws IOException Thrown when properties file can not be read
    */
-  public Application(String propertiesLocation) throws IOException {
+  public Application() throws IOException {
     super();
     Logger.info("Starting application...");
-    InputStream stream = this.getClass().getResourceAsStream(propertiesLocation);
-    if (stream != null) {
-      properties = new Properties();
-      properties.load(stream);
-    } else {
-      String err = "Could not find resource file: " + propertiesLocation;
-      throw new FileNotFoundException(err);
-    }
   }
 
   /**
@@ -75,10 +61,10 @@ public class Application extends JFrame {
    * @throws IOException Thrown when resource file containing properties can not be read
    */
   public void start() throws IOException {
-    Integer width = Integer.valueOf(properties.getProperty("application-width"));
-    Integer height = Integer.valueOf(properties.getProperty("application-height"));
+    Integer width = Integer.valueOf(propertiesHandler.getProperty("application-width"));
+    Integer height = Integer.valueOf(propertiesHandler.getProperty("application-height"));
 
-    String name = properties.getProperty("application-name");
+    String name = propertiesHandler.getProperty("application-name");
     setTitle(name);
 
     setResizable(false);
@@ -187,7 +173,7 @@ public class Application extends JFrame {
     EventQueue.invokeLater(() -> {
       Application app = null;
       try {
-        app = new Application(PROPERTIES_LOCATION);
+        app = new Application();
         app.start();
       } catch (IOException ex) {
         Logger.error(ex.getMessage(), ex);

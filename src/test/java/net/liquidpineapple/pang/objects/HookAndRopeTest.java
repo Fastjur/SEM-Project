@@ -16,8 +16,6 @@ import org.junit.Test;
  */
 public class HookAndRopeTest {
 
-  private static final String PROPERTIES_LOCATION = "/config.properties";
-
   private HookAndRope hookAndRope;
   private Player player;
   private static final int XCOORD = 400;
@@ -31,7 +29,7 @@ public class HookAndRopeTest {
    */
   @Before
   public void setUp() throws Exception {
-    app = new Application(PROPERTIES_LOCATION);
+    app = new Application();
     app.start();
     player = new Player(0, 0, new Player1());
     hookAndRope = new HookAndRope(XCOORD, MAXY, player, 0);
