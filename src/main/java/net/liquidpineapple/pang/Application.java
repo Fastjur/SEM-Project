@@ -102,12 +102,12 @@ public class Application extends JFrame {
 
   private void startRunnables() {
     updateRunnable = new UpdateRunnable(board, scoreSystem, lifeSystem);
-    updateThread = new Thread(updateRunnable);
+    updateThread = new Thread(updateRunnable, "UpdateLoop");
     Logger.info("Starting update Thread: " + updateThread);
     updateThread.start();
 
     drawRunnable = new DrawRunnable(board);
-    drawThread = new Thread(drawRunnable);
+    drawThread = new Thread(drawRunnable, "DrawLoop");
     Logger.info("Starting draw Thread: " + drawThread);
     drawThread.start();
   }
