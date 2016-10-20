@@ -4,37 +4,69 @@
 	<objects>
     <ball>
       <position>
-        <x>100</x>
-        <y>100</y>
+        <x>138</x>
+        <y>222</y>
       </position>
       <direction>LEFT_MOVEMENT</direction>
       <size>4</size>
     </ball>
     <ball>
       <position>
-        <x>700</x>
-        <y>200</y>
+        <x>228</x>
+        <y>261</y>
       </position>
       <direction>LEFT_MOVEMENT</direction>
-      <size>4</size>
-    </ball>
-    <ball>
-      <position>
-        <x>400</x>
-        <y>150</y>
-      </position>
-      <direction>RIGHT_MOVEMENT</direction>
       <size>3</size>
+    </ball>
+    <ball>
+      <position>
+        <x>268</x>
+        <y>258</y>
+      </position>
+      <direction>LEFT_MOVEMENT</direction>
+      <size>3</size>
+    </ball>
+    <ball>
+      <position>
+        <x>312</x>
+        <y>275</y>
+      </position>
+      <direction>LEFT_MOVEMENT</direction>
+      <size>2</size>
+    </ball>
+    <ball>
+      <position>
+        <x>342</x>
+        <y>278</y>
+      </position>
+      <direction>LEFT_MOVEMENT</direction>
+      <size>2</size>
+    </ball>
+    <ball>
+      <position>
+        <x>389</x>
+        <y>305</y>
+      </position>
+      <direction>LEFT_MOVEMENT</direction>
+      <size>1</size>
+    </ball>
+    <ball>
+      <position>
+        <x>409</x>
+        <y>306</y>
+      </position>
+      <direction>LEFT_MOVEMENT</direction>
+      <size>1</size>
     </ball>
         <player>
             <position>
-                <x>300</x>
+                <x>450</x>
                 <y>475</y>
             </position>
         </player>
 		<player>
             <position>
-                <x>350</x>
+                <x>500</x>
                 <y>475</y>
             </position>
         </player>
