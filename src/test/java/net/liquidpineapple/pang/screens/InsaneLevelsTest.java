@@ -14,38 +14,37 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
- * Created by Tim on 14-10-2016.
+ * Created by Tim on 20-10-2016.
  */
-
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(XmlHandler.class)
-public class SinglePlayerLevelsTest {
+public class InsaneLevelsTest {
 
-  private SinglePlayerLevels singlePlayerLevels;
+  private InsaneLevels insaneLevels;
 
   @Before
-  public void setUp() throws Exception{
+  public void setUp() throws Exception {
     PowerMockito.mockStatic(XmlHandler.class);
     LevelScreen level = new LevelScreen();
     level.setDifficulty(1);
     Mockito.when(XmlHandler.createFromXml(Mockito.anyString())).thenReturn(level);
-    singlePlayerLevels = new SinglePlayerLevels();
+    insaneLevels = new InsaneLevels();
   }
 
   @Test
   public void testArrayIsFilled() throws Exception {
 
-    assertTrue(singlePlayerLevels.createIterator().next() != null);
+    assertTrue(insaneLevels.createIterator().next() != null);
   }
 
   @Test
   public void testArrayContainsLevels() {
-    assertTrue(singlePlayerLevels.createIterator().next() instanceof LevelScreen);
+    assertTrue(insaneLevels.createIterator().next() instanceof LevelScreen);
   }
 
   @Test
-  public void testLevelContainsData(){
-    assertEquals(1,((LevelScreen)singlePlayerLevels.createIterator().next()).getDifficulty());
+  public void testLevelContainsData() {
+    assertEquals(1, ((LevelScreen) insaneLevels.createIterator().next()).getDifficulty());
   }
 
 }
