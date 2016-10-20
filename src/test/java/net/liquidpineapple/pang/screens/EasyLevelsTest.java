@@ -23,6 +23,9 @@ public class EasyLevelsTest {
 
   private EasyLevels easyLevels;
 
+  /**
+   * set up tests.
+   */
   @Before
   public void setUp() throws Exception {
     PowerMockito.mockStatic(XmlHandler.class);

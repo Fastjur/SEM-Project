@@ -10,9 +10,15 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * Created by Jaap-Jan on 17-10-2016.
+ * Class that represents the screen for the difficulty buttons.
+ *
+ * @author Jaap-Jan
+ * @date 17-10-2016
  */
 public class DifficultyScreen extends Screen {
+  /**
+   * Screen with the difficulty buttons.
+   */
   public DifficultyScreen() {
     try {
       backgroundImage = ImageIO.read(LevelScreen.class.getResource("/sprites/titlebg.png"));

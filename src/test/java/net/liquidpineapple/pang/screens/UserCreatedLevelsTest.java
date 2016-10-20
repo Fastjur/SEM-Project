@@ -22,6 +22,9 @@ public class UserCreatedLevelsTest {
 
   private UserCreatedLevels userCreatedLevels;
 
+  /**
+   * sets up tests.
+   */
   @Before
   public void setUp() throws Exception {
     PowerMockito.mockStatic(XmlHandler.class);

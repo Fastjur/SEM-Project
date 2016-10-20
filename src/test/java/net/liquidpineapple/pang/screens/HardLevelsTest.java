@@ -22,6 +22,9 @@ public class HardLevelsTest {
 
   private HardLevels hardLevels;
 
+  /**
+   * sets up tests.
+   */
   @Before
   public void setUp() throws Exception {
     PowerMockito.mockStatic(XmlHandler.class);

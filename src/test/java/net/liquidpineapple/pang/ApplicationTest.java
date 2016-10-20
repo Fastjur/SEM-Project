@@ -24,6 +24,9 @@ public class ApplicationTest {
   private Application app;
   private static final String PROPERTIES_LOCATION = "/config.properties";
 
+  /**
+   * Sets up the environment for the tests.
+   */
   @Before
   public void setUp() throws Exception {
     app = new Application(PROPERTIES_LOCATION);

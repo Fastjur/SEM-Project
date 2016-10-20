@@ -22,6 +22,9 @@ public class InsaneLevelsTest {
 
   private InsaneLevels insaneLevels;
 
+  /**
+   * sets up tests.
+   */
   @Before
   public void setUp() throws Exception {
     PowerMockito.mockStatic(XmlHandler.class);
