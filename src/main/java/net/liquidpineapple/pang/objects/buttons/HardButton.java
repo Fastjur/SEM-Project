@@ -6,7 +6,7 @@ import net.liquidpineapple.pang.screens.ControlsScreen;
 import net.liquidpineapple.pang.screens.HardLevels;
 
 /**
- * Class that represents the object for the SinglePlayer button.
+ * Class that represents the object for the hard button.
  *
  * @author Jaap-Jan
  * @date 17-10-2016
@@ -23,7 +23,7 @@ public class HardButton extends Button {
   }
 
   /**
-   * Method that starts a SinglePlayer game when the button is clicked.
+   * Method that starts a hard game when the button is clicked.
    */
   @Override
   public void onClick() {
