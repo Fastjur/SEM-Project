@@ -13,11 +13,10 @@ import org.junit.Test;
 public class WinScreenTest {
 
   private Application app;
-  private static String PROPERTIES_LOCATION = "/config.properties";
 
   @Before
   public void setUp() throws Exception {
-    app = new Application(PROPERTIES_LOCATION);
+    app = new Application();
     app.start();
   }
 

@@ -7,6 +7,7 @@ import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
 import net.liquidpineapple.pang.objects.playerschemes.Player1;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,6 @@ import org.junit.Test;
  */
 public class HeartDropTest {
 
-  private static final String PROPERTIES_LOCATION = "/config.properties";
   private Drop drop1Live = new HeartDrop("/sprites/drops/heart.png", 0, 0, 0, 1, 0, 1);
   private Drop droplose2Live = new HeartDrop("/sprites/drops/heart.png", 0, 0, 0, 1, 0, -2);
   private Player testplayer = new Player(0,0,new Player1());
@@ -25,7 +25,7 @@ public class HeartDropTest {
 
   @Before
   public void setUp() throws Exception {
-    app = new Application(PROPERTIES_LOCATION);
+    app = new Application();
     app.start();
   }
 

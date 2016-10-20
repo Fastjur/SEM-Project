@@ -20,8 +20,6 @@ public class Ball extends GameObject {
   private int ballSize;
   private double movX;
   private double movY;
-  private double oldX;
-  private double oldY;
 
 
   private static final String textureLocationBlue = "/sprites/Balls/blue.png";
@@ -100,13 +98,9 @@ public class Ball extends GameObject {
    * Calculates and sets the next position the ball should be drawn in.
    */
   public void move() {
-    oldX = xpos;
-    oldY = ypos;
     xpos += movX;
     movY += 1 / 25.0;
     ypos += movY;
-    Logger.info("Moved " + this.toString() + " from (" + oldX + ", " + oldY + ") to (" + xpos
-        + ", " + ypos + ")");
   }
 
   /**

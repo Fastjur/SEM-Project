@@ -17,7 +17,6 @@ import org.junit.Test;
  */
 public class DropTest {
 
-  private static final String PROPERTIES_LOCATION = "/config.properties";
   private Player testplayer = new Player(0,0,new Player1());
 
   private static final double DELTA = 0.01;
@@ -30,7 +29,7 @@ public class DropTest {
 
   @Before
   public void setUp() throws Exception {
-    app = new Application(PROPERTIES_LOCATION);
+    app = new Application();
     app.start();
   }
 

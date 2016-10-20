@@ -8,7 +8,7 @@
 [![codecov](https://codecov.io/gh/Fastjur/SEM-Project/branch/master/graph/badge.svg?token=3WonhjrCjs)](https://codecov.io/gh/Fastjur/SEM-Project)
 
 Current coverage graph:  
-![Graph](https://codecov.io/gh/Fastjur/SEM-Project/branch/feature%2Fcodecov-token/graphs/tree.svg?token=3WonhjrCjs)
+![Graph](https://codecov.io/gh/Fastjur/SEM-Project/branch/master/graph/tree.svg)
 
 ---
 

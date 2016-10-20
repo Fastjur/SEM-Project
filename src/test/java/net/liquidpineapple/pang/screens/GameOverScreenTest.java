@@ -16,11 +16,10 @@ import org.junit.Test;
 public class GameOverScreenTest {
 
   private Application app;
-  private static final String PROPERTIES_LOCATION = "/config.properties";
 
   @Before
   public void setUp() throws Exception {
-    app = new Application(PROPERTIES_LOCATION);
+    app = new Application();
     app.start();
   }
 

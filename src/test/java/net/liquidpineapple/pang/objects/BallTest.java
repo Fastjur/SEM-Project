@@ -9,7 +9,6 @@ import org.junit.Test;
 
 public class BallTest {
 
-  private static final String PROPERTIES_LOCATION = "/config.properties";
   private Application app;
 
   private Ball testBallLeft = new Ball(0, 0, BallMovement.LEFT_MOVEMENT, 4);
@@ -20,7 +19,7 @@ public class BallTest {
 
   @Before
   public void setUp() throws Exception {
-    app = new Application(PROPERTIES_LOCATION);
+    app = new Application();
     app.start();
   }
 
