@@ -7,7 +7,7 @@ public class HardLevels extends LevelIterator {
   private static final String DIRECTORY = "levels/hardlevel";
 
   /**
-   * Method to fill the levels array with easy levels.
+   * Method to fill the levels array with hard levels.
    */
   public HardLevels() {
     super.initArray(DIRECTORY);

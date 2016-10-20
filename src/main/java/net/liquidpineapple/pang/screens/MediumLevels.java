@@ -7,7 +7,7 @@ public class MediumLevels extends LevelIterator {
   private static final String DIRECTORY = "levels/mediumlevel";
 
   /**
-   * Method to fill the levels array with easy levels.
+   * Method to fill the levels array with medium levels.
    */
   public MediumLevels() {
     super.initArray(DIRECTORY);
