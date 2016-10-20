@@ -1,5 +1,8 @@
 package net.liquidpineapple.pang;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
@@ -18,9 +21,6 @@ import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
-
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * The main application, extends {@link JFrame}.
@@ -136,6 +136,19 @@ public class Application extends JFrame {
    * @param args Command line arguments
    */
   public static void main(String[] args) {
+    handleArgs(args);
+
+    EventQueue.invokeLater(() -> {
+      try {
+        app = new Application();
+        app.start();
+      } catch (IOException ex) {
+        Logger.error(ex.getMessage(), ex);
+      }
+    });
+  }
+
+  private static void handleArgs(String[] args) {
     LoggerTypes type = LoggerTypes.INFO;
     if (args.length > 0) {
       String loggerLevel = args[0].toUpperCase();
@@ -150,16 +163,6 @@ public class Application extends JFrame {
       }
     }
     Logger.setLevel(type);
-
-    EventQueue.invokeLater(() -> {
-      app = null;
-      try {
-        app = new Application();
-        app.start();
-      } catch (IOException ex) {
-        Logger.error(ex.getMessage(), ex);
-      }
-    });
   }
 
   /**
