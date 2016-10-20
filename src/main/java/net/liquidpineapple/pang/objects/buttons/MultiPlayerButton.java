@@ -2,9 +2,7 @@ package net.liquidpineapple.pang.objects.buttons;
 
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
-import net.liquidpineapple.pang.screens.ControlsScreen;
 import net.liquidpineapple.pang.screens.DifficultyScreen;
-import net.liquidpineapple.pang.screens.MultiPlayerLevels;
 
 /**
  * Class that represents the object for the SinglePlayer button.
