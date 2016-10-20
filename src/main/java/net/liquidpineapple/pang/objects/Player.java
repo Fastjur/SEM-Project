@@ -21,7 +21,6 @@ public class Player extends GameObject {
 
   private boolean shootheld = false;
   private boolean isHit = false;
-  private double oldX;
   private PlayerScheme playerScheme;
   public int activeHooks = 0;
   public int maximumHooks = 1;
@@ -52,7 +51,6 @@ public class Player extends GameObject {
    * Method that moves the player.
    */
   public void move() {
-    oldX = xpos;
     xpos += dx;
     if (xpos < 1) {
       xpos = 1;
@@ -63,7 +61,6 @@ public class Player extends GameObject {
       xpos = playerMaxPosX;
     }
     AudioSystem.playEffect("step", false, 3);
-    Logger.info("Moved " + this + " from x: " + oldX + " to x: " + xpos);
   }
 
   @Override

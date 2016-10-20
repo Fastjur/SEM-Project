@@ -101,3 +101,5 @@ crashlytics.properties
 crashlytics-build.properties
 
 target/
+
+logs/
