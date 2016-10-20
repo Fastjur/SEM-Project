@@ -3,7 +3,6 @@ package net.liquidpineapple.pang.objects.buttons;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.screens.ControlsScreen;
-import net.liquidpineapple.pang.screens.EasyLevels;
 import net.liquidpineapple.pang.screens.InsaneLevels;
 
 /**
