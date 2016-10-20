@@ -1,6 +1,6 @@
 <level>
 	<background>bg.png</background>
-  <difficulty>1</difficulty>
+  <difficulty>3</difficulty>
 	<objects>
 		<ball>
 			<position>
@@ -8,7 +8,7 @@
 				<y>100</y>
 			</position>
 			<direction>LEFT_MOVEMENT</direction>
-			<size>2</size>
+			<size>4</size>
 		</ball>
         <player>
             <position>

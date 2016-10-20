@@ -12,19 +12,19 @@
     </ball>
     <ball>
       <position>
-        <x>700</x>
+        <x>500</x>
         <y>200</y>
       </position>
-      <direction>LEFT_MOVEMENT</direction>
-      <size>4</size>
+      <direction>RIGHT_MOVEMENT</direction>
+      <size>3</size>
     </ball>
     <ball>
       <position>
         <x>400</x>
         <y>150</y>
       </position>
-      <direction>RIGHT_MOVEMENT</direction>
-      <size>3</size>
+      <direction>LEFT_MOVEMENT</direction>
+      <size>1</size>
     </ball>
         <player>
             <position>

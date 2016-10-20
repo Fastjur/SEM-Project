@@ -1,18 +1,26 @@
 <level>
 	<background>bg.png</background>
-  <difficulty>1</difficulty>
+  <difficulty>2</difficulty>
 	<objects>
 		<ball>
 			<position>
-				<x>100</x>
-				<y>100</y>
+				<x>550</x>
+				<y>175</y>
 			</position>
 			<direction>LEFT_MOVEMENT</direction>
-			<size>2</size>
+			<size>4</size>
+		</ball>
+		<ball>
+			<position>
+				<x>100</x>
+				<y>250</y>
+			</position>
+			<direction>RIGHT_MOVEMENT</direction>
+			<size>1</size>
 		</ball>
         <player>
             <position>
-                <x>300</x>
+                <x>700</x>
                 <y>475</y>
             </position>
         </player>
