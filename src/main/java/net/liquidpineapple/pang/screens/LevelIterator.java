@@ -11,6 +11,7 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -52,10 +53,8 @@ public abstract class LevelIterator {
           levels.add(levelScreen);
         } catch (IOException ioEx) {
           Logger.error("File not found", ioEx);
-        } catch (ParserConfigurationException parserEx) {
-          Logger.error(parserEx.getStackTrace().toString(), parserEx);
-        } catch (SAXException saxEx) {
-          Logger.error(saxEx.getStackTrace().toString(), saxEx);
+        } catch (ParserConfigurationException | SAXException parserEx) {
+          Logger.error(Arrays.toString(parserEx.getStackTrace()), parserEx);
         }
       }
     }
@@ -99,10 +98,8 @@ public abstract class LevelIterator {
           levels.add(newScreen);
         } catch (IOException ioEx) {
           Logger.error("File not found", ioEx);
-        } catch (ParserConfigurationException parserEx) {
-          Logger.error(parserEx.getStackTrace().toString(), parserEx);
-        } catch (SAXException saxEx) {
-          Logger.error(saxEx.getStackTrace().toString(), saxEx);
+        } catch (ParserConfigurationException | SAXException parserEx) {
+          Logger.error(Arrays.toString(parserEx.getStackTrace()), parserEx);
         }
       }
     }

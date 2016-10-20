@@ -12,7 +12,6 @@ import org.junit.Test;
 public class DropRandomizerTest {
 
   private static Application app;
-  private static final String CONFIG_PROPERTIES = "/config.properties";
 
   /**
    * Setup test.
@@ -20,7 +19,7 @@ public class DropRandomizerTest {
    */
   @Before
   public void setUp() throws Throwable {
-    app = new Application(CONFIG_PROPERTIES);
+    app = new Application();
     app.start();
     DropRandomizer.getInstance();
   }

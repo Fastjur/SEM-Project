@@ -12,20 +12,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
 /**
  * Created by Erik on 22-9-2016.
  */
 public class BombDropTest {
 
-  private static final String PROPERTIES_LOCATION = "/config.properties";
-
   private Application app;
 
   @Before
   public void setUp() throws Exception {
-    app = new Application(PROPERTIES_LOCATION);
+    app = new Application();
     app.start();
   }
 
