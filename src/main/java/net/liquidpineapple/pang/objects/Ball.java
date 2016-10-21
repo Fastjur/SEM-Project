@@ -77,15 +77,10 @@ public class Ball extends GameObject {
     super.doUpdate();
 
     move();
-    if (ypos + this.getHeight() > Application.getBoard().getHeight()) {
-      ypos = Application.getBoard().getHeight() - this.getHeight();
-    }
-    if (xpos + this.getWidth() > Application.getBoard().getWidth()) {
-      xpos = Application.getBoard().getWidth() - this.getWidth();
-    }
-    if (xpos < 0) {
-      xpos = 0;
-    }
+    ypos = Math.min(ypos + this.getHeight(), Application.getBoard().getHeight()) - this.getHeight();
+    xpos = Math.min(xpos + this.getWidth(), Application.getBoard().getWidth()) - this.getWidth();
+    xpos = Math.max(xpos, 0);
+
     if (xpos == 0 || xpos + this.getWidth() == Application.getBoard().getWidth()) {
       movX = -movX;
     }

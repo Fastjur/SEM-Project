@@ -19,10 +19,7 @@ public class FreezeTimeDrop extends Drop {
                         double movY, int score, int timeFrozen) {
     super(textureLocation, startX, startY, movX, movY, score);
     this.collectSound = "genericPowerup";
-    this.timeFrozen = timeFrozen;
-    if ( timeFrozen < 0) {
-      this.timeFrozen = 0;
-    }
+    this.timeFrozen = Math.max(timeFrozen ,0);
   }
 
 

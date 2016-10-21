@@ -94,6 +94,7 @@ public class AudioSystem {
 
   /**
    * Method to play a soundeffect.
+   *
    * @param path - path to the effect.
    */
   public static void playEffect(String path) {
@@ -101,17 +102,11 @@ public class AudioSystem {
   }
 
   /**
-<<<<<<< HEAD
    * Plays a sound effect.
-   * @param name The name of the sound effect
-   * @param allowOverlap Should the sound be allowed to play multiple times at the same time?
-   * @param numSounds The number of different versions of this sound effect to choose from
-=======
-   * overloaded method to play a soundeffect.
-   * @param name - name of the soundeffect.
-   * @param allowOverlap - boolean indicating if there can be overlap in sounds
-   * @param numSounds - number of effects
->>>>>>> master
+   *
+   * @param name         The name of the sound file you want to play
+   * @param allowOverlap Decides if this sound can play while the same sound is already playing
+   * @param numSounds    The number of different versions of this sound effect to choose from.
    */
   public static void playEffect(String name, boolean allowOverlap, int numSounds) {
     if (!allowOverlap && effectsPlaying.contains(name)) {

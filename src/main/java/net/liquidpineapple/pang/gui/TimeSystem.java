@@ -64,9 +64,7 @@ public class TimeSystem {
   public static void resetTime(int inTime) {
     time = inTime;
     frozen = 0;
-    if (time > 999) {
-      time = 999;
-    }
+    time = Math.min(time, 999);
     if (timePlaces.size() == 0) {
       timePlaces.add(new NumberToken(755, 52));
       timePlaces.add(new NumberToken(723, 52));
