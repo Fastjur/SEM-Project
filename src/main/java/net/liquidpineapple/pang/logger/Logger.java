@@ -26,7 +26,7 @@ public class Logger {
   private static Logger instance = new Logger();
 
   private static int level;
-  private static final String DATE_FORMAT = "dd-MM-yyyy_hh:mm:ss";
+  private static final String DATE_FORMAT = "dd-MM-yyyy_hh-mm-ss";
   private static PrintWriter outWriter;
 
   /**
