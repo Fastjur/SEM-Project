@@ -22,6 +22,8 @@ import java.util.regex.Pattern;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+
+
 /**
  * Created by Tim on 10-10-2016.
  * Class that creates an iterator over the levels
@@ -83,7 +85,8 @@ public abstract class LevelIterator {
   private void loadArrayIde(final String directory) {
     //get the files from the directory
     File[] files = new File(Application.class.getResource("/" + directory).getFile()).listFiles();
-    Pattern pattern = Pattern.compile("levels\\\\((single|multi)player|custom)\\\\level\\d*.xml");
+    Pattern pattern = Pattern.compile("levels\\\\(easy|medium|hard|insane|custom)level"
+        + "\\\\level\\d*.xml");
 
     for (File file : files) {
       if (!file.isDirectory()) {

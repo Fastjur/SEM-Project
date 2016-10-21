@@ -14,37 +14,40 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
- * Created by Tim on 14-10-2016.
+ * Created by Tim on 20-10-2016.
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(XmlHandler.class)
-public class MultiPlayerLevelsTest {
+public class HardLevelsTest {
 
-  private MultiPlayerLevels multiPlayerLevels;
+  private HardLevels hardLevels;
 
+  /**
+   * sets up tests.
+   */
   @Before
   public void setUp() throws Exception {
     PowerMockito.mockStatic(XmlHandler.class);
     LevelScreen level = new LevelScreen();
     level.setDifficulty(1);
     Mockito.when(XmlHandler.createFromXml(Mockito.anyString())).thenReturn(level);
-    multiPlayerLevels = new MultiPlayerLevels();
+    hardLevels = new HardLevels();
   }
 
   @Test
   public void testArrayIsFilled() throws Exception {
 
-    assertTrue(multiPlayerLevels.createIterator().next() != null);
+    assertTrue(hardLevels.createIterator().next() != null);
   }
 
   @Test
   public void testArrayContainsLevels() {
-    assertTrue(multiPlayerLevels.createIterator().next() instanceof LevelScreen);
+    assertTrue(hardLevels.createIterator().next() instanceof LevelScreen);
   }
 
   @Test
   public void testLevelContainsData() {
-    assertEquals(1, ((LevelScreen) multiPlayerLevels.createIterator().next()).getDifficulty());
+    assertEquals(1, ((LevelScreen) hardLevels.createIterator().next()).getDifficulty());
   }
 
 }

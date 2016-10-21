@@ -92,13 +92,24 @@ public class AudioSystem {
     }
   }
 
+  /**
+   * Method to play a soundeffect.
+   * @param path - path to the effect.
+   */
   public static void playEffect(String path) {
     playEffect(path, true, 1);
   }
 
+  /**
+   * overloaded method to play a soundeffect.
+   * @param name - name of the soundeffect.
+   * @param allowOverlap - boolean indicating if there can be overlap in sounds
+   * @param numSounds - number of effects
+   */
   public static void playEffect(String name, boolean allowOverlap, int numSounds) {
-    if (!allowOverlap && effectsPlaying.contains(name))
+    if (!allowOverlap && effectsPlaying.contains(name)) {
       return;
+    }
 
     String path;
     if (numSounds > 1) {
@@ -130,12 +141,12 @@ public class AudioSystem {
       });
       effectsPlaying.add(name);
       clip.start();
-    } catch (LineUnavailableException | IOException e) {
-      Logger.error("Could not play sound effect", e);
-    } catch (UnsupportedAudioFileException e) {
-      Logger.error("The AudioSystem tried to play an unsupported audio file", e);
-    } catch (IllegalArgumentException e) {
-      Logger.error("Your system cannot play the specified audio file", e);
+    } catch (LineUnavailableException | IOException exception) {
+      Logger.error("Could not play sound effect", exception);
+    } catch (UnsupportedAudioFileException exception) {
+      Logger.error("The AudioSystem tried to play an unsupported audio file", exception);
+    } catch (IllegalArgumentException exception) {
+      Logger.error("Your system cannot play the specified audio file", exception);
     }
   }
 }

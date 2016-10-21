@@ -15,7 +15,7 @@ import java.awt.Point;
 
 public abstract class Button extends GameObject {
 
-  private boolean clicked = false;
+  private boolean clicked = true;
 
   /**
    * Constructor of a button.
