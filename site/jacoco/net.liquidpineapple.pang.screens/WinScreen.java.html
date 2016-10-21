@@ -5,6 +5,7 @@ import lombok.Getter;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.gui.NumberToken;
+import net.liquidpineapple.pang.gui.ScoreSystem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,61 +21,61 @@ import javax.imageio.ImageIO;
  */
 
 public class WinScreen extends Screen {
-<span class="fc" id="L23">  @Getter</span>
+<span class="fc" id="L24">  @Getter</span>
   private static ArrayList&lt;NumberToken&gt; places;
 
   /**
    * Constructor for the winscreen.
    */
-<span class="fc" id="L29">  public WinScreen() {</span>
+<span class="fc" id="L30">  public WinScreen() {</span>
     try {
-<span class="fc" id="L31">      backgroundImage = ImageIO.read(Level.class.getResource(&quot;/sprites/winscreen.png&quot;));</span>
-<span class="nc" id="L32">    } catch (IOException ex) {</span>
-<span class="nc" id="L33">      ex.printStackTrace();</span>
-<span class="fc" id="L34">    }</span>
+<span class="fc" id="L32">      backgroundImage = ImageIO.read(Level.class.getResource(&quot;/sprites/winscreen.png&quot;));</span>
+<span class="fc" id="L33">    } catch (IOException ex) {</span>
+<span class="fc" id="L34">      ex.printStackTrace();</span>
+<span class="fc" id="L35">    }</span>
 
     //These are from right to left.
-<span class="fc" id="L37">    places = new ArrayList&lt;&gt;(9);</span>
-<span class="fc" id="L38">    int numberPosX = 524;</span>
-<span class="fc" id="L39">    int numberPosY = 300;</span>
-<span class="fc" id="L40">    int numberOfTokens = 9;</span>
-<span class="fc bfc" id="L41" title="All 2 branches covered.">    for (int i = 0; i &lt; numberOfTokens; i++) {</span>
-<span class="fc" id="L42">      NumberToken token = new NumberToken(numberPosX, numberPosY);</span>
-<span class="fc" id="L43">      places.add(token);</span>
-<span class="fc" id="L44">      objectList.add(token);</span>
-<span class="fc" id="L45">      numberPosX -= 32;</span>
+<span class="fc" id="L38">    places = new ArrayList&lt;&gt;(9);</span>
+<span class="fc" id="L39">    int numberPosX = 524;</span>
+<span class="fc" id="L40">    int numberPosY = 300;</span>
+<span class="fc" id="L41">    int numberOfTokens = 9;</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">    for (int i = 0; i &lt; numberOfTokens; i++) {</span>
+<span class="fc" id="L43">      NumberToken token = new NumberToken(numberPosX, numberPosY);</span>
+<span class="fc" id="L44">      places.add(token);</span>
+<span class="fc" id="L45">      objectList.add(token);</span>
+<span class="fc" id="L46">      numberPosX -= 32;</span>
     }
-<span class="fc" id="L47">    displayscore();</span>
-<span class="fc" id="L48">  }</span>
+<span class="fc" id="L48">    displayscore();</span>
+<span class="fc" id="L49">  }</span>
 
   /**
    * Method that updates the winscreen.
    */
   @Override
   public void doUpdate() {
-<span class="fc" id="L55">    super.doUpdate();</span>
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">    if (InputHandler.isAnyKeyPressed()) {</span>
-<span class="nc" id="L57">      Application.getBoard().setLevelCount(1);</span>
-<span class="nc" id="L58">      Application.lifeSystem.resetLives();</span>
-<span class="nc" id="L59">      Application.getScoreKeeper().resetScore();</span>
-<span class="nc" id="L60">      Application.getBoard().changeScreen(new MainMenu());</span>
+<span class="fc" id="L56">    super.doUpdate();</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">    if (InputHandler.isAnyKeyPressed()) {</span>
+<span class="nc" id="L58">      Application.getBoard().setLevelCount(1);</span>
+<span class="nc" id="L59">      Application.lifeSystem.resetLives();</span>
+<span class="nc" id="L60">      Application.getScoreKeeper().resetScore();</span>
+<span class="nc" id="L61">      Application.getBoard().changeScreen(new MainMenu());</span>
     }
-<span class="fc" id="L62">  }</span>
+<span class="fc" id="L63">  }</span>
 
   /**
    * Method that makes the score display on the screen.
    */
   public void displayscore() {
-<span class="fc" id="L68">    int calcscore = Application.getScoreKeeper().getScore();</span>
-<span class="fc" id="L69">    int pos = 0;</span>
+<span class="fc" id="L69">    int calcscore = ScoreSystem.getScore();</span>
+<span class="fc" id="L70">    int pos = 0;</span>
 
-<span class="fc bfc" id="L71" title="All 2 branches covered.">    while (calcscore &gt; 0) {</span>
-<span class="fc" id="L72">      places.get(pos).setScoreToken(calcscore % 10);</span>
-<span class="fc" id="L73">      calcscore /= 10;</span>
-<span class="fc" id="L74">      pos++;</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">    while (calcscore &gt; 0) {</span>
+<span class="fc" id="L73">      places.get(pos).setScoreToken(calcscore % 10);</span>
+<span class="fc" id="L74">      calcscore /= 10;</span>
+<span class="fc" id="L75">      pos++;</span>
     }
-<span class="fc" id="L76">    doUpdate();</span>
-<span class="fc" id="L77">  }</span>
+<span class="fc" id="L77">    doUpdate();</span>
+<span class="fc" id="L78">  }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

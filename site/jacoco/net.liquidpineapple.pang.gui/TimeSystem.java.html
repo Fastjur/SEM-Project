@@ -20,14 +20,14 @@ public class TimeSystem {
   private static int time;
   private static Timer interval;
 
-<span class="fc" id="L23">  @Getter</span>
+<span class="nc" id="L23">  @Getter</span>
   @SuppressWarnings(&quot;PMD.UnusedPrivateField&quot;) // It is used in the generated getter method
-<span class="fc" id="L25">  private static TimeSystem instance = new TimeSystem();</span>
+<span class="nc" id="L25">  private static TimeSystem instance = new TimeSystem();</span>
 
 <span class="nc" id="L27">  @Getter</span>
   private static ArrayList&lt;NumberToken&gt; timePlaces;
 
-<span class="fc" id="L30">  private ActionListener timerAction = new ActionListener() {</span>
+<span class="nc" id="L30">  private ActionListener timerAction = new ActionListener() {</span>
     @Override
     public void actionPerformed(ActionEvent ae) {
 <span class="nc bnc" id="L33" title="All 2 branches missed.">      if (time &gt; 0) {</span>
@@ -46,11 +46,11 @@ public class TimeSystem {
   /**
    * Singleton constructor.
    */
-<span class="fc" id="L49">  private TimeSystem() {</span>
-<span class="fc" id="L50">    Logger.info(&quot;TimeSystem Starting.&quot;);</span>
-<span class="fc" id="L51">    interval = new Timer(1000, timerAction);</span>
-<span class="fc" id="L52">    interval.setRepeats(true);</span>
-<span class="fc" id="L53">  }</span>
+<span class="nc" id="L49">  private TimeSystem() {</span>
+<span class="nc" id="L50">    Logger.info(&quot;TimeSystem Starting.&quot;);</span>
+<span class="nc" id="L51">    interval = new Timer(1000, timerAction);</span>
+<span class="nc" id="L52">    interval.setRepeats(true);</span>
+<span class="nc" id="L53">  }</span>
 
   /**
    * Method to reset the time to a certain number.

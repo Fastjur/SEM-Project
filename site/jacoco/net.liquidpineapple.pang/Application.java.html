@@ -6,7 +6,6 @@ import lombok.Setter;
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
-import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.DropRandomizer;
 
@@ -29,7 +28,7 @@ import javax.swing.WindowConstants;
  */
 public class Application extends JFrame {
 
-<span class="fc" id="L32">  private static String PROPERTIES_LOCATION = &quot;/config.properties&quot;;</span>
+<span class="fc" id="L31">  private static String PROPERTIES_LOCATION = &quot;/config.properties&quot;;</span>
   private static final int UPDATE_DELAY = 10;
   private static final int DRAW_DELAY = 5;
 
@@ -37,15 +36,15 @@ public class Application extends JFrame {
   public static final boolean cheatMode = false;
 
   public static boolean multiplayer;
-<span class="fc" id="L40">  public static HashMap&lt;String, Image&gt; imageCache = new HashMap&lt;String, Image&gt;();</span>
+<span class="fc" id="L39">  public static HashMap&lt;String, Image&gt; imageCache = new HashMap&lt;String, Image&gt;();</span>
   public static LifeSystem lifeSystem;
 
-<span class="fc" id="L43">  @Getter</span>
+<span class="fc" id="L42">  @Getter</span>
   private static Board board;
 
-<span class="fc" id="L46">  @Getter</span>
+<span class="nc" id="L45">  @Getter</span>
 
-<span class="fc" id="L48">  @Setter</span>
+<span class="fc" id="L47">  @Setter</span>
   private static ScoreSystem scoreKeeper;
 
   private Properties properties;
@@ -57,17 +56,17 @@ public class Application extends JFrame {
    * @throws IOException Thrown when properties file can not be read
    */
   public Application(String propertiesLocation) throws IOException {
-<span class="fc" id="L60">    super();</span>
-<span class="fc" id="L61">    Logger.info(&quot;Starting application...&quot;);</span>
-<span class="fc" id="L62">    InputStream stream = this.getClass().getResourceAsStream(propertiesLocation);</span>
-<span class="fc bfc" id="L63" title="All 2 branches covered.">    if (stream != null) {</span>
-<span class="fc" id="L64">      properties = new Properties();</span>
-<span class="fc" id="L65">      properties.load(stream);</span>
+<span class="fc" id="L59">    super();</span>
+<span class="fc" id="L60">    Logger.info(&quot;Starting application...&quot;);</span>
+<span class="fc" id="L61">    InputStream stream = this.getClass().getResourceAsStream(propertiesLocation);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">    if (stream != null) {</span>
+<span class="fc" id="L63">      properties = new Properties();</span>
+<span class="fc" id="L64">      properties.load(stream);</span>
     } else {
-<span class="fc" id="L67">      String err = &quot;Could not find resource file: &quot; + propertiesLocation;</span>
-<span class="fc" id="L68">      throw new FileNotFoundException(err);</span>
+<span class="fc" id="L66">      String err = &quot;Could not find resource file: &quot; + propertiesLocation;</span>
+<span class="fc" id="L67">      throw new FileNotFoundException(err);</span>
     }
-<span class="fc" id="L70">  }</span>
+<span class="fc" id="L69">  }</span>
 
   /**
    * Starts the application.
@@ -75,94 +74,94 @@ public class Application extends JFrame {
    * @throws IOException Thrown when resource file containing properties can not be read
    */
   public void start() throws IOException {
-<span class="fc" id="L78">    Integer width = Integer.valueOf(properties.getProperty(&quot;application-width&quot;));</span>
-<span class="fc" id="L79">    Integer height = Integer.valueOf(properties.getProperty(&quot;application-height&quot;));</span>
+<span class="fc" id="L77">    Integer width = Integer.valueOf(properties.getProperty(&quot;application-width&quot;));</span>
+<span class="fc" id="L78">    Integer height = Integer.valueOf(properties.getProperty(&quot;application-height&quot;));</span>
 
-<span class="fc" id="L81">    String name = properties.getProperty(&quot;application-name&quot;);</span>
-<span class="fc" id="L82">    setTitle(name);</span>
+<span class="fc" id="L80">    String name = properties.getProperty(&quot;application-name&quot;);</span>
+<span class="fc" id="L81">    setTitle(name);</span>
 
-<span class="fc" id="L84">    setResizable(false);</span>
-<span class="fc" id="L85">    setSize(width, height);</span>
+<span class="fc" id="L83">    setResizable(false);</span>
+<span class="fc" id="L84">    setSize(width, height);</span>
 
-<span class="fc" id="L87">    scoreKeeper = ScoreSystem.getInstance();</span>
-<span class="fc" id="L88">    lifeSystem = LifeSystem.getInstance();</span>
-<span class="fc" id="L89">    DropRandomizer.getInstance();</span>
-<span class="fc" id="L90">    board = new Board();</span>
-<span class="fc" id="L91">    add(board);</span>
-<span class="fc" id="L92">    Logger.info(&quot;Initialized with width: &quot; + width + &quot; and height: &quot; + height);</span>
+<span class="fc" id="L86">    scoreKeeper = ScoreSystem.getInstance();</span>
+<span class="fc" id="L87">    lifeSystem = LifeSystem.getInstance();</span>
+<span class="fc" id="L88">    DropRandomizer.getInstance();</span>
+<span class="fc" id="L89">    board = new Board();</span>
+<span class="fc" id="L90">    add(board);</span>
+<span class="fc" id="L91">    Logger.info(&quot;Initialized with width: &quot; + width + &quot; and height: &quot; + height);</span>
 
-<span class="fc" id="L94">    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span>
-<span class="fc" id="L95">    setLocationRelativeTo(null);</span>
+<span class="fc" id="L93">    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="fc" id="L94">    setLocationRelativeTo(null);</span>
 
-<span class="fc" id="L97">    setVisible(true);</span>
+<span class="fc" id="L96">    setVisible(true);</span>
 
-<span class="fc" id="L99">    Logger.info(&quot;Application started successfully!&quot;);</span>
+<span class="fc" id="L98">    Logger.info(&quot;Application started successfully!&quot;);</span>
 
-<span class="fc" id="L101">    TimeSystem.getInstance();</span>
+//    TimeSystem.getInstance();
 
-<span class="fc" id="L103">    Runnable doUpdateRunnable = () -&gt; {</span>
+<span class="fc" id="L102">    Runnable doUpdateRunnable = () -&gt; {</span>
       long beforeTime;
       long timeDiff;
       long sleep;
 
-<span class="fc" id="L108">      beforeTime = System.currentTimeMillis();</span>
-<span class="fc" id="L109">      Logger.info(&quot;Update loop is running&quot;);</span>
+<span class="fc" id="L107">      beforeTime = System.currentTimeMillis();</span>
+<span class="fc" id="L108">      Logger.info(&quot;Update loop is running&quot;);</span>
 
       while (true) {
-<span class="fc" id="L112">        timeDiff = System.currentTimeMillis() - beforeTime;</span>
-<span class="fc" id="L113">        sleep = UPDATE_DELAY - timeDiff;</span>
+<span class="fc" id="L111">        timeDiff = System.currentTimeMillis() - beforeTime;</span>
+<span class="fc" id="L112">        sleep = UPDATE_DELAY - timeDiff;</span>
 
-<span class="fc bfc" id="L115" title="All 2 branches covered.">        if (sleep &lt; 0) {</span>
-<span class="fc" id="L116">          sleep = 2;</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        if (sleep &lt; 0) {</span>
+<span class="fc" id="L115">          sleep = 2;</span>
         }
 
         try {
-<span class="fc" id="L120">          board.doUpdate();</span>
-<span class="fc" id="L121">          scoreKeeper.displayscore();</span>
-<span class="fc" id="L122">          lifeSystem.updateLifes();</span>
+<span class="fc" id="L119">          board.doUpdate();</span>
+<span class="fc" id="L120">          scoreKeeper.displayscore();</span>
+<span class="fc" id="L121">          lifeSystem.updateLifes();</span>
 
-<span class="fc" id="L124">          beforeTime = System.currentTimeMillis();</span>
-<span class="fc" id="L125">          Thread.sleep(sleep);</span>
-<span class="nc" id="L126">        } catch (InterruptedException exception) {</span>
-<span class="nc" id="L127">          Logger.info(&quot;Interrupted: &quot; + exception.getMessage());</span>
-<span class="pc" id="L128">        }</span>
+<span class="fc" id="L123">          beforeTime = System.currentTimeMillis();</span>
+<span class="fc" id="L124">          Thread.sleep(sleep);</span>
+<span class="nc" id="L125">        } catch (InterruptedException exception) {</span>
+<span class="nc" id="L126">          Logger.info(&quot;Interrupted: &quot; + exception.getMessage());</span>
+<span class="pc" id="L127">        }</span>
       }
     };
 
-<span class="fc" id="L132">    Runnable doDrawRunnable = () -&gt; {</span>
+<span class="fc" id="L131">    Runnable doDrawRunnable = () -&gt; {</span>
       long beforeTime;
       long timeDiff;
       long sleep;
 
-<span class="fc" id="L137">      beforeTime = System.currentTimeMillis();</span>
-<span class="fc" id="L138">      Logger.info(&quot;Draw loop is running&quot;);</span>
+<span class="fc" id="L136">      beforeTime = System.currentTimeMillis();</span>
+<span class="fc" id="L137">      Logger.info(&quot;Draw loop is running&quot;);</span>
 
       while (true) {
-<span class="fc" id="L141">        timeDiff = System.currentTimeMillis() - beforeTime;</span>
-<span class="fc" id="L142">        sleep = DRAW_DELAY - timeDiff;</span>
+<span class="fc" id="L140">        timeDiff = System.currentTimeMillis() - beforeTime;</span>
+<span class="fc" id="L141">        sleep = DRAW_DELAY - timeDiff;</span>
 
-<span class="fc bfc" id="L144" title="All 2 branches covered.">        if (sleep &lt; 0) {</span>
-<span class="fc" id="L145">          sleep = 2;</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        if (sleep &lt; 0) {</span>
+<span class="fc" id="L144">          sleep = 2;</span>
         }
 
         try {
-<span class="fc" id="L149">          board.revalidate();</span>
-<span class="fc" id="L150">          board.repaint();</span>
-<span class="fc" id="L151">          beforeTime = System.currentTimeMillis();</span>
-<span class="fc" id="L152">          Thread.sleep(sleep);</span>
-<span class="nc" id="L153">        } catch (InterruptedException ex) {</span>
-<span class="nc" id="L154">          Logger.info(&quot;Interrupted: &quot; + ex.getMessage());</span>
+<span class="fc" id="L148">          board.revalidate();</span>
+<span class="fc" id="L149">          board.repaint();</span>
+<span class="fc" id="L150">          beforeTime = System.currentTimeMillis();</span>
+<span class="fc" id="L151">          Thread.sleep(sleep);</span>
+<span class="nc" id="L152">        } catch (InterruptedException ex) {</span>
+<span class="nc" id="L153">          Logger.info(&quot;Interrupted: &quot; + ex.getMessage());</span>
 
-<span class="pc" id="L156">        }</span>
+<span class="pc" id="L155">        }</span>
       }
     };
 
-<span class="fc" id="L160">    new Thread(doUpdateRunnable).start();</span>
-<span class="fc" id="L161">    new Thread(doDrawRunnable).start();</span>
+<span class="fc" id="L159">    new Thread(doUpdateRunnable).start();</span>
+<span class="fc" id="L160">    new Thread(doDrawRunnable).start();</span>
 
-<span class="fc" id="L163">    AudioSystem.start();</span>
-<span class="fc" id="L164">    AudioSystem.changeLoopingSound(&quot;/sounds/bg.mp3&quot;);</span>
-<span class="fc" id="L165">  }</span>
+<span class="fc" id="L162">    AudioSystem.start();</span>
+<span class="fc" id="L163">    AudioSystem.changeLoopingSound(&quot;/sounds/bg.mp3&quot;);</span>
+<span class="fc" id="L164">  }</span>
 
   /**
    * Main method of the application.
@@ -170,24 +169,24 @@ public class Application extends JFrame {
    * @param args Command line arguments
    */
   public static void main(String[] args) {
-<span class="nc" id="L173">    EventQueue.invokeLater(() -&gt; {</span>
-<span class="nc" id="L174">      Application app = null;</span>
+<span class="nc" id="L172">    EventQueue.invokeLater(() -&gt; {</span>
+<span class="nc" id="L173">      Application app = null;</span>
       try {
-<span class="nc" id="L176">        app = new Application(PROPERTIES_LOCATION);</span>
-<span class="nc" id="L177">        app.start();</span>
-<span class="nc" id="L178">      } catch (IOException ex) {</span>
-<span class="nc" id="L179">        Logger.error(ex.getMessage(), ex);</span>
-<span class="nc" id="L180">      }</span>
-<span class="nc" id="L181">    });</span>
-<span class="nc" id="L182">  }</span>
+<span class="nc" id="L175">        app = new Application(PROPERTIES_LOCATION);</span>
+<span class="nc" id="L176">        app.start();</span>
+<span class="nc" id="L177">      } catch (IOException ex) {</span>
+<span class="nc" id="L178">        Logger.error(ex.getMessage(), ex);</span>
+<span class="nc" id="L179">      }</span>
+<span class="nc" id="L180">    });</span>
+<span class="nc" id="L181">  }</span>
 
   /**
    * Closes the application.
    */
   public void close() {
-<span class="fc" id="L188">    Logger.info(&quot;Shutting down. Goodbye!&quot;);</span>
-<span class="fc" id="L189">    AudioSystem.stop();</span>
-<span class="fc" id="L190">    dispose();</span>
-<span class="fc" id="L191">  }</span>
+<span class="fc" id="L187">    Logger.info(&quot;Shutting down. Goodbye!&quot;);</span>
+<span class="fc" id="L188">    AudioSystem.stop();</span>
+<span class="fc" id="L189">    dispose();</span>
+<span class="fc" id="L190">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
