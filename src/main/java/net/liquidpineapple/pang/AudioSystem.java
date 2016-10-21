@@ -92,18 +92,22 @@ public class AudioSystem {
     }
   }
 
+  /**
+   * Method to play a soundeffect.
+   *
+   * @param path - path to the effect.
+   */
   public static void playEffect(String path) {
     playEffect(path, true, 1);
   }
 
   /**
-   * This method playes a sound effect
+   * Plays a sound effect.
    *
-   * @param name          The name of the sound file you want to play
-   * @param allowOverlap  Decides if this sound can play while the same sound is already playing
-   * @param numSounds     Allows add a number after the name of the sound file name,
-   *                      to easily play an order of sounds after eachother.
-     */
+   * @param name         The name of the sound file you want to play
+   * @param allowOverlap Decides if this sound can play while the same sound is already playing
+   * @param numSounds    The number of different versions of this sound effect to choose from.
+   */
   public static void playEffect(String name, boolean allowOverlap, int numSounds) {
     if (!allowOverlap && effectsPlaying.contains(name)) {
       return;
@@ -116,35 +120,47 @@ public class AudioSystem {
     } else {
       path = "/sounds/" + name + ".wav";
     }
-
     Logger.info("Playing sound effect " + path);
     byte[] buffer;
-    try {
-      if ((buffer = cachedEffects.getOrDefault(path, null)) == null) {
+    if (!cachedEffects.containsKey(path)) {
+      try {
         BufferedInputStream inputStream =
             new BufferedInputStream(Application.class.getResourceAsStream(path));
         buffer = new byte[inputStream.available()];
         inputStream.read(buffer);
         cachedEffects.put(path, buffer);
+        Logger.info("Loaded sound file " + path);
+      } catch (IOException ex) {
+        Logger.error("An exception was thrown while reading a sound file", ex);
       }
-      Clip clip = javax.sound.sampled.AudioSystem.getClip();
-      clip.open(javax.sound.sampled.AudioSystem.getAudioInputStream(
-          new ByteArrayInputStream(buffer)));
-
-      clip.addLineListener((lineEvent) -> {
-        if (lineEvent.getType() == LineEvent.Type.STOP) {
-          effectsPlaying.remove(name);
-          clip.close(); // close resources when clip is finished.
-        }
-      });
-      effectsPlaying.add(name);
-      clip.start();
-    } catch (LineUnavailableException | IOException ex) {
-      Logger.error("Could not play sound effect", ex);
-    } catch (UnsupportedAudioFileException ex) {
-      Logger.error("The AudioSystem tried to play an unsupported audio file", ex);
-    } catch (IllegalArgumentException ex) {
-      Logger.error("Your system cannot play the specified audio file", ex);
     }
+
+    playTheSound(path, name);
+  }
+
+  private static void playTheSound(final String path, final String name) {
+    effectsPlaying.add(name);
+    new Thread(() -> {
+      byte[] buffer = cachedEffects.get(path);
+      try {
+        Clip clip = javax.sound.sampled.AudioSystem.getClip();
+        clip.open(javax.sound.sampled.AudioSystem.getAudioInputStream(
+            new ByteArrayInputStream(buffer)));
+
+        clip.addLineListener((lineEvent) -> {
+          if (lineEvent.getType() == LineEvent.Type.STOP) {
+            effectsPlaying.remove(name);
+            clip.close(); // close resources when clip is finished.
+          }
+        });
+        clip.start();
+      } catch (UnsupportedAudioFileException ex) {
+        Logger.error("The AudioSystem tried to play an unsupported audio file", ex);
+      } catch (LineUnavailableException | IOException ex) {
+        ex.printStackTrace();
+      } catch (IllegalArgumentException ex) {
+        Logger.error("Your system cannot play the specified audio file", ex);
+      }
+    }).start();
   }
 }

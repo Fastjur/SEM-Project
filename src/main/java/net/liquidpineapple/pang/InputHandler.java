@@ -25,53 +25,6 @@ public class InputHandler implements MouseListener, KeyListener {
   public InputHandler() {
   }
 
-
-  @Override
-  public void keyPressed(KeyEvent event) {
-    keysDown.add(event.getKeyCode());
-    if (!keysPressed.contains(event.getKeyCode())) {
-      keysPressed.add(event.getKeyCode());
-    }
-  }
-
-  @Override
-  public void keyReleased(KeyEvent event) {
-    keysDown.remove(event.getKeyCode());
-    keysPressed.remove(event.getKeyCode());
-  }
-
-  @Override
-  public void keyTyped(KeyEvent event) {
-  }
-
-
-  @Override
-  public void mouseClicked(MouseEvent event) {
-
-  }
-
-  @Override
-  public void mousePressed(MouseEvent event) {
-    mousePos = new Point(event.getX(), event.getY());
-    mouseButtonPressed = event.getButton();
-    Logger.info("pang-1");
-  }
-
-  @Override
-  public void mouseReleased(MouseEvent event) {
-    mouseButtonPressed = 0;
-  }
-
-  @Override
-  public void mouseEntered(MouseEvent event) {
-
-  }
-
-  @Override
-  public void mouseExited(MouseEvent event) {
-
-  }
-
   public static boolean isKeyDown(int keyCode) {
     return keysDown.contains(keyCode);
   }
@@ -107,5 +60,50 @@ public class InputHandler implements MouseListener, KeyListener {
   public static void clearState() {
     keysDown.clear();
     mouseButtonPressed = 0;
+  }
+
+  @Override
+  public void keyPressed(KeyEvent event) {
+    keysDown.add(event.getKeyCode());
+    if (!keysPressed.contains(event.getKeyCode())) {
+      keysPressed.add(event.getKeyCode());
+    }
+  }
+
+  @Override
+  public void keyReleased(KeyEvent event) {
+    keysDown.remove(event.getKeyCode());
+    keysPressed.remove(event.getKeyCode());
+  }
+
+  @Override
+  public void keyTyped(KeyEvent event) {
+  }
+
+  @Override
+  public void mouseClicked(MouseEvent event) {
+
+  }
+
+  @Override
+  public void mousePressed(MouseEvent event) {
+    mousePos = new Point(event.getX(), event.getY());
+    mouseButtonPressed = event.getButton();
+    Logger.info("pang-1");
+  }
+
+  @Override
+  public void mouseReleased(MouseEvent event) {
+    mouseButtonPressed = 0;
+  }
+
+  @Override
+  public void mouseEntered(MouseEvent event) {
+
+  }
+
+  @Override
+  public void mouseExited(MouseEvent event) {
+
   }
 }

@@ -28,12 +28,12 @@ import javax.imageio.ImageIO;
  * @date 10-10-2016.
  */
 public class LevelEditor extends Screen {
-  public LinkedList<GameObject> addedObjects = new LinkedList<>();
+  private static final int gametime = 120;
   private static boolean addedPlayer = false;
+  public LinkedList<GameObject> addedObjects = new LinkedList<>();
   private int currentMouseX = 0;
   private int currentMouseY = 0;
   private BallMovement ballMovement = BallMovement.valueOf("LEFT_MOVEMENT");
-  private static final int gametime = 120;
 
   /**
    * Constructor for the LevelEditor screen.
@@ -155,7 +155,7 @@ public class LevelEditor extends Screen {
 
   private void addBall(int ballSize) {
     int size = ballSize;
-    Ball ball = new Ball(0,0, ballMovement, size);
+    Ball ball = new Ball(0, 0, ballMovement, size);
     int offset = (int) ball.getWidth() / 2;
     ball.setXpos(currentMouseX - offset);
     ball.setYpos(currentMouseY - offset);

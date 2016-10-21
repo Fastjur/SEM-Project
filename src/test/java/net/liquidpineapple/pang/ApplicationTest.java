@@ -18,6 +18,9 @@ public class ApplicationTest {
 
   private Application app;
 
+  /**
+   * Sets up the environment for the tests.
+   */
   @Before
   public void setUp() throws Exception {
     app = new Application();
