@@ -16,6 +16,7 @@ public class FileHandler {
   private FileHandler() {}
 
   @Getter
+  @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
   private static final FileHandler instance = new FileHandler();
 
   private PropertiesHandler propertiesHandler = PropertiesHandler.getInstance();

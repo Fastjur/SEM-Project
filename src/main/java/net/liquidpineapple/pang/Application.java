@@ -12,10 +12,13 @@ import net.liquidpineapple.pang.objects.DropRandomizer;
 
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.HashMap;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 /**
@@ -28,6 +31,9 @@ public class Application extends JFrame {
 
   private static final int UPDATE_DELAY = 10;
   private static final int DRAW_DELAY = 5;
+
+  @Getter
+  private static Application app;
 
   // Set to true to prevent loosing lives
   public static final boolean cheatMode = false;
@@ -77,8 +83,10 @@ public class Application extends JFrame {
     add(board);
     Logger.info("Initialized with width: " + width + " and height: " + height);
 
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     setLocationRelativeTo(null);
+
+    addCloseHandler();
 
     setVisible(true);
 
@@ -149,6 +157,21 @@ public class Application extends JFrame {
     AudioSystem.changeLoopingSound("/sounds/bg.mp3");
   }
 
+  private void addCloseHandler() {
+    JFrame frame = this;
+    frame.addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosing(WindowEvent e) {
+        if (JOptionPane.showConfirmDialog(frame,
+            "Are you sure you want to exit the game?", "Closing",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+          close();
+        }
+      }
+    });
+  }
+
   /**
    * Main method of the application.
    *
@@ -171,7 +194,7 @@ public class Application extends JFrame {
     Logger.setLevel(type);
 
     EventQueue.invokeLater(() -> {
-      Application app = null;
+      app = null;
       try {
         app = new Application();
         app.start();
@@ -186,6 +209,7 @@ public class Application extends JFrame {
    */
   public void close() {
     Logger.info("Shutting down. Goodbye!");
+    Logger.getInstance().flush();
     AudioSystem.stop();
     dispose();
   }

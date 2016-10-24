@@ -1,17 +1,16 @@
 package net.liquidpineapple.pang.logger;
 
-import lombok.Getter;
-import lombok.SneakyThrows;
-
 import net.liquidpineapple.pang.FileHandler;
-import net.liquidpineapple.pang.PropertiesHandler;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import lombok.Getter;
 
 /**
  * The logger class containing static methods to log out to the console.
@@ -24,7 +23,15 @@ public class Logger {
 
   @Getter
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
-  private static Logger instance = new Logger();
+  private static final Logger instance;
+  static {
+    try{
+      instance = new Logger();
+    } catch(Exception ex) {
+      // Note that catching all Exceptions here is allowed!
+      throw new ExceptionInInitializerError(ex);
+    }
+  }
 
   private FileHandler fileHandler = FileHandler.getInstance();
 
@@ -35,8 +42,7 @@ public class Logger {
   /**
    * Singleton constructor.
    */
-  @SneakyThrows
-  private Logger() {
+  private Logger() throws IOException {
     SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
     Date now = new Date();
     String dateString = dateFormat.format(now);
@@ -48,6 +54,10 @@ public class Logger {
     BufferedWriter bw = new BufferedWriter(fw);
     outWriter = new PrintWriter(bw);
     outWriter.println("Logger initialized at: " + dateString);
+  }
+
+  public void flush() {
+    outWriter.flush();
   }
 
   /**

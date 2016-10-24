@@ -22,8 +22,6 @@ import java.util.regex.Pattern;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-
-
 /**
  * Created by Tim on 10-10-2016.
  * Class that creates an iterator over the levels
