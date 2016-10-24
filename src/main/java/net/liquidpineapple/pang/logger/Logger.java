@@ -3,6 +3,7 @@ package net.liquidpineapple.pang.logger;
 import lombok.Getter;
 import lombok.SneakyThrows;
 
+import net.liquidpineapple.pang.FileHandler;
 import net.liquidpineapple.pang.PropertiesHandler;
 
 import java.io.BufferedWriter;
@@ -25,6 +26,8 @@ public class Logger {
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
   private static Logger instance = new Logger();
 
+  private FileHandler fileHandler = FileHandler.getInstance();
+
   private static int level;
   private static final String DATE_FORMAT = "dd-MM-yyyy_hh-mm-ss";
   private static PrintWriter outWriter;
@@ -38,15 +41,8 @@ public class Logger {
     Date now = new Date();
     String dateString = dateFormat.format(now);
 
-    PropertiesHandler propertiesHandler = PropertiesHandler.getInstance();
-
-    String appFolder = System.getProperty("user.home") + '/'
-        + propertiesHandler.getProperty("application-folder");
-    String logFolder = appFolder + propertiesHandler.getProperty("log-folder-name");
-
-    File file = new File(logFolder + "Pang-" + dateString + ".log");
-    file = new File(file.getAbsoluteFile().toString());
-    file.getParentFile().mkdirs();
+    String logFolder = fileHandler.getLogsFolder().toString();
+    File file = new File(logFolder + "/Pang-" + dateString + ".log");
 
     FileWriter fw = new FileWriter(file, true);
     BufferedWriter bw = new BufferedWriter(fw);
