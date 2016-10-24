@@ -13,13 +13,24 @@ public class FileHandler {
   /**
    * Singleton constructor
    */
-  private FileHandler() {}
+  private FileHandler() throws FileNotFoundException {
+    appFolder = appendSlash(getApplicationFolder().toString());
+  }
 
   @Getter
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
-  private static final FileHandler instance = new FileHandler();
+  private static final FileHandler instance;
+  static {
+    try {
+      instance = new FileHandler();
+    } catch(Exception ex) {
+      // Note that catching all Exceptions here is allowed!
+      throw new ExceptionInInitializerError(ex);
+    }
+  }
 
   private PropertiesHandler propertiesHandler = PropertiesHandler.getInstance();
+  private final String appFolder;
 
   /**
    * Return the application folder for storage of levels etc.
@@ -41,7 +52,6 @@ public class FileHandler {
   }
 
   public File getLogsFolder() throws FileNotFoundException {
-    String appFolder = appendSlash(getApplicationFolder().toString());
     String logsFolder = appendSlash(propertiesHandler.getProperty("log-folder-name"));
     File folder = new File(appFolder + logsFolder);
     folder.mkdirs();
