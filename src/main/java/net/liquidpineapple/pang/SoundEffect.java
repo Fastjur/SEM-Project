@@ -1,7 +1,5 @@
 package net.liquidpineapple.pang;
 
-import lombok.Getter;
-
 /**
  * @author Govert de Gans
  * @date 2016-10-25
@@ -19,9 +17,13 @@ public final class SoundEffect {
   public static final SoundEffect PLAYER_HIT = new SoundEffect("hit");
   public static final SoundEffect BALL_DESTROY = new SoundEffect("pop");
 
-  @Getter
   private String name;
+
   private SoundEffect(String name) {
     this.name = name;
+  }
+
+  public String getName() {
+    return this.name;
   }
 }
