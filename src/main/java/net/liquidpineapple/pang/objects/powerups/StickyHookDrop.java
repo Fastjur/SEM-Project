@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.objects.powerups;
 
+import net.liquidpineapple.pang.SoundEffect;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
 
@@ -16,7 +17,7 @@ public class StickyHookDrop extends Drop {
   public StickyHookDrop(String textureLocation, double startX, double startY,
                         double movX, double movY, int score, int stickyDelayTime) {
     super(textureLocation, startX, startY, movX, movY, score);
-    this.collectSound = "genericPowerup";
+    this.collectSound = SoundEffect.COLLECT_STICKY;
     this.stickyDelayTime = Math.max(stickyDelayTime, 0);
   }
 
