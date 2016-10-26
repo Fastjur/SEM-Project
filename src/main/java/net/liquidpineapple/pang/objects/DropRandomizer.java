@@ -20,16 +20,16 @@ import java.util.Random;
 public class DropRandomizer {
 
   private Random randomizer;
-  private static final int BRONZE_NUM = 20;
+  private static final int BRONZE_NUM = 15;
   private static final int SILVER_NUM = 15;
   private static final int GOLD_NUM = 10;
-  private static final int GEM_NUM = 8;
+  private static final int GEM_NUM = 12;
   private static final int HEART_NUM = 5;
-  private static final int HOOK_NUM = 5;
-  private static final int SHIELD_NUM = 5;
-  private static final int BOMB_NUM = 5;
-  private static final int FROZEN_NUM = 5;
-  private static final int STICKY_NUM = 5;
+  private static final int HOOK_NUM = 1;
+  private static final int SHIELD_NUM = 1;
+  private static final int BOMB_NUM = 1;
+  private static final int FROZEN_NUM = 1;
+  private static final int STICKY_NUM = 1;
   private static final int TOTAL_CHANCE = 100;
 
   private ArrayList<Drop> randomList;
