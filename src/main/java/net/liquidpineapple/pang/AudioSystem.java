@@ -95,20 +95,21 @@ public class AudioSystem {
   /**
    * Method to play a soundeffect.
    *
-   * @param path - path to the effect.
+   * @param soundEffect The {@link SoundEffect} you want to play
    */
-  public static void playEffect(String path) {
-    playEffect(path, true, 1);
+  public static void playEffect(SoundEffect soundEffect) {
+    playEffect(soundEffect, true, 1);
   }
 
   /**
    * Plays a sound effect.
    *
-   * @param name         The name of the sound file you want to play
+   * @param soundEffect  The {@link SoundEffect} you want to play
    * @param allowOverlap Decides if this sound can play while the same sound is already playing
-   * @param numSounds    The number of different versions of this sound effect to choose from.
+   * @param numSounds    The number of different versions of  this sound effect to choose from.
    */
-  public static void playEffect(String name, boolean allowOverlap, int numSounds) {
+  public static void playEffect(SoundEffect soundEffect, boolean allowOverlap, int numSounds) {
+    String name = soundEffect.getName();
     if (!allowOverlap && effectsPlaying.contains(name)) {
       return;
     }

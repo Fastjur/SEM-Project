@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.objects.powerups;
 
+import net.liquidpineapple.pang.SoundEffect;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
@@ -17,7 +18,7 @@ public class HeartDrop extends Drop {
   public HeartDrop(String textureLocation, double startX, double startY, double movX, double movY,
                    int score, int livesChange) {
     super(textureLocation, startX, startY, movX, movY, score);
-    this.collectSound = "genericPowerup";
+    this.collectSound = SoundEffect.COLLECT_HEART;
     this.livesChange = livesChange;
   }
 
