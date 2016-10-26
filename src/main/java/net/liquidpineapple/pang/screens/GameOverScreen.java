@@ -7,6 +7,7 @@ import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.gui.NumberToken;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
@@ -53,7 +54,7 @@ public class GameOverScreen extends Screen {
   @Override
   public void doUpdate() {
     super.doUpdate();
-    if (InputHandler.isAnyKeyPressed()) {
+    if (InputHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
       Application.lifeSystem.resetLives();
       Application.getScoreKeeper().resetScore();
       Application.getBoard().changeScreen(new MainMenuScreen());
