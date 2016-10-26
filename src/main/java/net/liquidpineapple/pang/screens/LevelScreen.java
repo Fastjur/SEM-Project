@@ -32,11 +32,15 @@ public class LevelScreen extends Screen {
 
   @Getter
   @Setter
+  @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
   private int time;
 
   private static final int DEFAULT_TIME = 120;
 
 
+  /**
+   * Constructor for the LevelScreen class
+   */
   public LevelScreen() {
     super();
     hudObjectList = new LinkedList<GameObject>();
