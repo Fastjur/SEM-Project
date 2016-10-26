@@ -4,23 +4,25 @@
 	<objects>
 		<ball>
 			<position>
-				<x>550</x>
-				<y>175</y>
+				<x>100</x>
+				<y>100</y>
 			</position>
 			<direction>LEFT_MOVEMENT</direction>
-			<size>4</size>
+			<size>2</size>
+			<color>red</color>
 		</ball>
 		<ball>
 			<position>
-				<x>100</x>
-				<y>250</y>
+				<x>500</x>
+				<y>200</y>
 			</position>
-			<direction>RIGHT_MOVEMENT</direction>
-			<size>1</size>
+			<direction>LEFT_MOVEMENT</direction>
+			<size>3</size>
+			<color>red</color>
 		</ball>
         <player>
             <position>
-                <x>700</x>
+                <x>300</x>
                 <y>475</y>
             </position>
         </player>
