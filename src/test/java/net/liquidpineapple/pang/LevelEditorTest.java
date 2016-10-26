@@ -86,7 +86,7 @@ public class LevelEditorTest {
   @Test
   public void testAddPlayer() throws Exception {
     Whitebox.invokeMethod(levelEditor, "addPlayer");
-    assertEquals(levelEditor.addedObjects.size(), 1);
+    assertEquals(1, levelEditor.addedObjects.size());
     assertTrue(levelEditor.addedObjects.get(0) instanceof Player);
   }
 }
