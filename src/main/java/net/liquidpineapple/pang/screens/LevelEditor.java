@@ -17,6 +17,7 @@ import java.awt.PointerInfo;
 import java.awt.event.KeyEvent;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
@@ -29,11 +30,12 @@ import javax.imageio.ImageIO;
  */
 public class LevelEditor extends Screen {
   private static final int gametime = 120;
-  private static boolean addedPlayer = false;
   public LinkedList<GameObject> addedObjects = new LinkedList<>();
+  private boolean addedPlayer = false;
   private int currentMouseX = 0;
   private int currentMouseY = 0;
   private BallMovement ballMovement = BallMovement.valueOf("LEFT_MOVEMENT");
+  private HashMap<Integer, Runnable> keyMethodMap = new HashMap<>();
 
   /**
    * Constructor for the LevelEditor screen.
@@ -45,6 +47,17 @@ public class LevelEditor extends Screen {
     } catch (IOException ex) {
       ex.printStackTrace();
     }
+    initMap();
+  }
+
+  private void initMap() {
+    keyMethodMap.put(KeyEvent.VK_1, () -> addBall(1));
+    keyMethodMap.put(KeyEvent.VK_2, () -> addBall(2));
+    keyMethodMap.put(KeyEvent.VK_3, () -> addBall(3));
+    keyMethodMap.put(KeyEvent.VK_4, () -> addBall(4));
+    keyMethodMap.put(KeyEvent.VK_5, this::addPlayer);
+    keyMethodMap.put(KeyEvent.VK_S, this::saveGame);
+    keyMethodMap.put(KeyEvent.VK_P, this::playGame);
   }
 
   /**
@@ -59,38 +72,12 @@ public class LevelEditor extends Screen {
     currentMouseX = (int) (point1.getX() - point2.getX());
     currentMouseY = (int) (point1.getY() - point2.getY());
     if (InputHandler.isAnyKeyPressed()) {
-      //key 1 pressed, add ball with size 1
-      if (InputHandler.isKeyPressed(KeyEvent.VK_1)) {
-        int size = 1;
-        addBall(size);
-      }
-      //key 2 pressed, add ball with size 2
-      if (InputHandler.isKeyPressed(KeyEvent.VK_2)) {
-        int size = 2;
-        addBall(size);
-      }
-      //key 3 pressed, add ball with size 3
-      if (InputHandler.isKeyPressed(KeyEvent.VK_3)) {
-        int size = 3;
-        addBall(size);
-      }
-      //key 4 pressed, add ball with size 4
-      if (InputHandler.isKeyPressed(KeyEvent.VK_4)) {
-        int size = 4;
-        addBall(size);
-      }
-      //key 5 pressed, add player
-      if (InputHandler.isKeyPressed(KeyEvent.VK_5) && !addedPlayer) {
-        addPlayer();
-      }
-      //key p pressed, play the last saved level
-      if (InputHandler.isKeyPressed(KeyEvent.VK_P)) {
-        playGame();
-      }
-      //key s pressed, save the current level
-      if (InputHandler.isKeyPressed(KeyEvent.VK_S)) {
-        saveGame();
-      }
+
+      keyMethodMap.forEach((key, method) -> {
+        if (InputHandler.isKeyPressed(key)) {
+          method.run();
+        }
+      });
     }
     //select the object
     GameObject selectedObject = null;
@@ -121,6 +108,7 @@ public class LevelEditor extends Screen {
   }
 
   private void playGame() {
+    saveGame();
     addedPlayer = false;
     UserCreatedLevels levels = new UserCreatedLevels();
     Application.getBoard().setLevels(levels.createIterator());
@@ -140,6 +128,10 @@ public class LevelEditor extends Screen {
   }
 
   private void addPlayer() {
+    if (addedPlayer) {
+      return;
+    }
+
     addedPlayer = true;
     int offset = 0;
     int fixedPlayerYpos = 475;
