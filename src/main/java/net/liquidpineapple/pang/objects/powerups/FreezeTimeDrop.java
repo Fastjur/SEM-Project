@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.objects.powerups;
 
+import net.liquidpineapple.pang.SoundEffect;
 import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
@@ -18,7 +19,7 @@ public class FreezeTimeDrop extends Drop {
   public FreezeTimeDrop(String textureLocation, double startX, double startY, double movX,
                         double movY, int score, int timeFrozen) {
     super(textureLocation, startX, startY, movX, movY, score);
-    this.collectSound = "genericPowerup";
+    this.collectSound = SoundEffect.COLLECT_FREEZE;
     this.timeFrozen = Math.max(timeFrozen ,0);
   }
 

@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.objects.powerups;
 
+import net.liquidpineapple.pang.SoundEffect;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
 
@@ -18,7 +19,7 @@ public class HookDrop extends Drop {
                   int score, int hookChange) {
     super(textureLocation, startX, startY, movX, movY, score);
     this.hookChange = hookChange;
-    this.collectSound = "genericPowerup";
+    this.collectSound = SoundEffect.COLLECT_HOOK;
   }
 
 
