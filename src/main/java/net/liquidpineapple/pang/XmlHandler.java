@@ -44,9 +44,8 @@ public class XmlHandler {
    * Method which parses a Level into a xml file.
    *
    * @param level - Level to be parsed
-   * @param time  - Time the level may take.
    */
-  public static void createXmlFromLevel(LevelScreen level, int time) {
+  public static void createXmlFromLevel(LevelScreen level) {
     try {
       DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -78,7 +77,7 @@ public class XmlHandler {
 
       //time element
       Element timeElement = doc.createElement("time");
-      timeElement.appendChild(doc.createTextNode(Integer.toString(time)));
+      timeElement.appendChild(doc.createTextNode(Integer.toString(level.getTime())));
       objects.appendChild(timeElement);
 
       // write the content into xml file
