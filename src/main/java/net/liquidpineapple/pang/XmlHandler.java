@@ -179,7 +179,8 @@ public class XmlHandler {
       for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
         output.objectList.add(player);
       }
-      loadTime(doc);
+
+      output.setTime(loadTime(doc));
       TimeSystem.resetTime(loadTime(doc));
 
       for (NumberToken token : TimeSystem.getTimePlaces()) {
