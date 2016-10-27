@@ -1,7 +1,5 @@
 package net.liquidpineapple.pang.screens;
 
-import edu.emory.mathcs.backport.java.util.Collections;
-
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.XmlHandler;
 import net.liquidpineapple.pang.logger.Logger;
@@ -21,6 +19,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.xml.parsers.ParserConfigurationException;
+
+import edu.emory.mathcs.backport.java.util.Collections;
 
 /**
  * Created by Tim on 10-10-2016.
@@ -83,8 +83,7 @@ public abstract class LevelIterator {
   private void loadArrayIde(final String directory) {
     //get the files from the directory
     File[] files = new File(Application.class.getResource("/" + directory).getFile()).listFiles();
-    Pattern pattern = Pattern.compile("levels\\\\(easy|medium|hard|insane|custom)level"
-        + "\\\\level\\d*.xml");
+    Pattern pattern = Pattern.compile("levels/(easy|medium|hard|insane|custom)level/level\\d*.xml");
 
     for (File file : files) {
       if (!file.isDirectory()) {

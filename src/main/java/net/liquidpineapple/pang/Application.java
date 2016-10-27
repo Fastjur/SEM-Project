@@ -1,14 +1,12 @@
 package net.liquidpineapple.pang;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.logger.LoggerTypes;
-import net.liquidpineapple.pang.objects.DropRandomizer;
+import net.liquidpineapple.pang.runnables.DrawRunnable;
+import net.liquidpineapple.pang.runnables.UpdateRunnable;
 
 import java.awt.EventQueue;
 import java.awt.Image;
@@ -21,6 +19,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * The main application, extends {@link JFrame}.
  *
@@ -28,9 +29,6 @@ import javax.swing.WindowConstants;
  * @date 2016/09/06.
  */
 public class Application extends JFrame {
-
-  private static final int UPDATE_DELAY = 10;
-  private static final int DRAW_DELAY = 5;
 
   @Getter
   private static Application app;
@@ -47,9 +45,13 @@ public class Application extends JFrame {
 
   @Getter
   @Setter
-  private static ScoreSystem scoreKeeper;
+  private static ScoreSystem scoreSystem;
 
   private PropertiesHandler propertiesHandler = PropertiesHandler.getInstance();
+  private DrawRunnable drawRunnable;
+  private UpdateRunnable updateRunnable;
+  private Thread drawThread;
+  private Thread updateThread;
 
   /**
    * Constructor for the Application.
@@ -67,98 +69,52 @@ public class Application extends JFrame {
    * @throws IOException Thrown when resource file containing properties can not be read
    */
   public void start() throws IOException {
+
+    // Initialize width and height
     Integer width = Integer.valueOf(propertiesHandler.getProperty("application-width"));
     Integer height = Integer.valueOf(propertiesHandler.getProperty("application-height"));
+    setResizable(false);
+    setSize(width, height);
+    Logger.info("Initialized with width: " + width + " and height: " + height);
 
+    // Window title
     String name = propertiesHandler.getProperty("application-name");
     setTitle(name);
 
-    setResizable(false);
-    setSize(width, height);
-
-    scoreKeeper = ScoreSystem.getInstance();
+    // Initialize systems and fields
+    scoreSystem = ScoreSystem.getInstance();
     lifeSystem = LifeSystem.getInstance();
-    DropRandomizer.getInstance();
     board = new Board();
     add(board);
-    Logger.info("Initialized with width: " + width + " and height: " + height);
-
-    setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-    setLocationRelativeTo(null);
 
     addCloseHandler();
 
+    setLocationRelativeTo(null);
     setVisible(true);
 
-    Logger.info("Application started successfully!");
-    //TimeSystem.getInstance();
-
-    Runnable doUpdateRunnable = () -> {
-      long beforeTime;
-      long timeDiff;
-      long sleep;
-
-      beforeTime = System.currentTimeMillis();
-      Logger.info("Update loop is running");
-
-      while (true) {
-        timeDiff = System.currentTimeMillis() - beforeTime;
-        sleep = UPDATE_DELAY - timeDiff;
-
-        if (sleep < 0) {
-          sleep = 2;
-        }
-
-        try {
-          board.getCurrentScreen().doUpdate();
-          scoreKeeper.displayscore();
-          lifeSystem.updateLifes();
-
-          beforeTime = System.currentTimeMillis();
-          Thread.sleep(sleep);
-        } catch (InterruptedException exception) {
-          Logger.info("Interrupted: " + exception.getMessage());
-        }
-      }
-    };
-
-    Runnable doDrawRunnable = () -> {
-      long beforeTime;
-      long timeDiff;
-      long sleep;
-
-      beforeTime = System.currentTimeMillis();
-      Logger.info("Draw loop is running");
-
-      while (true) {
-        timeDiff = System.currentTimeMillis() - beforeTime;
-        sleep = DRAW_DELAY - timeDiff;
-
-        if (sleep < 0) {
-          sleep = 2;
-        }
-
-        try {
-          board.revalidate();
-          board.repaint();
-          beforeTime = System.currentTimeMillis();
-          Thread.sleep(sleep);
-        } catch (InterruptedException ex) {
-          Logger.info("Interrupted: " + ex.getMessage());
-
-        }
-      }
-    };
-
-    new Thread(doUpdateRunnable).start();
-    new Thread(doDrawRunnable).start();
+    startRunnables();
 
     AudioSystem.start();
     AudioSystem.changeLoopingSound("/sounds/bg.mp3");
+
+    Logger.info("Application started successfully!");
+  }
+
+  private void startRunnables() {
+    updateRunnable = new UpdateRunnable(board, scoreSystem, lifeSystem);
+    updateThread = new Thread(updateRunnable);
+    Logger.info("Starting update Thread: " + updateThread);
+    updateThread.start();
+
+    drawRunnable = new DrawRunnable(board);
+    drawThread = new Thread(drawRunnable);
+    Logger.info("Starting draw Thread: " + drawThread);
+    drawThread.start();
   }
 
   private void addCloseHandler() {
     JFrame frame = this;
+    frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     frame.addWindowListener(new WindowAdapter() {
       @Override
       public void windowClosing(WindowEvent e) {
@@ -167,6 +123,8 @@ public class Application extends JFrame {
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
           close();
+        } else {
+          frame.setVisible(true);
         }
       }
     });
@@ -208,9 +166,25 @@ public class Application extends JFrame {
    * Closes the application.
    */
   public void close() {
+    this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     Logger.info("Shutting down. Goodbye!");
-    Logger.getInstance().flush();
     AudioSystem.stop();
-    dispose();
+
+    updateRunnable.terminate();
+    try {
+      updateThread.join(1000);
+    } catch (InterruptedException ex) {
+      Logger.error("Update Thread interrupted on close", ex);
+    }
+
+    drawRunnable.terminate();
+    try {
+      drawThread.join(1000);
+    } catch (InterruptedException ex) {
+      Logger.error("Draw Thread interrupted on close", ex);
+    }
+
+    Logger.getInstance().flush();
+    this.dispose();
   }
 }
