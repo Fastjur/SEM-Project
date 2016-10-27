@@ -17,8 +17,8 @@ import org.junit.Test;
  */
 public class HeartDropTest {
 
-  private Drop drop1Live = new HeartDrop("/sprites/drops/heart.png", 0, 0, 0, 1, 0, 1);
-  private Drop droplose2Live = new HeartDrop("/sprites/drops/heart.png", 0, 0, 0, 1, 0, -2);
+  private Drop drop1Live = new HeartDrop(1, 0, 1);
+  private Drop droplose2Live = new HeartDrop(1, 0, -2);
   private Player testplayer = new Player(0,0,new Player1());
 
   private Application app;

@@ -27,7 +27,7 @@ public class BombDropTest {
 
   @Test
   public void testBombDrop() {
-    Drop hook = new BombDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1);
+    Drop hook = new BombDrop(1, 1);
     Ball smallerBall = new Ball(0, 0, BallMovement.LEFT_MOVEMENT, 1);
     Application.getBoard().getCurrentScreen().objectList.add(smallerBall);
     Player testplayer = new Player(0,0,new Player1());

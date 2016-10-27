@@ -30,7 +30,7 @@ public class FreezeTimeDropTest {
 
   @Test
   public void testHookSetNormal3() {
-    Drop hook = new FreezeTimeDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 3);
+    Drop hook = new FreezeTimeDrop(1, 1, 3);
     Player testplayer = new Player(0,0,new Player1());
     Player testplayer2 = new Player(0,0,new Player2());
     hook.playerCollision(testplayer);
@@ -40,7 +40,7 @@ public class FreezeTimeDropTest {
 
   @Test
   public void testHookSetNormal2() {
-    Drop hook = new FreezeTimeDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 2);
+    Drop hook = new FreezeTimeDrop(1, 1, 2);
     Player testplayer = new Player(0,0,new Player1());
     hook.playerCollision(testplayer);
     assertEquals(TimeSystem.getFrozen(), 2);
@@ -48,7 +48,7 @@ public class FreezeTimeDropTest {
 
   @Test
   public void testHookSetNegative() {
-    Drop hook = new FreezeTimeDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, -3);
+    Drop hook = new FreezeTimeDrop(1, 1, -3);
     Player testplayer = new Player(0,0,new Player1());
     hook.playerCollision(testplayer);
     assertEquals(TimeSystem.getFrozen(), 0);

@@ -4,9 +4,11 @@ import net.liquidpineapple.pang.SoundEffect;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
 
+
 public class StickyHookDrop extends Drop {
 
   private int stickyDelayTime;
+  private static final String TEXTURELOCATION = "/sprites/drops/chain.png";
 
   /**
    * Creates a drop, the parameter stickyDelayTime is the amount of seconds the hook waits,
@@ -14,9 +16,8 @@ public class StickyHookDrop extends Drop {
    *
    * @param stickyDelayTime The seconds waited before removal after roof collision.
    */
-  public StickyHookDrop(String textureLocation, double startX, double startY,
-                        double movX, double movY, int score, int stickyDelayTime) {
-    super(textureLocation, startX, startY, movX, movY, score);
+  public StickyHookDrop(double movY, int score, int stickyDelayTime) {
+    super(TEXTURELOCATION, movY, score);
     this.collectSound = SoundEffect.COLLECT_STICKY;
     this.stickyDelayTime = Math.max(stickyDelayTime, 0);
   }

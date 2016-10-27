@@ -25,7 +25,7 @@ public class StickyHookDropTest {
 
   @Test
   public void testHookSetNormal3() {
-    Drop hook = new StickyHookDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 3);
+    Drop hook = new StickyHookDrop(1, 1, 3);
     Player testplayer = new Player(0,0,new Player1());
     hook.playerCollision(testplayer);
     assertEquals(testplayer.getHookRemoveDelay(), 3);
@@ -33,7 +33,7 @@ public class StickyHookDropTest {
 
   @Test
   public void testHookSetNormal2() {
-    Drop hook = new StickyHookDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 2);
+    Drop hook = new StickyHookDrop(1, 1, 2);
     Player testplayer = new Player(0,0,new Player1());
     hook.playerCollision(testplayer);
     assertEquals(testplayer.getHookRemoveDelay(), 2);
@@ -41,7 +41,7 @@ public class StickyHookDropTest {
 
   @Test
   public void testHookSetNegative() {
-    Drop hook = new StickyHookDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, -3);
+    Drop hook = new StickyHookDrop(1, 1, -3);
     Player testplayer = new Player(0,0,new Player1());
     hook.playerCollision(testplayer);
     assertEquals(testplayer.getHookRemoveDelay(), 0);

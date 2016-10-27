@@ -51,37 +51,37 @@ public class DropRandomizer {
     randomizer = new Random();
 
     for (int i = 0; i < BRONZE_NUM; i++) {
-      randomList.add(new Drop("/sprites/drops/coinBronze.png", 0, 0, 0, 1, 10));
+      randomList.add(new Drop("/sprites/drops/coinBronze.png", 1, 10));
     }
     for (int i = 0; i < SILVER_NUM; i++) {
-      randomList.add(new Drop("/sprites/drops/coinSilver.png", 0, 0, 0, 1, 100));
+      randomList.add(new Drop("/sprites/drops/coinSilver.png", 1, 100));
     }
     for (int i = 0; i < GOLD_NUM; i++) {
-      randomList.add(new Drop("/sprites/drops/coinGold.png", 0, 0, 0, 1, 1000));
+      randomList.add(new Drop("/sprites/drops/coinGold.png", 1, 1000));
     }
     for (int i = 0; i < (GEM_NUM / TOTAL_GEMS); i++) {
-      randomList.add(new Drop("/sprites/drops/gemBlue.png", 0, 0, 0, 1, 1500));
-      randomList.add(new Drop("/sprites/drops/gemRed.png", 0, 0, 0, 1, 1500));
-      randomList.add(new Drop("/sprites/drops/gemYellow.png", 0, 0, 0, 1, 1500));
-      randomList.add(new Drop("/sprites/drops/gemGreen.png", 0, 0, 0, 1, 1500));
+      randomList.add(new Drop("/sprites/drops/gemBlue.png", 1, 1500));
+      randomList.add(new Drop("/sprites/drops/gemRed.png",  1, 1500));
+      randomList.add(new Drop("/sprites/drops/gemYellow.png", 1, 1500));
+      randomList.add(new Drop("/sprites/drops/gemGreen.png",  1, 1500));
     }
     for (int i = 0; i < HEART_NUM; i++) {
-      randomList.add(new HeartDrop("/sprites/drops/heart.png", 0, 0, 0, 1, 1, 1));
+      randomList.add(new HeartDrop(1, 1, 1));
     }
     for (int i = 0; i < HOOK_NUM; i++) {
-      randomList.add(new HookDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 3));
+      randomList.add(new HookDrop(1, 1, 3));
     }
     for (int i = 0; i < SHIELD_NUM; i++) {
-      randomList.add(new ShieldDrop("/sprites/drops/shieldBronze.png", 0, 0, 0, 1, 1, 1));
+      randomList.add(new ShieldDrop(1, 1, 1));
     }
     for (int i = 0; i < BOMB_NUM; i++) {
-      randomList.add(new BombDrop("/sprites/drops/bomb.png", 0, 0, 0, 1, 1));
+      randomList.add(new BombDrop(1, 1));
     }
     for (int i = 0; i < FROZEN_NUM; i++) {
-      randomList.add(new FreezeTimeDrop("/sprites/drops/freezeIcon.png", 0, 0, 0, 1, 1, 5));
+      randomList.add(new FreezeTimeDrop(1, 1, 5));
     }
     for (int i = 0; i < STICKY_NUM; i++) {
-      randomList.add(new StickyHookDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 2));
+      randomList.add(new StickyHookDrop(1, 1, 2));
     }
   }
 

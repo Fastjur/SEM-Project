@@ -25,7 +25,7 @@ public class ShieldDropTest {
 
   @Test
   public void testShieldSetNormal3() {
-    Drop shield = new ShieldDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 3);
+    Drop shield = new ShieldDrop(1, 1, 3);
     Player testplayer = new Player(0,0,new Player1());
     shield.playerCollision(testplayer);
     assertEquals(testplayer.getShield(), 3);
@@ -33,7 +33,7 @@ public class ShieldDropTest {
 
   @Test
   public void testShieldSetNormal2() {
-    Drop shield = new ShieldDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 2);
+    Drop shield = new ShieldDrop(1, 1, 2);
     Player testplayer = new Player(0,0,new Player1());
     shield.playerCollision(testplayer);
     assertEquals(testplayer.getShield(), 2);
@@ -41,8 +41,8 @@ public class ShieldDropTest {
 
   @Test
   public void testShieldSetNormal2and3() {
-    Drop shield = new ShieldDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 2);
-    Drop shield2 = new ShieldDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 3);
+    Drop shield = new ShieldDrop(1, 1, 2);
+    Drop shield2 = new ShieldDrop(1, 1, 3);
 
     Player testplayer = new Player(0,0,new Player1());
     shield2.playerCollision(testplayer);
@@ -52,7 +52,7 @@ public class ShieldDropTest {
 
   @Test
   public void testHookSetNegative() {
-    Drop shield = new ShieldDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, -3);
+    Drop shield = new ShieldDrop(1, 1, -3);
     Player testplayer = new Player(0,0,new Player1());
     shield.playerCollision(testplayer);
     assertEquals(testplayer.getShield(), -3);
