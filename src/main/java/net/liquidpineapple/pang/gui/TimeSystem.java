@@ -75,7 +75,6 @@ public class TimeSystem {
       }
     }
     updatetime();
-    interval.start();
   }
 
   public static void setFrozen(int freezeTime) {
@@ -98,6 +97,13 @@ public class TimeSystem {
    */
   public static void stop() {
     interval.stop();
+  }
+
+  /**
+   * Starts the tick timer.
+   */
+  public static void start() {
+    interval.start();
   }
 
 }
