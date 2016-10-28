@@ -22,8 +22,8 @@ public class DropTest {
   private static final double DELTA = 0.01;
 
   private float movement = 1;
-  private Drop drop100P = new Drop("/sprites/drops/heart.png", 0, 0, 2 * movement, movement, 100);
-  private Drop drop1000P = new Drop("/sprites/drops/heart.png", 0, 0, 0, 1, 1000);
+  private Drop drop100P = new Drop("/sprites/drops/heart.png", movement, 100);
+  private Drop drop1000P = new Drop("/sprites/drops/heart.png", 1, 1000);
 
   private Application app;
 
@@ -45,7 +45,7 @@ public class DropTest {
   @Test
   public void updatetest() {
     drop100P.doUpdate();
-    assertEquals(2 * movement, drop100P.getXpos(), DELTA);
+    assertEquals(0, drop100P.getXpos(), DELTA);
     assertEquals(movement, drop100P.getYpos(), DELTA);
   }
 

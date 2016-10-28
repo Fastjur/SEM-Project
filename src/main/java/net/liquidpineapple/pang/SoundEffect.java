@@ -1,7 +1,7 @@
 package net.liquidpineapple.pang;
 
 /**
- * @author Govert de Gans
+ * @author Govert de Gans.
  * @date 2016-10-25
  */
 public final class SoundEffect {

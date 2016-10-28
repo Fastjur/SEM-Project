@@ -6,9 +6,11 @@ import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
 
 
+
 public class FreezeTimeDrop extends Drop {
 
   private int timeFrozen;
+  private static final String TEXTURELOCATION = "/sprites/drops/freezeIcon.png";
 
   /**
    * Creates a drop, it freezes time for timeFrozen seconds,
@@ -16,9 +18,9 @@ public class FreezeTimeDrop extends Drop {
    *
    * @param timeFrozen the amount of seconds the time is frozen.
    */
-  public FreezeTimeDrop(String textureLocation, double startX, double startY, double movX,
-                        double movY, int score, int timeFrozen) {
-    super(textureLocation, startX, startY, movX, movY, score);
+  public FreezeTimeDrop(double movY,
+                        int score, int timeFrozen) {
+    super(TEXTURELOCATION,  movY, score);
     this.collectSound = SoundEffect.COLLECT_FREEZE;
     this.timeFrozen = Math.max(timeFrozen ,0);
   }
