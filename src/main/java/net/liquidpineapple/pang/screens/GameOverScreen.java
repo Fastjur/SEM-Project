@@ -56,7 +56,7 @@ public class GameOverScreen extends Screen {
     super.doUpdate();
     if (InputHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
       Application.lifeSystem.resetLives();
-      Application.getScoreKeeper().resetScore();
+      Application.getScoreSystem().resetScore();
       Application.getBoard().changeScreen(new MainMenuScreen());
     }
   }
