@@ -6,7 +6,7 @@ package net.liquidpineapple.pang.screens;
  * Part of the iterator design pattern.
  */
 public class UserCreatedLevels extends LevelIterator {
-  private static final String DIRECTORY = "levels/customlevel/";
+  private static final String DIRECTORY = "/levels/customlevel/";
 
   /**
    * Method to fill the levels array with userCreatedLevels.

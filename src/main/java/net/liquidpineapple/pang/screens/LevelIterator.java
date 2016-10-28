@@ -49,7 +49,7 @@ public abstract class LevelIterator {
     for (String file : filenames) {
       Screen level;
       try {
-        level = XmlHandler.createFromXml('/' + path + file);
+        level = XmlHandler.createFromXml(path + file);
       } catch (IOException | ParserConfigurationException | SAXException e) {
         level = null;
         Logger.error(e.getMessage(), e);
@@ -59,6 +59,10 @@ public abstract class LevelIterator {
       } else {
         Logger.warning("Attempted to add null level");
       }
+    }
+
+    if (levels.size() == 0) {
+      throw new ExceptionInInitializerError("Could not load levels, level array size was 0.");
     }
     Logger.info("Array initialized, " + levels.size() + " added to array");
   }
