@@ -5,8 +5,6 @@ import net.liquidpineapple.pang.AudioSystem;
 import net.liquidpineapple.pang.SoundEffect;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 
-import java.awt.Point;
-
 /**
  * Created by Erik on 22-9-2016.
  */

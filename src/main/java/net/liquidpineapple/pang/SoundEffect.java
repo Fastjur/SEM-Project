@@ -1,9 +1,9 @@
 package net.liquidpineapple.pang;
 
 /**
- * @author Govert de Gans
+ * @author Govert de Gans.
  * @date 2016-10-25
- **/
+ */
 public final class SoundEffect {
   public static final SoundEffect COLLECT_COIN = new SoundEffect("coin");
   public static final SoundEffect COLLECT_BOMB = new SoundEffect("genericPowerup");
