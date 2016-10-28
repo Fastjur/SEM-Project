@@ -11,12 +11,14 @@ import java.util.ArrayList;
 
 public class BombDrop extends Drop {
 
+  private static final String TEXTURELOCATION = "/sprites/drops/bomb.png";
+
   /**
    * Creates a drop, when picked up this drop breaks all the balls 1 time.
    */
-  public BombDrop(String textureLocation, double startX, double startY, double movX, double movY,
+  public BombDrop(double movY,
                   int score) {
-    super(textureLocation, startX, startY, movX, movY, score);
+    super(TEXTURELOCATION, movY, score);
     this.collectSound = SoundEffect.COLLECT_BOMB;
   }
 

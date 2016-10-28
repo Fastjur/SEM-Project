@@ -44,9 +44,8 @@ public class XmlHandler {
    * Method which parses a Level into a xml file.
    *
    * @param level - Level to be parsed
-   * @param time  - Time the level may take.
    */
-  public static void createXmlFromLevel(LevelScreen level, int time) {
+  public static void createXmlFromLevel(LevelScreen level) {
     try {
       DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -78,7 +77,7 @@ public class XmlHandler {
 
       //time element
       Element timeElement = doc.createElement("time");
-      timeElement.appendChild(doc.createTextNode(Integer.toString(time)));
+      timeElement.appendChild(doc.createTextNode(Integer.toString(level.getTime())));
       objects.appendChild(timeElement);
 
       // write the content into xml file
@@ -179,7 +178,8 @@ public class XmlHandler {
       for (Player player : loadPlayer(doc.getElementsByTagName("player"))) {
         output.objectList.add(player);
       }
-      loadTime(doc);
+
+      output.setTime(loadTime(doc));
       TimeSystem.resetTime(loadTime(doc));
 
       for (NumberToken token : TimeSystem.getTimePlaces()) {
@@ -268,16 +268,10 @@ public class XmlHandler {
    * @return - returns a new FileReader if no exception is thrown, else it will return null.
    */
   public static Document createFileReader(String xmlFile)
-      throws ParserConfigurationException, SAXException {
+      throws ParserConfigurationException, SAXException, IOException {
 
     DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
     InputStream in = LevelScreen.class.getResourceAsStream(xmlFile);
-    try {
-      return documentBuilder.parse(in);
-    } catch (IOException | IllegalArgumentException ex) {
-      //TODO Fix this shit
-      ex.printStackTrace();
-      return null;
-    }
+    return documentBuilder.parse(in);
   }
 }

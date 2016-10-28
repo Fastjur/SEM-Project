@@ -7,6 +7,7 @@ import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.BallMovement;
 import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.objects.Player;
+import net.liquidpineapple.pang.objects.buttons.ReturnButton;
 import net.liquidpineapple.pang.objects.playerschemes.Player1;
 
 import java.awt.Graphics2D;
@@ -29,7 +30,7 @@ import javax.imageio.ImageIO;
  * @date 10-10-2016.
  */
 public class LevelEditor extends Screen {
-  private static final int gametime = 120;
+  private static final int LEVELTIME = 120;
   public LinkedList<GameObject> addedObjects = new LinkedList<>();
   private boolean addedPlayer = false;
   private int currentMouseX = 0;
@@ -47,6 +48,7 @@ public class LevelEditor extends Screen {
     } catch (IOException ex) {
       ex.printStackTrace();
     }
+    objectList.add(new ReturnButton(725, 515));
     initMap();
   }
 
@@ -192,9 +194,10 @@ public class LevelEditor extends Screen {
   public void createLevel() {
 
     LevelScreen level = new LevelScreen();
+    level.setTime(LEVELTIME);
     level.objectList = addedObjects;
 
-    XmlHandler.createXmlFromLevel(level, gametime);
+    XmlHandler.createXmlFromLevel(level);
   }
 
   /**

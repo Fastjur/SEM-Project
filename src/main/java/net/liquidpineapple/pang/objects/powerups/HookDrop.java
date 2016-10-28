@@ -4,9 +4,11 @@ import net.liquidpineapple.pang.SoundEffect;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
 
+
 public class HookDrop extends Drop {
 
   private int hookChange;
+  private static final String TEXTURELOCATION = "/sprites/drops/chain.png";
 
   /**
    * Creates a drop, with additional parameter hookChange,
@@ -15,9 +17,9 @@ public class HookDrop extends Drop {
    * @param hookChange The amount of maximum allowed hooks after picking up this drop.
    *                   It will always be set to a minimum of 1.
    */
-  public HookDrop(String textureLocation, double startX, double startY, double movX, double movY,
-                  int score, int hookChange) {
-    super(textureLocation, startX, startY, movX, movY, score);
+  public HookDrop(double movY, int score,
+                  int hookChange) {
+    super(TEXTURELOCATION, movY, score);
     this.hookChange = hookChange;
     this.collectSound = SoundEffect.COLLECT_HOOK;
   }

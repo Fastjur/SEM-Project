@@ -4,9 +4,11 @@ import net.liquidpineapple.pang.SoundEffect;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
 
+
 public class ShieldDrop extends Drop {
 
   private int shield;
+  private static final String TEXTURELOCATION = "/sprites/drops/shieldBronze.png";
 
   /**
    * Creates a drop, with additional parameter Shield,
@@ -15,9 +17,9 @@ public class ShieldDrop extends Drop {
    *
    * @param shield The amount of hits needed before the shield breaks.
    */
-  public ShieldDrop(String textureLocation, double startX, double startY, double movX, double movY,
-                    int score, int shield) {
-    super(textureLocation, startX, startY, movX, movY, score);
+  public ShieldDrop(double movY, int score,
+                    int shield) {
+    super(TEXTURELOCATION, movY, score);
     this.shield = shield;
     this.collectSound = SoundEffect.COLLECT_SHIELD;
   }

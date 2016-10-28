@@ -25,7 +25,7 @@ public class HookDropTest {
 
   @Test
   public void testHookSetNormal3() {
-    Drop hook = new HookDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 3);
+    Drop hook = new HookDrop(1, 1, 3);
     Player testplayer = new Player(0,0,new Player1());
     hook.playerCollision(testplayer);
     assertEquals(testplayer.getMaximumHooks(), 3);
@@ -33,7 +33,7 @@ public class HookDropTest {
 
   @Test
   public void testHookSetNormal2() {
-    Drop hook = new HookDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, 2);
+    Drop hook = new HookDrop(1, 1, 2);
     Player testplayer = new Player(0,0,new Player1());
     hook.playerCollision(testplayer);
     assertEquals(testplayer.getMaximumHooks(), 2);
@@ -41,7 +41,7 @@ public class HookDropTest {
 
   @Test
   public void testHookSetNegative() {
-    Drop hook = new HookDrop("/sprites/drops/chain.png", 0, 0, 0, 1, 1, -3);
+    Drop hook = new HookDrop(1, 1, -3);
     Player testplayer = new Player(0,0,new Player1());
     hook.playerCollision(testplayer);
     assertEquals(testplayer.getMaximumHooks(), 1);

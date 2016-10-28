@@ -1,16 +1,16 @@
 package net.liquidpineapple.pang.logger;
 
-import lombok.Getter;
-import lombok.SneakyThrows;
-
-import net.liquidpineapple.pang.PropertiesHandler;
+import net.liquidpineapple.pang.FileHandler;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import lombok.Getter;
 
 /**
  * The logger class containing static methods to log out to the console.
@@ -23,7 +23,17 @@ public class Logger {
 
   @Getter
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
-  private static Logger instance = new Logger();
+  private static final Logger instance;
+  static {
+    try{
+      instance = new Logger();
+    } catch(Exception ex) {
+      // Note that catching all Exceptions here is allowed!
+      throw new ExceptionInInitializerError(ex);
+    }
+  }
+
+  private FileHandler fileHandler = FileHandler.getInstance();
 
   private static int level;
   private static final String DATE_FORMAT = "dd-MM-yyyy_hh-mm-ss";
@@ -32,26 +42,22 @@ public class Logger {
   /**
    * Singleton constructor.
    */
-  @SneakyThrows
-  private Logger() {
+  private Logger() throws IOException {
     SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
     Date now = new Date();
     String dateString = dateFormat.format(now);
 
-    PropertiesHandler propertiesHandler = PropertiesHandler.getInstance();
-
-    String appFolder = System.getProperty("user.home") + '/'
-        + propertiesHandler.getProperty("application-folder");
-    String logFolder = appFolder + propertiesHandler.getProperty("log-folder-name");
-
-    File file = new File(logFolder + "Pang-" + dateString + ".log");
-    file = new File(file.getAbsoluteFile().toString());
-    file.getParentFile().mkdirs();
+    String logFolder = fileHandler.getLogsFolder().toString();
+    File file = new File(logFolder + "/Pang-" + dateString + ".log");
 
     FileWriter fw = new FileWriter(file, true);
     BufferedWriter bw = new BufferedWriter(fw);
     outWriter = new PrintWriter(bw);
     outWriter.println("Logger initialized at: " + dateString);
+  }
+
+  public void flush() {
+    outWriter.flush();
   }
 
   /**
