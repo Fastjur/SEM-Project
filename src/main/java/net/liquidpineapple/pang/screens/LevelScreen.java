@@ -7,16 +7,12 @@ import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.objects.Ball;
-
 import net.liquidpineapple.pang.objects.GameObject;
-
-import org.xml.sax.SAXException;
 
 import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Class that represents a level.
@@ -42,29 +38,31 @@ public class LevelScreen extends Screen {
    * Updates all components in level when the level is not ended.
    */
   public void doUpdate() {
-    boolean levelEnded = true;
-    for (GameObject object : objectList) {
-      if (object instanceof Ball) {
-        levelEnded = false;
-      }
-    }
-
-    if (levelEnded) {
-      try {
+    if (noBallsLeft()) {
         ScoreSystem.addScore(TimeSystem.getTime());
         nextLevel();
-      } catch (ParserConfigurationException | SAXException ex) {
-        ex.printStackTrace();
-      }
     } else {
       new ArrayList<>(objectList).forEach(GameObject::doUpdate);
     }
   }
 
   /**
+   * Checks if there are any balls left in the level.
+   * @return true if there is at least one ball in the level and false otherwise.
+   */
+  private boolean noBallsLeft() {
+    for (GameObject object : objectList) {
+      if (object instanceof Ball) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
    * Attempst to load the new level (WIP).
    */
-  private void nextLevel() throws ParserConfigurationException, SAXException {
+  private void nextLevel() {
     Board currentBoard = Application.getBoard();
     Screen newScreen;
 
