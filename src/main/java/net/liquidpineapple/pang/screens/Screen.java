@@ -54,8 +54,6 @@ public abstract class Screen {
    * This is were all the doUpdate() methods from the objectList are called.
    */
   public void doUpdate() {
-    for (GameObject object : new ArrayList<GameObject>(objectList)) {
-      object.doUpdate();
-    }
+    new ArrayList<>(objectList).forEach(GameObject::doUpdate);
   }
 }
