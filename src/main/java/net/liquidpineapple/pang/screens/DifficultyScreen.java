@@ -4,6 +4,7 @@ import net.liquidpineapple.pang.objects.buttons.EasyButton;
 import net.liquidpineapple.pang.objects.buttons.HardButton;
 import net.liquidpineapple.pang.objects.buttons.InsaneButton;
 import net.liquidpineapple.pang.objects.buttons.MediumButton;
+import net.liquidpineapple.pang.objects.buttons.ReturnButton;
 
 import java.io.IOException;
 
@@ -30,5 +31,6 @@ public class DifficultyScreen extends Screen {
     objectList.add(new MediumButton(200, 310));
     objectList.add(new HardButton(200, 390));
     objectList.add(new InsaneButton(200, 470));
+    objectList.add(new ReturnButton(725, 515));
   }
 }
