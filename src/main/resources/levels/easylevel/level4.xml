@@ -1,34 +1,34 @@
 <level>
 	<background>bg.png</background>
-  <difficulty>2</difficulty>
+  <difficulty>4</difficulty>
 	<objects>
+		<ball>
+			<position>
+				<x>100</x>
+				<y>100</y>
+			</position>
+			<direction>LEFT_MOVEMENT</direction>
+			<size>2</size>
+		</ball>
     <ball>
       <position>
-        <x>100</x>
-        <y>100</y>
-      </position>
-      <direction>LEFT_MOVEMENT</direction>
-      <size>2</size>
-    </ball>
-    <ball>
-      <position>
-        <x>650</x>
+        <x>300</x>
         <y>200</y>
       </position>
-      <direction>RIGHT_MOVEMENT</direction>
-      <size>4</size>
+      <direction>LEFT_MOVEMENT</direction>
+      <size>1</size>
     </ball>
     <ball>
       <position>
-        <x>400</x>
-        <y>150</y>
+        <x>600</x>
+        <y>400</y>
       </position>
       <direction>RIGHT_MOVEMENT</direction>
       <size>2</size>
     </ball>
         <player>
             <position>
-                <x>300</x>
+                <x>550</x>
                 <y>475</y>
             </position>
         </player>
