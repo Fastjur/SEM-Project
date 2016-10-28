@@ -44,7 +44,7 @@ public class LifeSystem extends GameObject {
     if (lives > 0) {
       lives -= 1;
     }
-
+    LifeSystem.getInstance().updateLifes();
   }
 
   /**
@@ -54,6 +54,7 @@ public class LifeSystem extends GameObject {
     if (lives < 3) {
       lives += 1;
     }
+    LifeSystem.getInstance().updateLifes();
   }
 
   /**
@@ -75,7 +76,6 @@ public class LifeSystem extends GameObject {
           changeImage(textureH0);
           Application.getBoard().changeScreen(new GameOverScreen());
           TimeSystem.stop();
-
           break;
         default:
           break;

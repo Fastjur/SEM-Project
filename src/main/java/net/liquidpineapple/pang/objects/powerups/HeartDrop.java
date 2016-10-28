@@ -33,10 +33,12 @@ public class HeartDrop extends Drop {
     while (livesChange > 0) {
       LifeSystem.gainLife();
       livesChange -= 1;
+      System.out.println("GAIN LIFE HEARTDROP");
     }
     while (livesChange < 0) {
       LifeSystem.loseLife();
       livesChange += 1;
+      System.out.println("LOSE LIFE HEARTDROP");
     }
     super.playerCollision(player);
   }

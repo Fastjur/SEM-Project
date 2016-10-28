@@ -24,7 +24,7 @@ public class DropRandomizer {
   private static final int SILVER_NUM = 15;
   private static final int GOLD_NUM = 10;
   private static final int GEM_NUM = 12;
-  private static final int HEART_NUM = 5;
+  private static final int HEART_NUM = 100;
   private static final int HOOK_NUM = 1;
   private static final int SHIELD_NUM = 1;
   private static final int BOMB_NUM = 1;
