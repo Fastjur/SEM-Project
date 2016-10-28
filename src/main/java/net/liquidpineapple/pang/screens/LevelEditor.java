@@ -7,6 +7,7 @@ import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.BallMovement;
 import net.liquidpineapple.pang.objects.GameObject;
 import net.liquidpineapple.pang.objects.Player;
+import net.liquidpineapple.pang.objects.buttons.ReturnButton;
 import net.liquidpineapple.pang.objects.playerschemes.Player1;
 
 import java.awt.Graphics2D;
@@ -47,6 +48,7 @@ public class LevelEditor extends Screen {
     } catch (IOException ex) {
       ex.printStackTrace();
     }
+    objectList.add(new ReturnButton(725, 515));
     initMap();
   }
 
