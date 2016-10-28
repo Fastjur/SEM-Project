@@ -2,6 +2,7 @@ package net.liquidpineapple.pang.objects;
 
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.AudioSystem;
+import net.liquidpineapple.pang.SoundEffect;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 
 /**
@@ -13,7 +14,7 @@ public class Drop extends GameObject {
   private int score;
   private double movY;
   private double movX;
-  protected String collectSound;
+  protected SoundEffect collectSound;
 
   /**
    * Method that creates a new drop.
@@ -29,7 +30,7 @@ public class Drop extends GameObject {
               int score) {
     super(textureLocation, startX, startY);
     this.score = score;
-    this.collectSound = "coin";
+    this.collectSound = SoundEffect.COLLECT_COIN;
     this.movY = movY;
     this.movX = movX;
   }

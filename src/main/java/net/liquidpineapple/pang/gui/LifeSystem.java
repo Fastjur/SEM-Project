@@ -34,6 +34,7 @@ public class LifeSystem extends GameObject {
     super(textureH3, 636, 5);
     Logger.info("LifeSystem starting.");
     lives = 3;
+    lastLives = 4;
   }
 
   /**
@@ -85,8 +86,10 @@ public class LifeSystem extends GameObject {
 
   /**
    * Method that resets the lives if the player gets hit.
+   * Resets lastLives to properly redraw with 3 lives.
    */
   public void resetLives() {
     lives = 3;
+    lastLives = 4;
   }
 }

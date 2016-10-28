@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.objects.powerups;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.SoundEffect;
 import net.liquidpineapple.pang.objects.Ball;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.GameObject;
@@ -16,7 +17,7 @@ public class BombDrop extends Drop {
   public BombDrop(String textureLocation, double startX, double startY, double movX, double movY,
                   int score) {
     super(textureLocation, startX, startY, movX, movY, score);
-    this.collectSound = "genericPowerup";
+    this.collectSound = SoundEffect.COLLECT_BOMB;
   }
 
 

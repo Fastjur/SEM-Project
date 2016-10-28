@@ -37,5 +37,16 @@ public class LifeSystemTest {
     assertEquals(LifeSystem.getLives(), 3);
   }
 
+  @Test
+  public void loseliveAndReset() {
+    while (LifeSystem.getLives() < 3) {
+      LifeSystem.gainLife();
+    }
+    LifeSystem.loseLife();
+    assertEquals(LifeSystem.getLives(), 2);
+    LifeSystem.getInstance().resetLives();
+    assertEquals(LifeSystem.getLives(), 3);
+  }
+
 
 }

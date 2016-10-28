@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.objects.powerups;
 
+import net.liquidpineapple.pang.SoundEffect;
 import net.liquidpineapple.pang.objects.Drop;
 import net.liquidpineapple.pang.objects.Player;
 
@@ -18,7 +19,7 @@ public class ShieldDrop extends Drop {
                     int score, int shield) {
     super(textureLocation, startX, startY, movX, movY, score);
     this.shield = shield;
-    this.collectSound = "shield";
+    this.collectSound = SoundEffect.COLLECT_SHIELD;
   }
 
 
