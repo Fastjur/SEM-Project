@@ -268,16 +268,10 @@ public class XmlHandler {
    * @return - returns a new FileReader if no exception is thrown, else it will return null.
    */
   public static Document createFileReader(String xmlFile)
-      throws ParserConfigurationException, SAXException {
+      throws ParserConfigurationException, SAXException, IOException {
 
     DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
     InputStream in = LevelScreen.class.getResourceAsStream(xmlFile);
-    try {
-      return documentBuilder.parse(in);
-    } catch (IOException | IllegalArgumentException ex) {
-      //TODO Fix this shit
-      ex.printStackTrace();
-      return null;
-    }
+    return documentBuilder.parse(in);
   }
 }

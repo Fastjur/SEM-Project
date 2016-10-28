@@ -1,6 +1,8 @@
 package net.liquidpineapple.pang.objects.buttons;
 
-import net.liquidpineapple.pang.logger.Logger;
+import net.liquidpineapple.pang.Application;
+
+import java.awt.event.WindowEvent;
 
 /**
  * Class that represents the object for the Quitbutton.
@@ -25,7 +27,7 @@ public class QuitButton extends Button {
    */
   @Override
   public void onClick() {
-    Logger.info("Close");
-    System.exit(0);
+    Application.getApp().dispatchEvent(new WindowEvent(Application.getApp(),
+        WindowEvent.WINDOW_CLOSING));
   }
 }
