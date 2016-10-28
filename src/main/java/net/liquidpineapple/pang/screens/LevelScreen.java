@@ -8,6 +8,7 @@ import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.objects.Ball;
+import net.liquidpineapple.pang.objects.Countdown;
 import net.liquidpineapple.pang.objects.GameObject;
 
 import java.awt.Graphics2D;
@@ -30,6 +31,7 @@ public class LevelScreen extends Screen {
   @Setter
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
   private int time;
+  private Countdown countdown;
 
   private static final int DEFAULT_TIME = 120;
 
@@ -41,6 +43,8 @@ public class LevelScreen extends Screen {
     super();
     hudObjectList = new LinkedList<GameObject>();
     time = DEFAULT_TIME;
+    this.countdown = new Countdown(Application.getBoard().getWidth() / 2,
+        Application.getBoard().getHeight() / 2);
   }
 
   @Override
@@ -51,15 +55,25 @@ public class LevelScreen extends Screen {
    */
   public void doUpdate() {
     if (noBallsLeft()) {
-        ScoreSystem.addScore(TimeSystem.getTime());
-        nextLevel();
+      TimeSystem.stop();
+      ScoreSystem.addScore(TimeSystem.getTime());
+      nextLevel();
     } else {
-      new ArrayList<>(objectList).forEach(GameObject::doUpdate);
+      if (this.countdown != null) {
+        this.countdown.doUpdate();
+        if (this.countdown.getCurrentNum() <= 0) {
+          this.countdown = null;
+          TimeSystem.start();
+        }
+      } else {
+        new ArrayList<>(objectList).forEach(GameObject::doUpdate);
+      }
     }
   }
 
   /**
    * Checks if there are any balls left in the level.
+   *
    * @return true if there is at least one ball in the level and false otherwise.
    */
   private boolean noBallsLeft() {
@@ -95,6 +109,9 @@ public class LevelScreen extends Screen {
     super.doDrawing(graphics2D, imageObserver);
     for (GameObject hudObject : hudObjectList) {
       hudObject.doDrawing(graphics2D, imageObserver);
+    }
+    if (this.countdown != null) {
+      this.countdown.doDrawing(graphics2D,  imageObserver);
     }
   }
 }
