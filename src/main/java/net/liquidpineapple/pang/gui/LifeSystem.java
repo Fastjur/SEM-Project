@@ -44,6 +44,7 @@ public class LifeSystem extends GameObject {
     if (lives > 0) {
       lives -= 1;
     }
+    
   }
 
   /**
