@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.screens;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.Board;
@@ -25,10 +26,21 @@ public class LevelScreen extends Screen {
   @Getter
   private LinkedList<GameObject> hudObjectList;
 
+  @Getter
+  @Setter
+  @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
+  private int time;
 
+  private static final int DEFAULT_TIME = 120;
+
+
+  /**
+   * Constructor for the LevelScreen class
+   */
   public LevelScreen() {
     super();
     hudObjectList = new LinkedList<GameObject>();
+    time = DEFAULT_TIME;
   }
 
   @Override
@@ -64,15 +76,18 @@ public class LevelScreen extends Screen {
    */
   private void nextLevel() {
     Board currentBoard = Application.getBoard();
-    Screen newScreen;
+
 
     if (currentBoard.getLevels().hasNext()) {
-      newScreen = (Screen) currentBoard.getLevels().next();
+      LevelScreen newScreen = (LevelScreen) currentBoard.getLevels().next();
+      TimeSystem.resetTime(newScreen.getTime());
+      currentBoard.changeScreen(newScreen);
     } else {
       //set behaviour when all levels have been completed here.
-      newScreen = new WinScreen();
+      Screen newScreen = new WinScreen();
+      currentBoard.changeScreen(newScreen);
     }
-    currentBoard.changeScreen(newScreen);
+
   }
 
   @Override
