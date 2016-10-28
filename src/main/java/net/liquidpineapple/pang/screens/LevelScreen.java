@@ -43,8 +43,10 @@ public class LevelScreen extends Screen {
     super();
     hudObjectList = new LinkedList<GameObject>();
     time = DEFAULT_TIME;
-    this.countdown = new Countdown(Application.getBoard().getWidth() / 2,
-        Application.getBoard().getHeight() / 2);
+    if (Application.getBoard() != null) {
+      this.countdown = new Countdown(Application.getBoard().getWidth() / 2,
+          Application.getBoard().getHeight() / 2);
+    }
   }
 
   @Override
