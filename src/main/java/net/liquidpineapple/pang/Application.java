@@ -1,5 +1,7 @@
 package net.liquidpineapple.pang;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
@@ -14,13 +16,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.HashMap;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
-
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * The main application, extends {@link JFrame}.
@@ -117,7 +115,7 @@ public class Application extends JFrame {
     frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     frame.addWindowListener(new WindowAdapter() {
       @Override
-      public void windowClosing(WindowEvent e) {
+      public void windowClosing(WindowEvent ex) {
         if (JOptionPane.showConfirmDialog(frame,
             "Are you sure you want to exit the game?", "Closing",
             JOptionPane.YES_NO_OPTION,
