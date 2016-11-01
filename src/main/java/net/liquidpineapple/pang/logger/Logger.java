@@ -1,5 +1,6 @@
 package net.liquidpineapple.pang.logger;
 
+import lombok.Getter;
 import net.liquidpineapple.pang.FileHandler;
 
 import java.io.BufferedWriter;
@@ -9,8 +10,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import lombok.Getter;
 
 /**
  * The logger class containing static methods to log out to the console.
@@ -24,10 +23,11 @@ public class Logger {
   @Getter
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
   private static final Logger instance;
+
   static {
-    try{
+    try {
       instance = new Logger();
-    } catch(Exception ex) {
+    } catch (Exception ex) {
       // Note that catching all Exceptions here is allowed!
       throw new ExceptionInInitializerError(ex);
     }
