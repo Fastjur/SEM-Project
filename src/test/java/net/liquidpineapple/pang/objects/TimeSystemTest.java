@@ -61,12 +61,4 @@ public class TimeSystemTest {
     TimeSystem.start();
   }
 
-  @Test
-  public synchronized void TestTimeUp() throws Exception {
-    TimeSystem.stop();
-    TimeSystem.setTime(0);
-    Whitebox.invokeMethod(TimeSystem.getInstance(), "timeTick");
-    assertEquals(60, TimeSystem.getTime());
-  }
-
 }
