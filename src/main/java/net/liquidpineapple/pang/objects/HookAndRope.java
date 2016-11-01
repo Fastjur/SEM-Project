@@ -1,8 +1,8 @@
 package net.liquidpineapple.pang.objects;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import lombok.Getter;
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.gui.TimeSystem;
 
@@ -10,13 +10,12 @@ import net.liquidpineapple.pang.gui.TimeSystem;
  * Created by Tim on 9-9-2016.
  * Class that represents the hook system in the game.
  */
-@Data
-
 @EqualsAndHashCode(callSuper = true)
 public class HookAndRope extends GameObject {
 
   private final double maxY;
   private double dy = 3; //specify upspeed rope here.
+  @Getter
   private Player player;
   private int removeDelay = 0;
   private int removeMoment = -1;
