@@ -26,7 +26,7 @@ public class TimeSystemTest {
   @Test
   public void TestsetFrozenTime() {
     assertEquals(0, TimeSystem.getFrozen());
-    TimeSystem.setFrozen(10);
+    TimeSystem.getInstance().setFrozen(10);
     assertEquals(10, TimeSystem.getFrozen());
   }
 
@@ -59,6 +59,14 @@ public class TimeSystemTest {
       assertEquals(9, token.getCurrentnumber());
     }
     TimeSystem.start();
+  }
+
+  @Test
+  public synchronized void TestTimeUp() throws Exception {
+    TimeSystem.stop();
+    TimeSystem.setTime(0);
+    Whitebox.invokeMethod(TimeSystem.getInstance(), "timeTick");
+    assertEquals(60, TimeSystem.getTime());
   }
 
 }
