@@ -65,6 +65,17 @@ public class Player extends GameObject {
   public void doUpdate() {
     super.doUpdate();
 
+    updatePlayerTexture();
+    handlePlayerMovement();
+    handlePlayerShooting();
+    handlePlayerCollision();
+  }
+
+  /**
+   * Handles the player texture.
+   * eg. sets it to frozen or shield when necesarry.
+   */
+  private void updatePlayerTexture() {
     if (TimeSystem.getFrozen() > 0 && !frozen) {
       frozen = true;
       this.changeImage(playerScheme.getFrozenTextureName());
@@ -76,20 +87,29 @@ public class Player extends GameObject {
         this.changeImage(playerScheme.getTextureName());
       }
     }
+  }
 
+  /**
+   * Checks for keypresses and sets player movement accordingly
+   */
+  private void handlePlayerMovement() {
     if (playerScheme.leftPressed()) {
       if (!playerScheme.rightPressed()) {
         dx = PlayerMovement.LEFT_DIRECTION.dx;
         move();
       }
-
     } else if (playerScheme.rightPressed()) {
       dx = PlayerMovement.RIGHT_DIRECTION.dx;
       move();
     } else {
       dx = PlayerMovement.NO_MOVEMENT.dx;
     }
+  }
 
+  /**
+   * Checks for shooting keypress and initiates the {@link HookAndRope} and sound effect.
+   */
+  private void handlePlayerShooting() {
     if (playerScheme.shootPressed() && !shootheld && activeHooks < maximumHooks) {
       HookAndRope newRope = new HookAndRope(getXpos(), 0, this, hookRemoveDelay);
       Application.getBoard().getCurrentScreen().objectList.add(newRope);
@@ -100,7 +120,13 @@ public class Player extends GameObject {
     if (!playerScheme.shootPressed() && shootheld) {
       shootheld = false;
     }
+  }
 
+  /**
+   * Checks if player collides and updates lives when necessary.
+   * Also plays a sound effect on hit.
+   */
+  private void handlePlayerCollision() {
     if (collisionPlayer() && !isHit && !Application.cheatMode && !frozen) {
       if (shield > 0) {
         shield -= 1;
@@ -143,6 +169,10 @@ public class Player extends GameObject {
     return false;
   }
 
+  /**
+   * Sets the player shield.
+   * @param shield 'Amount' of shield to add. Every value is 1 hit protection.
+   */
   public final void setShield(int shield) {
     this.shield = shield;
     this.changeImage(playerScheme.getShieldTextureName());
