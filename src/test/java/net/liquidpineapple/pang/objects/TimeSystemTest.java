@@ -25,6 +25,7 @@ public class TimeSystemTest {
 
   @Test
   public void TestsetFrozenTime() {
+    TimeSystem.getInstance().setFrozen(0);
     assertEquals(0, TimeSystem.getFrozen());
     TimeSystem.getInstance().setFrozen(10);
     assertEquals(10, TimeSystem.getFrozen());
