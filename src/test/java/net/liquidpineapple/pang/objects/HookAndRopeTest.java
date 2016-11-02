@@ -68,7 +68,7 @@ public class HookAndRopeTest {
   }
 
   /**
-   * Tests the behaviour of the move method when Ypos <= MaxY
+   * Tests the behaviour of the move method when {@code yPos <= MAXY}.
    */
   @Test
   public void hitTopTest() throws Exception {
