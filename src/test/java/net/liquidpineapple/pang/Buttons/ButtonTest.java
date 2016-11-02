@@ -1,5 +1,6 @@
-package net.liquidpineapple.pang;
+package net.liquidpineapple.pang.Buttons;
 
+import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.objects.buttons.Button;
 import net.liquidpineapple.pang.objects.buttons.EasyButton;
 import org.junit.Before;

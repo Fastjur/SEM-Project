@@ -1,5 +1,7 @@
-package net.liquidpineapple.pang;
+package net.liquidpineapple.pang.Buttons;
 
+import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.Difficulty;
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.objects.buttons.*;
 import net.liquidpineapple.pang.screens.ControlsScreen;
