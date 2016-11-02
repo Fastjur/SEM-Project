@@ -2,6 +2,7 @@ package net.liquidpineapple.pang.gui;
 
 import lombok.Getter;
 
+import lombok.Setter;
 import net.liquidpineapple.pang.logger.Logger;
 
 import java.awt.event.ActionEvent;
@@ -16,7 +17,7 @@ import javax.swing.Timer;
  */
 public class TimeSystem {
 
-  @Getter
+  @Getter @Setter
   private static int time;
   private static Timer interval;
   @Getter
@@ -29,20 +30,11 @@ public class TimeSystem {
   @Getter
   private static ArrayList<NumberToken> timePlaces = new ArrayList<>(3);
 
+  @Getter
   private ActionListener timerAction = new ActionListener() {
     @Override
     public void actionPerformed(ActionEvent ae) {
-      if (time > 0 && frozen == 0) {
-        time -= 1;
-      } else {
-        frozen -= 1;
-      }
-      //Here the proper behaviour when time is run out should be replaced,
-      //for now it will add 60 seconds and lose a life.
-      if (time == 0) {
-        LifeSystem.loseLife();
-        time = 60;
-      }
+      timeTick();
       updatetime();
     }
   };
@@ -81,6 +73,18 @@ public class TimeSystem {
     frozen = freezeTime;
   }
 
+  private void timeTick() {
+    if (time > 0 && frozen == 0) {
+      time -= 1;
+    } else {
+      frozen -= 1;
+    }
+
+    if (time == 0) {
+      LifeSystem.loseLife();
+      time = 60;
+    }
+  }
 
   private static void updatetime() {
     int calctime = time;
