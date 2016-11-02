@@ -9,9 +9,9 @@ import net.liquidpineapple.pang.runnables.DrawRunnable;
 import net.liquidpineapple.pang.runnables.UpdateRunnable;
 
 import java.awt.EventQueue;
-import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -37,7 +37,7 @@ public class Application extends JFrame {
   public static final boolean cheatMode = false;
 
   public static boolean multiplayer;
-  public static HashMap<String, Image> imageCache = new HashMap<>();
+  public static HashMap<String, BufferedImage> imageCache = new HashMap<>();
   public static LifeSystem lifeSystem;
 
   @Getter
