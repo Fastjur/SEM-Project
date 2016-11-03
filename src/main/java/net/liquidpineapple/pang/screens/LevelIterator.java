@@ -34,25 +34,25 @@ public abstract class LevelIterator {
   public void initArray(final String path) {
     List<String> filenames = new ArrayList<>();
 
-    try(
+    try (
         InputStream in = getResourceAsStream(path);
         BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
 
       String resource;
-      while((resource = br.readLine()) != null) {
+      while ((resource = br.readLine()) != null) {
         filenames.add(resource);
       }
-    } catch (IOException e) {
-      Logger.error(e.getMessage(), e);
+    } catch (IOException ex) {
+      Logger.error(ex.getMessage(), ex);
     }
 
     for (String file : filenames) {
       Screen level;
       try {
         level = XmlHandler.createFromXml(path + file);
-      } catch (IOException | ParserConfigurationException | SAXException e) {
+      } catch (IOException | ParserConfigurationException | SAXException ex) {
         level = null;
-        Logger.error(e.getMessage(), e);
+        Logger.error(ex.getMessage(), ex);
       }
       if (level != null) {
         levels.add(level);

@@ -6,6 +6,7 @@ import net.liquidpineapple.pang.gui.ScoreSystem;
 import net.liquidpineapple.pang.logger.Logger;
 
 /**
+ * The runnable for the update loop of the {@link net.liquidpineapple.pang.Application}.
  * @author Jurriaan Den Toonder Created on 25-10-16
  */
 public class UpdateRunnable implements Runnable {
@@ -21,6 +22,12 @@ public class UpdateRunnable implements Runnable {
   // Thread running boolean
   private volatile boolean running = true;
 
+  /**
+   * Constructor for the {@link UpdateRunnable}.
+   * @param board The {@link Board}
+   * @param scoreSystem The {@link ScoreSystem}
+   * @param lifeSystem The {@link LifeSystem}
+   */
   public UpdateRunnable(Board board, ScoreSystem scoreSystem, LifeSystem lifeSystem) {
     this.board = board;
     this.scoreSystem = scoreSystem;
