@@ -4,6 +4,7 @@ import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.logger.Logger;
 
 /**
+ * The runnable for the draw loop of the {@link net.liquidpineapple.pang.Application}.
  * @author Jurriaan Den Toonder Created on 25-10-16
  */
 public class DrawRunnable implements Runnable {

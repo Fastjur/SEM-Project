@@ -67,6 +67,24 @@ public class HookAndRopeTest {
     assertFalse(Application.getBoard().getCurrentScreen().objectList.contains(rope));
   }
 
+  /**
+   * Tests the behaviour of the move method when {@code yPos <= MAXY}.
+   */
+  @Test
+  public void hitTopTest() throws Exception {
+    HookAndRope rope = new HookAndRope(500, 597, player, 0);
+    assertEquals(600, rope.getYpos(), DELTA);
+    rope.move();
+    assertEquals(597, rope.getYpos(), DELTA);
+    rope.doUpdate();
+    assertFalse(Application.getBoard().getCurrentScreen().objectList.contains(rope));
+  }
+
+  @Test
+  public void testPlayerGetter() {
+    assertEquals(player, hookAndRope.getPlayer());
+  }
+
   @After
   public void tearDown() {
     hookAndRope = null;

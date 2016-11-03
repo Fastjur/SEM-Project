@@ -17,7 +17,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.HashMap;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
@@ -117,7 +116,7 @@ public class Application extends JFrame {
     frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     frame.addWindowListener(new WindowAdapter() {
       @Override
-      public void windowClosing(WindowEvent e) {
+      public void windowClosing(WindowEvent ex) {
         if (JOptionPane.showConfirmDialog(frame,
             "Are you sure you want to exit the game?", "Closing",
             JOptionPane.YES_NO_OPTION,
