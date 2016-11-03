@@ -46,6 +46,10 @@ public class LevelEditorTest {
   private Board board;
   private Robot robot;
 
+  /**
+   * Sets up all dependencies for the tests.
+   * @throws Exception when something goes wrong in mocking
+   */
   @Before
   public void setUp() throws Exception {
     levelEditor = PowerMockito.spy(new LevelEditor());
@@ -198,8 +202,6 @@ public class LevelEditorTest {
 
   @Test
   public void testSelectObject() throws Exception {
-
-    Ball ball = new Ball(-79, -79, BallMovement.LEFT_MOVEMENT, 4);
     inputHandler.keyPressed(new KeyEvent(new Component() {
     }, 0, 0, 0, KeyEvent.VK_4));
     Whitebox.invokeMethod(levelEditor, "handleKeyPresses");
@@ -210,17 +212,18 @@ public class LevelEditorTest {
     inputHandler.mousePressed(new MouseEvent(new Component() {
     }, 0, 0, 0, 1, 2, 3, false, 1));
     GameObject result = Whitebox.invokeMethod(levelEditor, "selectObject");
+    Ball ball = new Ball(-79, -79, BallMovement.LEFT_MOVEMENT, 4);
     assertEquals(result, ball);
 
   }
 
   @Test
   public void testDelete() throws Exception {
-    Ball ball = new Ball(-79, -79, BallMovement.LEFT_MOVEMENT, 4);
     inputHandler.keyPressed(new KeyEvent(new Component() {
     }, 0, 0, 0, KeyEvent.VK_4));
     Whitebox.invokeMethod(levelEditor, "handleKeyPresses");
     assertEquals(levelEditor.addedObjects.size(), 1);
+    Ball ball = new Ball(-79, -79, BallMovement.LEFT_MOVEMENT, 4);
     Whitebox.invokeMethod(levelEditor, "deleteObject", ball);
     assertEquals(levelEditor.addedObjects.size(), 0);
   }
