@@ -1,5 +1,7 @@
 package net.liquidpineapple.pang.screens;
 
+import lombok.Getter;
+
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.XmlHandler;
@@ -33,7 +35,9 @@ public class LevelEditor extends Screen {
   private static final int LEVELTIME = 120;
   public LinkedList<GameObject> addedObjects = new LinkedList<>();
   private boolean addedPlayer = false;
+  @Getter
   private int currentMouseX = 0;
+  @Getter
   private int currentMouseY = 0;
   private BallMovement ballMovement = BallMovement.valueOf("LEFT_MOVEMENT");
   private HashMap<Integer, Runnable> keyMethodMap = new HashMap<>();
@@ -68,20 +72,27 @@ public class LevelEditor extends Screen {
   @Override
   public void doUpdate() {
     super.doUpdate();
-    PointerInfo pointerInfo = MouseInfo.getPointerInfo();
-    Point point1 = pointerInfo.getLocation();
-    Point point2 = Application.getBoard().getLocationOnScreen();
-    currentMouseX = (int) (point1.getX() - point2.getX());
-    currentMouseY = (int) (point1.getY() - point2.getY());
-    if (InputHandler.isAnyKeyPressed()) {
+    setCurrentMousePos();
 
-      keyMethodMap.forEach((key, method) -> {
-        if (InputHandler.isKeyPressed(key)) {
-          method.run();
-        }
-      });
+    if (InputHandler.isAnyKeyPressed()) {
+      handleKeyPresses();
     }
     //select the object
+    GameObject selectedObject = selectObject();
+
+    //delete an object
+    if (InputHandler.isRightMouseButtonDown() && selectedObject != null) {
+      deleteObject(selectedObject);
+    }
+    //drag and drop
+    if (InputHandler.isLeftMouseButtonDown() && selectedObject != null) {
+      dragAndDrop(selectedObject);
+    }
+
+    InputHandler.clearKeys();
+  }
+
+  private GameObject selectObject() {
     GameObject selectedObject = null;
     if (InputHandler.isLeftMouseButtonDown() || InputHandler.isRightMouseButtonDown()) {
       for (GameObject addedObject : addedObjects) {
@@ -93,20 +104,23 @@ public class LevelEditor extends Screen {
         }
       }
     }
+    return selectedObject;
+  }
 
-    //delete an object
-    if (InputHandler.isRightMouseButtonDown() && selectedObject != null) {
-      if (selectedObject instanceof Player) {
-        addedPlayer = false;
+  private void handleKeyPresses() {
+    keyMethodMap.forEach((key, method) -> {
+      if (InputHandler.isKeyPressed(key)) {
+        method.run();
       }
-      deleteObject(selectedObject);
-    }
-    //drag and drop
-    if (InputHandler.isLeftMouseButtonDown() && selectedObject != null) {
-      dragAndDrop(selectedObject);
-    }
+    });
+  }
 
-    InputHandler.clearKeys();
+  private void setCurrentMousePos() {
+    PointerInfo pointerInfo = MouseInfo.getPointerInfo();
+    Point point1 = pointerInfo.getLocation();
+    Point point2 = Application.getBoard().getLocationOnScreen();
+    currentMouseX = (int) (point1.getX() - point2.getX());
+    currentMouseY = (int) (point1.getY() - point2.getY());
   }
 
   private void playGame() {
@@ -118,15 +132,13 @@ public class LevelEditor extends Screen {
   }
 
   private void saveGame() {
-    if (addedPlayer) {
-      createLevel();
-    } else {
+    if (!addedPlayer) {
       int fixedPlayerYpos = 475;
       int fixedPlayerXpos = 380;
       addedObjects.add(new Player(fixedPlayerXpos, fixedPlayerYpos, new Player1()));
       addedPlayer = true;
-      createLevel();
     }
+    createLevel();
   }
 
   private void addPlayer() {
@@ -206,12 +218,10 @@ public class LevelEditor extends Screen {
    * @param delete - Object which should be removed.
    */
   public void deleteObject(GameObject delete) {
-    int size = addedObjects.size();
-    for (int i = 0; i < size; i++) {
-      if (addedObjects.get(i).equals(delete)) {
-        addedObjects.remove(i);
-        break;
-      }
+    if (delete instanceof Player) {
+      addedPlayer = false;
     }
+    int size = addedObjects.size();
+    addedObjects.remove(delete);
   }
 }
