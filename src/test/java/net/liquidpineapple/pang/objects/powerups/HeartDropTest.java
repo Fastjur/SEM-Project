@@ -17,8 +17,7 @@ import org.junit.Test;
  */
 public class HeartDropTest {
 
-  private Drop drop1Live = new HeartDrop(1, 0, 1);
-  private Drop droplose2Live = new HeartDrop(1, 0, -2);
+  private Drop drop1Live = new HeartDrop(1, 0);
   private Player testplayer = new Player(0,0,new Player1());
 
   private Application app;
@@ -32,10 +31,9 @@ public class HeartDropTest {
   @Test
   public void testlifegain() {
     int oldlives = LifeSystem.getLives();
-    droplose2Live.playerCollision(testplayer);
-    assertEquals(oldlives - 2, LifeSystem.getLives());
+    LifeSystem.loseLife();
     drop1Live.playerCollision(testplayer);
-    assertEquals(oldlives - 1, LifeSystem.getLives());
+    assertEquals(oldlives, LifeSystem.getLives());
   }
 
   @After
