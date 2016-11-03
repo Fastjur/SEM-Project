@@ -1,20 +1,24 @@
 package net.liquidpineapple.pang.objects;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.objects.playerschemes.Player1;
 import net.liquidpineapple.pang.objects.playerschemes.Player2;
+import net.liquidpineapple.pang.objects.playerschemes.PlayerScheme;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 
 /**
  * @author Jurriaan Den Toonder
@@ -27,11 +31,12 @@ public class PlayerTest {
   private static final int startX = 15;
   private static final int startY = 20;
 
-  private static final String defaultTexture = "/sprites/no-texture.png";
+  private static final String SOME_TEXTURE = "/sprites/beam1.png";
   private static final double DELTA = 0.01;
 
   private Player player;
   private Player player2;
+  private PlayerScheme playerScheme;
 
   /**
    * Setup test.
@@ -43,6 +48,7 @@ public class PlayerTest {
     app.start();
     player = new Player(startX, startY, new Player1());
     player2 = new Player(startX, startY, new Player2());
+    playerScheme = player.getPlayerScheme();
   }
 
   @After
@@ -69,8 +75,8 @@ public class PlayerTest {
 
   @Test
   public void testSetImage() throws Exception {
-    ImageIcon ii = new ImageIcon(defaultTexture);
-    Image newImg = ii.getImage();
+    InputStream newImgStream = getClass().getResourceAsStream(SOME_TEXTURE);
+    BufferedImage newImg = ImageIO.read(newImgStream);
     player.setImage(newImg);
     player2.setImage(newImg);
     assertEquals(newImg, player.getImage());
@@ -134,5 +140,88 @@ public class PlayerTest {
     player.setXpos(100);
     player.setYpos(100);
 
+  }
+
+  @Test
+  public void testFrozenTexture() throws Throwable {
+    player.doUpdate();
+    InputStream frozenImgStream = getClass().getResourceAsStream(playerScheme.getFrozenTextureName());
+    BufferedImage frozenImg = ImageIO.read(frozenImgStream);
+    BufferedImage currentPlayerImg = player.getImage();
+
+    assertFalse(compareImages(frozenImg, currentPlayerImg));
+
+    TimeSystem.setFrozen(1);
+    player.doUpdate();
+
+    currentPlayerImg = player.getImage();
+    assertTrue(compareImages(frozenImg, currentPlayerImg));
+  }
+
+  @Test
+  public void testShieldTexture() throws Throwable {
+    player.doUpdate();
+    InputStream shieldImgStream = getClass().getResourceAsStream(playerScheme.getShieldTextureName());
+    BufferedImage shieldImg = ImageIO.read(shieldImgStream);
+    BufferedImage currentPlayerImg = player.getImage();
+
+    assertFalse(compareImages(shieldImg, currentPlayerImg));
+
+    TimeSystem.setFrozen(0);
+    player.setShield(1);
+    player.doUpdate();
+
+    currentPlayerImg = player.getImage();
+
+    assertTrue(compareImages(shieldImg, currentPlayerImg));
+  }
+
+  @Test
+  public void testBackToDefaultTexture() throws Throwable {
+    TimeSystem.setFrozen(1);
+    player.doUpdate();
+    TimeSystem.setFrozen(0);
+    player.setShield(0);
+    player.doUpdate();
+
+    InputStream defaultPlayerTextureStream = getClass().getResourceAsStream(playerScheme.getTextureName());
+    BufferedImage defaultPlayerTexture = ImageIO.read(defaultPlayerTextureStream);
+    BufferedImage currentPlayerImg = player.getImage();
+
+    assertTrue(compareImages(defaultPlayerTexture, currentPlayerImg));
+
+    player.setShield(1);
+    player.doUpdate();
+    player.setShield(0);
+    player.doUpdate();
+
+    currentPlayerImg = player.getImage();
+    assertTrue(compareImages(defaultPlayerTexture, currentPlayerImg));
+  }
+
+  /**
+   * Returns true if both images are equal.
+   * @param imgA Image 1 to compare
+   * @param imgB Image 2 to compare
+   * @return True iff images are equal (graphical wise)
+   */
+  private static boolean compareImages(BufferedImage imgA, BufferedImage imgB) {
+
+    if (imgA.getWidth() == imgB.getWidth() && imgA.getHeight() == imgB.getHeight()) {
+      int width = imgA.getWidth(null);
+      int height = imgB.getHeight(null);
+
+      for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+          if (imgA.getRGB(x, y) != imgB.getRGB(x, y)) {
+            return false;
+          }
+        }
+      }
+    } else {
+      return false;
+    }
+
+    return true;
   }
 }

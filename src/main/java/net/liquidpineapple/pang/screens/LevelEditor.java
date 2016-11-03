@@ -74,7 +74,7 @@ public class LevelEditor extends Screen {
     super.doUpdate();
     setCurrentMousePos();
 
-    if (InputHandler.isAnyKeyPressed()) {
+    if (InputHandler.isAnyKeyDown()) {
       handleKeyPresses();
     }
     //select the object
