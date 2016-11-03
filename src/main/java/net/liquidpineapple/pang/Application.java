@@ -2,6 +2,7 @@ package net.liquidpineapple.pang;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import net.liquidpineapple.pang.gui.Board;
 import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.ScoreSystem;
@@ -100,12 +101,12 @@ public class Application extends JFrame {
 
   private void startRunnables() {
     updateRunnable = new UpdateRunnable(board, scoreSystem, lifeSystem);
-    updateThread = new Thread(updateRunnable);
+    updateThread = new Thread(updateRunnable, "UpdateLoop");
     Logger.info("Starting update Thread: " + updateThread);
     updateThread.start();
 
     drawRunnable = new DrawRunnable(board);
-    drawThread = new Thread(drawRunnable);
+    drawThread = new Thread(drawRunnable, "DrawLoop");
     Logger.info("Starting draw Thread: " + drawThread);
     drawThread.start();
   }
@@ -134,6 +135,19 @@ public class Application extends JFrame {
    * @param args Command line arguments
    */
   public static void main(String[] args) {
+    handleArgs(args);
+
+    EventQueue.invokeLater(() -> {
+      try {
+        app = new Application();
+        app.start();
+      } catch (IOException ex) {
+        Logger.error(ex.getMessage(), ex);
+      }
+    });
+  }
+
+  private static void handleArgs(String[] args) {
     LoggerTypes type = LoggerTypes.INFO;
     if (args.length > 0) {
       String loggerLevel = args[0].toUpperCase();
@@ -148,16 +162,6 @@ public class Application extends JFrame {
       }
     }
     Logger.setLevel(type);
-
-    EventQueue.invokeLater(() -> {
-      app = null;
-      try {
-        app = new Application();
-        app.start();
-      } catch (IOException ex) {
-        Logger.error(ex.getMessage(), ex);
-      }
-    });
   }
 
   /**
