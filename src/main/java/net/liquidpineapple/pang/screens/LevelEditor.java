@@ -95,7 +95,7 @@ public class LevelEditor extends Screen {
   private GameObject selectObject() {
     GameObject selectedObject = null;
     if (InputHandler.isLeftMouseButtonDown() || InputHandler.isRightMouseButtonDown()) {
-      for (GameObject addedObject : addedObjects) {
+      for (GameObject addedObject : this.addedObjects) {
         if (currentMouseX > addedObject.getXpos()
             && currentMouseX < addedObject.getXpos() + addedObject.getWidth()
             && currentMouseY > addedObject.getYpos()
@@ -221,7 +221,6 @@ public class LevelEditor extends Screen {
     if (delete instanceof Player) {
       addedPlayer = false;
     }
-    int size = addedObjects.size();
     addedObjects.remove(delete);
   }
 }
