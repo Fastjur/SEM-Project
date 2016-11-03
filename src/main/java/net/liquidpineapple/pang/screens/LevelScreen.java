@@ -78,7 +78,7 @@ public class LevelScreen extends Screen {
    *
    * @return true if there is at least one ball in the level and false otherwise.
    */
-  private boolean noBallsLeft() {
+  public boolean noBallsLeft() {
     for (GameObject object : objectList) {
       if (object instanceof Ball) {
         return false;
