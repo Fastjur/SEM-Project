@@ -1,21 +1,20 @@
 package net.liquidpineapple.pang.objects;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.logger.Logger;
 
-
 import java.awt.Graphics2D;
-import java.awt.Image;
-
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.io.IOException;
 import java.net.URL;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Jurriaan Den Toonder
@@ -29,7 +28,7 @@ public abstract class GameObject {
   protected double ypos;
   private double width;
   private double height;
-  private Image image;
+  private BufferedImage image;
 
   /**
    * Constructor for gameobject.
@@ -53,10 +52,9 @@ public abstract class GameObject {
    * @param textureLocation - image storage location.
    */
   public void changeImage(String textureLocation) {
-    ImageIcon imageIcon;
     Logger.info("Registering object with texture " + textureLocation);
 
-    Image img;
+    BufferedImage img;
     if ((img = Application.imageCache.getOrDefault(textureLocation, null)) != null) {
       this.image = img;
     } else {
@@ -64,8 +62,12 @@ public abstract class GameObject {
       if (url == null) {
         throw new IllegalArgumentException("Could not find texture " + textureLocation);
       }
-      imageIcon = new ImageIcon(url);
-      image = imageIcon.getImage();
+      try {
+        image = ImageIO.read(url);
+      } catch (IOException ex) {
+        Logger.error("Could not load image", ex);
+        throw new IllegalArgumentException("Could not load image at url: " + url);
+      }
       Application.imageCache.put(textureLocation, image);
       Logger.info("Loaded image " + textureLocation);
     }
@@ -73,8 +75,8 @@ public abstract class GameObject {
   }
 
   private void getWidthAndHeight() {
-    this.width = image.getWidth(null);
-    this.height = image.getHeight(null);
+    this.width = image.getWidth();
+    this.height = image.getHeight();
   }
 
   public Rectangle2D.Double getBounds() {

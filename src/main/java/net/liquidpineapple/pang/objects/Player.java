@@ -1,8 +1,5 @@
 package net.liquidpineapple.pang.objects;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import net.liquidpineapple.pang.Application;
 import net.liquidpineapple.pang.AudioSystem;
 import net.liquidpineapple.pang.SoundEffect;
@@ -10,6 +7,9 @@ import net.liquidpineapple.pang.gui.LifeSystem;
 import net.liquidpineapple.pang.gui.TimeSystem;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.objects.playerschemes.PlayerScheme;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 /**
@@ -28,6 +28,7 @@ public class Player extends GameObject {
   public int shield = 0;
   public int hookRemoveDelay = 0;
   private  boolean frozen = false;
+  private boolean hasDefaultTexture = true;
 
   private enum PlayerMovement {
     LEFT_DIRECTION(-4 / 5.0),
@@ -65,28 +66,40 @@ public class Player extends GameObject {
   public void doUpdate() {
     super.doUpdate();
 
+    updatePlayerState();
     updatePlayerTexture();
     handlePlayerMovement();
     handlePlayerShooting();
     handlePlayerCollision();
   }
 
-  /**
-   * Handles the player texture.
-   * eg. sets it to frozen or shield when necesarry.
-   */
-  private void updatePlayerTexture() {
+  private void updatePlayerState() {
     if (TimeSystem.getFrozen() > 0 && !frozen) {
       frozen = true;
-      this.changeImage(playerScheme.getFrozenTextureName());
-    } else if (frozen && TimeSystem.getFrozen() == 0) {
+    } else if (TimeSystem.getFrozen() == 0 && frozen){
       frozen = false;
-      if (shield > 0) {
-        this.changeImage(playerScheme.getShieldTextureName());
-      } else {
-        this.changeImage(playerScheme.getTextureName());
-      }
     }
+  }
+
+  /**
+   * Handles the player texture.
+   * eg. sets it to frozen or shield when necessary.
+   */
+  private void updatePlayerTexture() {
+    if (frozen) {
+      this.changeImage(playerScheme.getFrozenTextureName());
+    } else if (shield > 0) {
+      this.changeImage(playerScheme.getShieldTextureName());
+    } else if (!hasDefaultTexture) {
+      this.changeImage(playerScheme.getTextureName());
+      hasDefaultTexture = true;
+    }
+  }
+
+  @Override
+  public void changeImage(String textureLocation) {
+    super.changeImage(textureLocation);
+    hasDefaultTexture = false;
   }
 
   /**

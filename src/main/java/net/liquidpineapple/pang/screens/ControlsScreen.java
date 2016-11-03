@@ -36,7 +36,7 @@ public class ControlsScreen extends Screen {
   @Override
   public void doUpdate() {
     super.doUpdate();
-    if (InputHandler.isAnyKeyPressed()) {
+    if (InputHandler.isAnyKeyDown()) {
       Application.lifeSystem.resetLives();
       Application.getScoreSystem().resetScore();
       Application.getBoard().changeScreen((Screen) Application.getBoard().getLevels().next());
