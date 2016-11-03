@@ -33,7 +33,7 @@ public class HeartDropTest {
     int oldlives = LifeSystem.getLives();
     LifeSystem.loseLife();
     drop1Live.playerCollision(testplayer);
-    assertEquals(oldlives - 1, LifeSystem.getLives());
+    assertEquals(oldlives, LifeSystem.getLives());
   }
 
   @After
