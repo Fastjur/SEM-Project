@@ -37,7 +37,7 @@ public class InputHandler implements MouseListener, KeyListener {
     keysPressed.clear();
   }
 
-  public static boolean isAnyKeyPressed() {
+  public static boolean isAnyKeyDown() {
     return !keysDown.isEmpty();
   }
 
