@@ -56,11 +56,7 @@ public class LevelScreenTest {
       }
     }
     assertTrue(newScreen.noBallsLeft());
-    try {
-      Thread.sleep(100);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    newScreen.doUpdate();
     assertFalse(Application.getBoard().getCurrentScreen().equals(newScreen));
   }
 
