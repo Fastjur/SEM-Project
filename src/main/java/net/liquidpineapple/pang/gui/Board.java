@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.logger.Logger;
+import net.liquidpineapple.pang.Difficulty;
 import net.liquidpineapple.pang.screens.MainMenuScreen;
 import net.liquidpineapple.pang.screens.Screen;
 
@@ -32,6 +33,9 @@ public class Board extends JPanel {
       Iterator levels;
   @Getter
   private Screen currentScreen;
+  @Getter
+  @Setter
+  public Difficulty difficulty;
 
   /**
    * Constructor of the board.

@@ -1,6 +1,7 @@
 package net.liquidpineapple.pang.objects.buttons;
 
 import net.liquidpineapple.pang.Application;
+import net.liquidpineapple.pang.Difficulty;
 import net.liquidpineapple.pang.logger.Logger;
 import net.liquidpineapple.pang.screens.ControlsScreen;
 import net.liquidpineapple.pang.screens.MediumLevels;
@@ -31,5 +32,6 @@ public class MediumButton extends Button {
     MediumLevels levels = new MediumLevels();
     Application.getBoard().setLevels(levels.createIterator());
     Application.getBoard().changeScreen(new ControlsScreen());
+    Application.getBoard().setDifficulty(Difficulty.MEDIUM);
   }
 }
