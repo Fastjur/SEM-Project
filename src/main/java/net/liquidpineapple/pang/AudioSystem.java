@@ -39,7 +39,7 @@ public class AudioSystem {
    */
   public static void start() {
     playMusic = true;
-    new Thread(AudioSystem::playLoop).start();
+    new Thread(AudioSystem::playLoop, "AudioSystem").start();
   }
 
   private static void playLoop() {

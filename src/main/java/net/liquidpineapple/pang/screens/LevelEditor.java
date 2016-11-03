@@ -73,7 +73,7 @@ public class LevelEditor extends Screen {
     Point point2 = Application.getBoard().getLocationOnScreen();
     currentMouseX = (int) (point1.getX() - point2.getX());
     currentMouseY = (int) (point1.getY() - point2.getY());
-    if (InputHandler.isAnyKeyPressed()) {
+    if (InputHandler.isAnyKeyDown()) {
 
       keyMethodMap.forEach((key, method) -> {
         if (InputHandler.isKeyPressed(key)) {
