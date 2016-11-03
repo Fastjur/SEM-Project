@@ -1,17 +1,18 @@
 package net.liquidpineapple.pang;
 
+import lombok.Getter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import lombok.Getter;
-
 /**
+ * FileHandler class to handle OS independent file system storage.
  * @author Jurriaan Den Toonder Created on 24-10-16
  */
 public class FileHandler {
 
   /**
-   * Singleton constructor
+   * Singleton constructor.
    */
   private FileHandler() throws FileNotFoundException {
     appFolder = appendSlash(getApplicationFolder().toString());
@@ -20,10 +21,11 @@ public class FileHandler {
   @Getter
   @SuppressWarnings("PMD.UnusedPrivateField") // It is used in the generated getter method
   private static final FileHandler instance;
+
   static {
     try {
       instance = new FileHandler();
-    } catch(Exception ex) {
+    } catch (Exception ex) {
       // Note that catching all Exceptions here is allowed!
       throw new ExceptionInInitializerError(ex);
     }
@@ -51,6 +53,11 @@ public class FileHandler {
     }
   }
 
+  /**
+   * Return the path to the logs folder. Also creates the required directories of nonexistent.
+   * @return {@link File} to the logs folder.
+   * @throws FileNotFoundException when the folder cannot be found
+   */
   public File getLogsFolder() throws FileNotFoundException {
     String logsFolder = appendSlash(propertiesHandler.getProperty("log-folder-name"));
     File folder = new File(appFolder + logsFolder);

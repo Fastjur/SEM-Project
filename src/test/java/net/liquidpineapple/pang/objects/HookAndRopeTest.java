@@ -81,7 +81,7 @@ public class HookAndRopeTest {
   }
 
   @Test
-  public void TestPlayerGetter() {
+  public void testPlayerGetter() {
     assertEquals(player, hookAndRope.getPlayer());
   }
 

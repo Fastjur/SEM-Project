@@ -37,11 +37,11 @@ public class LevelScreen extends Screen {
 
 
   /**
-   * Constructor for the LevelScreen class
+   * Constructor for the LevelScreen class.
    */
   public LevelScreen() {
     super();
-    hudObjectList = new LinkedList<GameObject>();
+    hudObjectList = new LinkedList<>();
     time = DEFAULT_TIME;
     if (Application.getBoard() != null) {
       this.countdown = new Countdown(Application.getBoard().getWidth() / 2,
