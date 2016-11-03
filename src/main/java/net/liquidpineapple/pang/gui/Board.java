@@ -3,9 +3,9 @@ package net.liquidpineapple.pang.gui;
 import lombok.Getter;
 import lombok.Setter;
 
+import net.liquidpineapple.pang.Difficulty;
 import net.liquidpineapple.pang.InputHandler;
 import net.liquidpineapple.pang.logger.Logger;
-import net.liquidpineapple.pang.Difficulty;
 import net.liquidpineapple.pang.screens.MainMenuScreen;
 import net.liquidpineapple.pang.screens.Screen;
 
