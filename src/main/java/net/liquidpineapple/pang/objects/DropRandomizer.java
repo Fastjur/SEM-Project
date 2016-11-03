@@ -66,7 +66,7 @@ public class DropRandomizer {
       randomList.add(new Drop("/sprites/drops/gemGreen.png",  1, 1500));
     }
     for (int i = 0; i < HEART_NUM; i++) {
-      randomList.add(new HeartDrop(1, 1, 1));
+      randomList.add(new HeartDrop(1, 1));
     }
     for (int i = 0; i < HOOK_NUM; i++) {
       randomList.add(new HookDrop(1, 1, 3));

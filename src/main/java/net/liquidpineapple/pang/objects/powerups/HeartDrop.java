@@ -8,20 +8,15 @@ import net.liquidpineapple.pang.objects.Player;
 
 public class HeartDrop extends Drop {
 
-  private int livesChange;
   private static final String TEXTURELOCATION = "/sprites/drops/heart.png";
 
   /**
-   * Creates a drop, with additional parameter livesChange,
-   * which decides how much the live changes when this object is picked up.
-   *
-   * @param livesChange The change in the amount of lives when drop is picked up.
+   * Creates a drop that gives one life when picked up.
    */
   public HeartDrop( double movY,
-                   int score, int livesChange) {
+                   int score) {
     super(TEXTURELOCATION, movY, score);
     this.collectSound = SoundEffect.COLLECT_HEART;
-    this.livesChange = livesChange;
   }
 
 
@@ -30,14 +25,7 @@ public class HeartDrop extends Drop {
    */
   @Override
   public void playerCollision(Player player) {
-    while (livesChange > 0) {
-      LifeSystem.gainLife();
-      livesChange -= 1;
-    }
-    while (livesChange < 0) {
-      LifeSystem.loseLife();
-      livesChange += 1;
-    }
+    LifeSystem.gainLife();
     super.playerCollision(player);
   }
 }

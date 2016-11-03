@@ -103,7 +103,7 @@ public class Player extends GameObject {
   }
 
   /**
-   * Checks for keypresses and sets player movement accordingly
+   * Checks for keypresses and sets player movement accordingly.
    */
   private void handlePlayerMovement() {
     if (playerScheme.leftPressed()) {
