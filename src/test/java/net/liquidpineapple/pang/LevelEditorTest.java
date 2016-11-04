@@ -42,7 +42,6 @@ public class LevelEditorTest {
   private LevelEditor levelEditor;
   private PointerInfo pointerInfo;
   private InputHandler inputHandler;
-  private Application app;
   private Board board;
   private Robot robot;
 
@@ -61,8 +60,6 @@ public class LevelEditorTest {
     PowerMockito.mockStatic(Application.class);
     Mockito.when(Application.getBoard()).thenReturn(board);
     robot = new Robot();
-    robot.mouseMove(100, 100);
-    Whitebox.invokeMethod(levelEditor, "setCurrentMousePos");
   }
 
   @Test
@@ -196,8 +193,14 @@ public class LevelEditorTest {
 
   @Test
   public void testSetCurrentMousePos() throws Exception {
+    robot.mouseMove(100, 100);
+    Whitebox.invokeMethod(levelEditor, "setCurrentMousePos");
     assertEquals(levelEditor.getCurrentMouseX(), 100);
     assertEquals(levelEditor.getCurrentMouseY(), 100);
+    robot.mouseMove(200,600);
+    Whitebox.invokeMethod(levelEditor, "setCurrentMousePos");
+    assertEquals(levelEditor.getCurrentMouseX(), 200);
+    assertEquals(levelEditor.getCurrentMouseY(), 600);
   }
 
   @Test
